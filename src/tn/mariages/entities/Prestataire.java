@@ -32,11 +32,10 @@ public class Prestataire {
     
     private String emailPrest;
     private String pwdPrest;
-    private String saltPrest;
     private String categorie;
     private String specialite; // à voir
-    private String localitePrest;
-    
+    private String villePrest;
+   
     private boolean mailValide;
     private boolean compteValide;
     

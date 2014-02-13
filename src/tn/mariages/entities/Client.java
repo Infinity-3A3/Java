@@ -33,7 +33,7 @@ public class Client {
     
     private boolean cmptValide;
     
-    private String localiteClient;
+    private String villeClient;
     private String telClient;
     private String dateDebut; // a rajouter dates clés
     private String dateFin;
