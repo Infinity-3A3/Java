@@ -67,7 +67,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jTextField1" linkSize="1" min="-2" pref="193" max="-2" attributes="0"/>
+                                      <Component id="tfNomPres" linkSize="1" min="-2" pref="193" max="-2" attributes="0"/>
                                       <Component id="jScrollPane1" linkSize="1" min="-2" pref="169" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -83,28 +83,27 @@
                                   </Group>
                                   <EmptySpace min="55" pref="55" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jPasswordField1" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tfEmailPres" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" alignment="0" groupAlignment="2" attributes="0">
-                                          <Component id="jTextField8" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField7" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField6" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField4" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox1" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField3" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfSpecialitePres" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfCategoriePres" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfPswPres" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfNumPres" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="CmbVillePres" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfAdressePres" linkSize="1" alignment="2" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="jButton1" linkSize="2" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="BtnAjouterPres" linkSize="2" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
-                          <Component id="jButton2" linkSize="2" min="-2" pref="95" max="-2" attributes="0"/>
+                          <Component id="BtnAnnulerPres" linkSize="2" min="-2" pref="95" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="115" max="32767" attributes="0"/>
+                  <EmptySpace pref="200" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -116,7 +115,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfNomPres" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -132,42 +131,42 @@
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfAdressePres" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CmbVillePres" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfNumPres" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jPasswordField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfEmailPres" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfPswPres" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfCategoriePres" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfSpecialitePres" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButton1" linkSize="3" pref="31" max="32767" attributes="0"/>
-                      <Component id="jButton2" linkSize="3" max="32767" attributes="0"/>
+                      <Component id="BtnAjouterPres" linkSize="3" pref="31" max="32767" attributes="0"/>
+                      <Component id="BtnAnnulerPres" linkSize="3" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -228,39 +227,39 @@
             <Property name="text" type="java.lang.String" value="Ville:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="tfNomPres">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="tfAdressePres">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField4">
+        <Component class="javax.swing.JTextField" name="tfNumPres">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
+        <Component class="javax.swing.JTextField" name="tfPswPres">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField7">
+        <Component class="javax.swing.JTextField" name="tfCategoriePres">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField7ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfCategoriePresActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField8">
+        <Component class="javax.swing.JTextField" name="tfSpecialitePres">
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="CmbVillePres">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="BtnAjouterPres">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ajouter"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="BtnAnnulerPres">
           <Properties>
             <Property name="text" type="java.lang.String" value="Annuler"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+        <Component class="javax.swing.JPasswordField" name="tfEmailPres">
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -269,7 +268,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextPane" name="jTextPane1">
+            <Component class="javax.swing.JTextPane" name="tfDescPres">
             </Component>
           </SubComponents>
         </Container>
