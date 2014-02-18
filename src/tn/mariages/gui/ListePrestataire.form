@@ -74,7 +74,7 @@
                           <Component id="BtnSupprimePres" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="60" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -128,7 +128,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="BtnAjouterPres">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ajouter"/>
+            <Property name="text" type="java.lang.String" value="Ajouter Prestataire"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="BtnModifierPres">
