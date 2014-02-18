@@ -33,8 +33,10 @@ public class Paquet {
         this.prixPaquet = prixPaquet;
     }
 
-    public Paquet(int idPaquet, String nomPaquet, String descPaquet, String shortDescPaquet, String imgPaquet, boolean prixPaquet) {
+    public Paquet(int idPaquet, int idPrest, String nomPaquet, String descPaquet, String shortDescPaquet, String imgPaquet, boolean prixPaquet) {
         this.idPaquet = idPaquet;
+        this.idPrest=  idPrest;
+
         this.nomPaquet = nomPaquet;
         this.descPaquet = descPaquet;
         this.shortDescPaquet = shortDescPaquet;
@@ -45,7 +47,8 @@ public class Paquet {
     
     
     private int idPaquet;
-    
+    private int idPrest;
+
     private String nomPaquet;
     private String descPaquet;
     private String shortDescPaquet;
@@ -122,7 +125,14 @@ public class Paquet {
         }
         return true;
     }
+
     
-    
-    
+    public int getIdPrest() {
+        return idPrest;
+    }
+
+    public void setIdPrest(int idPrest) {
+        this.idPrest = idPrest;
+    }
+   
 }

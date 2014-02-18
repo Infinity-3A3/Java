@@ -47,7 +47,7 @@ public class Reclamation {
     private String dateRec;
     private String objRec;
     private String texteRec;
-
+/* A ajouter un bool qui verifie la lecture+ rep de la réclamation */
     public int getIdRec() {
         return idRec;
     }
