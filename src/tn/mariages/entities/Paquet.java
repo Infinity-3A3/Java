@@ -27,7 +27,7 @@ public class Paquet {
     
     private String nomPaquet;
     private String descPaquet;
-    private String ShortDescPaquet;
+    private String shortDescPaquet;
     
     private String imgPaquet;
     
