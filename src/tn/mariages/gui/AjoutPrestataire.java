@@ -48,7 +48,7 @@ public class AjoutPrestataire extends javax.swing.JFrame {
         BtnAnnulerPres = new javax.swing.JButton();
         tfEmailPres = new javax.swing.JPasswordField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tfDescPres = new javax.swing.JTextPane();
+        tfDescPrest = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,7 +85,7 @@ public class AjoutPrestataire extends javax.swing.JFrame {
 
         BtnAnnulerPres.setText("Annuler");
 
-        jScrollPane1.setViewportView(tfDescPres);
+        jScrollPane1.setViewportView(tfDescPrest);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -265,7 +265,7 @@ public class AjoutPrestataire extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField tfAdressePres;
     private javax.swing.JTextField tfCategoriePres;
-    private javax.swing.JTextPane tfDescPres;
+    private javax.swing.JTextPane tfDescPrest;
     private javax.swing.JPasswordField tfEmailPres;
     private javax.swing.JTextField tfNomPres;
     private javax.swing.JTextField tfNumPres;
