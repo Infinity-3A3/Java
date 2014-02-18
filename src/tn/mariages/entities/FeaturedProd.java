@@ -23,8 +23,86 @@ package tn.mariages.entities;
 public class FeaturedProd {
     
     private int idFeat;
+
+    public FeaturedProd() {
+    }
+
+    public FeaturedProd(String dateFeat, String widget, int idProd) {
+        this.dateFeat = dateFeat;
+        this.widget = widget;
+        this.idProd = idProd;
+    }
+
+    public FeaturedProd(int idFeat, String dateFeat, String widget, int idProd) {
+        this.idFeat = idFeat;
+        this.dateFeat = dateFeat;
+        this.widget = widget;
+        this.idProd = idProd;
+    }
+    
     
     private String dateFeat;    
     private String widget;
     private int idProd;
+
+    public int getIdFeat() {
+        return idFeat;
+    }
+
+    public void setIdFeat(int idFeat) {
+        this.idFeat = idFeat;
+    }
+
+    public String getDateFeat() {
+        return dateFeat;
+    }
+
+    public void setDateFeat(String dateFeat) {
+        this.dateFeat = dateFeat;
+    }
+
+    public String getWidget() {
+        return widget;
+    }
+
+    public void setWidget(String widget) {
+        this.widget = widget;
+    }
+
+    public int getIdProd() {
+        return idProd;
+    }
+
+    public void setIdProd(int idProd) {
+        this.idProd = idProd;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FeaturedProd other = (FeaturedProd) obj;
+        if (this.idFeat != other.idFeat) {
+            return false;
+        }
+        if (this.idProd != other.idProd) {
+            return false;
+        }
+        return true;
+    }
+
+
+
+
+
 }

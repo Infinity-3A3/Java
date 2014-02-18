@@ -22,8 +22,69 @@ package tn.mariages.entities;
  * @author RAED
  */
 public class ProduitPaquet {
+
+    public ProduitPaquet() {
+    }
+
+    public ProduitPaquet(int idProd, int idPaquet, String dateAjout) {
+        this.idProd = idProd;
+        this.idPaquet = idPaquet;
+        this.dateAjout = dateAjout;
+    }
+    
+    
     private int idProd;
     private int idPaquet;
     private String dateAjout;    
+
+    public int getIdProd() {
+        return idProd;
+    }
+
+    public void setIdProd(int idProd) {
+        this.idProd = idProd;
+    }
+
+    public int getIdPaquet() {
+        return idPaquet;
+    }
+
+    public void setIdPaquet(int idPaquet) {
+        this.idPaquet = idPaquet;
+    }
+
+    public String getDateAjout() {
+        return dateAjout;
+    }
+
+    public void setDateAjout(String dateAjout) {
+        this.dateAjout = dateAjout;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ProduitPaquet other = (ProduitPaquet) obj;
+        if (this.idProd != other.idProd) {
+            return false;
+        }
+        if (this.idPaquet != other.idPaquet) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
 }
