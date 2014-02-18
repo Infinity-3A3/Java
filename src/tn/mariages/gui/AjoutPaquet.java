@@ -67,8 +67,6 @@ public class AjoutPaquet extends javax.swing.JFrame {
 
         jLabel6.setText("Produit:");
 
-        cmbProduitPaquet.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jTextField1.setText("jTextField1");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
