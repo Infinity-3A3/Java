@@ -33,12 +33,14 @@ public class Produit {
     private String dateAjoutProd;
     private double prixProd;
     
-    private boolean dispHorsPaquet;
-    private boolean newProd;
+    private boolean exclusifPaquet;
     /*
      * A voir ajouter un nbr de liens des images
      */
+    private String imgProd_P;
+    
     private String imgProd_1;
     private String imgProd_2;
     private String imgProd_3;
+    private String imgProd_4;
 }

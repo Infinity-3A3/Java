@@ -28,13 +28,19 @@ public class Prestataire {
     private String nomPrest;
     private String descPrest;
     private String adrPrest;
-    private String telPrest;
+    private String villePrest;
+
     
+    private String imgPrest;
+    
+    private String telMobilePrest;
+    private String telFixePrest;
+
     private String emailPrest;
     private String pwdPrest;
+    
     private String categorie;
     private String specialite; // à voir
-    private String villePrest;
    
     private boolean mailValide;
     private boolean compteValide;

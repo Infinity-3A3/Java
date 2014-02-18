@@ -20,18 +20,11 @@ package tn.mariages.entities;
  *
  * @author RAED
  */
-public class Featured_Article {
+public class FeaturedProd {
     
     private int idFeat;
     
     private String dateFeat;    
     private String widget;
-    
     private int idProd;
-    private String nomProd;
-    private String shortDescProd;
-    private String categorieProd;
-    private double prixProd;
-    private boolean newProd;
-    private String dateAjoutProd;
 }

@@ -26,6 +26,5 @@ public class Admin {
     private String nomAdmin;
     private String mailAdmin;
     private String pwdAdmin;
-    private String saltAdmin;
     
 }

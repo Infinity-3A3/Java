@@ -22,7 +22,6 @@ package tn.mariages.entities;
  */
 public class Commentaire {
     
-    private int idCom; // A voir ( clé double)
     private int idClient;
     private int idProd;
     
