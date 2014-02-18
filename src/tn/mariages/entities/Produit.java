@@ -40,8 +40,9 @@ public class Produit {
         this.imgProd_4 = imgProd_4;
     }
 
-    public Produit(int idProd, String nomProd, String descProd, String shortDescProd, String categorieProd, String dateAjoutProd, double prixProd, boolean exclusifPaquet, String imgProd_P, String imgProd_1, String imgProd_2, String imgProd_3, String imgProd_4) {
+    public Produit(int idProd,int idPrest , String nomProd, String descProd, String shortDescProd, String categorieProd, String dateAjoutProd, double prixProd, boolean exclusifPaquet, String imgProd_P, String imgProd_1, String imgProd_2, String imgProd_3, String imgProd_4) {
         this.idProd = idProd;
+        this.idPrest=  idPrest;
         this.nomProd = nomProd;
         this.descProd = descProd;
         this.shortDescProd = shortDescProd;
@@ -59,6 +60,8 @@ public class Produit {
     
     
     private int idProd;
+    private int idPrest;
+  
     private String nomProd;
     
     private String descProd;
@@ -90,6 +93,14 @@ public class Produit {
 
     public String getNomProd() {
         return nomProd;
+    }
+    
+     public int getIdPrest() {
+        return idPrest;
+    }
+
+    public void setIdPrest(int idPrest) {
+        this.idPrest = idPrest;
     }
 
     public void setNomProd(String nomProd) {
