@@ -22,7 +22,7 @@ package tn.mariages.entities;
  * @author RAED
  */
 public class PanierPaquet {
-    private int idProd;
+    private int idClient;
     private int idPaquet;
     private String dateAjout;    
     

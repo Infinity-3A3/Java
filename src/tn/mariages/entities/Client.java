@@ -23,20 +23,23 @@ package tn.mariages.entities;
 public class Client {
     
     private int idClient;
-    private String nomMari;
-    private String nomMarie;
-    private String prenom;
+    private String prenomMari;
+    private String prenomEpouse;
+    private String nomDeFamille;
     
+    private String imgClient;
+
     private String emailClient;
     private String pwdClient;
-    private String saltClient; // à voir
     
     private boolean cmptValide;
     
     private String villeClient;
     private String telClient;
-    private String dateDebut; // a rajouter dates clés
+    
+    private String dateDebut;
     private String dateFin;
+    
     private double budget;
     
 }
