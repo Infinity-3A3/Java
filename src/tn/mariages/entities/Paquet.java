@@ -25,7 +25,7 @@ public class Paquet {
     public Paquet() {
     }
 
-    public Paquet(String nomPaquet, String descPaquet, String shortDescPaquet, String imgPaquet, boolean prixPaquet) {
+    public Paquet(String nomPaquet, String descPaquet, String shortDescPaquet, String imgPaquet, Double prixPaquet) {
         this.nomPaquet = nomPaquet;
         this.descPaquet = descPaquet;
         this.shortDescPaquet = shortDescPaquet;
@@ -33,7 +33,7 @@ public class Paquet {
         this.prixPaquet = prixPaquet;
     }
 
-    public Paquet(int idPaquet, int idPrest, String nomPaquet, String descPaquet, String shortDescPaquet, String imgPaquet, boolean prixPaquet) {
+    public Paquet(int idPaquet, int idPrest, String nomPaquet, String descPaquet, String shortDescPaquet, String imgPaquet, Double prixPaquet) {
         this.idPaquet = idPaquet;
         this.idPrest=  idPrest;
 
@@ -55,7 +55,7 @@ public class Paquet {
     
     private String imgPaquet;
     
-    private boolean prixPaquet;
+    private Double prixPaquet;
 
     public int getIdPaquet() {
         return idPaquet;
@@ -97,13 +97,15 @@ public class Paquet {
         this.imgPaquet = imgPaquet;
     }
 
-    public boolean isPrixPaquet() {
+    public Double getPrixPaquet() {
         return prixPaquet;
     }
 
-    public void setPrixPaquet(boolean prixPaquet) {
+    public void setPrixPaquet(Double prixPaquet) {
         this.prixPaquet = prixPaquet;
     }
+
+    
 
     @Override
     public int hashCode() {
@@ -133,6 +135,11 @@ public class Paquet {
 
     public void setIdPrest(int idPrest) {
         this.idPrest = idPrest;
+    }
+
+    @Override
+    public String toString() {
+        return "Paquet{" + "idPaquet=" + idPaquet + ", idPrest=" + idPrest + ", nomPaquet=" + nomPaquet + ", descPaquet=" + descPaquet + ", shortDescPaquet=" + shortDescPaquet + ", imgPaquet=" + imgPaquet + ", prixPaquet=" + prixPaquet + '}';
     }
    
 }
