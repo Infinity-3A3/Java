@@ -22,7 +22,7 @@ package tn.mariages.entities;
  */
 public class FeaturedProd {
     
-    private int idFeat;
+   
 
     public FeaturedProd() {
     }
@@ -40,7 +40,7 @@ public class FeaturedProd {
         this.idProd = idProd;
     }
     
-    
+     private int idFeat;
     private String dateFeat;    
     private String widget;
     private int idProd;

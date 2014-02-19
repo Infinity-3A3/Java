@@ -54,7 +54,7 @@ public class ListePrestataire extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablePrest);
 
-        BtnAjouterPres.setText("Ajouter");
+        BtnAjouterPres.setText("Ajouter Prestataire");
 
         BtnModifierPres.setText("Modifier");
 
@@ -79,7 +79,7 @@ public class ListePrestataire extends javax.swing.JFrame {
                         .addComponent(BtnModifierPres)
                         .addGap(99, 99, 99)
                         .addComponent(BtnSupprimePres)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
