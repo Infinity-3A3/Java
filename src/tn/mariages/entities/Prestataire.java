@@ -23,6 +23,30 @@ import java.util.Objects;
  * @author RAED
  */
 public class Prestataire {
+     private int idPrest;
+    
+    private String nomPrest;
+    private String descPrest;
+    private String adrPrest;
+    private String villePrest;
+
+    
+    private String imgPrest;
+    
+    private String telMobilePrest;
+    private String telFixePrest;
+
+    private String emailPrest;
+    private String pwdPrest;
+    
+    private String categorie;
+    private String specialite; // à voir
+   
+    private boolean mailValide;
+    private boolean compteValide;
+    
+    private boolean premium;
+    private String datePayement;
 
     public Prestataire() {
     }
@@ -64,33 +88,7 @@ public class Prestataire {
         this.datePayement = datePayement;
     }
     
-    
-    
-    private int idPrest;
-    
-    private String nomPrest;
-    private String descPrest;
-    private String adrPrest;
-    private String villePrest;
-
-    
-    private String imgPrest;
-    
-    private String telMobilePrest;
-    private String telFixePrest;
-
-    private String emailPrest;
-    private String pwdPrest;
-    
-    private String categorie;
-    private String specialite; // à voir
-   
-    private boolean mailValide;
-    private boolean compteValide;
-    
-    private boolean premium;
-    private String datePayement;
-
+  
     public int getIdPrest() {
         return idPrest;
     }
@@ -240,6 +238,11 @@ public class Prestataire {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Prestataire{"  + " nomPrest=" + nomPrest + ", descPrest=" + descPrest + ", adrPrest=" + adrPrest + ", villePrest=" + villePrest + ", imgPrest=" + imgPrest + ", telMobilePrest=" + telMobilePrest + ", telFixePrest=" + telFixePrest + ", emailPrest=" + emailPrest + ", pwdPrest=" + pwdPrest + ", categorie=" + categorie + ", specialite=" + specialite + ", mailValide=" + mailValide + ", compteValide=" + compteValide + ", premium=" + premium + ", datePayement=" + datePayement + '}';
     }
 
     

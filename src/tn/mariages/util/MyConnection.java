@@ -14,7 +14,7 @@ public class MyConnection {
     public Connection cnx;
     private MyConnection()
     {
-     String url ="jdbc:mysql://127.0.0.1:3306/3a3";
+     String url ="jdbc:mysql://127.0.0.1:3306/mariages_master_dev";
      String login ="root";
      String pwd="";
     

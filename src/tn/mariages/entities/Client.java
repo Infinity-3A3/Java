@@ -204,5 +204,10 @@ public class Client {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Client{" +  " prenomMari=" + prenomMari + ", prenomEpouse=" + prenomEpouse + ", nomDeFamille=" + nomDeFamille + ", imgClient=" + imgClient + ", emailClient=" + emailClient + ", pwdClient=" + pwdClient + ", cmptValide=" + cmptValide + ", villeClient=" + villeClient + ", telClient=" + telClient + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", budget=" + budget + '}';
+    }
     
 }
