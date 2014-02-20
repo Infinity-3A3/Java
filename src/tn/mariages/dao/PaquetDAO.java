@@ -140,24 +140,6 @@ public class PaquetDAO {
             return null;
         }
     }
-    
-    
-    
-    
-    public static void main(String[] args) {
-        Paquet p1 = new Paquet(1, 1, "khaled", "lll", "lll", "lll", 10.0);
-        Paquet p2 = new Paquet(2, 1, "youssef", "ooo", "oo", "oo", 50.0);
-        PaquetDAO dao = new PaquetDAO();
-        //p.setNomPaquet("khaled");
-        //dao.updatePaquet(p);
-       // dao.deletePaquet(1);
-        //dao.insertPaquet(p1);
-        //dao.insertPaquet(p2);
-        List<Paquet> listePaquets = new ArrayList<Paquet>();
-        listePaquets=dao.FindPaquetsByPrix(60, 20);
-        
-        System.out.println(listePaquets);
-    }
-    
+      
 }
 
