@@ -25,7 +25,8 @@ public class Produit {
     public Produit() {
     }
 
-    public Produit(String nomProd, String descProd, String shortDescProd, String categorieProd, String dateAjoutProd, double prixProd, boolean exclusifPaquet, String imgProd_P, String imgProd_1, String imgProd_2, String imgProd_3, String imgProd_4) {
+    public Produit(int idPrest, String nomProd, String descProd, String shortDescProd, String categorieProd, String dateAjoutProd, double prixProd, boolean exclusifPaquet, String imgProd_P, String imgProd_1, String imgProd_2, String imgProd_3, String imgProd_4) {
+        this.idPrest=idPrest;
         this.nomProd = nomProd;
         this.descProd = descProd;
         this.shortDescProd = shortDescProd;
