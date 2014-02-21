@@ -40,7 +40,7 @@ public class FeaturedProd {
         this.idProd = idProd;
     }
     
-     private int idFeat;
+    private int idFeat;
     private String dateFeat;    
     private String widget;
     private int idProd;
