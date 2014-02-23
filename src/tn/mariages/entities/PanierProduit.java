@@ -17,6 +17,8 @@
 
 package tn.mariages.entities;
 
+import java.sql.Date;
+
 /**
  *
  * @author RAED
@@ -29,14 +31,14 @@ public class PanierProduit {
     public PanierProduit(int idClient, int idProd, String dateAjout) {
         this.idClient = idClient;
         this.idProd = idProd;
-        this.dateAjout = dateAjout;
+        this.dateAjout = Date.valueOf(dateAjout);
     }
     
     
     
     private int idClient;
     private int idProd;
-    private String dateAjout;    
+    private Date dateAjout;    
 
     public int getIdClient() {
         return idClient;
@@ -54,12 +56,12 @@ public class PanierProduit {
         this.idProd = idProd;
     }
 
-    public String getDateAjout() {
+    public Date getDateAjout() {
         return dateAjout;
     }
 
     public void setDateAjout(String dateAjout) {
-        this.dateAjout = dateAjout;
+        this.dateAjout = Date.valueOf(dateAjout);
     }
 
     @Override
