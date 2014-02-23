@@ -69,7 +69,7 @@ public class Modif_Prest extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         btnValiderModifPrest = new javax.swing.JButton();
         btnAnulModifPrest = new javax.swing.JButton();
-        jDayChooser1 = new com.toedter.calendar.JDayChooser();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         labelIdPrest = new javax.swing.JLabel();
 
@@ -199,27 +199,28 @@ public class Modif_Prest extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(btnAnulModifPrest)
-                            .addComponent(btnValiderModifPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnValiderModifPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(chkCmptValidePrest)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(chkEmailValidePrest)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(chkPremiumPrest))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifierPrestLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1)
+                                    .addComponent(jScrollPane2)
+                                    .addComponent(tfNomPrest)
+                                    .addComponent(cmbVillePrest, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                .addGap(41, 41, 41)
                                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane1)
-                                        .addComponent(jScrollPane2)
-                                        .addComponent(tfNomPrest)
-                                        .addComponent(cmbVillePrest, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifierPrestLayout.createSequentialGroup()
-                                        .addComponent(jDayChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)))))))
-                .addGap(24, 24, 24))
+                                    .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                        .addComponent(chkCmptValidePrest)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(chkEmailValidePrest)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(chkPremiumPrest)))))))
+                .addGap(103, 103, 103))
         );
         pnlModifierPrestLayout.setVerticalGroup(
             pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,18 +268,19 @@ public class Modif_Prest extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(TfSpecPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnValiderModifPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkEmailValidePrest)
-                    .addComponent(chkPremiumPrest)
-                    .addComponent(chkCmptValidePrest))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAnulModifPrest)
-                    .addComponent(jDayChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnValiderModifPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkEmailValidePrest)
+                            .addComponent(chkPremiumPrest)
+                            .addComponent(chkCmptValidePrest))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAnulModifPrest))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         tfNomPrest.getAccessibleContext().setAccessibleName("");
@@ -386,7 +388,7 @@ public class Modif_Prest extends javax.swing.JFrame {
     private javax.swing.JCheckBox chkPremiumPrest;
     private javax.swing.JComboBox cmbCategoriePrest;
     private javax.swing.JComboBox cmbVillePrest;
-    private com.toedter.calendar.JDayChooser jDayChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
