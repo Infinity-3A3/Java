@@ -84,7 +84,7 @@ public class FeaturedProdDAO {
     
     
     
-    public List<FeaturedProd> DisplayAllFEATProd (){
+    public List<FeaturedProd> DisplayAllFeatProd (){
         
         List<FeaturedProd> listeFeatProd = new ArrayList<FeaturedProd>();
 
@@ -122,5 +122,43 @@ return null;
     }
 
     
+    
+        public FeaturedProd DisplayFeatProdByID (int id){
+        
+        FeaturedProd fp = new FeaturedProd();
+        
+            fp.setIdFeat(-1);
+        
+        String requete = "SELECT * FROM `featuredprod` where IdFeat = "+id;
+        
+        Statement statement;
+        try {
+            statement = MyConnection.getInstance().cnx.createStatement();
+            ResultSet resultat=statement.executeQuery(requete);
+
+            
+            
+            while(resultat.next()){
+
+                
+                fp.setIdFeat(resultat.getInt(1));
+                fp.setDateFeat(resultat.getString(2));
+                fp.setWidget(resultat.getString(3));
+                fp.setIdProd(resultat.getInt(4));
+                /* `idFeat`, `dateFeat`, `widget`, `idProd`  */
+               
+              
+        }
+        
+                     return fp;
+        }
+catch (SQLException ex) {
+System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+return null;
+
+}
+      
+    }
+
     
 }
