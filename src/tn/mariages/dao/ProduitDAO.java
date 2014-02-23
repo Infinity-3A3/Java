@@ -23,7 +23,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import tn.mariages.entities.Client;
 import tn.mariages.entities.Produit;
 import tn.mariages.util.MyConnection;
 /**

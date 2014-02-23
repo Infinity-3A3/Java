@@ -37,10 +37,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlModifierPrest" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="pnlModifierPrest" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="jLabel1" max="-2" attributes="0"/>
@@ -110,7 +107,10 @@
                                       <Component id="cmbCategoriePrest" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="316" max="-2" attributes="0"/>
+                                  <Component id="jSeparator1" max="32767" attributes="0"/>
+                              </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   <Component id="TfSpecPrest" min="-2" pref="194" max="-2" attributes="0"/>
@@ -121,10 +121,10 @@
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="2" attributes="0">
                               <Component id="btnAnulModifPrest" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnValiderModifPrest" alignment="2" min="-2" pref="82" max="-2" attributes="0"/>
+                              <Component id="btnValiderModifPrest" alignment="2" min="-2" pref="109" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -133,11 +133,14 @@
                                       <Component id="cmbVillePrest" alignment="1" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="tfDatePayementPrest" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jDateChooser1" min="-2" pref="167" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
                                           <Component id="chkCmptValidePrest" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="chkEmailValidePrest" min="-2" max="-2" attributes="0"/>
@@ -149,7 +152,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -212,20 +215,22 @@
                       <Component id="TfSpecPrest" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                  <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnValiderModifPrest" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="chkEmailValidePrest" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkPremiumPrest" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkCmptValidePrest" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnValiderModifPrest" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="chkEmailValidePrest" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="chkPremiumPrest" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="chkCmptValidePrest" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnAnulModifPrest" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnAnulModifPrest" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfDatePayementPrest" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                  <EmptySpace pref="121" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -338,17 +343,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkEmailValidePrestActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="tfDatePayementPrest">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="1/1/1970"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDatePayementPrestActionPerformed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JFormattedTextField(new SimpleDateFormat(&quot;dd/MM/yyyy&quot;))"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nom"/>
@@ -414,6 +408,8 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Anuller"/>
           </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
         </Component>
       </SubComponents>
     </Container>

@@ -57,7 +57,6 @@ public class Modif_Prest extends javax.swing.JFrame {
         chkCmptValidePrest = new javax.swing.JCheckBox();
         chkPremiumPrest = new javax.swing.JCheckBox();
         chkEmailValidePrest = new javax.swing.JCheckBox();
-        tfDatePayementPrest = new JFormattedTextField(new SimpleDateFormat("dd/MM/yyyy"));
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -70,6 +69,7 @@ public class Modif_Prest extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         btnValiderModifPrest = new javax.swing.JButton();
         btnAnulModifPrest = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         labelIdPrest = new javax.swing.JLabel();
 
@@ -131,13 +131,6 @@ public class Modif_Prest extends javax.swing.JFrame {
             }
         });
 
-        tfDatePayementPrest.setText("1/1/1970");
-        tfDatePayementPrest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfDatePayementPrestActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Nom");
 
         jLabel3.setText("Description");
@@ -196,7 +189,9 @@ public class Modif_Prest extends javax.swing.JFrame {
                                     .addComponent(TfEmailPrest, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(tfTelPrest)
                                     .addComponent(cmbCategoriePrest, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifierPrestLayout.createSequentialGroup()
+                                .addGap(316, 316, 316)
+                                .addComponent(jSeparator1))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifierPrestLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(TfSpecPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -204,9 +199,9 @@ public class Modif_Prest extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(btnAnulModifPrest)
-                            .addComponent(btnValiderModifPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnValiderModifPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifierPrestLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane1)
@@ -216,14 +211,16 @@ public class Modif_Prest extends javax.swing.JFrame {
                             .addGroup(pnlModifierPrestLayout.createSequentialGroup()
                                 .addGap(41, 41, 41)
                                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfDatePayementPrest)
+                                    .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(pnlModifierPrestLayout.createSequentialGroup()
                                         .addComponent(chkCmptValidePrest)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(chkEmailValidePrest)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(chkPremiumPrest)))))))
-                .addGap(24, 24, 24))
+                .addGap(103, 103, 103))
         );
         pnlModifierPrestLayout.setVerticalGroup(
             pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,18 +268,19 @@ public class Modif_Prest extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(TfSpecPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnValiderModifPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkEmailValidePrest)
-                    .addComponent(chkPremiumPrest)
-                    .addComponent(chkCmptValidePrest))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAnulModifPrest)
-                    .addComponent(tfDatePayementPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnValiderModifPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkEmailValidePrest)
+                            .addComponent(chkPremiumPrest)
+                            .addComponent(chkCmptValidePrest))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAnulModifPrest))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         tfNomPrest.getAccessibleContext().setAccessibleName("");
@@ -301,9 +299,7 @@ public class Modif_Prest extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlModifierPrest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlModifierPrest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jLabel1)
@@ -345,10 +341,6 @@ public class Modif_Prest extends javax.swing.JFrame {
     private void btnValiderModifPrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValiderModifPrestActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnValiderModifPrestActionPerformed
-
-    private void tfDatePayementPrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDatePayementPrestActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfDatePayementPrestActionPerformed
 
     /**
      * @param args the command line arguments
@@ -396,6 +388,7 @@ public class Modif_Prest extends javax.swing.JFrame {
     private javax.swing.JCheckBox chkPremiumPrest;
     private javax.swing.JComboBox cmbCategoriePrest;
     private javax.swing.JComboBox cmbVillePrest;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -413,7 +406,6 @@ public class Modif_Prest extends javax.swing.JFrame {
     private javax.swing.JPanel pnlModifierPrest;
     private javax.swing.JTextArea taAdrPrest;
     private javax.swing.JTextArea taDescPrest;
-    private javax.swing.JFormattedTextField tfDatePayementPrest;
     private javax.swing.JTextField tfNomPrest;
     private javax.swing.JTextField tfTelPrest;
     // End of variables declaration//GEN-END:variables
