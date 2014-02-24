@@ -4,6 +4,10 @@
  */
 package tn.mariages.gui;
 
+import javax.swing.JOptionPane;
+import tn.mariages.dao.PrestataireDAO;
+import tn.mariages.entities.Prestataire;
+
 /**
  *
  * @author cyrine
@@ -14,8 +18,12 @@ public class ListePrestataire extends javax.swing.JFrame {
      * Creates new form ListePrestataire
      */
     public   ListePrestataire() {
-        initComponents();
+        initComponents();   
     }
+    
+          Prestataire prest=new Prestataire();
+              PrestataireDAO prestDao=new PrestataireDAO();
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,65 +43,76 @@ public class ListePrestataire extends javax.swing.JFrame {
         BtnSupprimePres = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Liste des prestataires");
 
-        tablePrest.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        tablePrest.setModel(new MyTablePrest());
         jScrollPane1.setViewportView(tablePrest);
 
         BtnAjouterPres.setText("Ajouter Prestataire");
+        BtnAjouterPres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAjouterPresActionPerformed(evt);
+            }
+        });
 
         BtnModifierPres.setText("Modifier");
+        BtnModifierPres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnModifierPresActionPerformed(evt);
+            }
+        });
 
         BtnSupprimePres.setText("Supprimer");
+        BtnSupprimePres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSupprimePresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(BtnAjouterPres)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnModifierPres, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(142, 142, 142)
+                .addComponent(BtnSupprimePres, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(224, 224, 224)
+                        .addGap(454, 454, 454)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(BtnAjouterPres)
-                        .addGap(96, 96, 96)
-                        .addComponent(BtnModifierPres)
-                        .addGap(99, 99, 99)
-                        .addComponent(BtnSupprimePres)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 876, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(53, 53, 53)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnAjouterPres, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnModifierPres, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnSupprimePres, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                    .addComponent(BtnModifierPres, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnAjouterPres, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnSupprimePres, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -102,8 +121,8 @@ public class ListePrestataire extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,6 +134,76 @@ public class ListePrestataire extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnAjouterPresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAjouterPresActionPerformed
+         setVisible(true);
+         AjoutPrestataire ajoutPrest=new AjoutPrestataire();
+         ajoutPrest.setVisible(true);
+
+
+    }//GEN-LAST:event_BtnAjouterPresActionPerformed
+
+    private void BtnSupprimePresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSupprimePresActionPerformed
+           
+        
+         int dialogButton = JOptionPane.YES_NO_OPTION;
+                JOptionPane.showConfirmDialog (null, "Voulez vous supprimer tous les paquets selectionnés?","Warning",dialogButton);
+
+                if(dialogButton == JOptionPane.YES_OPTION){ //The ISSUE is here
+                    
+                    PrestataireDAO prestDAo = new PrestataireDAO();
+                    int ids[]=new int[50];
+                    int j=-1;
+                    for(int i=0;i<tablePrest.getRowCount();i++){
+                    Boolean b =(Boolean)tablePrest.getValueAt(i, 9);
+                    if(b)
+                    {
+                        j++;
+                         ids[j]=(int)tablePrest.getValueAt(i, 0);
+                    }
+                      
+                      
+                    }
+                    
+                    while(j!=-1)
+                    {
+                        
+                        prestDAo.deletePrest(ids[j]);
+                        j--;
+                    }
+                   MyTablePrest  model = new MyTablePrest();
+                    tablePrest.setModel(model);
+                }
+        
+        
+           
+    }//GEN-LAST:event_BtnSupprimePresActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+           
+    }//GEN-LAST:event_formWindowOpened
+
+    private void BtnModifierPresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModifierPresActionPerformed
+      
+        if(tablePrest.getSelectedRow()!=-1){
+            prest=prestDao.findPrestById((int) tablePrest.getValueAt(tablePrest.getSelectedRow(), 0));
+           
+            
+         this.setVisible(true);
+        Modif_Prest modifPrest=new Modif_Prest(prest);
+         modifPrest.setVisible(true);
+           
+        }else
+        {
+            int d=JOptionPane.OK_CANCEL_OPTION;
+            JOptionPane.showConfirmDialog(null, "Vous n'avez pas sélectionnez un prestataire","erreur",d);
+                    
+        }
+        
+        
+        
+             
+    }//GEN-LAST:event_BtnModifierPresActionPerformed
 
     /**
      * @param args the command line arguments

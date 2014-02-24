@@ -17,6 +17,12 @@
 
 package tn.mariages.gui;
 
+import java.awt.Button;
+import javax.swing.JOptionPane;
+import tn.mariages.dao.ClientDAO;
+import tn.mariages.dao.PrestataireDAO;
+import tn.mariages.entities.Client;
+
 /**
  *
  * @author khaled
@@ -53,17 +59,7 @@ public class ListeClients extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        tableClient.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        tableClient.setModel(new MytableClient());
         jScrollPane1.setViewportView(tableClient);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -87,10 +83,25 @@ public class ListeClients extends javax.swing.JFrame {
         jLabel1.setText("Lister Clients");
 
         btnAjouterClient.setText("Ajouter");
+        btnAjouterClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAjouterClientActionPerformed(evt);
+            }
+        });
 
         btnModifierClient.setText("Modifier");
+        btnModifierClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModifierClientActionPerformed(evt);
+            }
+        });
 
         btnSupprimerClient.setText("Supprimer");
+        btnSupprimerClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSupprimerClientActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,6 +141,76 @@ public class ListeClients extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSupprimerClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSupprimerClientActionPerformed
+         
+
+
+                                          
+
+    
+        
+         int dialogButton = JOptionPane.YES_NO_OPTION;
+                JOptionPane.showConfirmDialog (null, "Voulez vous supprimer tous les paquets selectionnés?","Warning",dialogButton);
+
+                if(dialogButton == JOptionPane.YES_OPTION){ //The ISSUE is here
+                    
+                    ClientDAO clDAO = new ClientDAO();
+                    int ids[]=new int[50];
+                    int j=-1;
+                    for(int i=0;i<tableClient.getRowCount();i++){
+                    Boolean b =(Boolean)tableClient.getValueAt(i,6);
+                    if(b)
+                    {
+                        j++;
+                         ids[j]=(int)tableClient.getValueAt(i, 0);
+                    }
+                      
+                      
+                    }
+                    
+                    while(j!=-1)
+                    {
+                        
+                        clDAO.deleteClient(ids[j]);
+                        j--;
+                    }
+                   MytableClient  model = new MytableClient();
+                    tableClient.setModel(model);
+                }
+               
+       
+          
+    }//GEN-LAST:event_btnSupprimerClientActionPerformed
+
+    private void btnAjouterClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterClientActionPerformed
+
+      this.setVisible(true);
+      AjoutClient ajoutClt=new AjoutClient();
+      ajoutClt.setVisible(true);
+
+    }//GEN-LAST:event_btnAjouterClientActionPerformed
+
+    private void btnModifierClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifierClientActionPerformed
+    if(tableClient.getSelectedRow()!=-1){
+            Client c=new Client();
+            ClientDAO clientdao=new ClientDAO();
+            c= clientdao.findClientById((int) tableClient.getValueAt(tableClient.getSelectedRow(), 0));
+           
+            
+         this.setVisible(true);
+        ModifierClient modifclient=new ModifierClient(c);
+         modifclient.setVisible(true);
+           
+        }else
+        {
+            int d=JOptionPane.OK_CANCEL_OPTION;
+            JOptionPane.showConfirmDialog(null, "Vous n'avez pas sélectionnez un client","erreur",d);
+                    
+        }
+       
+           
+    }//GEN-LAST:event_btnModifierClientActionPerformed
 
     /**
      * @param args the command line arguments
