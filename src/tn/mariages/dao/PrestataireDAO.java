@@ -22,7 +22,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import tn.mariages.entities.Client;
 import tn.mariages.entities.Prestataire;
 import tn.mariages.util.MyConnection;
 
@@ -96,11 +95,11 @@ public class PrestataireDAO {
     
     }
     
-    public void  deletePrest (Prestataire p){
+    public void  deletePrest (int id){
         String requete = "delete from prestataire where idPrest=?";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
-            ps.setInt(1, p.getIdPrest());
+            ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("Prestataire supprimée");
         } catch (SQLException ex) {
@@ -326,17 +325,18 @@ System.out.println("erreur lors de la recherche du prestataire "+ex.getMessage()
                  prest.setNomPrest(resultat.getString(2));
                 prest.setDescPrest(resultat.getString(3));
                  prest.setAdrPrest(resultat.getString(4));
-                  prest.setImgPrest(resultat.getString(5));
-                 prest.setTelMobilePrest(resultat.getString(6));
-                  prest.setTelFixePrest(resultat.getString(7));
-                  prest.setEmailPrest(resultat.getString(8));
-                  prest.setPwdPrest(resultat.getString(9));
-                  prest.setCategorie(resultat.getString(10));
-                   prest.setSpecialite(resultat.getString(11));
-                   prest.setMailValide(resultat.getBoolean(12));
-                   prest.setCompteValide(resultat.getBoolean(13));
-                   prest.setPremium(resultat.getBoolean(13));
-                   prest.setDatePayement(resultat.getString(13));
+                   prest.setVillePrest(resultat.getString(5));
+                   prest.setImgPrest(resultat.getString(6));
+                prest.setTelMobilePrest(resultat.getString(7));
+                  prest.setTelFixePrest(resultat.getString(8));
+                 prest.setEmailPrest(resultat.getString(9));
+                prest.setPwdPrest(resultat.getString(10));
+                   prest.setCategorie(resultat.getString(11));
+                    prest.setSpecialite(resultat.getString(12));
+                    prest.setMailValide(resultat.getBoolean(13));
+                    prest.setCompteValide(resultat.getBoolean(14));
+                    prest.setPremium(resultat.getBoolean(15));
+                    prest.setDatePayement(resultat.getString(16));
                    listePrestataires.add(prest);
         }
         

@@ -1,21 +1,9 @@
-/*
- * Copyright (C) 2014 khaled
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 
 package tn.mariages.gui;
+
+import javax.swing.JOptionPane;
+import tn.mariages.dao.ClientDAO;
+import tn.mariages.entities.Client;
 
 /**
  *
@@ -29,7 +17,7 @@ public class AjoutClient extends javax.swing.JFrame {
     public AjoutClient() {
         initComponents();
     }
-
+     String[] ville={"Arriana","Mannouba","Carthage","El ghazela"};
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,10 +50,18 @@ public class AjoutClient extends javax.swing.JFrame {
         tfDateFin = new javax.swing.JFormattedTextField();
         btnValider = new javax.swing.JButton();
         btnAnnuler = new javax.swing.JButton();
-        tfVilleClient = new javax.swing.JTextField();
+        cmbVilleClient = new javax.swing.JComboBox();
+        jLabel13 = new javax.swing.JLabel();
+        tfImageclient = new javax.swing.JTextField();
+        btParcourir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -79,15 +75,11 @@ public class AjoutClient extends javax.swing.JFrame {
 
         jLabel6.setText("Mot De Passe");
 
-        tfPrenomMari.setText("jTextField1");
-
-        tfPrenomEpouse.setText("jTextField2");
-
-        tfNom.setText("jTextField3");
-
-        tfEmailClient.setText("jTextField4");
-
-        tfTelClient.setText("jTextField5");
+        tfPrenomMari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPrenomMariActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Telephone");
 
@@ -101,17 +93,23 @@ public class AjoutClient extends javax.swing.JFrame {
 
         jLabel12.setText("Fin");
 
-        tfPwdClient.setText("jPasswordField1");
-
-        tfDateDebut.setText("jFormattedTextField1");
-
-        tfDateFin.setText("jFormattedTextField1");
-
-        btnValider.setText("Valider");
+        btnValider.setText("Ajouter");
+        btnValider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValiderActionPerformed(evt);
+            }
+        });
 
         btnAnnuler.setText("Annuler");
+        btnAnnuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnnulerActionPerformed(evt);
+            }
+        });
 
-        tfVilleClient.setText("jTextField6");
+        jLabel13.setText("Image:");
+
+        btParcourir.setText("Parcourir");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -124,32 +122,6 @@ public class AjoutClient extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel8))
-                                        .addGap(27, 27, 27)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel11)
-                                            .addComponent(jLabel12)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btnValider)
-                                        .addGap(17, 17, 17)))
-                                .addGap(20, 20, 20)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAnnuler)
-                                    .addComponent(tfDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfDateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5))
-                                .addGap(83, 83, 83)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfEmailClient, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfPwdClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2)
@@ -159,16 +131,50 @@ public class AjoutClient extends javax.swing.JFrame {
                                     .addComponent(tfNom, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(tfPrenomMari, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                                        .addComponent(tfPrenomEpouse)))))
+                                        .addComponent(tfPrenomEpouse))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5))
+                                .addGap(83, 83, 83)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfTelClient, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfEmailClient, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                                        .addComponent(tfPwdClient))
+                                    .addComponent(cmbVilleClient, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(102, 102, 102)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(spinBudget)
-                            .addComponent(tfTelClient, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                            .addComponent(tfVilleClient))
-                        .addGap(84, 84, 84))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel7))
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnValider)
+                                .addGap(15, 15, 15)))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfDateDebut)
+                            .addComponent(tfDateFin)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(btnAnnuler))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(tfImageclient, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btParcourir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(spinBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +206,7 @@ public class AjoutClient extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(tfVilleClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbVilleClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -214,11 +220,16 @@ public class AjoutClient extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(tfImageclient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btParcourir))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnValider)
                     .addComponent(btnAnnuler))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -249,6 +260,98 @@ public class AjoutClient extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tfPrenomMariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPrenomMariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPrenomMariActionPerformed
+
+    private void btnValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValiderActionPerformed
+ if(tfPrenomMari.getText().equals("")|| tfPrenomEpouse.getText().equals("")|| tfNom.getText().equals("") ||tfDateDebut.getText().equals("")|| tfDateFin.getText().equals("")|| tfImageclient.getText().equals("") || tfEmailClient.getText().equals("") || tfPwdClient.getText().equals("") || cmbVilleClient.getSelectedItem().equals("--Choisir ville--")){
+    
+     String ch="";
+           if(tfPrenomMari.getText().equals(""))
+               ch+="Veuillez saisir le Prenom du mari \n";
+           
+            if(tfPrenomEpouse.getText().equals(""))
+               ch+="Veuillez saisir le Prenom de l'epouse  \n";
+            if(tfNom.getText().equals(""))
+               ch+="Veuillez saisir le nom de famille  \n";
+            if(cmbVilleClient.getSelectedItem().toString().equals(""))
+               ch+="Veuillez donner la ville du client  \n";
+             if(tfDateDebut.getText().equals(""))
+               ch+="Veuillez saisir la date début de la période de mariage  \n";
+             
+              if(tfPwdClient.getText().equals(""))
+               ch+="Veuillez saisir votre mot de pasee  \n";
+              if((tfEmailClient.getText()!=null )&&(tfEmailClient.getText().trim().length()>0)){
+               ch+="Veuillez donner l'adresse email du client  \n";
+                    if(tfEmailClient.getText().matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" ))
+                     ch+="MAUVAISE @  \n";
+              }
+              if(tfDateFin.getText().equals(""))
+               ch+="Veuillez saisir la date fin de la période de mariage  \n";
+             if(tfImageclient.getText().equals(""))
+               ch+="Veuillez donner un chemin correct de votre photo  \n";
+              
+            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
+                JOptionPane.showConfirmDialog (null,ch,"Warning",dialogButton);
+     
+     
+     
+     
+     
+     
+ }else{
+     
+     
+     
+     String prMari=tfPrenomMari.getText();
+ 
+            String prEpouse=tfPrenomEpouse.getText();
+          String nom=tfNom.getText();
+          String email=tfEmailClient.getText();
+          String pwd=tfPwdClient.getText();
+          String tel=tfTelClient.getText();
+          String vville=cmbVilleClient.getSelectedItem().toString();
+          int  budget= Integer.parseInt(spinBudget.getValue().toString());
+          String dateDebut=tfDateDebut.getText();
+          String dateFin=tfDateFin.getText();
+          String img=tfImageclient.getText();
+          
+          Client client=new Client();
+          client.setPrenomMari(prMari);
+          client.setPrenomEpouse(prEpouse);
+          client.setNomDeFamille(nom);
+         client.setEmailClient(email);
+         client.setPwdClient(pwd);
+         client.setTelClient(tel);
+         client.setVilleClient(vville);
+         client.setBudget(budget);
+         client.setDateDebut(dateDebut);
+         client.setDateFin(dateFin);
+         client.setImgClient(img);
+         ClientDAO clientDao=new ClientDAO();
+         clientDao.insertClient(client);
+         this.setVisible(false);
+             ListeClients lp=new ListeClients();
+             lp.setVisible(true);
+          
+ }  
+          
+                   
+
+    }//GEN-LAST:event_btnValiderActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+          for (int i=0;i<ville.length;i++){
+                 cmbVilleClient.addItem(ville[i]);
+                 
+             }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnAnnulerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,12 +389,15 @@ public class AjoutClient extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btParcourir;
     private javax.swing.JButton btnAnnuler;
     private javax.swing.JButton btnValider;
+    private javax.swing.JComboBox cmbVilleClient;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -305,11 +411,11 @@ public class AjoutClient extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tfDateDebut;
     private javax.swing.JFormattedTextField tfDateFin;
     private javax.swing.JTextField tfEmailClient;
+    private javax.swing.JTextField tfImageclient;
     private javax.swing.JTextField tfNom;
     private javax.swing.JTextField tfPrenomEpouse;
     private javax.swing.JTextField tfPrenomMari;
     private javax.swing.JPasswordField tfPwdClient;
     private javax.swing.JTextField tfTelClient;
-    private javax.swing.JTextField tfVilleClient;
     // End of variables declaration//GEN-END:variables
 }

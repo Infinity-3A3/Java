@@ -242,9 +242,7 @@ public class Prestataire {
 
     @Override
     public String toString() {
-        return "Prestataire{"  + " nomPrest=" + nomPrest + ", descPrest=" + descPrest + ", adrPrest=" + adrPrest + ", villePrest=" + villePrest + ", imgPrest=" + imgPrest + ", telMobilePrest=" + telMobilePrest + ", telFixePrest=" + telFixePrest + ", emailPrest=" + emailPrest + ", pwdPrest=" + pwdPrest + ", categorie=" + categorie + ", specialite=" + specialite + ", mailValide=" + mailValide + ", compteValide=" + compteValide + ", premium=" + premium + ", datePayement=" + datePayement + '}';
-    }
-
-    
-    
+       return "Prestataire{"  + " nomPrest=" + nomPrest + ", descPrest=" + descPrest + ", adrPrest=" + adrPrest + ", villePrest=" + villePrest +  ", telMobilePrest=" + telMobilePrest + ", telFixePrest=" + telFixePrest + ", emailPrest=" + emailPrest +  ", categorie=" + categorie + ", specialite=" + specialite +   ", premium=" + premium + ", datePayement=" + datePayement + '}';
+      }
+   
 }

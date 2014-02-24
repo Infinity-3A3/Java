@@ -42,12 +42,12 @@ public class Client {
     private String dateDebut;
     private String dateFin;
     
-    private double budget;
+    private int budget;
 
     public Client() {
     }
 
-    public Client(String prenomMari, String prenomEpouse, String nomDeFamille, String imgClient, String emailClient, String pwdClient, boolean cmptValide, String villeClient, String telClient, String dateDebut, String dateFin, double budget) {
+    public Client(String prenomMari, String prenomEpouse, String nomDeFamille, String imgClient, String emailClient, String pwdClient, boolean cmptValide, String villeClient, String telClient, String dateDebut, String dateFin, int budget) {
         this.prenomMari = prenomMari;
         this.prenomEpouse = prenomEpouse;
         this.nomDeFamille = nomDeFamille;
@@ -62,7 +62,7 @@ public class Client {
         this.budget = budget;
     }
 
-    public Client(int idClient, String prenomMari, String prenomEpouse, String nomDeFamille, String imgClient, String emailClient, String pwdClient, boolean cmptValide, String villeClient, String telClient, String dateDebut, String dateFin, double budget) {
+    public Client(int idClient, String prenomMari, String prenomEpouse, String nomDeFamille, String imgClient, String emailClient, String pwdClient, boolean cmptValide, String villeClient, String telClient, String dateDebut, String dateFin, int budget) {
         this.idClient = idClient;
         this.prenomMari = prenomMari;
         this.prenomEpouse = prenomEpouse;
@@ -174,11 +174,11 @@ public class Client {
         this.dateFin = dateFin;
     }
 
-    public double getBudget() {
+    public int getBudget() {
         return budget;
     }
 
-    public void setBudget(double budget) {
+    public void setBudget(int budget) {
         this.budget = budget;
     }
 
