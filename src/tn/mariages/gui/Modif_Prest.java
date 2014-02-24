@@ -17,8 +17,16 @@
 
 package tn.mariages.gui;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import javax.swing.JFormattedTextField;
+import javax.swing.JTextArea;
+import javax.swing.filechooser.*;
+import javax.swing.JFileChooser;
+
+
 
 /**
  *
@@ -42,6 +50,7 @@ public class Modif_Prest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser = new javax.swing.JFileChooser();
         pnlModifierPrest = new javax.swing.JPanel();
         tfNomPrest = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -70,6 +79,10 @@ public class Modif_Prest extends javax.swing.JFrame {
         btnValiderModifPrest = new javax.swing.JButton();
         btnAnulModifPrest = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        jButton1 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        textarea = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         labelIdPrest = new javax.swing.JLabel();
 
@@ -150,7 +163,9 @@ public class Modif_Prest extends javax.swing.JFrame {
         jLabel10.setText("Spécialité");
 
         btnValiderModifPrest.setBackground(new java.awt.Color(0, 153, 0));
+        btnValiderModifPrest.setMnemonic('o');
         btnValiderModifPrest.setText("Valider");
+        btnValiderModifPrest.setToolTipText("");
         btnValiderModifPrest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnValiderModifPrestActionPerformed(evt);
@@ -159,6 +174,19 @@ public class Modif_Prest extends javax.swing.JFrame {
 
         btnAnulModifPrest.setBackground(new java.awt.Color(255, 102, 102));
         btnAnulModifPrest.setText("Anuller");
+
+        jDateChooser1.setDateFormatString("yyyy-MM-dd");
+
+        jButton1.setText("Choisr Fichier..");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        textarea.setColumns(20);
+        textarea.setRows(5);
+        jScrollPane3.setViewportView(textarea);
 
         javax.swing.GroupLayout pnlModifierPrestLayout = new javax.swing.GroupLayout(pnlModifierPrest);
         pnlModifierPrest.setLayout(pnlModifierPrestLayout);
@@ -196,31 +224,41 @@ public class Modif_Prest extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(TfSpecPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(btnAnulModifPrest)
-                            .addComponent(btnValiderModifPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifierPrestLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(jScrollPane2)
-                                    .addComponent(tfNomPrest)
-                                    .addComponent(cmbVillePrest, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                .addGap(41, 41, 41)
+                                .addGap(25, 25, 25)
+                                .addComponent(btnAnulModifPrest))
+                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnValiderModifPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                .addGap(44, 44, 44)
                                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jScrollPane1)
+                                            .addComponent(jScrollPane2)
+                                            .addComponent(tfNomPrest)
+                                            .addComponent(cmbVillePrest, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                        .addComponent(chkCmptValidePrest)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(chkEmailValidePrest)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(chkPremiumPrest)))))))
-                .addGap(103, 103, 103))
+                                        .addGap(41, 41, 41)
+                                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                                .addComponent(chkCmptValidePrest)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(chkEmailValidePrest)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(chkPremiumPrest))))))
+                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jButton1)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         pnlModifierPrestLayout.setVerticalGroup(
             pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,7 +284,10 @@ public class Modif_Prest extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(cmbVillePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                        .addComponent(cmbVillePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfTelPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,28 +300,37 @@ public class Modif_Prest extends javax.swing.JFrame {
                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TfPwdPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
-                    .addComponent(cmbCategoriePrest, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCategoriePrest, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addComponent(TfSpecPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
-                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkEmailValidePrest)
+                    .addComponent(chkPremiumPrest)
+                    .addComponent(chkCmptValidePrest))
+                .addGap(15, 15, 15)
+                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnValiderModifPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chkEmailValidePrest)
-                            .addComponent(chkPremiumPrest)
-                            .addComponent(chkCmptValidePrest))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAnulModifPrest))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(121, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifierPrestLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                .addComponent(btnValiderModifPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAnulModifPrest)))
+                        .addGap(19, 19, 19))))
         );
 
         tfNomPrest.getAccessibleContext().setAccessibleName("");
@@ -297,15 +347,15 @@ public class Modif_Prest extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlModifierPrest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel1)
-                        .addGap(28, 28, 28)
-                        .addComponent(labelIdPrest)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(28, 28, 28)
+                .addComponent(labelIdPrest)
+                .addGap(227, 227, 227))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlModifierPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,19 +366,15 @@ public class Modif_Prest extends javax.swing.JFrame {
                     .addComponent(labelIdPrest))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlModifierPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfTelPrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelPrestActionPerformed
+    private void btnValiderModifPrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValiderModifPrestActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfTelPrestActionPerformed
-
-    private void cmbVillePrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVillePrestActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbVillePrestActionPerformed
+    }//GEN-LAST:event_btnValiderModifPrestActionPerformed
 
     private void chkEmailValidePrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEmailValidePrestActionPerformed
         // TODO add your handling code here:
@@ -338,9 +384,28 @@ public class Modif_Prest extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chkPremiumPrestActionPerformed
 
-    private void btnValiderModifPrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValiderModifPrestActionPerformed
+    private void cmbVillePrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVillePrestActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnValiderModifPrestActionPerformed
+    }//GEN-LAST:event_cmbVillePrestActionPerformed
+
+    private void tfTelPrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelPrestActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfTelPrestActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    int returnVal = fileChooser.showOpenDialog(this);
+    if (returnVal == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+        textarea.setText(file.getAbsolutePath());
+    } else {
+        System.out.println("File access cancelled by user.");
+    }
+
+
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -388,6 +453,9 @@ public class Modif_Prest extends javax.swing.JFrame {
     private javax.swing.JCheckBox chkPremiumPrest;
     private javax.swing.JComboBox cmbCategoriePrest;
     private javax.swing.JComboBox cmbVillePrest;
+    private javax.swing.JFileChooser fileChooser;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -401,11 +469,13 @@ public class Modif_Prest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelIdPrest;
     private javax.swing.JPanel pnlModifierPrest;
     private javax.swing.JTextArea taAdrPrest;
     private javax.swing.JTextArea taDescPrest;
+    private javax.swing.JTextArea textarea;
     private javax.swing.JTextField tfNomPrest;
     private javax.swing.JTextField tfTelPrest;
     // End of variables declaration//GEN-END:variables
