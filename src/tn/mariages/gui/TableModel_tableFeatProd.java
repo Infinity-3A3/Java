@@ -17,22 +17,14 @@
 
 package tn.mariages.gui;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import tn.mariages.entities.Produit;
 
 /**
  *
  * @author RAED
  */
-@SuppressWarnings("serial")
-public class TableModel_tableProduits extends AbstractTableModel {
+public class TableModel_tableFeatProd extends AbstractTableModel {
 
-        List<Produit> listeProd = new ArrayList<Produit>();
-      String[]header = {"id","Nom","Description","Categorie","Date Ajout","Prix","Exclusif Paquet"};
-
-    
     @Override
     public int getRowCount() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -40,8 +32,7 @@ public class TableModel_tableProduits extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-return listeProd.size();
-    
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
