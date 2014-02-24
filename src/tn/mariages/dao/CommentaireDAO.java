@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.applet.Main;
 import tn.mariages.util.MyConnection;
 
 /**
@@ -160,20 +159,6 @@ return null;
 
   
 
-        
-public static void main(String[] args) {
-            Commentaire c=new Commentaire(1, 1, "2014-02-05", "super");
-           
-            CommentaireDAO dao=new CommentaireDAO();
-            //dao.insertCommentaire(c);
-            //c.setTexteCom("hello");
-            //dao.updateCommentaire(c);
-            List<Commentaire> listcommentaire=new ArrayList<Commentaire>();
-            listcommentaire=dao.DisplayAllCommentaires();
-            
-            
-            
-}
 }
 
 
