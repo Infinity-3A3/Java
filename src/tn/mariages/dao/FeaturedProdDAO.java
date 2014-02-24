@@ -82,8 +82,7 @@ public class FeaturedProdDAO {
         
     }
     
-    
-    
+     
     public List<FeaturedProd> DisplayAllFeatProd (){
         
         List<FeaturedProd> listeFeatProd = new ArrayList<FeaturedProd>();
@@ -121,9 +120,8 @@ return null;
       
     }
 
-    
-    
-        public FeaturedProd DisplayFeatProdByID (int id){
+      
+    public FeaturedProd DisplayFeatProdByID (int id){
         
         FeaturedProd fp = new FeaturedProd();
         
@@ -160,5 +158,41 @@ return null;
       
     }
 
+        
+    public Produit DisplayProdInFeatProdById(int id){
+            
+
+        String requete = "SELECT * FROM `produit` WHERE `idProd` = (SELECT `idProd` FROM `featuredprod` WHERE `idFeat` ="+id+")";
+        
+        Statement statement;
+        try {
+            statement = MyConnection.getInstance().cnx.createStatement();
+            ResultSet resultat=statement.executeQuery(requete);
+
+                Produit p = new Produit();
+
+                p.setIdProd(resultat.getInt(1));
+                p.setIdPrest(resultat.getInt(2));
+                p.setNomProd(resultat.getString(3));
+                p.setDescProd(resultat.getString(4));
+                p.setShortDescProd(resultat.getString(5));
+                p.setCategorieProd(resultat.getString(6));
+                p.setDateAjoutProd(resultat.getString(7));
+                p.setPrixProd(resultat.getDouble(8));
+                p.setExclusifPaquet(resultat.getBoolean(9));
+                p.setImgProd_P(resultat.getString(10));
+                p.setImgProd_1(resultat.getString(11));
+                p.setImgProd_2(resultat.getString(12));
+                p.setImgProd_3(resultat.getString(13));
+                p.setImgProd_4(resultat.getString(14));
+        
+                     return p;
+        }
+    catch (SQLException ex) {
+    System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+        return null;        }
+   
+            
+        }
     
 }
