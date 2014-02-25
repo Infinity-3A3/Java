@@ -17,6 +17,10 @@
 
 package tn.mariages.gui;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import tn.mariages.dao.FeaturedProdDAO;
 import tn.mariages.entities.FeaturedProd;
 import tn.mariages.entities.Produit;
@@ -51,22 +55,22 @@ public class ListeFeatProd extends javax.swing.JFrame {
         tableFeatProd = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnDel = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         PanelImgProd = new javax.swing.JPanel();
+        labelimg = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         labelNomProd = new javax.swing.JLabel();
         labelShortDesc = new javax.swing.JLabel();
         labelCategorie = new javax.swing.JLabel();
         labelDateAjout = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        labelPrix = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         labelNomPret = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        labelPrix = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -80,6 +84,13 @@ public class ListeFeatProd extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -87,6 +98,11 @@ public class ListeFeatProd extends javax.swing.JFrame {
 
         tableFeatProd.setModel(new TableModel_tableFeatProd()
         );
+        tableFeatProd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableFeatProdMouseClicked(evt);
+            }
+        });
         tableFeatProd.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tableFeatProdFocusGained(evt);
@@ -101,36 +117,39 @@ public class ListeFeatProd extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_plus.png"))); // NOI18N
         jButton1.setLabel("Ajouter");
+        jButton1.setPreferredSize(new java.awt.Dimension(117, 41));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/equalizer.png"))); // NOI18N
-        jButton2.setLabel("Modifer");
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
-        jButton3.setText("Supprimer");
+        btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
+        btnDel.setText("Supprimer");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(147, 147, 147)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDel)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 22, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDel)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -166,15 +185,23 @@ public class ListeFeatProd extends javax.swing.JFrame {
         PanelImgProd.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         PanelImgProd.setPreferredSize(new java.awt.Dimension(150, 150));
 
+        labelimg.setText("jLabel5");
+
         javax.swing.GroupLayout PanelImgProdLayout = new javax.swing.GroupLayout(PanelImgProd);
         PanelImgProd.setLayout(PanelImgProdLayout);
         PanelImgProdLayout.setHorizontalGroup(
             PanelImgProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(PanelImgProdLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelimg)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelImgProdLayout.setVerticalGroup(
             PanelImgProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 146, Short.MAX_VALUE)
+            .addGroup(PanelImgProdLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelimg)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -191,12 +218,6 @@ public class ListeFeatProd extends javax.swing.JFrame {
         labelDateAjout.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         labelDateAjout.setText("Date_Ajou");
 
-        jLabel4.setFont(new java.awt.Font("Meiryo UI", 1, 14)); // NOI18N
-        jLabel4.setText("Prix");
-
-        labelPrix.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
-        labelPrix.setText("Prix");
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -207,9 +228,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
                     .addComponent(labelNomProd)
                     .addComponent(labelShortDesc)
                     .addComponent(labelCategorie)
-                    .addComponent(labelDateAjout)
-                    .addComponent(jLabel4)
-                    .addComponent(labelPrix))
+                    .addComponent(labelDateAjout))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -217,17 +236,13 @@ public class ListeFeatProd extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelNomProd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(61, 61, 61)
                 .addComponent(labelShortDesc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelCategorie)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labelDateAjout)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelPrix)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -238,26 +253,41 @@ public class ListeFeatProd extends javax.swing.JFrame {
         labelNomPret.setFont(new java.awt.Font("Meiryo", 0, 14)); // NOI18N
         labelNomPret.setText("Nom_Prest");
 
+        jLabel4.setFont(new java.awt.Font("Meiryo UI", 1, 14)); // NOI18N
+        jLabel4.setText("Prix :");
+
+        labelPrix.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
+        labelPrix.setText("Prix");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelNomPret)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(labelNomPret))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelPrix)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labelNomPret)
-                .addGap(22, 22, 22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(labelPrix))
+                .addGap(47, 47, 47))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -273,7 +303,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PanelImgProd, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                    .addComponent(PanelImgProd, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -329,7 +359,9 @@ public class ListeFeatProd extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 21, Short.MAX_VALUE)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -341,7 +373,32 @@ public class ListeFeatProd extends javax.swing.JFrame {
 
     private void tableFeatProdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableFeatProdFocusGained
 
-            int row= tableFeatProd.getSelectedRow();
+    
+
+    }//GEN-LAST:event_tableFeatProdFocusGained
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
+        AjoutFeatProd afp = new AjoutFeatProd();
+        afp.setVisible(true);
+
+tableFeatProd.setModel(new TableModel_tableFeatProd());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        
+         int row= tableFeatProd.getSelectedRow();
+            int idFeat =(int) tableFeatProd.getValueAt(row, 0);
+           System.out.println("ID ==> "+idFeat);
+          FeaturedProdDAO fpDAO = new FeaturedProdDAO();
+          fpDAO.DeleteFeatProd(idFeat);
+        JOptionPane.showMessageDialog(this, "Fait");
+        
+    }//GEN-LAST:event_btnDelActionPerformed
+
+    private void tableFeatProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableFeatProdMouseClicked
+
+        int row= tableFeatProd.getSelectedRow();
             int idFeat =(int) tableFeatProd.getValueAt(row, 0);
            System.out.println("ID ==> "+idFeat);
           FeaturedProdDAO fpDAO = new FeaturedProdDAO();
@@ -352,17 +409,29 @@ public class ListeFeatProd extends javax.swing.JFrame {
             labelShortDesc.setText(p.getShortDescProd());
             labelDateAjout.setText(p.getDateAjoutProd());
             labelPrix.setText(p.getPrixProd()+"");
-            }
+            ///
+            ImageIcon icon = createImageIcon("http://placehold.it/200x200.jpg", "sample image");
 
-    }//GEN-LAST:event_tableFeatProdFocusGained
+// Label with text and icon
+    JLabel label1 = new JLabel("Image and Text", icon, JLabel.CENTER);
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
-        AjoutFeatProd afp = new AjoutFeatProd();
-        afp.setVisible(true);
+// Label with icon only
+        JLabel label2 = new JLabel(icon);
+PanelImgProd.add(label1);
+        PanelImgProd.add(label2);
+ 
+         }
+
+    }//GEN-LAST:event_tableFeatProdMouseClicked
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+            TableModel_tableFeatProd tmtfp = new TableModel_tableFeatProd();
+            tableFeatProd.setModel(tmtfp);
+            tmtfp.fireTableDataChanged();
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
@@ -408,9 +477,8 @@ try
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelImgProd;
+    private javax.swing.JButton btnDel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -429,6 +497,11 @@ try
     private javax.swing.JLabel labelNomProd;
     private javax.swing.JLabel labelPrix;
     private javax.swing.JLabel labelShortDesc;
+    private javax.swing.JLabel labelimg;
     private javax.swing.JTable tableFeatProd;
     // End of variables declaration//GEN-END:variables
+
+    private ImageIcon createImageIcon(String imagegif, String sample_image) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
