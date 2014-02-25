@@ -23,12 +23,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.applet.Main;
-import tn.mariages.entities.Commentaire;
 import tn.mariages.util.MyConnection;
 
 /**
@@ -128,19 +125,6 @@ return null;
         
 }
     
-    public static void main(String[] args) {
-            Reclamation r=new Reclamation(1, "a@gmail", "2014-02-05","très cher", "brabi na9souna chwayya :D");
-           
-            ReclamationDAO dao=new ReclamationDAO();
-            //dao.insertReclamation(r);
-            //r.setTexteRec("barchaaa ghéééli");
-            //dao.updateReclamation(r);
-            List<Reclamation> listeReclamations=new ArrayList<Reclamation>();
-            listeReclamations=dao.DisplayAllReclamations();
-            
-            
-            
-}
-         
+   
          
 }
