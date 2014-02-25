@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Youssef
+ * Copyright (C) 2014 Raed
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,15 +26,15 @@ import tn.mariages.dao.ProduitDAO;
 import tn.mariages.entities.Prestataire;
 /**
  *
- * @author Youssef
+ * @author Raed
  */
-public class MyTableProduit extends AbstractTableModel{
+public class MyTablepPremiumProduit extends AbstractTableModel{
     
     List<Produit> mylist = new ArrayList<>();
-    String [] headers  = {"Nom Produit ","Nom Prestataire","Categorie","Date d'ajout","Prix"};
+    String [] headers  = {"Id Prod","Nom Produit ","Nom Prestataire","Categorie","Date d'ajout","Prix"};
 
-    public MyTableProduit() {
-        mylist = new ProduitDAO().DisplayAllProd();
+    public MyTablepPremiumProduit() {
+        mylist = new ProduitDAO().DisplayAllProdIfPremium();
     }
     
     
@@ -57,14 +57,17 @@ public class MyTableProduit extends AbstractTableModel{
         pres = presDAO.findPrestById(mylist.get(rowIndex).getIdPrest());
         switch(columnIndex){
             case 0 : 
+                return mylist.get(rowIndex).getIdProd();
+                
+            case 1 : 
                 return mylist.get(rowIndex).getNomProd();
-            case 1 :
-                return pres.getNomPrest();
             case 2 :
-                return mylist.get(rowIndex).getCategorieProd();
+                return  pres.getNomPrest();
             case 3 :
+                return mylist.get(rowIndex).getCategorieProd();
+            case 4:
                 return mylist.get(rowIndex).getDateAjoutProd();
-            case 4 :
+            case 5 :
                 return mylist.get(rowIndex).getPrixProd();
             default :
         return null;

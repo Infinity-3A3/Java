@@ -17,27 +17,96 @@
 
 package tn.mariages.gui;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import tn.mariages.dao.FeaturedProdDAO;
+import tn.mariages.entities.FeaturedProd;
 
 /**
  *
  * @author RAED
  */
+@SuppressWarnings("serial")
 public class TableModel_tableFeatProd extends AbstractTableModel {
 
+    FeaturedProd fp = new FeaturedProd();
+    FeaturedProdDAO fpDAO = new FeaturedProdDAO();
+    
+    List<FeaturedProd> listFp = new ArrayList<FeaturedProd>();
+    
+    String [] header={"IdFeat","Widget","Supprimer"};
+    Boolean rowlist[][] = new Boolean[3][3];
+
+    
+    public TableModel_tableFeatProd() {
+        listFp = fpDAO.DisplayAllFeatProd();
+        for(int i =0;i< getRowCount();i++){
+            rowlist[i][2]=Boolean.TRUE;
+        }
+        
+    }
+    
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    return listFp.size();
     }
 
     @Override
     public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    return header.length;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         //   fp=fpDAO.DisplayFeatProdByID(listFp.get(rowIndex).getIdFeat());
+        //fp=fpDAO.DisplayFeatProdByID(listFp.get(rowIndex).getIdFeat());
+    switch(columnIndex){
+        case 0: return listFp.get(rowIndex).getIdFeat();
+        case 1: return listFp.get(rowIndex).getWidget();
+        case 2: return rowlist[rowIndex][2];
+    
+                            default:return null;
+
     }
+    
+    }
+    
+    
+     @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+         
+         
+        boolean b = (Boolean) aValue;
+            if(columnIndex==2) {
+                rowlist[rowIndex][2]=b;
+        }
+            
+        fireTableCellUpdated(rowIndex, columnIndex);
+    
+    }
+    
+     @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        if(columnIndex==2){
+            return Boolean.class;
+        }
+        return super.getColumnClass(columnIndex); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+     @Override
+    public String getColumnName(int column) {
+        return header[column];
+    }
+    
+    
+   @Override
+    public boolean isCellEditable(int row, int column) {
+    return (column > 1);
+  }
+   
+    
     
 }

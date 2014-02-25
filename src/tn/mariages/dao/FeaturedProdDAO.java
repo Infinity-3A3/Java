@@ -33,10 +33,18 @@ import tn.mariages.util.MyConnection;
  */
 public class FeaturedProdDAO {
     
-    public void InsertFeatProduit(FeaturedProd fp){
+    public boolean InsertFeatProduit(FeaturedProd fp){
         
-        String requete="INSERT INTO `featuredprod`(`dateFeat`, `widget`, `idProd`) VALUES (?,?,?,?)";
-   
+        String requete="INSERT INTO `featuredprod`(`dateFeat`, `widget`, `idProd`) VALUES (?,?,?)";
+        List<FeaturedProd> DisplayAllFeatProd = this.DisplayAllFeatProd();
+        boolean test=false;
+        for (int i = 0; i < DisplayAllFeatProd.size(); i++) {
+            FeaturedProd featuredProd = DisplayAllFeatProd.get(i);
+            if(featuredProd.getIdProd()==fp.getIdProd()){
+                test=true;}
+        }
+        if(test==false)
+        {
         try {
            
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
@@ -50,7 +58,8 @@ public class FeaturedProdDAO {
             
         } catch (SQLException ex) {
               System.out.println("erreur lors de l'insertion "+ex.getMessage());        }
-    
+        }
+        return(!test);
     }
 
     public void  UpdateFeatProd(FeaturedProd p ){
@@ -162,14 +171,18 @@ return null;
     public Produit DisplayProdInFeatProdById(int id){
             
 
-        String requete = "SELECT * FROM `produit` WHERE `idProd` = (SELECT `idProd` FROM `featuredprod` WHERE `idFeat` ="+id+")";
-        
+        String requete = "SELECT * FROM `produit` WHERE `idProd` = (SELECT `idProd` FROM `featuredprod` WHERE `idFeat` = "+id+" )";
+        System.out.println("TEST 1");
         Statement statement;
+        System.out.println("TEST 2");
         try {
+            System.out.println("TEST 3");
             statement = MyConnection.getInstance().cnx.createStatement();
+            System.out.println("TEST 4");
             ResultSet resultat=statement.executeQuery(requete);
-
-                Produit p = new Produit();
+System.out.println("TEST 5");
+                while(resultat.next())
+                {    Produit p = new Produit();
 
                 p.setIdProd(resultat.getInt(1));
                 p.setIdPrest(resultat.getInt(2));
@@ -185,14 +198,15 @@ return null;
                 p.setImgProd_2(resultat.getString(12));
                 p.setImgProd_3(resultat.getString(13));
                 p.setImgProd_4(resultat.getString(14));
-        
-                     return p;
+        System.out.println("TEST 6");
+
+                     return p;}
         }
     catch (SQLException ex) {
-    System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+    System.out.println("erreur lors du chargement du Produit =>  "+ex.getMessage());
         return null;        }
    
-            
+   return null;         
         }
     
 }
