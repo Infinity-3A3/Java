@@ -64,6 +64,7 @@ public class AjoutFeatProd extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Ajouter un produit favoris");
 
+        btnAjout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_plus.png"))); // NOI18N
         btnAjout.setText("Ajouter");
         btnAjout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,9 +72,11 @@ public class AjoutFeatProd extends javax.swing.JFrame {
             }
         });
 
+        CbWidget.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         CbWidget.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Head_1", "Head_2", "Side_1", "Mid_1", "Foot_1" }));
         CbWidget.setToolTipText("Position");
 
+        btnAnuller.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/arrow_left.png"))); // NOI18N
         btnAnuller.setText("Anuller");
         btnAnuller.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,16 +91,17 @@ public class AjoutFeatProd extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CbWidget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(btnAjout)
-                .addGap(53, 53, 53)
-                .addComponent(btnAnuller)
-                .addGap(19, 19, 19))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(CbWidget, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAjout)
+                        .addGap(53, 53, 53)
+                        .addComponent(btnAnuller)
+                        .addGap(19, 19, 19))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,9 +113,9 @@ public class AjoutFeatProd extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAjout)
-                    .addComponent(CbWidget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAnuller))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(btnAnuller)
+                    .addComponent(CbWidget, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

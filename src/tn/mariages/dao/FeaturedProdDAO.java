@@ -77,7 +77,7 @@ public class FeaturedProdDAO {
      }
 
     public void  DeleteFeatProd (int id){
-        String requete = "delete from client where idFeat=?";
+        String requete = "DELETE FROM `featuredprod` where `idFeat` = ?";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
             ps.setInt(1, id);
