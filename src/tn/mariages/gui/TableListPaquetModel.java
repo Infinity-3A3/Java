@@ -38,6 +38,7 @@ public class TableListPaquetModel extends AbstractTableModel{
     String [] header={"ID Paquet","Nom Du Prestataire","Nom Du Paquet","Description","Image","Prix Du Paquet","Supprimer"};
     //List<Boolean> rowList=new ArrayList<Boolean>(getRowCount());
     Boolean rowlist[][] = new Boolean[50][50];
+    
     public TableListPaquetModel(){
     listPaquet=new PaquetDAO().DisplayAllPaquets();
     for (int i = 0; i < getRowCount(); i++) {
