@@ -162,19 +162,6 @@ return null;
         
 }
     
-    public static void main(String[] args) {
-            Reclamation r=new Reclamation(1, "a@gmail", "2014-02-05","très cher", "brabi na9souna chwayya :D");
-           
-            ReclamationDAO dao=new ReclamationDAO();
-            //dao.insertReclamation(r);
-            //r.setTexteRec("barchaaa ghéééli");
-            //dao.updateReclamation(r);
-            List<Reclamation> listeReclamations=new ArrayList<Reclamation>();
-            listeReclamations=dao.DisplayAllReclamations();
-            
-            
-            
-}
-         
+       
          
 }
