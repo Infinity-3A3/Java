@@ -100,7 +100,7 @@ public class AjoutToDo extends javax.swing.JFrame {
 
         jLabel5.setText("Date :");
 
-        jDateToDo.setDateFormatString("yyyy-m-dd");
+        jDateToDo.setDateFormatString("YYYY-MM-dd");
 
         cbUrgent.setText("Urgent");
         cbUrgent.addActionListener(new java.awt.event.ActionListener() {
@@ -204,9 +204,12 @@ public class AjoutToDo extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDateToDo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(60, 60, 60))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jDateToDo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbUrgent)
                     .addComponent(cbRDV)
@@ -259,7 +262,8 @@ public class AjoutToDo extends javax.swing.JFrame {
       todo.setIdClient(client.getIdClient());
       todo.setTitreToDo(tfTitre.getText());
       todo.setDescToDo(tfDescriptionToDo.getText());
-     // todo.setDateToDo(jDateToDo.getDate().);
+     //todo.setDateToDo(jDateToDo.getDate().toString());
+     //   System.out.println(todo.getDateToDo());
       todo.setLabelUrgent(cbUrgent.isSelected());
       todo.setLabelRDV(cbUrgent.isSelected());
       todo.setLabelPayement(cbPay.isSelected());

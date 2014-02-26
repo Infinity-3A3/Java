@@ -137,10 +137,15 @@
                   </Group>
                   <EmptySpace pref="37" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jDateToDo" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jDateToDo" min="-2" pref="30" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cbUrgent" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbRDV" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -214,7 +219,7 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jDateToDo">
           <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="yyyy-m-dd"/>
+            <Property name="dateFormatString" type="java.lang.String" value="YYYY-MM-dd"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="cbUrgent">
