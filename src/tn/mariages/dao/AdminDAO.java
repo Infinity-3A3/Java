@@ -107,7 +107,7 @@ public class AdminDAO {
             return admin;
 
         } catch (SQLException ex) {
-           //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+         
             
             return null;
         }
@@ -133,7 +133,7 @@ public class AdminDAO {
 
         } catch (SQLException ex) {
            //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("erreur lors de la recherche du depot "+ex.getMessage());
+            System.out.println("erreur lors de l'admin "+ex.getMessage());
             return null;
         }
     }
@@ -186,7 +186,7 @@ return false;
             return listeadmins;
         } catch (SQLException ex) {
            //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+            System.out.println("erreur lors du chargement des depots "+ex.getMessage()); 
             return null;
         }
     }
