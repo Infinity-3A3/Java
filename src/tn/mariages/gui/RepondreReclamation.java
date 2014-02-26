@@ -157,6 +157,7 @@ public class RepondreReclamation extends javax.swing.JFrame {
         } catch (MessagingException ex) {
             Logger.getLogger(RepondreReclamation.class.getName()).log(Level.SEVERE, null, ex);
         }
+        dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -17,10 +17,11 @@
 
 package tn.mariages.gui;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableColumn;
 import tn.mariages.dao.ReclamationDAO;
 import tn.mariages.entities.Reclamation;
 
@@ -33,8 +34,23 @@ public class Reclamations extends javax.swing.JFrame {
     /**
      * Creates new form Reclamations
      */
+   
+    
     public Reclamations() {
         initComponents();
+//        TableColumn column = null;
+//        column = table.getColumnModel().getColumn(3);
+//        column.setResizable(false);
+//        column.setPreferredWidth(1);
+        table.removeColumn(table.getColumnModel().getColumn(3));
+     table.getColumnModel().getColumn(0).setMinWidth(200);
+   table.getColumnModel().getColumn(0).setMaxWidth(200);
+   
+   table.getColumnModel().getColumn(0).setWidth(200);
+   table.getColumnModel().getColumn(3).setMinWidth(80);
+   table.getColumnModel().getColumn(3).setMaxWidth(80);
+   table.getColumnModel().getColumn(3).setWidth(80);
+        
     }
 
     /**
@@ -49,6 +65,8 @@ public class Reclamations extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        suppRec = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,21 +80,41 @@ public class Reclamations extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table);
 
+        suppRec.setText("Supprimer Reclamation(s)");
+        suppRec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suppRecActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
+        jLabel1.setText("Reclamations");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(suppRec)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(254, 254, 254)
+                        .addComponent(jLabel1)))
                 .addContainerGap(145, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(suppRec)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -100,12 +138,18 @@ public class Reclamations extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 ReclamationDAO rdao=new ReclamationDAO();
 List<Reclamation> maliste= new ArrayList<Reclamation>();
+
+
+
+
+
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         if(evt.getClickCount()==2)
         {
         
-            int id=(int) table.getValueAt(table.getSelectedRow(), 3);
-            //System.out.println(id);
+            int id=(int) table.getModel().getValueAt(table.getSelectedRow(), 3);
+            System.out.println(id);
+            
             RepondreReclamation rp = new RepondreReclamation(id);
         
         rp.setVisible(true); 
@@ -116,6 +160,40 @@ List<Reclamation> maliste= new ArrayList<Reclamation>();
         
         
     }//GEN-LAST:event_tableMouseClicked
+
+    private void suppRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppRecActionPerformed
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+                JOptionPane.showConfirmDialog (null, "Voulez vous supprimer tous les reclamations selectionnés?","Warning",dialogButton);
+
+                if(dialogButton == JOptionPane.YES_OPTION){ //The ISSUE is here
+                    
+                    ReclamationDAO rDAO = new ReclamationDAO();
+                    int ids[]=new int[50];
+                    int j=-1;
+                    for(int i=0;i<table.getRowCount();i++){
+                    Boolean b =(Boolean)table.getValueAt(i, 3);
+                        System.out.println(ids[1]);
+                    if(b)
+                    {
+                        j++;
+                        ids[j]=(int)table.getModel().getValueAt(i, 3);
+                        
+                    }
+                      
+                      
+                    }
+                    while(j!=-1)
+                    {
+                        System.out.println(j);
+                        rDAO.deleteReclamation(ids[j]);
+                        j--;
+                    }
+                    TableReclamationModel model = new TableReclamationModel();
+                    table.setModel(model);
+                    table.removeColumn(table.getColumnModel().getColumn(3));
+                    
+                }
+    }//GEN-LAST:event_suppRecActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,8 +231,10 @@ List<Reclamation> maliste= new ArrayList<Reclamation>();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton suppRec;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 

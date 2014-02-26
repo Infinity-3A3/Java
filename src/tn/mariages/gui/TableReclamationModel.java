@@ -17,12 +17,10 @@
 
 package tn.mariages.gui;
 
-import java.awt.TextField;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import org.eclipse.persistence.jpa.config.Column;
 import tn.mariages.dao.ReclamationDAO;
 import tn.mariages.entities.Reclamation;
 
@@ -33,11 +31,20 @@ import tn.mariages.entities.Reclamation;
 public class TableReclamationModel extends AbstractTableModel{
     
             List<Reclamation> listeReclamations = new ArrayList<Reclamation>();
-      String[]header = {"Par :","Objet","Date d'envoi","id"};
+      String[]header = {"Client","Objet","Date d'envoi","Id","Supprimer"};
+      Boolean rowlist[][] = new Boolean[50][50];
+    
+      
+              
+      
       
       public TableReclamationModel()
       {
           listeReclamations = new ReclamationDAO().DisplayAllReclamations();
+          
+        for (int i = 0; i < getRowCount(); i++) {
+        rowlist[i][4]=Boolean.FALSE;
+            }
       }
 
     @Override
@@ -57,15 +64,44 @@ public class TableReclamationModel extends AbstractTableModel{
             case 1:return listeReclamations.get(rowIndex).getObjRec();    
             case 2:return listeReclamations.get(rowIndex).getDateRec();
             case 3:return listeReclamations.get(rowIndex).getIdRec();
+            case 4: return rowlist[rowIndex][4];
                 default:return null;
         }
                         
+    }
+    
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+         
+         
+        boolean b = (Boolean) aValue;
+            if(columnIndex==4)
+                rowlist[rowIndex][4]=b;
+            
+        fireTableCellUpdated(rowIndex, columnIndex);
+    
     }
 
     @Override
     public String getColumnName(int column) {
         return header[column];
     }
+    
+        @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        if(columnIndex==4){
+            
+            return Boolean.class;
+        }
+        return super.getColumnClass(columnIndex);
+    }
+    
+    
+        
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+    return (column > 3);
+  }
 
     
     
