@@ -208,7 +208,7 @@ public class ListePaquets extends javax.swing.JFrame {
         }
         else
         {
-            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
+            int dialogButton = JOptionPane.CANCEL_OPTION;
                 JOptionPane.showConfirmDialog (null, "Vous n'avez selectionné aucun paquet","Warning",dialogButton);
         }
             
