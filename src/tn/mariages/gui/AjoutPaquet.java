@@ -236,6 +236,8 @@ public class AjoutPaquet extends javax.swing.JFrame {
                ch+="Veuillez preciser le prix de votre paquet  \n";
             if(tfDescPaquet.getText().equals(""))
                ch+="Veuillez donner une description de votre paquet  \n";
+            else if(tfDescPaquet.getText().length()<10)
+                ch+="La description du paquet doit contenir au moins 10 caracteres \n";
             if(tfImage.getText().equals(""))
                ch+="Veuillez donner le chemain d'une image de votre paquet  \n";
             int dialogButton = JOptionPane.OK_CANCEL_OPTION;
@@ -292,6 +294,8 @@ public class AjoutPaquet extends javax.swing.JFrame {
                ch+="Veuillez preciser le prix de votre paquet  \n";
             if(tfDescPaquet.getText().equals(""))
                ch+="Veuillez donner une description de votre paquet  \n";
+            else if(tfDescPaquet.getText().length()<10)
+                ch+="La description du paquet doit contenir au moins 10 caracteres \n";
             if(tfImage.getText().equals(""))
                ch+="Veuillez donner le chemain d'une image de votre paquet  \n";
             int dialogButton = JOptionPane.OK_CANCEL_OPTION;
