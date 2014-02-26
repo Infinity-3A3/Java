@@ -23,9 +23,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import sun.applet.Main;
+import tn.mariages.entities.Commentaire;
 import tn.mariages.util.MyConnection;
 
 /**
@@ -37,14 +40,14 @@ public class ReclamationDAO {
     public void insertReclamation(Reclamation r)
     {
         try {
-            String requete="insert into reclamation (idRec,mailRec,dateRec,objRec,texteRec) values (?,?,?,?,?)";
+            String requete="insert into reclamation (mailRec,dateRec,objRec,texteRec) values (?,?,?,?)";
             
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
-            ps.setInt(1, r.getIdRec());
-            ps.setString(2, r.getMailRec());
-            ps.setString(3, r.getDateRec());
-            ps.setString(4, r.getObjRec());
-            ps.setString(5, r.getTexteRec());
+            
+            ps.setString(1, r.getMailRec());
+            ps.setString(2, r.getDateRec());
+            ps.setString(3, r.getObjRec());
+            ps.setString(4, r.getTexteRec());
             ps.executeUpdate();
             System.out.println("Ajout effectuée avec succées");
             
@@ -121,10 +124,57 @@ System.out.println("erreur lors du chargement des depots "+ex.getMessage());
 return null;
 
 }
+         }
         
+        public Reclamation DisplayAllReclamationById(int id){
+        
+       
+
+        String requete = "select * from reclamation where idRec="+id+"";
+        
+        Statement statement;
+        try {
+            statement = MyConnection.getInstance().cnx.createStatement();
+            ResultSet resultat=statement.executeQuery(requete);
+            Reclamation reclamation=new Reclamation();
+        while(resultat.next()){
+            
+            reclamation.setIdRec(resultat.getInt(1));
+            reclamation.setMailRec(resultat.getString(2));
+            reclamation.setDateRec(resultat.getString(3));
+            reclamation.setObjRec(resultat.getString(4));
+            reclamation.setTexteRec(resultat.getString(5));
+            
+
+                   
+                   System.out.println(reclamation.getTexteRec()+" "+reclamation.getDateRec());
+        }
+        
+                     return reclamation;
+                    
+        }
+        catch (SQLException ex) {
+        System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+        return null;
+
+        }
+
         
 }
     
-   
+    public static void main(String[] args) {
+            Reclamation r=new Reclamation(1, "a@gmail", "2014-02-05","très cher", "brabi na9souna chwayya :D");
+           
+            ReclamationDAO dao=new ReclamationDAO();
+            //dao.insertReclamation(r);
+            //r.setTexteRec("barchaaa ghéééli");
+            //dao.updateReclamation(r);
+            List<Reclamation> listeReclamations=new ArrayList<Reclamation>();
+            listeReclamations=dao.DisplayAllReclamations();
+            
+            
+            
+}
+         
          
 }
