@@ -31,6 +31,11 @@ public class ProduitPaquet {
         this.idPaquet = idPaquet;
         this.dateAjout = dateAjout;
     }
+
+    @Override
+    public String toString() {
+        return "ProduitPaquet{" + "idProd=" + idProd + ", idPaquet=" + idPaquet + ", dateAjout=" + dateAjout + '}';
+    }
     
     
     private int idProd;
