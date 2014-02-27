@@ -16,23 +16,22 @@
  */
 
 package tn.mariages.gui;
-
-
 import javax.swing.JOptionPane;
-import tn.mariages.dao.PaquetDAO;
-import tn.mariages.entities.ToDo;
+import tn.mariages.dao.AdminDAO;
 import tn.mariages.dao.ToDoDAO;
-import tn.mariages.gui.AjoutToDo;
+import tn.mariages.entities.Admin;
+import tn.mariages.entities.ToDo;
+import tn.mariages.gui.TableListeAdminsModel;
 /**
  *
  * @author Karim
  */
-public class ListeToDoAdmin extends javax.swing.JFrame {
+public class ListeAdmins extends javax.swing.JFrame {
 
     /**
-     * Creates new form ListeToDoAdmin
+     * Creates new form ListeAdmins
      */
-    public ListeToDoAdmin() {
+    public ListeAdmins() {
         initComponents();
     }
 
@@ -46,39 +45,40 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableListeToDO = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        AjouterToDo = new javax.swing.JButton();
-        ModifierToDo = new javax.swing.JButton();
-        SupprimerToDo = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableListeAdmins = new javax.swing.JTable();
+        btnAjouter = new javax.swing.JButton();
+        btnModifier = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tableListeToDO.setModel(new TableListeToDoModel());
-        jScrollPane1.setViewportView(tableListeToDO);
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Liste des ToDo");
+        jLabel1.setText("Liste des Admins");
 
-        AjouterToDo.setText("Ajouter");
-        AjouterToDo.addActionListener(new java.awt.event.ActionListener() {
+        tableListeAdmins.setModel(new TableListeAdminsModel()
+        );
+        jScrollPane1.setViewportView(tableListeAdmins);
+
+        btnAjouter.setText("Ajouter");
+        btnAjouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AjouterToDoActionPerformed(evt);
+                btnAjouterActionPerformed(evt);
             }
         });
 
-        ModifierToDo.setText("Modifier");
-        ModifierToDo.addActionListener(new java.awt.event.ActionListener() {
+        btnModifier.setText("Modifier");
+        btnModifier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModifierToDoActionPerformed(evt);
+                btnModifierActionPerformed(evt);
             }
         });
 
-        SupprimerToDo.setText("Supprimer");
-        SupprimerToDo.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setText("Supprimer");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SupprimerToDoActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -88,37 +88,35 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(211, 211, 211)
+                                .addGap(124, 124, 124)
                                 .addComponent(jLabel1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(AjouterToDo)
-                                .addGap(72, 72, 72)
-                                .addComponent(ModifierToDo)
-                                .addGap(79, 79, 79)
-                                .addComponent(SupprimerToDo)))
-                        .addGap(0, 73, Short.MAX_VALUE)))
+                                .addGap(77, 77, 77)
+                                .addComponent(btnAjouter)
+                                .addGap(46, 46, 46)
+                                .addComponent(btnModifier)
+                                .addGap(47, 47, 47)
+                                .addComponent(jButton3)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AjouterToDo)
-                    .addComponent(ModifierToDo)
-                    .addComponent(SupprimerToDo))
-                .addGap(28, 28, 28))
+                    .addComponent(btnAjouter)
+                    .addComponent(btnModifier)
+                    .addComponent(jButton3))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -141,58 +139,57 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ModifierToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifierToDoActionPerformed
-        if(tableListeToDO.getSelectedRow()!=-1){
-        ToDo t = new ToDo();
-        ToDoDAO todoDAO=new ToDoDAO();
-        t=todoDAO.findToDoById((int)tableListeToDO.getValueAt(tableListeToDO.getSelectedRow(), 0));
+    private void btnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifierActionPerformed
+       if(tableListeAdmins.getSelectedRow()!=-1){
+           Admin admin=new Admin();
+           AdminDAO adminDAO=new AdminDAO();
+        admin=adminDAO.findAdminById((int)tableListeAdmins.getValueAt(tableListeAdmins.getSelectedRow(), 0));
        
-        AjoutToDo modifierToDo = new AjoutToDo(t);
-        modifierToDo.setVisible(true);
+        AjoutAdmin modifierAdmin = new AjoutAdmin(admin);
+        modifierAdmin.setVisible(true);
         }
         else
         {
             int dialogButton = JOptionPane.OK_CANCEL_OPTION;
                 JOptionPane.showConfirmDialog (null, "Vous n'avez selectionné aucun paquet","Warning",dialogButton);
         }
-    }//GEN-LAST:event_ModifierToDoActionPerformed
+    }//GEN-LAST:event_btnModifierActionPerformed
 
-    private void AjouterToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouterToDoActionPerformed
-AjoutToDo ajoutertodo=new AjoutToDo();
+    private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
+      AjoutAdmin ajoutAdmin=new AjoutAdmin();
+      ajoutAdmin.setVisible(true);
+    }//GEN-LAST:event_btnAjouterActionPerformed
 
-ajoutertodo.setVisible(true);
-    }//GEN-LAST:event_AjouterToDoActionPerformed
-
-    private void SupprimerToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SupprimerToDoActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int dialogButton = JOptionPane.YES_NO_OPTION;
                 JOptionPane.showConfirmDialog (null, "Voulez vous supprimer tous les todo selectionnés?","Warning",dialogButton);
 
                 if(dialogButton == JOptionPane.YES_OPTION){ //The ISSUE is here
                     
-                    ToDoDAO todoDAO=new ToDoDAO();
+                   AdminDAO adminDAO=new AdminDAO();
                     int id[]=new int[50];
                     int j=-1;
-                    System.out.println(tableListeToDO.getRowCount());
-                    for(int i=0;i<tableListeToDO.getRowCount();i++){
-                    Boolean test =(Boolean)tableListeToDO.getValueAt(i,4);
+                    System.out.println(tableListeAdmins.getRowCount());
+                    for(int i=0;i<tableListeAdmins.getRowCount();i++){
+                    Boolean test =(Boolean)tableListeAdmins.getValueAt(i,3);
                         System.out.println(test);
                     if(test)
                     {
                         j++;
-                        id[j]=(int)tableListeToDO.getValueAt(i, 0);
+                        id[j]=(int)tableListeAdmins.getValueAt(i, 0);
                     }
                       
                       
                     }
                     while(j!=-1)
                     {
-                        todoDAO.deleteToDo(id[j]);
+                       adminDAO.deleteAdmin(id[j]);
                         j--;
                     }
-                    TableListeToDoModel model = new TableListeToDoModel();
-                    tableListeToDO.setModel(model);
+                    TableListeAdminsModel model = new TableListeAdminsModel();
+                    tableListeAdmins.setModel(model);
                 }
-    }//GEN-LAST:event_SupprimerToDoActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,31 +208,31 @@ ajoutertodo.setVisible(true);
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListeToDoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListeAdmins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListeToDoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListeAdmins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListeToDoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListeAdmins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListeToDoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListeAdmins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListeToDoAdmin().setVisible(true);
+                new ListeAdmins().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AjouterToDo;
-    private javax.swing.JButton ModifierToDo;
-    private javax.swing.JButton SupprimerToDo;
+    private javax.swing.JButton btnAjouter;
+    private javax.swing.JButton btnModifier;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableListeToDO;
+    private javax.swing.JTable tableListeAdmins;
     // End of variables declaration//GEN-END:variables
 }

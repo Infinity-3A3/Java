@@ -21,35 +21,32 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import tn.mariages.dao.ToDoDAO;
-
 import tn.mariages.entities.ToDo;
-
-
+import tn.mariages.dao.AdminDAO;
+import tn.mariages.entities.Admin;
 /**
  *
  * @author Karim
  */
-public class TableListeToDoModel extends AbstractTableModel{
-    ToDoDAO todoDAO=new ToDoDAO();
-  
-   
-    ToDo todo=new ToDo();
+public class TableListeAdminsModel extends AbstractTableModel {
+      AdminDAO adminDAO=new AdminDAO();
+      Admin admin=new Admin();
     
-    List<ToDo> listToDo = new ArrayList<ToDo>();
-    String [] header={"ID ToDo","Titre","Description","Date","Supprimer"};
+    List<Admin> listAdmins = new ArrayList<Admin>();
+    String [] header={"ID Administrateur","Nom","Email","Supprimer"};
     //List<Boolean> rowList=new ArrayList<Boolean>(getRowCount());
     Boolean rowlist[][] = new Boolean[50][50];
-    public TableListeToDoModel(){
-    listToDo=new ToDoDAO().DisplayAllToDo();
+    public TableListeAdminsModel(){
+    listAdmins=new AdminDAO().DisplayAllAdmins();
     for (int i = 0; i < getRowCount(); i++) {
-        rowlist[i][5]=Boolean.FALSE;
+        rowlist[i][3]=Boolean.FALSE;
       
             }
 }
 
     @Override
     public int getRowCount() {
-        return listToDo.size();   
+        return listAdmins.size();   
     }
 
     @Override
@@ -59,15 +56,15 @@ public class TableListeToDoModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        todo=todoDAO.findToDoById(listToDo.get(rowIndex).getIdToDo());
+        admin=adminDAO.findAdminById(listAdmins.get(rowIndex).getIdAdmin());
 switch(columnIndex){
-            case 0:return listToDo.get(rowIndex).getIdToDo();
+            case 0:return listAdmins.get(rowIndex).getIdAdmin();
             
-            case 1:return listToDo.get(rowIndex).getTitreToDo();
-            case 2:return listToDo.get(rowIndex).getDescToDo();
-            case 3:return listToDo.get(rowIndex).getDateToDo();
+            case 1:return listAdmins.get(rowIndex).getNomAdmin();
+            case 2:return listAdmins.get(rowIndex).getMailAdmin();
+            
           
-            case 4:return rowlist[rowIndex][8];
+            case 3:return rowlist[rowIndex][3];
             
                 
                 default:return null;
@@ -81,8 +78,8 @@ switch(columnIndex){
          
          
         boolean b = (Boolean) aValue;
-            if(columnIndex==4)
-                rowlist[rowIndex][4]=b;
+            if(columnIndex==3)
+                rowlist[rowIndex][3]=b;
             
         fireTableCellUpdated(rowIndex, columnIndex);
     
@@ -108,10 +105,8 @@ switch(columnIndex){
     }
     @Override
     public boolean isCellEditable(int row, int column) {
-    return (column > 3);
+    return (column > 2);
   }
     
     
-    
 }
-
