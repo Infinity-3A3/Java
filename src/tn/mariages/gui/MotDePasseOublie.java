@@ -149,7 +149,7 @@ public String generate(int length)
         Admin admin=new Admin();
        Client client=new Client();
        Prestataire prestataire=new Prestataire();
-  /*      SimpleMail s1=new SimpleMail();
+     SimpleMail s1=new SimpleMail();
    String mdp=generate(10);
         
    if(adminDAO.findAdminByEmail(tfEmail.getText())!=null){
@@ -174,7 +174,7 @@ public String generate(int length)
    
    }
    
-      */
+      
     }//GEN-LAST:event_btnEnvoyerActionPerformed
 
     /**
