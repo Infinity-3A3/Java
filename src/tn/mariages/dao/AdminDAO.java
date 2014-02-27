@@ -170,22 +170,22 @@ public class AdminDAO {
          public boolean connectAdmin(String login,String pwd)
     {
         
-          String requete = "select * from admin where (nomAdmin=? or mailAdmin=?) and pwdAdmin=?";
+          String requete = "select * from admin where  mailAdmin=? and pwdAdmin=?";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
             ps.setString(1, login);
             ps.setString(2, login);
             ps.setString(3, pwd);
             ResultSet resultat = ps.executeQuery();
-          if (resultat==null)
-              return false;
+          if (resultat.next())
+              return true;
      
         }
         catch (SQLException ex) {
            //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("erreur lors de la suppression "+ex.getMessage());
         }
-return true;
+return false;
 }
        
        
