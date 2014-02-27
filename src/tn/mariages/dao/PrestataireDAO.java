@@ -148,6 +148,9 @@ System.out.println("erreur lors de la recherche du prestataire "+ex.getMessage()
         
     }
     
+    
+    
+    
     public Prestataire findPrestByNomPrest(String NomPrest){
         
         Prestataire prestataire=new Prestataire();
@@ -306,6 +309,77 @@ System.out.println("erreur lors de la recherche du prestataire "+ex.getMessage()
          
          
      }
+    
+    
+     public Prestataire findPrestByEmail(String email){
+        
+        Prestataire prestataire=new Prestataire();
+        String requete="select * from prestataire where emailPrestataire=?";
+        try {
+            PreparedStatement ps=MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, email);
+            ResultSet resultat=ps.executeQuery();
+            while (resultat.next())
+            {
+                prestataire.setIdPrest(resultat.getInt(1));
+                 prestataire.setNomPrest(resultat.getString(2));
+                prestataire.setDescPrest(resultat.getString(3));
+                 prestataire.setAdrPrest(resultat.getString(4));
+                  prestataire.setVillePrest(resultat.getString(5));
+                 prestataire.setImgPrest(resultat.getString(6));
+                  prestataire.setTelMobilePrest(resultat.getString(7));
+                  prestataire.setTelFixePrest(resultat.getString(8));
+                  prestataire.setEmailPrest(resultat.getString(9));
+                  prestataire.setPwdPrest(resultat.getString(10));
+                   prestataire.setCategorie(resultat.getString(11));
+                   prestataire.setSpecialite(resultat.getString(12));
+                   prestataire.setMailValide(resultat.getBoolean(13));
+                    prestataire.setCompteValide(resultat.getBoolean(14));
+                    prestataire.setPremium(resultat.getBoolean(15));
+                    prestataire.setDatePayement(resultat.getString(16));
+            }
+            return prestataire;
+            
+            
+        } catch (SQLException ex) {
+               System.out.println("erreur lors de la recherche du prest "+ex.getMessage());
+               return null; 
+        }
+        
+         
+         
+         
+     }
+    
+    
+    
+     public Boolean connectPrestataire(String login,String pwd){
+       
+        String requete="select * from prestataire where emailPrestataire=? and pwdPrestataire=?";
+        try {
+            PreparedStatement ps=MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, login);
+            ps.setString(2, pwd);
+            ResultSet resultat=ps.executeQuery();
+            if (resultat.next())
+            {
+       return true;
+                
+            }
+            
+            
+            
+        } catch (SQLException ex) {
+               System.out.println("erreur lors de la recherche du client "+ex.getMessage());
+               return null; 
+        }
+        
+         
+     return false;
+         
+     }
+    
+    
     
     public List<Prestataire> DisplayAllPrestataire (){
         

@@ -177,6 +177,78 @@ System.out.println("erreur lors de la recherche du client "+ex.getMessage());
          
      }
     
+     
+     
+      public Client findClientByEmail(String email){
+         Client client=new Client();
+        String requete="select * from client where emailClient=?";
+        try {
+            PreparedStatement ps=MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, email);
+            ResultSet resultat=ps.executeQuery();
+            while (resultat.next())
+            {
+                client.setIdClient(resultat.getInt(1));
+                 client.setPrenomMari(resultat.getString(2));
+                client.setPrenomEpouse(resultat.getString(3));
+                 client.setNomDeFamille(resultat.getString(4));
+                  client.setImgClient(resultat.getString(5));
+                 client.setEmailClient(resultat.getString(6));
+                  client.setPwdClient(resultat.getString(7));
+                  client.setCmptValide(resultat.getBoolean(8));
+                  client.setVilleClient(resultat.getString(9));
+                  client.setTelClient(resultat.getString(10));
+                   client.setDateDebut(resultat.getString(11));
+                   client.setDateFin(resultat.getString(12));
+                   client.setBudget(resultat.getInt(13));
+                
+            }
+            return client;
+            
+            
+        } catch (SQLException ex) {
+               System.out.println("erreur lors de la recherche du client "+ex.getMessage());
+               return null; 
+        }
+        
+         
+         
+         
+     }
+    
+     
+     
+          public Boolean connectClient(String login,String pwd){
+       
+        String requete="select * from client where emailClient=? and pwdClient=?";
+        try {
+            PreparedStatement ps=MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, login);
+            ps.setString(2, pwd);
+            ResultSet resultat=ps.executeQuery();
+            if (resultat.next())
+            {
+       return true;
+                
+            }
+            
+            
+            
+        } catch (SQLException ex) {
+               System.out.println("erreur lors de la recherche du client "+ex.getMessage());
+               return null; 
+        }
+        
+         
+     return false;
+         
+     }
+     
+     
+     
+     
+     
+     
     public List<Client> DisplayAllClients (){
         
         List<Client> listeClients = new ArrayList<Client>();
