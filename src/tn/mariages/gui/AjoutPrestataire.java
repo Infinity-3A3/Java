@@ -4,7 +4,10 @@
  */
 package tn.mariages.gui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.*;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.entities.Prestataire;
@@ -76,7 +79,7 @@ public class AjoutPrestataire extends javax.swing.JFrame {
         chkEmailVald = new javax.swing.JCheckBox();
         chkPremium = new javax.swing.JCheckBox();
         jLabel13 = new javax.swing.JLabel();
-        jtDatePayement = new javax.swing.JTextField();
+        jtDatePayement = new com.toedter.calendar.JDateChooser();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -109,7 +112,7 @@ public class AjoutPrestataire extends javax.swing.JFrame {
 
         jLabel10.setText("Ville:");
 
-        btnAjouterPrest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/basket_ok.png"))); // NOI18N
+        btnAjouterPrest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_plus.png"))); // NOI18N
         btnAjouterPrest.setText("   Ajouter");
         btnAjouterPrest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +120,7 @@ public class AjoutPrestataire extends javax.swing.JFrame {
             }
         });
 
+        btnAnnulerPrest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
         btnAnnulerPrest.setText("   Annuler");
         btnAnnulerPrest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +135,11 @@ public class AjoutPrestataire extends javax.swing.JFrame {
         jLabel12.setText("Image:");
 
         btnParcourir.setText("Parcourir");
+        btnParcourir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnParcourirActionPerformed(evt);
+            }
+        });
 
         cmbCategoriePrest.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -153,6 +162,8 @@ public class AjoutPrestataire extends javax.swing.JFrame {
 
         jLabel13.setText("Date payement:");
 
+        jtDatePayement.setDateFormatString("yyyy MM dd");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -162,13 +173,16 @@ public class AjoutPrestataire extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chkCompteVerif)
                     .addComponent(jLabel13))
-                .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
                         .addComponent(chkEmailVald)
                         .addGap(68, 68, 68)
                         .addComponent(chkPremium))
-                    .addComponent(jtDatePayement, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtDatePayement, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -180,10 +194,10 @@ public class AjoutPrestataire extends javax.swing.JFrame {
                     .addComponent(chkEmailVald)
                     .addComponent(chkPremium))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel13)
                     .addComponent(jtDatePayement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -302,7 +316,7 @@ public class AjoutPrestataire extends javax.swing.JFrame {
                                     .addComponent(cmbVillePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel11)
                                     .addComponent(jtNumFixePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(68, 68, 68)
+                                .addGap(74, 74, 74)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cmbSpecialitePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9)))
@@ -312,7 +326,7 @@ public class AjoutPrestataire extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(105, 105, 105)
                         .addComponent(jLabel8)))
-                .addGap(25, 25, 25)
+                .addGap(31, 31, 31)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -425,137 +439,82 @@ public class AjoutPrestataire extends javax.swing.JFrame {
 
     private void btnAjouterPrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterPrestActionPerformed
 
-//       if(jtNomPrest.getText().equals("")|| jtDescPrest.getText().equals("")|| jtEmailPrest.getText().equals("") || jtpwdPrest.getText().equals("") || jtAdrPrest.getText().equals("") || cmbVillePrest.getSelectedItem().equals("--Choisir ville--")|| cmbSpecialitePrest.getSelectedItem().equals("--Choisir spécialité--")|| cmbCategoriePrest.getSelectedItem().equals("--Choisir catégorie--")){
-//           String ch="";
-//           if(jtNomPrest.getText().equals(""))
-//               ch+="Veuillez saisir le Nom du prestataire \n";
-//           
-//            if(jtDescPrest.getText().equals(""))
-//               ch+="Veuillez preciser la description du prestataire  \n";
-//            if(jtAdrPrest.getText().equals(""))
-//               ch+="Veuillez donner l'adresse du prestataire  \n";
-//            if(cmbVillePrest.getSelectedItem().toString().equals(""))
-//               ch+="Veuillez donner la ville du prestataire  \n";
-//             if(jtNumFixePrest.getText().equals(""))
-//               ch+="Veuillez donner le numero de telephone fixe du prestataire  \n";
-//              if (jtEmailPrest.getText().matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" )) 
-//                  ch+="Veuillez donner une adresse correcte du prestataire  \n";
-//              if(jtImgPrest.getText().equals(""))
-//               ch+="Veuillez donner le chemin de l'image du prestataire  \n";
-//              if(jtEmailPrest.getText().equals(""))
-//               ch+="Veuillez donner l'adresse email du prestataire  \n";
-//              if(jtNumMobilPrest.getText().equals(""))
-//               ch+="Veuillez donner le numero de telephone mobile du prestataire  \n";
-//             if(cmbCategoriePrest.getSelectedItem().toString().equals(""))
-//               ch+="Veuillez donner la catégorie  du prestataire  \n";
-//              if(cmbSpecialitePrest.getSelectedItem().toString().equals(""))
-//               ch+="Veuillez donner la specialité  du prestataire  \n";
-//            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
-//                JOptionPane.showConfirmDialog (null,ch,"Warning",dialogButton);
-//            
-//        }else{
-//            
-//            
-//          
-//           
-//            prest.setNomPrest(jtNomPrest.getText());
-//           
-//             prest.setDescPrest(jtDescPrest.getText());
-//             
-//             
-//           prest.setAdrPrest(jtAdrPrest.getText());
-//           prest.setVillePrest(cmbVillePrest.getSelectedItem().toString());
-//           prest.setImgPrest(jtImgPrest.getText());
-//           prest.setEmailPrest(jtEmailPrest.getText());
-//           
-//           prest.setPwdPrest(jtpwdPrest.getText());
-//           prest.setCategorie(cmbCategoriePrest.getSelectedItem().toString());
-//           
-//           prest.setCompteValide(chkCompteVerif.isSelected());
-//           prest.setMailValide(chkEmailVald.isSelected());
-//           prest.setDatePayement(jtDatePayement.getText());
-//           prest.setPremium(chkPremium.isSelected());
-//           
-//                  prest.setSpecialite(cmbSpecialitePrest.getSelectedItem().toString());
-//                  
-//                  
-//           prest.setTelMobilePrest(jtNumMobilPrest.getText());
-//           prest.setTelFixePrest(jtNumMobilPrest.getText());
-//          presDAO.insertPrestataire(prest);
-//       
-//             this.dispose();
-//         } 
-//          
-        String nom = jtNomPrest.getText();
-        String Desc = jtDescPrest.getText();
-        String adr = jtAdrPrest.getText();
-        String ville = cmbVillePrest.getSelectedItem().toString();
-        String img = jtImgPrest.getText();
+      Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" );  
+    Pattern pattern = Pattern.compile("^\\d+$");
+    Matcher matcher3 = pattern2.matcher(jtEmailPrest.getText());
+      Matcher matcher = pattern.matcher(jtNumFixePrest.getText());
+         Matcher matcher2 = pattern.matcher(jtNumMobilPrest.getText());
+       if(jtNomPrest.getText().equals("")|| jtDescPrest.getText().equals("")|| jtEmailPrest.getText().equals("") || jtpwdPrest.getText().equals("") || jtAdrPrest.getText().equals("") || cmbVillePrest.getSelectedItem().equals("--Choisir ville--")|| cmbSpecialitePrest.getSelectedItem().equals("--Choisir spécialité--")|| cmbCategoriePrest.getSelectedItem().equals("--Choisir catégorie--")||!matcher.matches()||!matcher2.matches()||!matcher3.matches()){
+           String ch="";
+           if(jtNomPrest.getText().equals(""))
+               ch+="Veuillez saisir le Nom du prestataire \n";
+           
+            if(jtDescPrest.getText().equals(""))
+               ch+="Veuillez preciser la description du prestataire  \n";
+            if(jtAdrPrest.getText().equals(""))
+               ch+="Veuillez donner l'adresse du prestataire  \n";
+            if(cmbVillePrest.getSelectedItem().toString().equals(""))
+               ch+="Veuillez donner la ville du prestataire  \n";
+            if(jtNumMobilPrest.getText().equals(""))
+               ch+="Veuillez donner le numero de telephone mobile  du prestataire  \n";
+             else if(!matcher2.matches())
+                  ch+="Veuiller bien remplir le champ du numero de telephone mobile  du prestataire  \n";
+             if(jtNumFixePrest.getText().equals(""))
+               ch+="Veuillez donner le numero de telephone fixe du prestataire  \n";
+             else if(!matcher.matches())
+                  ch+="Veuiller bien remplir le champ du numero de telephone fixe du prestataire  \n";
+              
+              if(jtImgPrest.getText().equals(""))
+               ch+="Veuillez donner le chemin de l'image du prestataire  \n";
+              if(jtEmailPrest.getText().equals(""))
+               ch+="Veuillez donner l'adresse email du prestataire  \n";
+              else if(!matcher3.matches())
+                  ch+="Veuiller bien donner une adresse mail correcte du prestataire  \n";
+              if(jtNumMobilPrest.getText().equals(""))
+               ch+="Veuillez donner le numero de telephone mobile du prestataire  \n";
+             if(cmbCategoriePrest.getSelectedItem().toString().equals(""))
+               ch+="Veuillez donner la catégorie  du prestataire  \n";
+              if(cmbSpecialitePrest.getSelectedItem().toString().equals(""))
+               ch+="Veuillez donner la specialité  du prestataire  \n";
+            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
+                JOptionPane.showConfirmDialog (null,ch,"Warning",dialogButton);
+            
+        }else{
+            
+            
+          
+           
+            prest.setNomPrest(jtNomPrest.getText());
+           
+             prest.setDescPrest(jtDescPrest.getText());
+             
+             
+           prest.setAdrPrest(jtAdrPrest.getText());
+           prest.setVillePrest(cmbVillePrest.getSelectedItem().toString());
+           prest.setImgPrest(jtImgPrest.getText());
+           prest.setEmailPrest(jtEmailPrest.getText());
+           
+           prest.setPwdPrest(jtpwdPrest.getText());
+           prest.setCategorie(cmbCategoriePrest.getSelectedItem().toString());
+           
+           prest.setCompteValide(chkCompteVerif.isSelected());
+           prest.setMailValide(chkEmailVald.isSelected());
+           java.util.Date utilDate = jtDatePayement.getDate();
+java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+           
+           prest.setDatePayement(sqlDate.toString());
+           prest.setPremium(chkPremium.isSelected());
+           
+                  prest.setSpecialite(cmbSpecialitePrest.getSelectedItem().toString());
+                  
+                  
+           prest.setTelMobilePrest(jtNumMobilPrest.getText());
+           prest.setTelFixePrest(jtNumMobilPrest.getText());
+          presDAO.insertPrestataire(prest);
+       
+             this.dispose();
+         } 
 
-        String email = jtEmailPrest.getText();
-
-
-        String pwd = jtpwdPrest.getText();
-        String ctg = cmbCategoriePrest.getSelectedItem().toString();
-        String specialite = cmbSpecialitePrest.getSelectedItem().toString();
-        String NumMobil = jtNumMobilPrest.getText();
-        String NumFixe = jtNumFixePrest.getText();
-        String date_Payement = jtDatePayement.getText();
-        boolean CmpVerif = false;
-        boolean MailVal;
-        boolean prem = false;
-        if (chkCompteVerif.isSelected()) {
-            CmpVerif = true;
-        }
-        if (chkEmailVald.isSelected()) {
-            MailVal = true;
-        }
-        if (chkPremium.isSelected()) {
-            prem = true;
-        }
-        Prestataire prest = new Prestataire();
-        PrestataireDAO prestDAO = new PrestataireDAO();
-        if ((nom != null) && (nom.trim().length() > 0) || (adr != null) && (adr.trim().length() > 0) || (pwd != null) && (pwd.trim().length() > 0)) {
-            prest.setNomPrest(nom);
-
-            prest.setDescPrest(Desc);
-
-
-            prest.setAdrPrest(adr);
-            prest.setVillePrest(ville);
-            prest.setImgPrest(img);
-            prest.setEmailPrest(email);
-
-            prest.setPwdPrest(pwd);
-            prest.setCategorie(ctg);
-            prest.setCompteValide(CmpVerif);
-
-            prest.setDatePayement(date_Payement);
-            prest.setPremium(prem);
-
-            if ((email != null) && (email.trim().length() > 0)) {
-
-                if (email.matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+")) {
-
-                    prest.setEmailPrest(email);
-                    prest.setSpecialite(specialite);
-
-
-                    prest.setTelMobilePrest(NumMobil);
-                    prest.setTelFixePrest(NumFixe);
-                    prestDAO.insertPrestataire(prest);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Vérifier votre @mail");
-                }
-
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Vous avez des champs qui sont vide");
-        }
-
-        this.setVisible(false);
-        ListePrestataire lp = new ListePrestataire();
-        lp.setVisible(true);
 
 
 
@@ -566,15 +525,46 @@ public class AjoutPrestataire extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnAnnulerPrestActionPerformed
 
+    private void btnParcourirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParcourirActionPerformed
+       String chemin="";
+        
+       JFileChooser fc = new JFileChooser();
+       
+                int retval = fc.showOpenDialog(null);
+                
+                if (retval == JFileChooser.APPROVE_OPTION) {
+                    
+                    chemin = fc.getSelectedFile().getAbsolutePath();
+                    
+                    chemin = chemin.replace("\\", "/");    }//GEN-LAST:event_btnParcourirActionPerformed
+    
+                   jtImgPrest.setText(chemin);
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        try {
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+             */
+            
+            UIManager.setLookAndFeel(
+                UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AjoutPrestataire.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(AjoutPrestataire.class.getName()).log(Level.SEVERE, null, ex);;
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(AjoutPrestataire.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(AjoutPrestataire.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -635,7 +625,7 @@ public class AjoutPrestataire extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jtAdrPrest;
-    private javax.swing.JTextField jtDatePayement;
+    private com.toedter.calendar.JDateChooser jtDatePayement;
     private javax.swing.JTextPane jtDescPrest;
     private javax.swing.JTextField jtEmailPrest;
     private javax.swing.JTextField jtImgPrest;

@@ -199,7 +199,7 @@
                                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jtNumFixePrest" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="cmbSpecialitePrest" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -216,7 +216,7 @@
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
@@ -294,7 +294,7 @@
         <Component class="javax.swing.JButton" name="btnAjouterPrest">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/icons/basket_ok.png"/>
+              <Image iconType="3" name="/resources/icons/circle_plus.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="   Ajouter"/>
           </Properties>
@@ -304,6 +304,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAnnulerPrest">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/circle_delete.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="   Annuler"/>
           </Properties>
           <Events>
@@ -341,6 +344,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Parcourir"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnParcourirActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbCategoriePrest">
           <Properties>
@@ -380,14 +386,18 @@
                           <Component id="chkCompteVerif" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                               <Component id="chkEmailVald" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                               <Component id="chkPremium" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jtDatePayement" min="-2" pref="205" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jtDatePayement" min="-2" pref="165" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -403,11 +413,11 @@
                           <Component id="chkPremium" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jtDatePayement" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtDatePayement" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                      <EmptySpace pref="29" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -433,7 +443,10 @@
                 <Property name="text" type="java.lang.String" value="Date payement:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jtDatePayement">
+            <Component class="com.toedter.calendar.JDateChooser" name="jtDatePayement">
+              <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="yyyy MM dd"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

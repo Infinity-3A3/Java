@@ -31,7 +31,7 @@ public class MyTablePrest extends AbstractTableModel{
     
     
     List <Prestataire> ListePrest=new ArrayList<Prestataire>();
-String [] Column ={"idprest","Nom","Adresse","Ville","Numéro Mobile","Numéro Fixe","Email","Categorie","Speialite","Supprimer"};
+String [] Column ={"idprest","Nom","Adresse","Ville","Categorie","Speialite","Supprimer"};
     Boolean rowlist[][] = new Boolean[50][50];
     
     
@@ -40,7 +40,7 @@ String [] Column ={"idprest","Nom","Adresse","Ville","Numéro Mobile","Numéro F
         PrestataireDAO prestDAO=new PrestataireDAO();
         ListePrest =prestDAO.DisplayAllPrestataire();
        for (int i = 0; i < getRowCount(); i++) {
-        rowlist[i][9]=Boolean.FALSE;
+        rowlist[i][6]=Boolean.FALSE;
        
        
             }
@@ -67,13 +67,10 @@ String [] Column ={"idprest","Nom","Adresse","Ville","Numéro Mobile","Numéro F
            
             case 2:return ListePrest.get(rowIndex).getAdrPrest();
             case 3:return ListePrest.get(rowIndex).getVillePrest();
-            
-           case 4:return ListePrest.get(rowIndex).getTelMobilePrest();
-            case 5:return ListePrest.get(rowIndex).getTelFixePrest();
-           case 6:return ListePrest.get(rowIndex).getEmailPrest();
-            case 7:return ListePrest.get(rowIndex).getCategorie();
-            case 8:return ListePrest.get(rowIndex).getSpecialite();
-             case 9:return rowlist[rowIndex][9];
+          
+            case 4:return ListePrest.get(rowIndex).getCategorie();
+            case 5:return ListePrest.get(rowIndex).getSpecialite();
+             case 6:return rowlist[rowIndex][6];
           
             
                 default:return null;
@@ -84,8 +81,8 @@ String [] Column ={"idprest","Nom","Adresse","Ville","Numéro Mobile","Numéro F
      @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
       boolean b = (Boolean) aValue;
-            if(columnIndex==9)
-                rowlist[rowIndex][9]=b;
+            if(columnIndex==6)
+                rowlist[rowIndex][6]=b;
            
         fireTableCellUpdated(rowIndex, columnIndex);
       
@@ -94,7 +91,7 @@ String [] Column ={"idprest","Nom","Adresse","Ville","Numéro Mobile","Numéro F
      
      @Override
     public Class<?> getColumnClass(int columnIndex) {
-        if(columnIndex==9 ){
+        if(columnIndex==6 ){
             return Boolean.class;
         }
         return super.getColumnClass(columnIndex); //To change body of generated methods, choose Tools | Templates.
@@ -102,7 +99,7 @@ String [] Column ={"idprest","Nom","Adresse","Ville","Numéro Mobile","Numéro F
      
       @Override
     public boolean isCellEditable(int row, int column) {
-    return (column > 8);
+    return (column > 5);
   }
   
     

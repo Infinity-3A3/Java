@@ -54,6 +54,7 @@ public class ListerProduit extends javax.swing.JFrame {
             }
         });
 
+        pnlProduits.setBackground(new java.awt.Color(255, 0, 0));
         pnlProduits.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produits", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Meiryo UI", 0, 24))); // NOI18N
 
         jButton1.setText("jButton1");
