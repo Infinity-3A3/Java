@@ -14,7 +14,10 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import tn.mariages.dao.ClientDAO;
+import tn.mariages.entities.Client;
+import tn.mariages.entities.Prestataire;
+import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.entities.Admin;
 /**
@@ -193,11 +196,25 @@ public class Login extends javax.swing.JFrame {
 
         
         
-        
+        ClientDAO clientDAO=new ClientDAO();
+        PrestataireDAO prestatiareDAO=new PrestataireDAO();
         AdminDAO adminDAO=new AdminDAO();
         if(adminDAO.connectAdmin(email, pwd)){
         
        dispose();
+       Accueil accueil=new Accueil();
+       accueil.setVisible(true);
+        }
+        else if(clientDAO.connectClient(email, pwd)){
+         dispose();
+       Accueil accueil=new Accueil();
+       accueil.setVisible(true);
+        
+        }
+        
+        else if(prestatiareDAO.connectPrestataire(email, pwd))
+        {  
+            dispose();
        Accueil accueil=new Accueil();
        accueil.setVisible(true);
         }

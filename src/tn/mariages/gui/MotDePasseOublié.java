@@ -17,6 +17,17 @@
 
 package tn.mariages.gui;
 
+
+
+
+import javax.swing.JOptionPane;
+import tn.mariages.dao.AdminDAO;
+import tn.mariages.entities.Admin;
+import tn.mariages.dao.ClientDAO;
+import tn.mariages.entities.Client;
+import tn.mariages.dao.PrestataireDAO;
+import tn.mariages.entities.Prestataire;
+import tn.mariages.util.*;
 /**
  *
  * @author Karim
@@ -41,18 +52,23 @@ public class MotDePasseOublié extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        tfEmail = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnEnvoyer = new javax.swing.JButton();
         labelMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setToolTipText("");
+        tfEmail.setToolTipText("");
 
         jLabel1.setText("Email :");
 
         btnEnvoyer.setText("Envoyer");
+        btnEnvoyer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnvoyerActionPerformed(evt);
+            }
+        });
 
         labelMessage.setForeground(new java.awt.Color(253, 0, 0));
 
@@ -63,16 +79,16 @@ public class MotDePasseOublié extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(btnEnvoyer))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addComponent(jLabel1)
                         .addGap(54, 54, 54)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(179, 179, 179)
-                        .addComponent(labelMessage)))
+                        .addGap(212, 212, 212)
+                        .addComponent(labelMessage))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(btnEnvoyer)))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -80,9 +96,9 @@ public class MotDePasseOublié extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(labelMessage)
                 .addGap(18, 18, 18)
                 .addComponent(btnEnvoyer))
@@ -107,6 +123,65 @@ public class MotDePasseOublié extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    
+
+ 
+public String generate(int length)
+{
+	    String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"; // Tu supprimes les lettres dont tu ne veux pas
+	    String pass = "";
+	    for(int x=0;x<length;x++)
+	    {
+	       int i = (int)Math.floor(Math.random() * 62); // Si tu supprimes des lettres tu diminues ce nb
+	       pass += chars.charAt(i);
+	    }
+	   
+	    return pass;
+}
+    
+    
+    private void btnEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnvoyerActionPerformed
+       
+        
+        AdminDAO adminDAO=new AdminDAO();
+        ClientDAO clientDAO=new ClientDAO();
+        PrestataireDAO prestataireDAO=new PrestataireDAO();
+        Admin admin=new Admin();
+       Client client=new Client();
+       Prestataire prestataire=new Prestataire();
+        SimpleMail s1=new SimpleMail();
+   String mdp=generate(10);
+        
+   if(adminDAO.findAdminByEmail(tfEmail.getText())!=null){
+       admin=adminDAO.findAdminByEmail(tfEmail.getText());
+   s1.SendMail(tfEmail.getText(), "Mot de passe oublié", "Votre nouveau mot de passe : "+mdp);
+   admin.setPwdAdmin(mdp);
+   adminDAO.updateAdmin(admin);
+   }
+   
+   else if(clientDAO.findClientByEmail(tfEmail.getText())!=null){
+   client=clientDAO.findClientByEmail(tfEmail.getText());
+   s1.SendMail(tfEmail.getText(), "Mot de passe oublié", "Votre nouveau mot de passe : "+mdp);
+   client.setPwdClient(mdp);
+   clientDAO.updateClient(client);
+   }
+   
+   else if(prestataireDAO.findPrestByEmail(tfEmail.getText())!=null){
+   prestataire=prestataireDAO.findPrestByEmail(tfEmail.getText());
+   s1.SendMail(tfEmail.getText(), "Mot de passe oublié", "Votre nouveau mot de passe : "+mdp);
+   prestataire.setPwdPrest(mdp);
+   prestataireDAO.updatePrestataire(prestataire);
+   
+   }
+   
+   else {
+    int dialogButton = JOptionPane.OK_OPTION;
+          JOptionPane.showConfirmDialog (null, "L'email que vous avez saisi n'existe pas","ERROR",dialogButton);
+   
+   }
+       
+    }//GEN-LAST:event_btnEnvoyerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,7 +222,7 @@ public class MotDePasseOublié extends javax.swing.JFrame {
     private javax.swing.JButton btnEnvoyer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelMessage;
+    private javax.swing.JTextField tfEmail;
     // End of variables declaration//GEN-END:variables
 }
