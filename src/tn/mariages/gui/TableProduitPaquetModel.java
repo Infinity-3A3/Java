@@ -67,7 +67,7 @@ public class TableProduitPaquetModel extends AbstractTableModel {
         ProduitDAO prodDAO = new ProduitDAO();
         for(int i = 0;i<listeproduits.size();i++){
             Produit P=new Produit();
-            P=prodDAO.DisplayProdById(listeproduits.get(i).getIdProd());
+            P=prodDAO.DisplayProdByID(listeproduits.get(i).getIdProd());
             listeProduit.add(P);
         }
                 
