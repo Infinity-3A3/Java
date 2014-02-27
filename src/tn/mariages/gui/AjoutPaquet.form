@@ -89,9 +89,9 @@
                           <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
                           <Component id="BtnAjouterPaquet" min="-2" pref="85" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="BtnModifierPaquet" linkSize="2" min="-2" pref="85" max="-2" attributes="0"/>
+                          <Component id="BtnModifierPaquet" min="-2" pref="85" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="BtnAnnulerPaquet" linkSize="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtnAnnulerPaquet" min="-2" pref="88" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="148" max="32767" attributes="0"/>
@@ -131,7 +131,7 @@
                   <EmptySpace pref="82" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="BtnModifierPaquet" linkSize="3" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="BtnAnnulerPaquet" linkSize="3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnAnnulerPaquet" linkSize="3" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="BtnAjouterPaquet" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>

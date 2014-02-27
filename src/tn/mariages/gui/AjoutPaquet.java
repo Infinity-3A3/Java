@@ -6,6 +6,8 @@ package tn.mariages.gui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.PaquetDAO;
 import tn.mariages.dao.PrestataireDAO;
@@ -153,13 +155,11 @@ public class AjoutPaquet extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(BtnModifierPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnAnnulerPaquet)))
+                        .addComponent(BtnAnnulerPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(148, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane1, tfImage, tfNomPaquet, tfPrixPaquet});
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BtnAnnulerPaquet, BtnModifierPaquet});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +189,7 @@ public class AjoutPaquet extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnModifierPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnAnnulerPaquet)
+                    .addComponent(BtnAnnulerPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnAjouterPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
@@ -224,16 +224,19 @@ public class AjoutPaquet extends javax.swing.JFrame {
         
         Paquet p = new Paquet();
         PaquetDAO pDAO = new PaquetDAO();
-        //id prest static (à voir)
         
+        Pattern pattern = Pattern.compile("^\\d+$");
+      Matcher matcher = pattern.matcher(tfPrixPaquet.getText());
         
-        if(tfPrixPaquet.getText().equals("") || tfNomPaquet.getText().equals("") || tfDescPaquet.getText().equals("") || tfImage.getText().equals("")){
+        if(tfPrixPaquet.getText().equals("") || tfNomPaquet.getText().equals("") || tfDescPaquet.getText().equals("") || tfImage.getText().equals("") ||!matcher.matches()){
            String ch="";
            if(tfNomPaquet.getText().equals(""))
                ch+="Veuillez saisir le Nom de votre paquet \n";
            
             if(tfPrixPaquet.getText().equals(""))
                ch+="Veuillez preciser le prix de votre paquet  \n";
+            else if(!matcher.matches())
+                ch+="Veuiller bien remplir le champ du prix de votre paquet \n";
             if(tfDescPaquet.getText().equals(""))
                ch+="Veuillez donner une description de votre paquet  \n";
             else if(tfDescPaquet.getText().length()<10)
@@ -284,14 +287,20 @@ public class AjoutPaquet extends javax.swing.JFrame {
         PaquetDAO pDAO = new PaquetDAO();
         //id prest static (à voir)
         
+        Pattern pattern = Pattern.compile("^\\d+$");
+      Matcher matcher = pattern.matcher(tfPrixPaquet.getText());
         
-        if(tfPrixPaquet.getText().equals("") || tfNomPaquet.getText().equals("") || tfDescPaquet.getText().equals("") || tfImage.getText().equals("")){
+        if(tfPrixPaquet.getText().equals("") || tfNomPaquet.getText().equals("") || tfDescPaquet.getText().equals("") || tfImage.getText().equals("")||!matcher.matches()){
            String ch="";
            if(tfNomPaquet.getText().equals(""))
                ch+="Veuillez saisir le Nom de votre paquet \n";
            
             if(tfPrixPaquet.getText().equals(""))
                ch+="Veuillez preciser le prix de votre paquet  \n";
+            else if(!matcher.matches()){
+                ch+="Veuiller bien remplir le champ du prix de votre paquet \n";
+                System.out.println("brrrrr");
+            }
             if(tfDescPaquet.getText().equals(""))
                ch+="Veuillez donner une description de votre paquet  \n";
             else if(tfDescPaquet.getText().length()<10)
