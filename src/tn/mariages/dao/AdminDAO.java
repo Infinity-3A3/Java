@@ -83,7 +83,7 @@ public class AdminDAO {
             ps.executeUpdate();
          
         } catch (SQLException ex) {
-           //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+           
             System.out.println("erreur lors de la suppression "+ex.getMessage());
         }
     }
@@ -92,6 +92,7 @@ public class AdminDAO {
     public Admin findAdminById(int id){
     Admin admin =new Admin();
      String requete = "select * from admin where idAdmin=?";
+     
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
             ps.setInt(1, id);
@@ -138,6 +139,32 @@ public class AdminDAO {
         }
     }
 
+       
+       
+         public Admin findAdminByEmail(String email){
+    Admin admin =new Admin();
+     String requete = "select * from admin where mailAdmin=?";
+        try {
+            PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, email);
+            ResultSet resultat = ps.executeQuery();
+            while (resultat.next())
+            {
+                admin.setIdAdmin(resultat.getInt(1));
+                admin.setNomAdmin(resultat.getString(2));
+                admin.setMailAdmin(resultat.getString(3));
+                admin.setPwdAdmin(resultat.getString(4));
+
+            }
+            return admin;
+
+        } catch (SQLException ex) {
+           //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("erreur lors de l'admin "+ex.getMessage());
+            return null;
+        }
+    }
+       
        
        
          public boolean connectAdmin(String login,String pwd)

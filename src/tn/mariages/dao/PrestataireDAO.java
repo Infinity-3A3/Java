@@ -86,7 +86,7 @@ public class PrestataireDAO {
             ps.setInt(16, p.getIdPrest());
             
             ps.executeUpdate();
-            System.out.println("mise à jour effectué avecc succees");
+            //System.out.println("mise à jour effectué avecc succees");
         } catch (SQLException ex) {
                System.out.println("erreur lors de la mise à jour "+ex.getMessage());      
         }

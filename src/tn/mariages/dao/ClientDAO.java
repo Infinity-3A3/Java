@@ -169,7 +169,7 @@ System.out.println("erreur lors de la recherche du client "+ex.getMessage());
             
             
         } catch (SQLException ex) {
-               System.out.println("erreur lors de la recherche du client "+ex.getMessage());
+               System.out.println("erreur lors de la recherche du client "+ex.getMessage()); 
                return null; 
         }
         
