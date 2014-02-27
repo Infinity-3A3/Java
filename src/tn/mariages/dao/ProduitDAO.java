@@ -237,48 +237,8 @@ public class ProduitDAO {
         }
 
     }
+   
 
-    public Produit DisplayProdById(int id_prod) 
-    {        
-        String requete = "select * from Produit where idProd = " + id_prod;
-        Statement statement;
-        try {
-            statement = MyConnection.getInstance().cnx.createStatement();
-            ResultSet resultat = statement.executeQuery(requete);
-             Produit p = new Produit();
-            while(resultat.next()){
-           
-
-            /*SELECT `idProd`, `idPrest`, `nomProd`, `descProd`, `shortDescProd`, `categorieProd`, 
-             `dateAjoutProd`, `prixProd`, `exclusifPaquet`, `imgProd_P`, `imgProd_1`, `imgProd_2`, `imgProd_3`, `imgProd_4`
-             */
-            p.setIdProd(resultat.getInt(1));
-            p.setIdPrest(resultat.getInt(2));
-            p.setNomProd(resultat.getString(3));
-            p.setDescProd(resultat.getString(4));
-            p.setShortDescProd(resultat.getString(5));
-            p.setCategorieProd(resultat.getString(6));
-            p.setDateAjoutProd(resultat.getString(7));
-            p.setPrixProd(resultat.getDouble(8));
-            p.setExclusifPaquet(resultat.getBoolean(9));
-            p.setImgProd_P(resultat.getString(10));
-            p.setImgProd_1(resultat.getString(11));
-            p.setImgProd_2(resultat.getString(12));
-            p.setImgProd_3(resultat.getString(13));
-            p.setImgProd_4(resultat.getString(14));
-
-            
-            }
-            return p;
-        } catch (SQLException ex) {
-            System.out.println("erreur lors du chargement des produits " + ex.getMessage());
-            return null;
-        }
-
-    }
-    
-
-  
  public Produit DisplayProdByID (int id){
         
 Produit p = new Produit();
@@ -323,7 +283,6 @@ return null;
       
     }
 
- 
  
  
  public List<Produit> DisplayAllProdIfPremium (){
