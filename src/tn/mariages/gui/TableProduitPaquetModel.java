@@ -36,7 +36,7 @@ public class TableProduitPaquetModel extends AbstractTableModel {
     ProduitPaquetDAO pdao = new ProduitPaquetDAO();
     String[] header = {"ID Produit", "Nom prestataire", "Nom du produit", "Categorie", "Prix Hors paquet", "Supprimer"};
     Boolean data[][] = new Boolean[20][10];
-    int id_prod;
+    int id_paq;
     public TableProduitPaquetModel() {
         for (int i = 0; i < getRowCount(); i++) {
             data[i][5] = Boolean.FALSE;
@@ -48,7 +48,7 @@ public class TableProduitPaquetModel extends AbstractTableModel {
         for (int i = 0; i < getRowCount(); i++) {
             data[i][5] = Boolean.FALSE;
         }
-        this.id_prod=id;
+        this.id_paq=id;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class TableProduitPaquetModel extends AbstractTableModel {
 //        prestDAO.findPrestById(listeProduit.get(rowIndex).getIdPrest()).getNomPrest();
         switch (columnIndex) {
             case 0:
-                return id_prod;
+                return listeProduit.get(rowIndex).getIdProd();
             case 1:
                 return  prestDAO.findPrestById(listeProduit.get(rowIndex).getIdPrest()).getNomPrest();
             case 2:    

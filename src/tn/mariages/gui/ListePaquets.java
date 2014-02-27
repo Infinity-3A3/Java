@@ -20,6 +20,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.PaquetDAO;
+import tn.mariages.dao.ProduitPaquetDAO;
 import tn.mariages.entities.Paquet;
 
 /**
@@ -39,7 +40,6 @@ public class ListePaquets extends javax.swing.JFrame {
         Dimension d = new Dimension(648, 350);
         this.setSize(d);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -305,6 +305,33 @@ public class ListePaquets extends javax.swing.JFrame {
 
     private void btnSupprimerProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSupprimerProduitActionPerformed
         // TODO add your handling code here:
+
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        JOptionPane.showConfirmDialog(null, "Voulez vous supprimer tous les produits selectionnés?", "Warning", dialogButton);
+
+        if (dialogButton == JOptionPane.YES_OPTION) { //The ISSUE is here
+            int id_paq = (Integer) tablelistepaquet.getValueAt(tablelistepaquet.getSelectedRow(), 0);
+            ProduitPaquetDAO pDAO = new ProduitPaquetDAO();
+            int ids[] = new int[50];
+            int j = -1;
+            for (int i = 0; i < tablelisteproduitpaquet.getRowCount(); i++) {
+                Boolean b = (Boolean) tablelisteproduitpaquet.getValueAt(i, 5);
+                if (b) {
+                    j++;
+                    
+                    ids[j] = (int) tablelisteproduitpaquet.getValueAt(i, 0);
+                }
+
+            }
+            while (j != -1) {
+                //System.out.println(id_paq+"  "+ids[j]);
+                pDAO.deleteProduitPaquet(ids[j],id_paq);
+                j--;
+            }
+            TableProduitPaquetModel model = new TableProduitPaquetModel();
+            tablelisteproduitpaquet.setModel(model);
+        }
+
     }//GEN-LAST:event_btnSupprimerProduitActionPerformed
 
     private void btnAjouterProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterProduitActionPerformed
@@ -312,19 +339,21 @@ public class ListePaquets extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAjouterProduitActionPerformed
 
     private void btnlisterprodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlisterprodActionPerformed
-        if(tablelistepaquet.getSelectedRow()!=-1){
-        int id = (Integer)tablelistepaquet.getValueAt(tablelistepaquet.getSelectedRow(), 0);
-        TableProduitPaquetModel Mod = new TableProduitPaquetModel(id);
-        tablelisteproduitpaquet.setModel(Mod);
-        Mod.fireTableDataChanged();
-        Dimension d = new Dimension(648, 600);
-        this.setSize(d);
-                jPanel3.setVisible(true);
-                btnAjouterProduit.setVisible(true);
-        btnSupprimerProduit.setVisible(true);
+        if (tablelistepaquet.getSelectedRow() != -1) {
+            PaquetDAO pdao = new PaquetDAO();
+            int id = (Integer) tablelistepaquet.getValueAt(tablelistepaquet.getSelectedRow(), 0);
+            String nom =(String) pdao.FindPaquetById(id).getNomPaquet();
+            labelpaquet.setText(labelpaquet.getText()+nom);
+            TableProduitPaquetModel Mod = new TableProduitPaquetModel(id);
+            tablelisteproduitpaquet.setModel(Mod);
+            Mod.fireTableDataChanged();
+            Dimension d = new Dimension(648, 570);
+            this.setSize(d);
+            jPanel3.setVisible(true);
+            btnAjouterProduit.setVisible(true);
+            btnSupprimerProduit.setVisible(true);
 
-        }
-        else{
+        } else {
             int dialogButton = JOptionPane.CANCEL_OPTION;
             JOptionPane.showConfirmDialog(null, "Vous n'avez selectionné aucun paquet", "Warning", dialogButton);
         }
@@ -363,7 +392,7 @@ public class ListePaquets extends javax.swing.JFrame {
                 new ListePaquets().setVisible(true);
             }
         });
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
