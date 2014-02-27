@@ -96,11 +96,11 @@ public class PrestataireDAO {
     
     }
     
-    public void  deletePrest (Prestataire p){
+    public void  deletePrest (int p){
         String requete = "delete from prestataire where idPrest=?";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
-            ps.setInt(1, p.getIdPrest());
+            ps.setInt(1, p);
             ps.executeUpdate();
             System.out.println("Prestataire supprimée");
         } catch (SQLException ex) {
@@ -419,4 +419,4 @@ return null;
     
     
     
-}
+}    

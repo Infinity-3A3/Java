@@ -22,7 +22,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import tn.mariages.entities.Client;
 import tn.mariages.util.MyConnection;
@@ -91,11 +90,11 @@ public class ClientDAO {
     
     }
     
-    public void  deleteClient (Client c){
+    public void  deleteClient (int id){
         String requete = "delete from client where idClient=?";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
-            ps.setInt(1, c.getIdClient());
+            ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("Client supprimée");
         } catch (SQLException ex) {
@@ -169,7 +168,7 @@ System.out.println("erreur lors de la recherche du client "+ex.getMessage());
             
             
         } catch (SQLException ex) {
-               System.out.println("erreur lors de la recherche du client "+ex.getMessage()); 
+               System.out.println("erreur lors de la recherche du client "+ex.getMessage());
                return null; 
         }
         

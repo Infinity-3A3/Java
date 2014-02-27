@@ -17,9 +17,14 @@
 package tn.mariages.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 import tn.mariages.entities.PanierProduit;
 import tn.mariages.entities.Produit;
+import tn.mariages.entities.ToDo;
 import tn.mariages.util.MyConnection;
 
 /**
@@ -72,4 +77,44 @@ public class panierProduitDAO {
 
     }
 
+    
+    
+    public int[] getSellsByMonth(){
+        
+    int[] ventes = new int[12];
+        
+        String requete = "SELECT count(`idClient`), extract(month from dateAjout) FROM `panierproduit` group by MONTH(`dateAjout`)";
+        try {
+            PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
+            ResultSet resultat = ps.executeQuery();
+        int i =0;
+            while (resultat.next())
+            {
+                ventes[resultat.getInt(2)]=resultat.getInt(1);
+            }
+            return ventes;
+
+        } catch (SQLException ex) {
+           //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+            
+            return null;
+        }
+        
+        
+        
+    }
+    
+    
+    public static void main(String[] args) {
+        
+        panierProduitDAO pn = new panierProduitDAO();
+        int[] sellsByMonth = pn.getSellsByMonth();
+        
+        for (int i = 0; i < sellsByMonth.length; i++) {
+            
+            System.out.println("=> "+sellsByMonth[i]);
+        }
+        
+    }
+    
 }
