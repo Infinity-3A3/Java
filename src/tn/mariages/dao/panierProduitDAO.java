@@ -19,12 +19,11 @@ package tn.mariages.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import tn.mariages.entities.PanierProduit;
-import tn.mariages.entities.Produit;
-import tn.mariages.entities.ToDo;
 import tn.mariages.util.MyConnection;
 
 /**
@@ -35,14 +34,14 @@ public class panierProduitDAO {
 
     public void insertPanierProduit(PanierProduit p) {
 
-        String req = "insert into produit values (?)";
+        String req = "INSERT INTO `panierproduit`(`idClient`, `idProd`, `dateAjout`) VALUES (?,?,?)";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(req);
-            ps.setInt(1, p.getIdProd());
-            ps.setInt(2, p.getIdClient());
-            ps.setDate(3, p.getDateAjout());
+            ps.setInt(1, p.getIdClient());
+            ps.setInt(2, p.getIdProd());
+            ps.setString(3, p.getDateAjout());
             ps.executeUpdate();
-            System.out.println("Ajout effectuée avec succès");
+            System.out.println("Ajout Produit au panier effectuée avec succès");
         } catch (SQLException ex) {
             //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("erreur lors de l'insertion " + ex.getMessage());
@@ -50,7 +49,7 @@ public class panierProduitDAO {
 
     }
 
-    public void deletePanierProduit(int idclient) {
+    public void deletePanierAlLProduitByClient(int idclient) {
         String req = "delete from panierproduit where idclient=?";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(req);
@@ -64,7 +63,22 @@ public class panierProduitDAO {
     }
          
 
-    public void updatePanierProduit(PanierProduit p ) {
+    public void deletePanierProduit(int idclient,int idprod) {
+        String req = "delete from panierproduit where idclient= ? and idProd = ?";
+        try {
+            PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(req);
+            ps.setInt(1, idclient);
+            ps.setInt(2, idprod);
+
+            ps.executeUpdate();
+            System.out.println("Suppression effectuée avec succès");
+        } catch (SQLException ex) {
+            //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("erreur lors de le la suppression  " + ex.getMessage());
+        }
+    }
+         
+    public void updateDatePanierProduit(PanierProduit p ) {
         String requete = "update panierproduit set date_panierProd=? where idclient=?";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
@@ -77,8 +91,6 @@ public class panierProduitDAO {
 
     }
 
-    
-    
     public int[] getSellsByMonth(){
         
     int[] ventes = new int[12];
@@ -104,17 +116,54 @@ public class panierProduitDAO {
         
     }
     
+
+    public HashMap<Integer, Integer> getTop10BestSeller(){
+        
+    
+        HashMap<Integer, Integer> bestSeller = new HashMap<Integer, Integer>();
+    
+   String requete = "SELECT `idProd`, COUNT(`idProd`) FROM `panierproduit` group by `idProd` order by COUNT(`idProd`)";
+        try {
+            PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
+            ResultSet resultat = ps.executeQuery();
+      int i = 0;
+            while (resultat.next() && i<10)
+            {
+                    bestSeller.put(resultat.getInt(1), resultat.getInt(2));
+            i++;
+            }
+            return bestSeller;
+
+        } catch (SQLException ex) {
+           //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+            
+            return null;
+        }
+   }
+
+    
+    
+    
     
     public static void main(String[] args) {
         
         panierProduitDAO pn = new panierProduitDAO();
-        int[] sellsByMonth = pn.getSellsByMonth();
+       /* HashMap<Integer, Integer> bestSeller = pn.getTop10BestSeller();
+        Iterator<Integer> i = bestSeller.keySet().iterator();
+
+    while(i.hasNext()){
+  Integer key = i.next();
+  System.out.println("key: " + key + " value: " + bestSeller.get(key));*/
+       
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        System.out.println(dateFormat.format(date));
         
-        for (int i = 0; i < sellsByMonth.length; i++) {
-            
-            System.out.println("=> "+sellsByMonth[i]);
-        }
+        PanierProduit p = new PanierProduit(2, 1, ""+dateFormat.format(date));
+        pn.insertPanierProduit(p);
         
+               }
+    
+    
     }
     
-}

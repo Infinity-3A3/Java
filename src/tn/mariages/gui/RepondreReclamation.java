@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import tn.mariages.dao.ReclamationDAO;
 import tn.mariages.entities.Reclamation;
+import tn.mariages.util.Mail;
 
 /**
  *
@@ -152,11 +153,11 @@ public class RepondreReclamation extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          String to[]= {new ReclamationDAO().DisplayAllReclamationById(id).getMailRec()};
-       /* try {
-          //  Mail.sendMail("kahouajiomar@gmail.com", to, "compte123", texteRep.getText());
+        try {
+            Mail.sendMail("kahouajiomar@gmail.com", to, "compte123", texteRep.getText());
         } catch (MessagingException ex) {
             Logger.getLogger(RepondreReclamation.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
         dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
