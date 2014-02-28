@@ -22,8 +22,71 @@ package tn.mariages.entities;
  * @author RAED
  */
 public class PanierPaquet {
+
+    public PanierPaquet() {
+    }
+
+
+    public PanierPaquet(int idClient, int idPaquet, String dateAjout) {
+        this.idClient = idClient;
+        this.idPaquet = idPaquet;
+        this.dateAjout = dateAjout;
+    }
+    
+    
+    
     private int idClient;
     private int idPaquet;
-    private String dateAjout;    
+    private String dateAjout;
+
+    public int getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
+    }
+
+    public int getIdPaquet() {
+        return idPaquet;
+    }
+
+    public void setIdPaquet(int idPaquet) {
+        this.idPaquet = idPaquet;
+    }
+
+    public String getDateAjout() {
+        return dateAjout;
+    }
+
+    public void setDateAjout(String dateAjout) {
+        this.dateAjout = dateAjout;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PanierPaquet other = (PanierPaquet) obj;
+        if (this.idClient != other.idClient) {
+            return false;
+        }
+        if (this.idPaquet != other.idPaquet) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
 }

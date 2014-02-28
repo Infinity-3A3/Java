@@ -21,18 +21,125 @@ package tn.mariages.entities;
  * @author RAED
  */
 public class Paquet {
+
+    public Paquet() {
+    }
+
+    public Paquet(String nomPaquet, String descPaquet, String shortDescPaquet, String imgPaquet, Double prixPaquet) {
+        this.nomPaquet = nomPaquet;
+        this.descPaquet = descPaquet;
+        this.shortDescPaquet = shortDescPaquet;
+        this.imgPaquet = imgPaquet;
+        this.prixPaquet = prixPaquet;
+    }
+
+    public Paquet(int idPaquet, int idPrest, String nomPaquet, String descPaquet, String shortDescPaquet, String imgPaquet, Double prixPaquet) {
+        this.idPaquet = idPaquet;
+        this.idPrest=  idPrest;
+
+        this.nomPaquet = nomPaquet;
+        this.descPaquet = descPaquet;
+        this.shortDescPaquet = shortDescPaquet;
+        this.imgPaquet = imgPaquet;
+        this.prixPaquet = prixPaquet;
+    }
+    
     
     
     private int idPaquet;
-    
+    private int idPrest;
+
     private String nomPaquet;
     private String descPaquet;
     private String shortDescPaquet;
     
     private String imgPaquet;
     
-    private boolean prixPaquet;
+    private Double prixPaquet;
+
+    public int getIdPaquet() {
+        return idPaquet;
+    }
+
+    public void setIdPaquet(int idPaquet) {
+        this.idPaquet = idPaquet;
+    }
+
+    public String getNomPaquet() {
+        return nomPaquet;
+    }
+
+    public void setNomPaquet(String nomPaquet) {
+        this.nomPaquet = nomPaquet;
+    }
+
+    public String getDescPaquet() {
+        return descPaquet;
+    }
+
+    public void setDescPaquet(String descPaquet) {
+        this.descPaquet = descPaquet;
+    }
+
+    public String getShortDescPaquet() {
+        return shortDescPaquet;
+    }
+
+    public void setShortDescPaquet(String shortDescPaquet) {
+        this.shortDescPaquet = shortDescPaquet;
+    }
+
+    public String getImgPaquet() {
+        return imgPaquet;
+    }
+
+    public void setImgPaquet(String imgPaquet) {
+        this.imgPaquet = imgPaquet;
+    }
+
+    public Double getPrixPaquet() {
+        return prixPaquet;
+    }
+
+    public void setPrixPaquet(Double prixPaquet) {
+        this.prixPaquet = prixPaquet;
+    }
+
     
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Paquet other = (Paquet) obj;
+        if (this.idPaquet != other.idPaquet) {
+            return false;
+        }
+        return true;
+    }
+
     
-    
+    public int getIdPrest() {
+        return idPrest;
+    }
+
+    public void setIdPrest(int idPrest) {
+        this.idPrest = idPrest;
+    }
+
+    @Override
+    public String toString() {
+        return "Paquet{" + "idPaquet=" + idPaquet + ", idPrest=" + idPrest + ", nomPaquet=" + nomPaquet + ", descPaquet=" + descPaquet + ", shortDescPaquet=" + shortDescPaquet + ", imgPaquet=" + imgPaquet + ", prixPaquet=" + prixPaquet + '}';
+    }
+   
 }

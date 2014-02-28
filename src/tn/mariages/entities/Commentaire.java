@@ -27,5 +27,78 @@ public class Commentaire {
     
     private String dateCom;
     private String texteCom;
+
+    public int getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
+    }
+
+    public int getIdProd() {
+        return idProd;
+    }
+
+    public void setIdProd(int idProd) {
+        this.idProd = idProd;
+    }
+
+    public String getDateCom() {
+        return dateCom;
+    }
+
+    public void setDateCom(String dateCom) {
+        this.dateCom = dateCom;
+    }
+
+    public String getTexteCom() {
+        return texteCom;
+    }
+
+    public void setTexteCom(String texteCom) {
+        this.texteCom = texteCom;
+    }
+
+    public Commentaire() {
+    }
+
+    public Commentaire(int idProd, String dateCom, String texteCom) {
+        this.idProd = idProd;
+        this.dateCom = dateCom;
+        this.texteCom = texteCom;
+    }
+
+    public Commentaire(int idClient, int idProd, String dateCom, String texteCom) {
+        this.idClient = idClient;
+        this.idProd = idProd;
+        this.dateCom = dateCom;
+        this.texteCom = texteCom;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Commentaire other = (Commentaire) obj;
+        if (this.idClient != other.idClient) {
+            return false;
+        }
+        if (this.idProd != other.idProd) {
+            return false;
+        }
+        return true;
+    }
+    
     
 }

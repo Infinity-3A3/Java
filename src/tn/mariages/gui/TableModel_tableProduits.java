@@ -26,10 +26,11 @@ import tn.mariages.entities.Produit;
  *
  * @author RAED
  */
+@SuppressWarnings("serial")
 public class TableModel_tableProduits extends AbstractTableModel {
 
         List<Produit> listeProd = new ArrayList<Produit>();
-      String[]header = {"id","Nom","Description","Categorie","Date Ajout","Prix","New","Exclusif Paquet"};
+      String[]header = {"id","Nom","Description","Categorie","Date Ajout","Prix","Exclusif Paquet"};
 
     
     @Override

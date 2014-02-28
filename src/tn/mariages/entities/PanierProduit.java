@@ -17,13 +17,78 @@
 
 package tn.mariages.entities;
 
+import java.sql.Date;
+
 /**
  *
  * @author RAED
  */
 public class PanierProduit {
+
+    public PanierProduit() {
+    }
+
+    public PanierProduit(int idClient, int idProd, String dateAjout) {
+        this.idClient = idClient;
+        this.idProd = idProd;
+        this.dateAjout = dateAjout;
+    }
+    
+    
+    
     private int idClient;
     private int idProd;
     private String dateAjout;    
+
+    public int getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
+    }
+
+    public int getIdProd() {
+        return idProd;
+    }
+
+    public void setIdProd(int idProd) {
+        this.idProd = idProd;
+    }
+
+    public String getDateAjout() {
+        return dateAjout;
+    }
+
+   
+    public void setDateAjout(String dateAjout) {
+        this.dateAjout = dateAjout;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PanierProduit other = (PanierProduit) obj;
+        if (this.idClient != other.idClient) {
+            return false;
+        }
+        if (this.idProd != other.idProd) {
+            return false;
+        }
+        return true;
+    }
+
+   
     
 }
