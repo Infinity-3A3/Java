@@ -90,7 +90,7 @@ switch(columnIndex){
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        if(columnIndex==4 ){
+        if(columnIndex==3 ){
             return Boolean.class;
         }
         

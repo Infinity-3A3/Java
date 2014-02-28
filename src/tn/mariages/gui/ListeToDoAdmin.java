@@ -61,6 +61,7 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Liste des ToDo");
 
+        AjouterToDo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_plus.png"))); // NOI18N
         AjouterToDo.setText("Ajouter");
         AjouterToDo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +76,7 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
             }
         });
 
+        SupprimerToDo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
         SupprimerToDo.setText("Supprimer");
         SupprimerToDo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,13 +99,13 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
                                 .addGap(211, 211, 211)
                                 .addComponent(jLabel1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(AjouterToDo)
                                 .addGap(72, 72, 72)
+                                .addComponent(AjouterToDo)
+                                .addGap(69, 69, 69)
                                 .addComponent(ModifierToDo)
-                                .addGap(79, 79, 79)
+                                .addGap(67, 67, 67)
                                 .addComponent(SupprimerToDo)))
-                        .addGap(0, 73, Short.MAX_VALUE)))
+                        .addGap(0, 36, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -113,7 +115,7 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AjouterToDo)
                     .addComponent(ModifierToDo)
