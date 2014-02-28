@@ -174,8 +174,8 @@ public class AdminDAO {
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
             ps.setString(1, login);
-            ps.setString(2, login);
-            ps.setString(3, pwd);
+            ps.setString(2, pwd);
+    
             ResultSet resultat = ps.executeQuery();
           if (resultat.next())
               return true;
@@ -183,7 +183,7 @@ public class AdminDAO {
         }
         catch (SQLException ex) {
            //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("erreur lors de la suppression "+ex.getMessage());
+            System.out.println("erreur lors de la connection "+ex.getMessage());
         }
 return false;
 }

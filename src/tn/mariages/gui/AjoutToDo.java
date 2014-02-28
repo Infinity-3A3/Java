@@ -40,11 +40,12 @@ public class AjoutToDo extends javax.swing.JFrame {
     
     public AjoutToDo(ToDo t){
      initComponents();
+     
      jLabel1.setText("Modifier le paquet "+t.getIdToDo());
      btnAjouterToDo.setVisible(false);
      tfTitre.setText(t.getTitreToDo());
      tfDescriptionToDo.setText(t.getDescToDo());
-    // jDateToDo.setDate(t.getDateToDo());
+      //jDateChooser1.setDate(t.getDateToDo());
      cbUrgent.setSelected(t.isLabelUrgent());
      cbRDV.setSelected(t.isLabelRDV());
      cbPay.setSelected(t.isLabelPayement());
@@ -70,15 +71,13 @@ public class AjoutToDo extends javax.swing.JFrame {
         tfDescriptionToDo = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jDateDebuToDo = new com.toedter.calendar.JDateChooser();
         cbUrgent = new javax.swing.JCheckBox();
         cbRDV = new javax.swing.JCheckBox();
         cbPay = new javax.swing.JCheckBox();
         btnAjouterToDo = new javax.swing.JButton();
         ModifierToDo = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jDateFinToDo = new com.toedter.calendar.JDateChooser();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -101,8 +100,6 @@ public class AjoutToDo extends javax.swing.JFrame {
         jLabel1.setText("Ajouter une ToDo");
 
         jLabel5.setText("Date debut :");
-
-        jDateDebuToDo.setDateFormatString("YYYY-MM-dd");
 
         cbUrgent.setText("Urgent");
         cbUrgent.addActionListener(new java.awt.event.ActionListener() {
@@ -135,8 +132,6 @@ public class AjoutToDo extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-
-        jLabel6.setText("Date fin :");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -174,24 +169,22 @@ public class AjoutToDo extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel5))
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                                .addGap(74, 74, 74))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(cbPay)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(130, 130, 130)
-                                            .addComponent(jButton3)
-                                            .addGap(4, 4, 4))
-                                        .addComponent(jDateDebuToDo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jDateFinToDo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(130, 130, 130)
+                                        .addComponent(jButton3)
+                                        .addGap(4, 4, 4)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
+                                .addGap(74, 74, 74))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,18 +203,11 @@ public class AjoutToDo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(39, 39, 39))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jDateDebuToDo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jDateFinToDo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                    .addComponent(jLabel5)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(81, 81, 81)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbUrgent)
                     .addComponent(cbRDV)
@@ -269,12 +255,14 @@ public class AjoutToDo extends javax.swing.JFrame {
  ToDo todo=new ToDo();
  Client client=new Client();
         ClientDAO clientDAO=new ClientDAO();
+        java.util.Date date =jDateChooser1.getDate();
+     java.sql.Date  date1=new java.sql.Date(date.getTime());
       ToDoDAO todoDAO=new ToDoDAO();
       client=clientDAO.findClientByNomFamille((String)cmbClients.getItemAt(cmbClients.getSelectedIndex()));
       todo.setIdClient(client.getIdClient());
       todo.setTitreToDo(tfTitre.getText());
       todo.setDescToDo(tfDescriptionToDo.getText());
-     //todo.setDateToDo(jDateToDo.getDate().toString());
+    todo.setDateToDo(date1.toString());
      //   System.out.println(todo.getDateToDo());
       todo.setLabelUrgent(cbUrgent.isSelected());
       todo.setLabelRDV(cbUrgent.isSelected());
@@ -350,14 +338,12 @@ this.dispose();
     private javax.swing.JCheckBox cbUrgent;
     private javax.swing.JComboBox cmbClients;
     private javax.swing.JButton jButton3;
-    private com.toedter.calendar.JDateChooser jDateDebuToDo;
-    private com.toedter.calendar.JDateChooser jDateFinToDo;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea tfDescriptionToDo;
