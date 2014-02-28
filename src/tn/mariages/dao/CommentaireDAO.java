@@ -23,6 +23,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -35,8 +36,7 @@ import tn.mariages.util.MyConnection;
  */
 public class CommentaireDAO {
     
-    public void insertCommentaire(Commentaire c)
-    {
+  public void insertCommentaire(Commentaire c) {
         try {
             String requete="insert into commentaire (idClient,idProd,dateCom,texteCom) values (?,?,?,?)";
             
@@ -56,8 +56,7 @@ public class CommentaireDAO {
         }
     }
         
-        public void updateCommentaire(Commentaire c)
-        {
+  public void updateCommentaire(Commentaire c){
         try {
             String requete="update commentaire set idClient=?,idProd=?,dateCom=?,texteCom=? ";
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
@@ -72,10 +71,8 @@ public class CommentaireDAO {
         }
 
         }
-        
-        
-        public void deleteCommentaire(Commentaire c)
-        {
+            
+  public void deleteCommentaire(Commentaire c){
                     String requete = "delete from commenataire where idClient=?";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
@@ -89,7 +86,7 @@ public class CommentaireDAO {
 
         }
         
-        public List<Commentaire> DisplayAllCommentaires (){
+  public List<Commentaire> DisplayAllCommentaires (){
         
         List<Commentaire> listeCommentaire= new ArrayList<>();
 
@@ -123,7 +120,7 @@ return null;
         
 }
         
-       public List<Commentaire> DisplayAllCommentairesbyIdProd (int id){
+  public List<Commentaire> DisplayAllCommentairesbyIdProd (int id){
         
         List<Commentaire> listeCommentaire= new ArrayList<>();
 
@@ -148,19 +145,48 @@ return null;
                      return listeCommentaire;
                     
         }
-catch (SQLException ex) {
-System.out.println("erreur lors du chargement des depots "+ex.getMessage());
-return null;
-
-}
+        catch (SQLException ex) {
+    System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+    return null;
+            }
         
         
 }
 
-  
+  public HashMap<Integer, Integer> getTop10Coms(){
+      
+        HashMap<Integer, Integer> topComs = new HashMap<Integer, Integer>();
+String requete = "SELECT `idProd` , count(`idProd`) FROM `commentaire` group by `idProd`";
+        
+        Statement statement;
+        try {
+            statement = MyConnection.getInstance().cnx.createStatement();
+            ResultSet resultat=statement.executeQuery(requete);
+        
+            int i =0;
+            while(resultat.next() && i<10){
+             topComs.put(resultat.getInt(1), resultat.getInt(2));
+            i++;
+            }
+       return topComs;
+                   }
+        catch (SQLException ex) {
+            System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+        return null;
+            }
+       }
 
-}
-
-
+    public static void main(String[] args) {
+        CommentaireDAO c = new CommentaireDAO();
+      HashMap<Integer, Integer> top10Coms = c.getTop10Coms();
+      Iterator<Integer> i = top10Coms.keySet().iterator();
+      
+       while(i.hasNext()){
+           System.out.println(" TEST ");
+    Integer key = i.next();
+    System.out.println("key: " + key + " value: " + top10Coms.get(key));
+        }
     
-
+    }
+  
+}

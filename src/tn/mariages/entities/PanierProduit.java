@@ -31,14 +31,14 @@ public class PanierProduit {
     public PanierProduit(int idClient, int idProd, String dateAjout) {
         this.idClient = idClient;
         this.idProd = idProd;
-        this.dateAjout = Date.valueOf(dateAjout);
+        this.dateAjout = dateAjout;
     }
     
     
     
     private int idClient;
     private int idProd;
-    private Date dateAjout;    
+    private String dateAjout;    
 
     public int getIdClient() {
         return idClient;
@@ -56,12 +56,13 @@ public class PanierProduit {
         this.idProd = idProd;
     }
 
-    public Date getDateAjout() {
+    public String getDateAjout() {
         return dateAjout;
     }
 
+   
     public void setDateAjout(String dateAjout) {
-        this.dateAjout = Date.valueOf(dateAjout);
+        this.dateAjout = dateAjout;
     }
 
     @Override
