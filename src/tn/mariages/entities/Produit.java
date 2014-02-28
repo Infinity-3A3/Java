@@ -83,6 +83,7 @@ public class Produit {
     private String imgProd_2;
     private String imgProd_3;
     private String imgProd_4;
+    
 
     public int getIdProd() {
         return idProd;

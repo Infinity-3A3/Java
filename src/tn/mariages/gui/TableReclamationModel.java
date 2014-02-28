@@ -20,7 +20,6 @@ package tn.mariages.gui;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import org.eclipse.persistence.jpa.config.Column;
 import tn.mariages.dao.ReclamationDAO;
 import tn.mariages.entities.Reclamation;
 
