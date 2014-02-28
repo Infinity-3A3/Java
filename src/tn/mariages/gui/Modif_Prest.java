@@ -20,6 +20,9 @@ package tn.mariages.gui;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -64,7 +67,7 @@ public class Modif_Prest extends javax.swing.JFrame {
        chkPremiumPrest.setSelected(p.isPremium());
 //        }
         tfDatePayementPrest.setText(p.getDatePayement());
-        
+        labelIdPrest.setVisible(false);
      }
 
     /**
@@ -112,6 +115,7 @@ public class Modif_Prest extends javax.swing.JFrame {
         chkEmailValidePrest = new javax.swing.JCheckBox();
         chkPremiumPrest = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modifier Perstataire");
@@ -127,7 +131,7 @@ public class Modif_Prest extends javax.swing.JFrame {
             }
         });
 
-        pnlModifierPrest.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlModifierPrest.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modifier prestataire", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         taDescPrest.setColumns(20);
         taDescPrest.setRows(5);
@@ -168,16 +172,18 @@ public class Modif_Prest extends javax.swing.JFrame {
 
         jLabel10.setText("Spécialité");
 
-        btnValiderModifPrest.setBackground(new java.awt.Color(0, 153, 0));
-        btnValiderModifPrest.setText("Valider");
+        btnValiderModifPrest.setBackground(new java.awt.Color(204, 204, 204));
+        btnValiderModifPrest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
+        btnValiderModifPrest.setText("  Valider");
         btnValiderModifPrest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnValiderModifPrestActionPerformed(evt);
             }
         });
 
-        btnAnulModifPrest.setBackground(new java.awt.Color(255, 102, 102));
-        btnAnulModifPrest.setText("Anuller");
+        btnAnulModifPrest.setBackground(new java.awt.Color(204, 204, 204));
+        btnAnulModifPrest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
+        btnAnulModifPrest.setText("  Anuller");
         btnAnulModifPrest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnulModifPrestActionPerformed(evt);
@@ -256,6 +262,13 @@ public class Modif_Prest extends javax.swing.JFrame {
                     .addComponent(jLabel5)))
         );
 
+        jButton1.setText("Parcourir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlModifierPrestLayout = new javax.swing.GroupLayout(pnlModifierPrest);
         pnlModifierPrest.setLayout(pnlModifierPrestLayout);
         pnlModifierPrestLayout.setHorizontalGroup(
@@ -263,63 +276,70 @@ public class Modif_Prest extends javax.swing.JFrame {
             .addGroup(pnlModifierPrestLayout.createSequentialGroup()
                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
                         .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                .addGap(21, 21, 21)
                                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel6))
-                                .addGap(45, 45, 45)
-                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addGap(56, 56, 56)
+                                            .addComponent(cmbVillePrest, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                            .addComponent(jLabel9)
+                                            .addGap(27, 27, 27)
+                                            .addComponent(cmbCategoriePrest, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfNomPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel10)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(cmbSpecialitePrest, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jLabel2)
+                                .addGap(52, 52, 52)
+                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfNomPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                        .addGap(151, 151, 151)
+                                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(tfimage)
                                             .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                                .addGap(151, 151, 151)
-                                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(tfimage)
-                                                    .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                                        .addComponent(jLabel1)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(labelIdPrest)))))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModifierPrestLayout.createSequentialGroup()
-                                        .addComponent(TfEmailPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel3))))
+                                                .addComponent(jLabel1)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(labelIdPrest))
+                                            .addComponent(jLabel3)
+                                            .addComponent(aa)
+                                            .addComponent(ff)))))
                             .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(22, 22, 22)
+                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                        .addComponent(TfPwdPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(jLabel6)
+                                        .addGap(45, 45, 45)
+                                        .addComponent(TfEmailPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(aa))
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(TfPwdPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                        .addComponent(cmbVillePrest, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(ff))))
-                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cmbCategoriePrest, 0, 183, Short.MAX_VALUE)
-                                    .addComponent(cmbSpecialitePrest, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel4)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfImagePrest, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfTelFixePrest, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfTelMobilPrest))
-                        .addGap(62, 62, 62))
+                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfTelMobilPrest, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                        .addComponent(tfImagePrest, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(62, 62, 62))
+                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfTelFixePrest, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(pnlModifierPrestLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator1))
@@ -337,61 +357,60 @@ public class Modif_Prest extends javax.swing.JFrame {
 
         pnlModifierPrestLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAnulModifPrest, btnValiderModifPrest});
 
+        pnlModifierPrestLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {TfEmailPrest, TfPwdPrest, cmbCategoriePrest, cmbSpecialitePrest, cmbVillePrest, jScrollPane2, tfNomPrest});
+
+        pnlModifierPrestLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane1, tfTelFixePrest, tfTelMobilPrest});
+
         pnlModifierPrestLayout.setVerticalGroup(
             pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlModifierPrestLayout.createSequentialGroup()
                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(labelIdPrest))
+                .addGap(10, 10, 10)
+                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfNomPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfimage)
+                        .addComponent(tfImagePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1)))
+                .addGap(18, 18, 18)
                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(cmbCategoriePrest, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(cmbSpecialitePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(tfNomPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfimage)
-                                .addComponent(tfImagePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(32, 32, 32)
+                            .addComponent(jLabel6)
+                            .addComponent(TfEmailPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(17, 17, 17)
                         .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(TfEmailPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addGap(33, 33, 33)
-                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(TfPwdPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlModifierPrestLayout.createSequentialGroup()
-                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(aa)
-                                        .addComponent(tfTelMobilPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(59, 59, 59)
-                                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel8)
-                                    .addComponent(cmbVillePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfTelFixePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ff)))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 101, Short.MAX_VALUE)))
+                            .addComponent(jLabel7)
+                            .addComponent(TfPwdPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(aa)
+                        .addComponent(tfTelMobilPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11)
+                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(cmbVillePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ff)
+                    .addComponent(tfTelFixePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(cmbCategoriePrest, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(cmbSpecialitePrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addGroup(pnlModifierPrestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -435,7 +454,12 @@ public class Modif_Prest extends javax.swing.JFrame {
     }//GEN-LAST:event_chkPremiumPrestActionPerformed
 
     private void btnValiderModifPrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValiderModifPrestActionPerformed
-if(tfNomPrest.getText().equals("")|| TfPwdPrest.getText().equals("")|| TfEmailPrest.getText().equals("") || taDescPrest.getText().equals("") || taAdrPrest.getText().equals("") || cmbVillePrest.getSelectedItem().equals("")|| cmbSpecialitePrest.getSelectedItem().equals("")|| cmbCategoriePrest.getSelectedItem().equals("")){
+Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" );  
+    Pattern pattern = Pattern.compile("^\\d+$");
+    Matcher matcher3 = pattern2.matcher(TfEmailPrest.getText());
+      Matcher matcher = pattern.matcher(tfTelFixePrest.getText());
+         Matcher matcher2 = pattern.matcher(tfTelMobilPrest.getText());
+       if(tfNomPrest.getText().equals("")|| taDescPrest.getText().equals("")|| TfEmailPrest.getText().equals("") || TfPwdPrest.getText().equals("") || taAdrPrest.getText().equals("") || cmbVillePrest.getSelectedItem().equals("--Choisir ville--")|| cmbSpecialitePrest.getSelectedItem().equals("--Choisir spécialité--")|| cmbCategoriePrest.getSelectedItem().equals("--Choisir catégorie--")||!matcher.matches()||!matcher.matches()){
            String ch="";
            if(tfNomPrest.getText().equals(""))
                ch+="Veuillez saisir le Nom du prestataire \n";
@@ -446,20 +470,25 @@ if(tfNomPrest.getText().equals("")|| TfPwdPrest.getText().equals("")|| TfEmailPr
                ch+="Veuillez donner l'adresse du prestataire  \n";
             if(cmbVillePrest.getSelectedItem().toString().equals(""))
                ch+="Veuillez donner la ville du prestataire  \n";
+            if(tfTelMobilPrest.getText().equals(""))
+               ch+="Veuillez donner le numero de telephone mobile  du prestataire  \n";
+             else if(!matcher2.matches())
+                  ch+="Veuiller bien remplir le champ du numero de telephone mobile  du prestataire  \n";
              if(tfTelFixePrest.getText().equals(""))
                ch+="Veuillez donner le numero de telephone fixe du prestataire  \n";
-              if(tfTelMobilPrest.getText().equals(""))
-               ch+="Veuillez donner le numero de telephone mobile du prestataire  \n";
+             else if(!matcher.matches())
+                  ch+="Veuiller bien remplir le champ du numero de telephone fixe du prestataire  \n";
+              
               if(tfimage.getText().equals(""))
                ch+="Veuillez donner le chemin de l'image du prestataire  \n";
               if(TfEmailPrest.getText().equals(""))
                ch+="Veuillez donner l'adresse email du prestataire  \n";
+              else if(!matcher3.matches())
+                  ch+="Veuiller bien donner une adresse mail correcte du prestataire  \n";
               if(tfTelMobilPrest.getText().equals(""))
                ch+="Veuillez donner le numero de telephone mobile du prestataire  \n";
              if(cmbCategoriePrest.getSelectedItem().toString().equals(""))
                ch+="Veuillez donner la catégorie  du prestataire  \n";
-             if (TfEmailPrest.getText().matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" )) 
-                  ch+="Veuillez donner une adresse correcte du prestataire  \n";
               if(cmbSpecialitePrest.getSelectedItem().toString().equals(""))
                ch+="Veuillez donner la specialité  du prestataire  \n";
             int dialogButton = JOptionPane.OK_CANCEL_OPTION;
@@ -515,6 +544,21 @@ if(tfNomPrest.getText().equals("")|| TfPwdPrest.getText().equals("")|| TfEmailPr
 
           this.dispose();
     }//GEN-LAST:event_btnAnulModifPrestActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+ String chemin="";
+        
+       JFileChooser fc = new JFileChooser();
+       
+                int retval = fc.showOpenDialog(null);
+                
+                if (retval == JFileChooser.APPROVE_OPTION) {
+                    
+                    chemin = fc.getSelectedFile().getAbsolutePath();
+                    
+                    chemin = chemin.replace("\\", "/");    }                                            
+    
+                   tfImagePrest.setText(chemin);    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -572,6 +616,7 @@ if(tfNomPrest.getText().equals("")|| TfPwdPrest.getText().equals("")|| TfEmailPr
     private javax.swing.JComboBox cmbSpecialitePrest;
     private javax.swing.JComboBox cmbVillePrest;
     private javax.swing.JLabel ff;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
