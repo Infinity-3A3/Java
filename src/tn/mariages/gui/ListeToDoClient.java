@@ -17,25 +17,23 @@
 
 package tn.mariages.gui;
 
-
 import javax.swing.JOptionPane;
-import tn.mariages.dao.PaquetDAO;
-import tn.mariages.entities.ToDo;
 import tn.mariages.dao.ToDoDAO;
-import tn.mariages.gui.AjoutToDo;
+import tn.mariages.entities.ToDo;
+import tn.mariages.gui.TableListeToDoClientModel;
 /**
  *
  * @author Karim
  */
-public class ListeToDoAdmin extends javax.swing.JFrame {
+public class ListeToDoClient extends javax.swing.JFrame {
 
     /**
-     * Creates new form ListeToDoAdmin
+     * Creates new form ListeToDoClient
      */
-    public ListeToDoAdmin() {
+    public ListeToDoClient() {
         initComponents();
-        
-    }
+   
+  }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,40 +46,36 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableListeToDO = new javax.swing.JTable();
+        tabelListeToDoClient = new javax.swing.JTable();
+        btnAjouter = new javax.swing.JButton();
+        btnModifier = new javax.swing.JButton();
+        btnSupprimer = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        AjouterToDo = new javax.swing.JButton();
-        ModifierToDo = new javax.swing.JButton();
-        SupprimerToDo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tableListeToDO.setModel(new TableListeToDoModel());
-        jScrollPane1.setViewportView(tableListeToDO);
+        tabelListeToDoClient.setModel(new TableListeToDoClientModel()
+        );
+        jScrollPane1.setViewportView(tabelListeToDoClient);
+
+        btnAjouter.setText("Ajouter");
+
+        btnModifier.setText("Modifier");
+        btnModifier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModifierActionPerformed(evt);
+            }
+        });
+
+        btnSupprimer.setText("supprimer");
+        btnSupprimer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSupprimerActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Liste des ToDo");
-
-        AjouterToDo.setText("Ajouter");
-        AjouterToDo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AjouterToDoActionPerformed(evt);
-            }
-        });
-
-        ModifierToDo.setText("Modifier");
-        ModifierToDo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModifierToDoActionPerformed(evt);
-            }
-        });
-
-        SupprimerToDo.setText("Supprimer");
-        SupprimerToDo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SupprimerToDoActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Taches a faire");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,37 +83,34 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(211, 211, 211)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(AjouterToDo)
-                                .addGap(72, 72, 72)
-                                .addComponent(ModifierToDo)
-                                .addGap(79, 79, 79)
-                                .addComponent(SupprimerToDo)))
-                        .addGap(0, 73, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(44, 44, 44)
+                        .addComponent(btnAjouter)
+                        .addGap(35, 35, 35)
+                        .addComponent(btnModifier)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnSupprimer))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(jLabel1)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AjouterToDo)
-                    .addComponent(ModifierToDo)
-                    .addComponent(SupprimerToDo))
-                .addGap(28, 28, 28))
+                    .addComponent(btnAjouter)
+                    .addComponent(btnModifier)
+                    .addComponent(btnSupprimer))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,13 +133,13 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ModifierToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifierToDoActionPerformed
-        if(tableListeToDO.getSelectedRow()!=-1){
+    private void btnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifierActionPerformed
+        if(tabelListeToDoClient.getSelectedRow()!=-1){
         ToDo t = new ToDo();
         ToDoDAO todoDAO=new ToDoDAO();
-        t=todoDAO.findToDoById((int)tableListeToDO.getValueAt(tableListeToDO.getSelectedRow(), 0));
+        t=todoDAO.findToDoById((int)tabelListeToDoClient.getValueAt(tabelListeToDoClient.getSelectedRow(), 0));
        
-        AjoutToDo modifierToDo = new AjoutToDo(t);
+        AjouterToDoClient modifierToDo = new AjouterToDoClient(t);
         modifierToDo.setVisible(true);
         }
         else
@@ -156,14 +147,9 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
             int dialogButton = JOptionPane.OK_CANCEL_OPTION;
                 JOptionPane.showConfirmDialog (null, "Vous n'avez selectionné aucune todo","Warning",dialogButton);
         }
-    }//GEN-LAST:event_ModifierToDoActionPerformed
+    }//GEN-LAST:event_btnModifierActionPerformed
 
-    private void AjouterToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouterToDoActionPerformed
-AjoutToDo ajoutertodo=new AjoutToDo();
-ajoutertodo.setVisible(true);
-    }//GEN-LAST:event_AjouterToDoActionPerformed
-
-    private void SupprimerToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SupprimerToDoActionPerformed
+    private void btnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSupprimerActionPerformed
         int dialogButton = JOptionPane.YES_NO_OPTION;
                 JOptionPane.showConfirmDialog (null, "Voulez vous supprimer tous les todo selectionnés?","Warning",dialogButton);
 
@@ -172,14 +158,14 @@ ajoutertodo.setVisible(true);
                     ToDoDAO todoDAO=new ToDoDAO();
                     int id[]=new int[50];
                     int j=-1;
-                    System.out.println(tableListeToDO.getRowCount());
-                    for(int i=0;i<tableListeToDO.getRowCount();i++){
-                    Boolean test =(Boolean)tableListeToDO.getValueAt(i,4);
+                   
+                    for(int i=0;i<tabelListeToDoClient.getRowCount();i++){
+                    Boolean test =(Boolean)tabelListeToDoClient.getValueAt(i,5);
                         System.out.println(test);
                     if(test)
                     {
                         j++;
-                        id[j]=(int)tableListeToDO.getValueAt(i, 0);
+                        id[j]=(int)tabelListeToDoClient.getValueAt(i, 0);
                     }
                       
                       
@@ -189,10 +175,10 @@ ajoutertodo.setVisible(true);
                         todoDAO.deleteToDo(id[j]);
                         j--;
                     }
-                    TableListeToDoModel model = new TableListeToDoModel();
-                    tableListeToDO.setModel(model);
+                    TableListeToDoClientModel model = new TableListeToDoClientModel();
+                    tabelListeToDoClient.setModel(model);
                 }
-    }//GEN-LAST:event_SupprimerToDoActionPerformed
+    }//GEN-LAST:event_btnSupprimerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,31 +197,31 @@ ajoutertodo.setVisible(true);
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListeToDoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListeToDoClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListeToDoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListeToDoClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListeToDoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListeToDoClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListeToDoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListeToDoClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListeToDoAdmin().setVisible(true);
+                new ListeToDoClient().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AjouterToDo;
-    private javax.swing.JButton ModifierToDo;
-    private javax.swing.JButton SupprimerToDo;
+    private javax.swing.JButton btnAjouter;
+    private javax.swing.JButton btnModifier;
+    private javax.swing.JButton btnSupprimer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableListeToDO;
+    private javax.swing.JTable tabelListeToDoClient;
     // End of variables declaration//GEN-END:variables
 }

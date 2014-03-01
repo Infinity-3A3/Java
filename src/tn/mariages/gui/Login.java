@@ -11,14 +11,17 @@ import java.io.FileNotFoundException;
 import javax.swing.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import tn.mariages.dao.ClientDAO;
-import tn.mariages.entities.Client;
-import tn.mariages.entities.Prestataire;
+
+import tn.mariages.entities.ToDo;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.AdminDAO;
+import tn.mariages.dao.ToDoDAO;
 import tn.mariages.entities.Admin;
 /**
  *
@@ -206,6 +209,19 @@ public class Login extends javax.swing.JFrame {
        accueil.setVisible(true);
         }
         else if(clientDAO.connectClient(email, pwd)){
+            ToDoDAO todoDAO=new ToDoDAO();
+            todoDAO.DeleteToDos(clientDAO.findClientByEmail(email).getIdClient());
+            List <ToDo> listeTodo=new ArrayList<ToDo>();
+            listeTodo=todoDAO.NotifyClient(clientDAO.findClientByEmail(email).getIdClient());
+            String notify="N'oubliez pas les choses a faire demain : \n\n";
+            for (ToDo toDo : listeTodo) {
+                notify+="Titre : "+toDo.getTitreToDo()+"\n";
+                   notify+="Description : "+toDo.getDescToDo()+"\n\n";
+                   
+            }
+            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
+            
+                JOptionPane.showConfirmDialog (null,notify,"Rappel",dialogButton);
          dispose();
        Accueil accueil=new Accueil();
        accueil.setVisible(true);

@@ -17,6 +17,10 @@
 
 package tn.mariages.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import org.apache.commons.validator.EmailValidator;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.entities.Admin;
 
@@ -25,7 +29,7 @@ import tn.mariages.entities.Admin;
  * @author Karim
  */
 public class AjoutAdmin extends javax.swing.JFrame {
-
+Admin admin1=new Admin();
     /**
      * Creates new form AjoutAdmin
      */
@@ -46,6 +50,7 @@ public class AjoutAdmin extends javax.swing.JFrame {
     tfEmail.setText(a.getPwdAdmin());
        btnModifier.setEnabled(true);
          btnAjouter.setEnabled(false);
+         admin1=a;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -175,22 +180,60 @@ tfPwd.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_tfPwdFocusGained
 
     private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
-       Admin admin=new Admin();
-       AdminDAO adminDAO =new AdminDAO();
+ AdminDAO adminDAO=new AdminDAO();
+         
+          
+          List <Admin> listeadmins=new ArrayList<Admin>();
+          listeadmins=adminDAO.DisplayAllAdmins();
+        if(tfNom.getText().equals("") || tfEmail.getText().equals("") ||tfPwd.getText().equals("")||tfPwd.getText().length()<6|| !tfEmail.getText().matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" )){
+      
+    
+          
+           String ch="";
+           if(tfNom.getText().equals(""))
+               ch+="Veuillez saisir le nom de l'admin \n";
+           
+            
+            if(tfEmail.getText().equals(""))
+               ch+="Veuillez Saisir l'email de l'admin  \n";
+            
+            for (Admin admin : listeadmins) {
+                if(adminDAO.findAdminByEmail(tfEmail.getText()).equals(admin))
+                     ch+="l'email que vous avez saisi existe deja \n";
+            }
+            
+         
+               
+       if(!tfEmail.getText().matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" ))
+                     
+             ch+="l'email que vous avez saisi n'est pas valide \n";
+            
+             if(tfPwd.getText().length()<6)
+                 ch+="le mot de passe doit contenir au moins 6 caracteres";
+             
+             
+            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
+                JOptionPane.showConfirmDialog (null,ch,"Warning",dialogButton);
+ 
+ 
+  }
+  else{
        
+     
+       Admin admin=new Admin();
        admin.setNomAdmin(tfNom.getText());
        admin.setMailAdmin(tfEmail.getText());
        admin.setPwdAdmin(tfPwd.getText());
        
        adminDAO.insertAdmin(admin);
-        this.dispose();  
+        this.dispose();  }
     }//GEN-LAST:event_btnAjouterActionPerformed
 
     private void btnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifierActionPerformed
         Admin admin=new Admin();
        AdminDAO adminDAO =new AdminDAO();
         admin=adminDAO.findAdminByEmail(tfEmail.getText());
-        
+        admin.setIdAdmin(admin1.getIdAdmin());
        admin.setNomAdmin(tfNom.getText());
        admin.setMailAdmin(tfEmail.getText());
        admin.setPwdAdmin(tfPwd.getText());

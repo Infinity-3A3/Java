@@ -163,7 +163,27 @@ public class AdminDAO {
             return null;
         }
     }
-       
+      
+         
+           public boolean findAdminByEmailBoolean(String email){
+  
+     String requete = "select * from admin where mailAdmin=?";
+        try {
+            PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, email);
+            ResultSet resultat = ps.executeQuery();
+            if(resultat.next())
+        
+return true;
+        } catch (SQLException ex) {
+           //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("erreur lors de l'admin "+ex.getMessage());
+          
+        }
+          return false;
+    }
+         
+         
        
        
          public boolean connectAdmin(String login,String pwd)

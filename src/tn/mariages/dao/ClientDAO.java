@@ -216,6 +216,32 @@ System.out.println("erreur lors de la recherche du client "+ex.getMessage());
          
      }
     
+      
+      
+        public boolean findClientByEmailBoolean(String email){
+        
+        String requete="select * from client where emailClient=?";
+        try {
+            PreparedStatement ps=MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, email);
+            ResultSet resultat=ps.executeQuery();
+           if (resultat.next())
+            {
+               return true;
+                
+            }
+           
+            
+            
+        } catch (SQLException ex) {
+               System.out.println("erreur lors de la recherche du client "+ex.getMessage());
+              
+        }
+        
+         
+          return false; 
+         
+     }
      
      
           public Boolean connectClient(String login,String pwd){

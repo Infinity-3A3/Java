@@ -352,6 +352,34 @@ System.out.println("erreur lors de la recherche du prestataire "+ex.getMessage()
      }
     
     
+     
+     
+      
+     public boolean findPrestByEmailBoolean(String email){
+        
+        Prestataire prestataire=new Prestataire();
+        String requete="select * from prestataire where emailPrestataire=?";
+        try {
+            PreparedStatement ps=MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, email);
+            ResultSet resultat=ps.executeQuery();
+           if (resultat.next())
+            {
+              return true;
+            }
+          
+            
+            
+        } catch (SQLException ex) {
+               System.out.println("erreur lors de la recherche du prest "+ex.getMessage());
+          
+        }
+        return false;
+         
+         
+         
+     }
+     
     
      public Boolean connectPrestataire(String login,String pwd){
        

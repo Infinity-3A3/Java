@@ -33,6 +33,7 @@ public class ListeAdmins extends javax.swing.JFrame {
      */
     public ListeAdmins() {
         initComponents();
+        tableListeAdmins.setAutoCreateRowSorter(true);
     }
 
     /**
