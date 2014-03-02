@@ -225,7 +225,7 @@
                       <Component id="btnAjouterPrest" linkSize="9" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="btnAnnulerPrest" linkSize="9" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -293,9 +293,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAjouterPrest">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/icons/circle_plus.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="   Ajouter"/>
           </Properties>
           <Events>
@@ -304,9 +301,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAnnulerPrest">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/icons/circle_delete.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="   Annuler"/>
           </Properties>
           <Events>

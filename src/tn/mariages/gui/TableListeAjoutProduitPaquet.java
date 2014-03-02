@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Youssef
+ * Copyright (C) 2014 khaled
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,22 +21,50 @@ import java.util.ArrayList;
 import java.util.List;
 import tn.mariages.entities.Produit;
 import javax.swing.table.AbstractTableModel;
+import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.ProduitDAO;
+import tn.mariages.entities.Prestataire;
+
 /**
  *
- * @author Youssef
+ * @author khaled
  */
-public class MyTableProduit extends AbstractTableModel{
+public class TableListeAjoutProduitPaquet extends AbstractTableModel{
     
     List<Produit> mylist = new ArrayList<>();
-    String [] headers  = {"idprod","Nom Produit ","Nom Prestataire","Categorie","Date d'ajout","Prix"};
-
-    public MyTableProduit() {
+    String [] headers  = {" ","Id Produit","Nom Produit ","Nom Prestataire","Categorie","Date d'ajout","Prix"};
+    Boolean data[][] = new Boolean[20][20];
+    public TableListeAjoutProduitPaquet(){
         mylist = new ProduitDAO().DisplayAllProd();
+        for(int i=0;i<getRowCount();i++){
+            data[i][0]=Boolean.FALSE;
+        }
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        if(columnIndex==0){
+            data[rowIndex][0]=(Boolean)aValue;
+        }
+        fireTableCellUpdated(rowIndex, columnIndex);
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        if(columnIndex==0)
+            return Boolean.class;
+        return super.getColumnClass(columnIndex); 
+    }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return (columnIndex < 1 );
     }
     
     
-   
+    
+    
+    
     
 
     @Override
@@ -48,21 +76,27 @@ public class MyTableProduit extends AbstractTableModel{
     public int getColumnCount() {
         return headers.length;
     }
+    
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        Prestataire pres ;
+        PrestataireDAO presDAO = new PrestataireDAO();
+        pres = presDAO.findPrestById(mylist.get(rowIndex).getIdPrest());
         switch(columnIndex){
             case 0 : 
-                return mylist.get(rowIndex).getIdProd();
+                return data[rowIndex][0];
             case 1 : 
+                return mylist.get(rowIndex).getIdProd();
+            case 2 : 
                 return mylist.get(rowIndex).getNomProd();
-            case 2 :
-                return  mylist.get(rowIndex).getIdPrest();
             case 3 :
-                return mylist.get(rowIndex).getCategorieProd();
+                return pres.getNomPrest();
             case 4 :
-                return mylist.get(rowIndex).getDateAjoutProd();
+                return mylist.get(rowIndex).getCategorieProd();
             case 5 :
+                return mylist.get(rowIndex).getDateAjoutProd();
+            case 6 :
                 return mylist.get(rowIndex).getPrixProd();
             default :
         return null;
@@ -72,9 +106,6 @@ public class MyTableProduit extends AbstractTableModel{
     
     @Override
     public String getColumnName(int column) {
-        return headers[column];//To change body of generated methods, choose Tools | Templates.
+        return headers[column];
     }
-    
-    
-    
 }
