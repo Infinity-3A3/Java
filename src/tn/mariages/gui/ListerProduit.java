@@ -29,8 +29,9 @@ public class ListerProduit extends javax.swing.JFrame {
 
     /**
      * Creates new form Lister_Prod
-     */
-    public ListerProduit() {
+     */    public ListerProduit() {
+        
+
         initComponents();
     }
 

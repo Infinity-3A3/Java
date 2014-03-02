@@ -1,4 +1,4 @@
-
+package tn.mariages.util;
 
 
 import java.util.HashMap;
@@ -14,11 +14,11 @@ import tn.mariages.entities.PanierProduit;
 import tn.mariages.entities.Produit;
 
 
-public class PieChart extends JFrame{
+public class PieChart_1 extends JFrame{
     DefaultPieDataset dataset;//Dataset qui va contenir les Données
     JFreeChart graphe;        //Graphe
     ChartPanel cp;            //Panel
-    public PieChart() {
+    public PieChart_1() {
         dataset = new DefaultPieDataset();
 
         panierProduitDAO ppDAO = new panierProduitDAO();

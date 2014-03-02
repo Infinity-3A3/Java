@@ -17,12 +17,9 @@
 
 package tn.mariages.gui;
 
-import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Iterator;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -31,7 +28,6 @@ import tn.mariages.dao.ProduitDAO;
 import tn.mariages.dao.panierProduitDAO;
 import tn.mariages.entities.PanierProduit;
 import tn.mariages.entities.Produit;
-import tn.mariages.util.PieChart;
 
 /**
  *

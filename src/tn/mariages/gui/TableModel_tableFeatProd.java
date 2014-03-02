@@ -42,7 +42,7 @@ public class TableModel_tableFeatProd extends AbstractTableModel {
     public TableModel_tableFeatProd() {
         listFp = fpDAO.DisplayAllFeatProd();
         for(int i =0;i< getRowCount();i++){
-            rowlist[i][2]=Boolean.TRUE;
+            rowlist[i][2]=Boolean.FALSE;
         }
         
     }
