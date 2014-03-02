@@ -183,13 +183,13 @@ public class ProduitDAO {
 
         List<Produit> listeProd = new ArrayList<Produit>();
 
-        String requete = "select * from Produit where categorieProd = " + s;
+        String requete = "select * from produit where categorieProd = ?";
 
-        Statement statement;
+        
         try {
-            statement = MyConnection.getInstance().cnx.createStatement();
-            ResultSet resultat = statement.executeQuery(requete);
-
+            PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, s);
+            ResultSet resultat = ps.executeQuery();
             while (resultat.next()) {
 
                 Produit p = new Produit();
@@ -332,6 +332,8 @@ return null;
 }
       
     }
+ 
+ 
 
  
 }
