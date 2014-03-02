@@ -17,7 +17,6 @@
 
 package tn.mariages.gui;
 import javax.swing.JOptionPane;
-import javax.swing.Timer;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.dao.ToDoDAO;
 import tn.mariages.entities.Admin;
@@ -34,7 +33,7 @@ public class ListeAdmins extends javax.swing.JFrame {
      */
     public ListeAdmins() {
         initComponents();
-        this.setSize(450, this.getHeight());
+        tableListeAdmins.setAutoCreateRowSorter(true);
     }
 
     /**
@@ -52,7 +51,7 @@ public class ListeAdmins extends javax.swing.JFrame {
         tableListeAdmins = new javax.swing.JTable();
         btnAjouter = new javax.swing.JButton();
         btnModifier = new javax.swing.JButton();
-        btnSupprimer = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,7 +62,6 @@ public class ListeAdmins extends javax.swing.JFrame {
         );
         jScrollPane1.setViewportView(tableListeAdmins);
 
-        btnAjouter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
         btnAjouter.setText("Ajouter");
         btnAjouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,11 +76,10 @@ public class ListeAdmins extends javax.swing.JFrame {
             }
         });
 
-        btnSupprimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
-        btnSupprimer.setText("Supprimer");
-        btnSupprimer.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setText("Supprimer");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSupprimerActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -92,33 +89,34 @@ public class ListeAdmins extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(jLabel1)
-                        .addGap(0, 224, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(124, 124, 124)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(btnAjouter)
+                                .addGap(46, 46, 46)
+                                .addComponent(btnModifier)
+                                .addGap(47, 47, 47)
+                                .addComponent(jButton3)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(btnAjouter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnModifier)
-                .addGap(50, 50, 50)
-                .addComponent(btnSupprimer)
-                .addGap(42, 42, 42))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAjouter)
                     .addComponent(btnModifier)
-                    .addComponent(btnSupprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton3))
                 .addContainerGap())
         );
 
@@ -142,67 +140,57 @@ public class ListeAdmins extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSupprimerActionPerformed
-        int dialogButton = JOptionPane.YES_NO_OPTION;
-        JOptionPane.showConfirmDialog (null, "Voulez vous supprimer tous les admins selectionnés?","Warning",dialogButton);
-
-        if(dialogButton == JOptionPane.YES_OPTION){ //The ISSUE is here
-
-            AdminDAO adminDAO=new AdminDAO();
-            int id[]=new int[50];
-            int j=-1;
-            System.out.println(tableListeAdmins.getRowCount());
-            for(int i=0;i<tableListeAdmins.getRowCount();i++){
-                Boolean test =(Boolean)tableListeAdmins.getValueAt(i,3);
-                System.out.println(test);
-                if(test)
-                {
-                    j++;
-                    id[j]=(int)tableListeAdmins.getValueAt(i, 0);
-                }
-
-            }
-            while(j!=-1)
-            {
-                adminDAO.deleteAdmin(id[j]);
-                j--;
-            }
-            TableListeAdminsModel model = new TableListeAdminsModel();
-            tableListeAdmins.setModel(model);
-        }
-    }//GEN-LAST:event_btnSupprimerActionPerformed
-
     private void btnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifierActionPerformed
-        if(tableListeAdmins.getSelectedRow()!=-1){
-            Admin admin=new Admin();
-            AdminDAO adminDAO=new AdminDAO();
-            admin=adminDAO.findAdminById((int)tableListeAdmins.getValueAt(tableListeAdmins.getSelectedRow(), 0));
-
-            AjoutAdmin modifierAdmin = new AjoutAdmin(admin);
-            modifierAdmin.setVisible(true);
+       if(tableListeAdmins.getSelectedRow()!=-1){
+           Admin admin=new Admin();
+           AdminDAO adminDAO=new AdminDAO();
+        admin=adminDAO.findAdminById((int)tableListeAdmins.getValueAt(tableListeAdmins.getSelectedRow(), 0));
+       
+        AjoutAdmin modifierAdmin = new AjoutAdmin(admin);
+        modifierAdmin.setVisible(true);
         }
         else
         {
             int dialogButton = JOptionPane.OK_CANCEL_OPTION;
-            JOptionPane.showConfirmDialog (null, "Vous n'avez selectionné aucun admin","Warning",dialogButton);
+                JOptionPane.showConfirmDialog (null, "Vous n'avez selectionné aucun paquet","Warning",dialogButton);
         }
     }//GEN-LAST:event_btnModifierActionPerformed
 
     private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
-
-        Timer timer=new Timer(5, null);
-
-        for(int i=1;i<400;i++)
-        {
-            this.setSize((this.getWidth())+1, this.getHeight());
-            timer.start();
-
-        }
-
-        // AjoutAdmin ajoutAdmin=new AjoutAdmin();
-
-        //ajoutAdmin.setVisible(true);
+      AjoutAdmin ajoutAdmin=new AjoutAdmin();
+      ajoutAdmin.setVisible(true);
     }//GEN-LAST:event_btnAjouterActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+                JOptionPane.showConfirmDialog (null, "Voulez vous supprimer tous les admins selectionnés?","Warning",dialogButton);
+
+                if(dialogButton == JOptionPane.YES_OPTION){ //The ISSUE is here
+                    
+                   AdminDAO adminDAO=new AdminDAO();
+                    int id[]=new int[50];
+                    int j=-1;
+                    System.out.println(tableListeAdmins.getRowCount());
+                    for(int i=0;i<tableListeAdmins.getRowCount();i++){
+                    Boolean test =(Boolean)tableListeAdmins.getValueAt(i,3);
+                        System.out.println(test);
+                    if(test)
+                    {
+                        j++;
+                        id[j]=(int)tableListeAdmins.getValueAt(i, 0);
+                    }
+                      
+                      
+                    }
+                    while(j!=-1)
+                    {
+                       adminDAO.deleteAdmin(id[j]);
+                        j--;
+                    }
+                    TableListeAdminsModel model = new TableListeAdminsModel();
+                    tableListeAdmins.setModel(model);
+                }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,7 +230,7 @@ public class ListeAdmins extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAjouter;
     private javax.swing.JButton btnModifier;
-    private javax.swing.JButton btnSupprimer;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

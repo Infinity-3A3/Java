@@ -179,8 +179,7 @@ System.out.println("erreur lors de la recherche du client "+ex.getMessage());
     
      
      
-     
-          public Client findClientByEmail(String email){
+      public Client findClientByEmail(String email){
          Client client=new Client();
         String requete="select * from client where emailClient=?";
         try {
@@ -208,7 +207,7 @@ System.out.println("erreur lors de la recherche du client "+ex.getMessage());
             
             
         } catch (SQLException ex) {
-               System.out.println("erreur lors de la recherche du client "+ex.getMessage()); 
+               System.out.println("erreur lors de la recherche du client "+ex.getMessage());
                return null; 
         }
         
@@ -216,33 +215,66 @@ System.out.println("erreur lors de la recherche du client "+ex.getMessage());
          
          
      }
-     
-     
-          
-
-            public boolean connectClient(String login,String pwd)
-    {
+    
+      
+      
+        public boolean findClientByEmailBoolean(String email){
         
-          String requete = "select * from client where  mailClient=? and pwdClient=?";
+        String requete="select * from client where emailClient=?";
         try {
-            PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
-            ps.setString(1, login);
-            ps.setString(2, login);
-            ps.setString(3, pwd);
-            ResultSet resultat = ps.executeQuery();
-          if (resultat.next())
-              return true;
+            PreparedStatement ps=MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, email);
+            ResultSet resultat=ps.executeQuery();
+           if (resultat.next())
+            {
+               return true;
+                
+            }
+           
+            
+            
+        } catch (SQLException ex) {
+               System.out.println("erreur lors de la recherche du client "+ex.getMessage());
+              
+        }
+        
+         
+          return false; 
+         
+     }
      
+     
+          public Boolean connectClient(String login,String pwd){
+       
+        String requete="select * from client where emailClient=? and pwdClient=?";
+        try {
+            PreparedStatement ps=MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, login);
+            ps.setString(2, pwd);
+            ResultSet resultat=ps.executeQuery();
+            if (resultat.next())
+            {
+       return true;
+                
+            }
+            
+            
+            
+        } catch (SQLException ex) {
+               System.out.println("erreur lors de la recherche du client "+ex.getMessage());
+               return null; 
         }
-        catch (SQLException ex) {
-           //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("erreur lors de la suppression "+ex.getMessage());
-        }
-return false;
-}
-          
-          
-          
+        
+         
+     return false;
+         
+     }
+     
+     
+     
+     
+     
+     
     public List<Client> DisplayAllClients (){
         
         List<Client> listeClients = new ArrayList<Client>();

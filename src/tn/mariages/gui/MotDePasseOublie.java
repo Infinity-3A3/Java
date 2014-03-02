@@ -20,6 +20,7 @@ package tn.mariages.gui;
 
 
 
+import javax.swing.JOptionPane;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.entities.Admin;
 import tn.mariages.dao.ClientDAO;
@@ -149,24 +150,23 @@ public String generate(int length)
         Admin admin=new Admin();
        Client client=new Client();
        Prestataire prestataire=new Prestataire();
-     SimpleMail s1=new SimpleMail();
+        SimpleMail s1=new SimpleMail();
    String mdp=generate(10);
-        
-   if(adminDAO.findAdminByEmail(tfEmail.getText())!=null){
+   if(adminDAO.findAdminByEmailBoolean(tfEmail.getText())){
        admin=adminDAO.findAdminByEmail(tfEmail.getText());
    s1.SendMail(tfEmail.getText(), "Mot de passe oublié", "Votre nouveau mot de passe : "+mdp);
    admin.setPwdAdmin(mdp);
    adminDAO.updateAdmin(admin);
    }
    
-   if(clientDAO.findClientByEmail(tfEmail.getText())!=null){
+   else if(clientDAO.findClientByEmailBoolean(tfEmail.getText())){
    client=clientDAO.findClientByEmail(tfEmail.getText());
    s1.SendMail(tfEmail.getText(), "Mot de passe oublié", "Votre nouveau mot de passe : "+mdp);
    client.setPwdClient(mdp);
    clientDAO.updateClient(client);
    }
    
-   if(prestataireDAO.findPrestByEmail(tfEmail.getText())!=null){
+   else if(prestataireDAO.findPrestByEmailBoolean(tfEmail.getText())){
    prestataire=prestataireDAO.findPrestByEmail(tfEmail.getText());
    s1.SendMail(tfEmail.getText(), "Mot de passe oublié", "Votre nouveau mot de passe : "+mdp);
    prestataire.setPwdPrest(mdp);
@@ -174,7 +174,12 @@ public String generate(int length)
    
    }
    
-      
+   else {
+    int dialogButton = JOptionPane.OK_OPTION;
+          JOptionPane.showConfirmDialog (null, "L'email que vous avez saisi n'existe pas","ERROR",dialogButton);
+   
+   }
+       
     }//GEN-LAST:event_btnEnvoyerActionPerformed
 
     /**

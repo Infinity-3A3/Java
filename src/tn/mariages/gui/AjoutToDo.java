@@ -18,34 +18,40 @@
 package tn.mariages.gui;
  
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import tn.mariages.dao.ToDoDAO;
 import tn.mariages.dao.ClientDAO;
 import tn.mariages.entities.ToDo;
 import tn.mariages.entities.Client;
-import tn.mariages.entities.Prestataire;
 /**
  *
  * @author Karim
  */
 public class AjoutToDo extends javax.swing.JFrame {
-
+ToDo todo1=new ToDo();
     /**
      * Creates new form AjoutToDo
      */
     public AjoutToDo() {
         initComponents();
+        jDateToDo.setDate(new Date());
+        jLabel1.setText("Ajouter une todo");
+        btnModifier.setVisible(false);
+        btnAjouterToDo.setVisible(true);
     }
-    
     
     public AjoutToDo(ToDo t){
      initComponents();
      
+     todo1=t;
      jLabel1.setText("Modifier le paquet "+t.getIdToDo());
      btnAjouterToDo.setVisible(false);
+      btnModifier.setVisible(true);
      tfTitre.setText(t.getTitreToDo());
      tfDescriptionToDo.setText(t.getDescToDo());
-      //jDateChooser1.setDate(t.getDateToDo());
+    
      cbUrgent.setSelected(t.isLabelUrgent());
      cbRDV.setSelected(t.isLabelRDV());
      cbPay.setSelected(t.isLabelPayement());
@@ -75,9 +81,9 @@ public class AjoutToDo extends javax.swing.JFrame {
         cbRDV = new javax.swing.JCheckBox();
         cbPay = new javax.swing.JCheckBox();
         btnAjouterToDo = new javax.swing.JButton();
-        ModifierToDo = new javax.swing.JButton();
+        btnModifier = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateToDo = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -99,7 +105,7 @@ public class AjoutToDo extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Ajouter une ToDo");
 
-        jLabel5.setText("Date debut :");
+        jLabel5.setText("Date :");
 
         cbUrgent.setText("Urgent");
         cbUrgent.addActionListener(new java.awt.event.ActionListener() {
@@ -119,10 +125,10 @@ public class AjoutToDo extends javax.swing.JFrame {
             }
         });
 
-        ModifierToDo.setText("Modifier");
-        ModifierToDo.addActionListener(new java.awt.event.ActionListener() {
+        btnModifier.setText("Modifier");
+        btnModifier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModifierToDoActionPerformed(evt);
+                btnModifierActionPerformed(evt);
             }
         });
 
@@ -138,53 +144,51 @@ public class AjoutToDo extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(61, 61, 61)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbClients, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(cbUrgent)))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                        .addGap(74, 74, 74))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jDateToDo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cbRDV)
+                                .addGap(41, 41, 41)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton3)
+                                    .addComponent(cbPay))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cbUrgent)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbRDV))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnAjouterToDo)
-                                .addGap(35, 35, 35)
-                                .addComponent(ModifierToDo)))))
+                        .addComponent(btnAjouterToDo)
+                        .addGap(35, 35, 35)
+                        .addComponent(btnModifier)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(61, 61, 61)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbClients, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cbPay)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(130, 130, 130)
-                                        .addComponent(jButton3)
-                                        .addGap(4, 4, 4)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
-                                .addGap(74, 74, 74))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,20 +207,23 @@ public class AjoutToDo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(81, 81, 81)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbUrgent)
-                    .addComponent(cbRDV)
-                    .addComponent(cbPay))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAjouterToDo)
-                    .addComponent(ModifierToDo)
-                    .addComponent(jButton3)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jDateToDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbUrgent)
+                            .addComponent(cbRDV)
+                            .addComponent(cbPay))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAjouterToDo)
+                            .addComponent(btnModifier)
+                            .addComponent(jButton3)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -254,42 +261,97 @@ public class AjoutToDo extends javax.swing.JFrame {
     private void btnAjouterToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterToDoActionPerformed
  ToDo todo=new ToDo();
  Client client=new Client();
-        ClientDAO clientDAO=new ClientDAO();
-        java.util.Date date =jDateChooser1.getDate();
+        
+ 
+  if(tfTitre.getText().equals("") || tfDescriptionToDo.getText().equals("") ){
+      
+    
+           String ch="";
+           if(tfTitre.getText().equals(""))
+               ch+="Veuillez saisir le titre de la todo \n";
+           
+            
+            if(tfDescriptionToDo.getText().equals(""))
+               ch+="Veuillez donner une description de votre todo  \n";
+             if(tfDescriptionToDo.getText().length()<10)
+                ch+="La description de votre todo doit contenir au moins 10 caracteres \n";
+            
+            
+            
+            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
+                JOptionPane.showConfirmDialog (null,ch,"Warning",dialogButton);
+ 
+ 
+  }
+  else{
+ 
+  java.util.Date date =jDateToDo.getDate();
      java.sql.Date  date1=new java.sql.Date(date.getTime());
+        ClientDAO clientDAO=new ClientDAO();
       ToDoDAO todoDAO=new ToDoDAO();
       client=clientDAO.findClientByNomFamille((String)cmbClients.getItemAt(cmbClients.getSelectedIndex()));
+      todo.setIdToDo(WIDTH);
       todo.setIdClient(client.getIdClient());
       todo.setTitreToDo(tfTitre.getText());
       todo.setDescToDo(tfDescriptionToDo.getText());
-    todo.setDateToDo(date1.toString());
-     //   System.out.println(todo.getDateToDo());
+   todo.setDateToDo(date1.toString());
       todo.setLabelUrgent(cbUrgent.isSelected());
-      todo.setLabelRDV(cbUrgent.isSelected());
+      todo.setLabelRDV(cbRDV.isSelected());
       todo.setLabelPayement(cbPay.isSelected());
-        System.out.println(todo.getDateToDo());
+      
+        
          todoDAO.insertToDo(todo);
             this.dispose();     
+  }
     }//GEN-LAST:event_btnAjouterToDoActionPerformed
 
-    private void ModifierToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifierToDoActionPerformed
+    private void btnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifierActionPerformed
         ToDo todo=new ToDo();
  Client client=new Client();
+ 
+ 
+   if(tfTitre.getText().equals("") || tfDescriptionToDo.getText().equals("") ||tfDescriptionToDo.getText().length()<10 ){
+      
+    
+           String ch="";
+           if(tfTitre.getText().equals(""))
+               ch+="Veuillez saisir le titre de la todo \n";
+           
+            
+            if(tfDescriptionToDo.getText().equals(""))
+               ch+="Veuillez donner une description de votre todo  \n";
+             if(tfDescriptionToDo.getText().length()<10)
+                ch+="La description de votre todo doit contenir au moins 10 caracteres \n";
+            
+            
+            
+            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
+                JOptionPane.showConfirmDialog (null,ch,"Warning",dialogButton);
+ 
+ 
+  }
+ 
+   else{
+       java.util.Date date =jDateToDo.getDate();
+     java.sql.Date  date1=new java.sql.Date(date.getTime());
         ClientDAO clientDAO=new ClientDAO();
       ToDoDAO todoDAO=new ToDoDAO();
       client=clientDAO.findClientByNomFamille((String)cmbClients.getItemAt(cmbClients.getSelectedIndex()));
+      todo.setIdToDo(todo1.getIdToDo());
       todo.setIdClient(client.getIdClient());
       todo.setTitreToDo(tfTitre.getText());
       todo.setDescToDo(tfDescriptionToDo.getText());
-     // todo.setDateToDo(jDateToDo.getDate().);
+      todo.setDateToDo(date1.toString());
       todo.setLabelUrgent(cbUrgent.isSelected());
-      todo.setLabelRDV(cbUrgent.isSelected());
+      todo.setLabelRDV(cbRDV.isSelected());
       todo.setLabelPayement(cbPay.isSelected());
-        System.out.println(todo.getDateToDo());
+      //  System.out.println(todo.getDateToDo());
          todoDAO.updateToDo(todo);
          
-            this.dispose();     
-    }//GEN-LAST:event_ModifierToDoActionPerformed
+  
+         this.dispose();
+   }
+    }//GEN-LAST:event_btnModifierActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 this.dispose();       
@@ -331,14 +393,14 @@ this.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ModifierToDo;
     private javax.swing.JButton btnAjouterToDo;
+    private javax.swing.JButton btnModifier;
     private javax.swing.JCheckBox cbPay;
     private javax.swing.JCheckBox cbRDV;
     private javax.swing.JCheckBox cbUrgent;
     private javax.swing.JComboBox cmbClients;
     private javax.swing.JButton jButton3;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateToDo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
