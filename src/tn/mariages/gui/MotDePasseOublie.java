@@ -152,7 +152,6 @@ public String generate(int length)
        Prestataire prestataire=new Prestataire();
         SimpleMail s1=new SimpleMail();
    String mdp=generate(10);
-        
    if(adminDAO.findAdminByEmailBoolean(tfEmail.getText())){
        admin=adminDAO.findAdminByEmail(tfEmail.getText());
    s1.SendMail(tfEmail.getText(), "Mot de passe oublié", "Votre nouveau mot de passe : "+mdp);
