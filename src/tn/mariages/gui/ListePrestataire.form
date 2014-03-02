@@ -197,24 +197,16 @@
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="Labcategorie" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                          <Component id="Labdesc" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="labpayement" min="-2" max="-2" attributes="0"/>
+                              <Component id="labtel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="Labdesc" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="labpayement" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labtel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="LabTel2" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                              <Component id="labphoto" min="-2" pref="117" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="LabTel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="Labcategorie" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="labphoto" min="-2" pref="117" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -223,17 +215,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="NomLab" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Labcategorie" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="labphoto" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="NomLab" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Labcategorie" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="LabEmail" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -267,7 +258,6 @@
                               </Group>
                               <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="labphoto" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -314,11 +304,6 @@
                 <Property name="text" type="java.lang.String" value="Date payement:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel11">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Photo"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="NomLab">
             </Component>
             <Component class="javax.swing.JLabel" name="LabEmail">
@@ -336,9 +321,6 @@
             <Component class="javax.swing.JLabel" name="labpayement">
             </Component>
             <Component class="javax.swing.JLabel" name="labphoto">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel21"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="LabTel2">
             </Component>

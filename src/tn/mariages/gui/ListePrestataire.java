@@ -4,6 +4,12 @@
  */
 package tn.mariages.gui;
 
+import java.awt.image.BufferedImage;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import tn.mariages.dao.ClientDAO;
@@ -52,7 +58,6 @@ public class ListePrestataire extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         NomLab = new javax.swing.JLabel();
         LabEmail = new javax.swing.JLabel();
         LabAdresse = new javax.swing.JLabel();
@@ -123,10 +128,6 @@ public class ListePrestataire extends javax.swing.JFrame {
 
         jLabel10.setText("Date payement:");
 
-        jLabel11.setText("Photo");
-
-        labphoto.setText("jLabel21");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -158,35 +159,29 @@ public class ListePrestataire extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(Labcategorie)
-                        .addGap(95, 95, 95)
-                        .addComponent(jLabel11))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Labdesc)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(labpayement)
-                                .addComponent(labtel))
-                            .addComponent(LabTel2))
-                        .addGap(56, 56, 56)
-                        .addComponent(labphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(Labdesc)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(labpayement)
+                        .addComponent(labtel))
+                    .addComponent(LabTel2)
+                    .addComponent(Labcategorie))
+                .addGap(60, 60, 60)
+                .addComponent(labphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel11)
-                    .addComponent(NomLab)
-                    .addComponent(Labcategorie))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labphoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6)
+                            .addComponent(NomLab)
+                            .addComponent(Labcategorie))
+                        .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(LabEmail)
@@ -211,8 +206,7 @@ public class ListePrestataire extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addComponent(LabTel2)))
-                        .addGap(0, 24, Short.MAX_VALUE))
-                    .addComponent(labphoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 24, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -358,6 +352,21 @@ public class ListePrestataire extends javax.swing.JFrame {
                   labpayement.setText(c.getDatePayement());
                   labtel.setText(c.getTelFixePrest());
                     LabTel2.setText(c.getTelMobilePrest());
+       
+       
+         ImageIcon icon;
+            try {
+                icon = new ImageIcon(new URL(c.getImgPrest().toString()));
+                 icon = new ImageIcon(icon.getImage().getScaledInstance(150, 150, BufferedImage.SCALE_SMOOTH));
+            labphoto.setIcon(icon);     
+
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ListeFeatProd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       
+       
+       
+       
        }
     }//GEN-LAST:event_tablePrestMouseClicked
 
@@ -415,7 +424,6 @@ try
     private javax.swing.JLabel NomLab;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

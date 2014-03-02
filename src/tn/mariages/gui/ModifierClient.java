@@ -3,6 +3,7 @@ package tn.mariages.gui;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.ClientDAO;
 import tn.mariages.entities.Client;
@@ -19,9 +20,7 @@ import tn.mariages.entities.Client;
  */
 public class ModifierClient extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ModifierClient
-     */
+    
     public ModifierClient() {
         initComponents();
     }

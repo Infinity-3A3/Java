@@ -17,11 +17,23 @@
 
 package tn.mariages.gui;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import tn.mariages.dao.FeaturedProdDAO;
+import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.entities.FeaturedProd;
 import tn.mariages.entities.Produit;
 
@@ -60,7 +72,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         PanelImgProd = new javax.swing.JPanel();
-        labelimg = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         labelNomProd = new javax.swing.JLabel();
         labelShortDesc = new javax.swing.JLabel();
@@ -89,6 +101,11 @@ public class ListeFeatProd extends javax.swing.JFrame {
                 formWindowGainedFocus(evt);
             }
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -138,7 +155,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(147, 147, 147)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDel)
                 .addContainerGap())
@@ -181,11 +198,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Produit");
 
-        PanelImgProd.setBackground(new java.awt.Color(255, 102, 102));
-        PanelImgProd.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         PanelImgProd.setPreferredSize(new java.awt.Dimension(150, 150));
-
-        labelimg.setText("jLabel5");
 
         javax.swing.GroupLayout PanelImgProdLayout = new javax.swing.GroupLayout(PanelImgProd);
         PanelImgProd.setLayout(PanelImgProdLayout);
@@ -193,15 +206,15 @@ public class ListeFeatProd extends javax.swing.JFrame {
             PanelImgProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelImgProdLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelimg)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel5)
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         PanelImgProdLayout.setVerticalGroup(
             PanelImgProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelImgProdLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelimg)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addComponent(jLabel5)
+                .addContainerGap(169, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -211,6 +224,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
 
         labelShortDesc.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         labelShortDesc.setText("Short_Desc");
+        labelShortDesc.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         labelCategorie.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         labelCategorie.setText("Categorie");
@@ -226,10 +240,10 @@ public class ListeFeatProd extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelNomProd)
-                    .addComponent(labelShortDesc)
+                    .addComponent(labelShortDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCategorie)
                     .addComponent(labelDateAjout))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +251,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelNomProd)
                 .addGap(61, 61, 61)
-                .addComponent(labelShortDesc)
+                .addComponent(labelShortDesc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelCategorie)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -274,7 +288,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(labelPrix)))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,10 +314,10 @@ public class ListeFeatProd extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PanelImgProd, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                    .addComponent(PanelImgProd, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -317,7 +331,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(PanelImgProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PanelImgProd, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -348,19 +362,19 @@ public class ListeFeatProd extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 21, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -386,18 +400,45 @@ tableFeatProd.setModel(new TableModel_tableFeatProd());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+      
         
-         int row= tableFeatProd.getSelectedRow();
-            int idFeat =(int) tableFeatProd.getValueAt(row, 0);
-           System.out.println("ID ==> "+idFeat);
-          FeaturedProdDAO fpDAO = new FeaturedProdDAO();
-          fpDAO.DeleteFeatProd(idFeat);
-        JOptionPane.showMessageDialog(this, "Fait");
+                
+       
+         int dialogButton = JOptionPane.YES_NO_OPTION;
+                JOptionPane.showConfirmDialog (null, "Voulez vous supprimer tous les Produits selectionnés?","Warning",dialogButton);
+
+                if(dialogButton == JOptionPane.YES_OPTION){ //The ISSUE is here
+                    
+                        
+                    FeaturedProdDAO fpdao = new FeaturedProdDAO();
+                    
+                    int ids[]=new int[50];
+                    int j=-1;
+                    
+                    for(int i=0;i<tableFeatProd.getRowCount();i++)
+                    {
+                        Boolean b =(Boolean)tableFeatProd.getValueAt(i, 2);
+
+                        if(b)
+                        {j++; ids[j]=(int)tableFeatProd.getValueAt(i, 0);}
+
+                    }
+                    
+                    while(j!=-1)
+                        {
+                         fpdao.DeleteFeatProd(ids[j]);
+                            j--;
+                        }
+                   TableModel_tableFeatProd  model = new TableModel_tableFeatProd();
+                    tableFeatProd.setModel(model);
+                }
+      
         
     }//GEN-LAST:event_btnDelActionPerformed
 
     private void tableFeatProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableFeatProdMouseClicked
-
+      if(evt.getClickCount()==2)
+      {
         int row= tableFeatProd.getSelectedRow();
             int idFeat =(int) tableFeatProd.getValueAt(row, 0);
            System.out.println("ID ==> "+idFeat);
@@ -410,16 +451,18 @@ tableFeatProd.setModel(new TableModel_tableFeatProd());
             labelDateAjout.setText(p.getDateAjoutProd());
             labelPrix.setText(p.getPrixProd()+"");
             ///
-            ImageIcon icon = createImageIcon("http://placehold.it/200x200.jpg", "sample image");
+          ImageIcon icon;
+            try {
+                icon = new ImageIcon(new URL(p.getImgProd_P().toString()));
+                 icon = new ImageIcon(icon.getImage().getScaledInstance(180, 180, BufferedImage.SCALE_SMOOTH));
+ jLabel5.setIcon(icon);     
 
-// Label with text and icon
-    JLabel label1 = new JLabel("Image and Text", icon, JLabel.CENTER);
-
-// Label with icon only
-        JLabel label2 = new JLabel(icon);
-PanelImgProd.add(label1);
-        PanelImgProd.add(label2);
- 
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ListeFeatProd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+         }
          }
 
     }//GEN-LAST:event_tableFeatProdMouseClicked
@@ -432,6 +475,12 @@ PanelImgProd.add(label1);
 
 
     }//GEN-LAST:event_formWindowGainedFocus
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+jPanel3.setSize(0, 0);
+
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -471,6 +520,8 @@ try
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ListeFeatProd().setVisible(true);
+                   
+
             }
         });
     }
@@ -483,6 +534,7 @@ try
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -497,7 +549,6 @@ try
     private javax.swing.JLabel labelNomProd;
     private javax.swing.JLabel labelPrix;
     private javax.swing.JLabel labelShortDesc;
-    private javax.swing.JLabel labelimg;
     private javax.swing.JTable tableFeatProd;
     // End of variables declaration//GEN-END:variables
 

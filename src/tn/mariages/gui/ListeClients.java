@@ -22,9 +22,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.ClientDAO;
 import tn.mariages.dao.PrestataireDAO;
@@ -77,12 +81,16 @@ public class ListeClients extends javax.swing.JFrame {
         labBudget = new javax.swing.JLabel();
         labDatedebut = new javax.swing.JLabel();
         labDateFin = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        labelPhoto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lister client", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
@@ -134,7 +142,7 @@ public class ListeClients extends javax.swing.JFrame {
                         .addComponent(btnModifierClient, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSupprimerClient)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAjouterClient, btnModifierClient, btnSupprimerClient});
@@ -190,9 +198,7 @@ public class ListeClients extends javax.swing.JFrame {
 
         labDateFin.setText("jLabel14");
 
-        jLabel10.setText("Image de profil:");
-
-        jLabel11.setText("jLabel11");
+        labelPhoto.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -232,26 +238,24 @@ public class ListeClients extends javax.swing.JFrame {
                             .addComponent(labTel)
                             .addComponent(labBudget)
                             .addComponent(labDatedebut)
-                            .addComponent(labDateFin))
-                        .addGap(102, 102, 102)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(labDateFin))))
+                .addGap(60, 60, 60)
+                .addComponent(labelPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(labPrenomMari)
-                    .addComponent(jLabel6)
-                    .addComponent(labTel)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(labPrenomMari)
+                            .addComponent(jLabel6)
+                            .addComponent(labTel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel7)
@@ -273,8 +277,7 @@ public class ListeClients extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(labVille))
-                        .addGap(0, 52, Short.MAX_VALUE))
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 29, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -283,14 +286,18 @@ public class ListeClients extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -341,6 +348,7 @@ public class ListeClients extends javax.swing.JFrame {
 
       this.setVisible(true);
       AjoutClient ajoutClt=new AjoutClient();
+      ajoutClt.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       ajoutClt.setVisible(true);
 
     }//GEN-LAST:event_btnAjouterClientActionPerformed
@@ -367,7 +375,7 @@ public class ListeClients extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModifierClientActionPerformed
 
     private void tableClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClientMouseClicked
-          if(evt.getClickCount()==2){
+        if(evt.getClickCount()==2){
               ClientDAO cldao=new ClientDAO();
              Client c=cldao.findClientById((int)tableClient.getValueAt(tableClient.getSelectedRow(), 0));
              
@@ -383,41 +391,23 @@ public class ListeClients extends javax.swing.JFrame {
                   labVille.setText(c.getVilleClient());
                   labTel.setText(c.getTelClient());
            
-             URL url = null;
-try {
-    
-                        ImageIcon icon = null;
+                  ImageIcon icon;
+            try {
+                icon = new ImageIcon(new URL(c.getImgClient().toString()));
+                 icon = new ImageIcon(icon.getImage().getScaledInstance(150, 150, BufferedImage.SCALE_SMOOTH));
+            labelPhoto.setIcon(icon);     
 
-    url = new URL(c.getImgClient());
-      BufferedImage image=ImageIO.read(url);
-                   
-                    icon = new ImageIcon(image);
-          
-                    Image img = icon.getImage();
-                    BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-                    Graphics g = bi.createGraphics();
-                    g.drawImage(img, 0, 0, 230, 250, null);
-                    ImageIcon newIcon = new ImageIcon(bi);
-
-                   
-
-                    jLabel11.setIcon(newIcon);
-                    
-                    
-                    System.out.println("yes");
-    
-    
-  
-    
-} catch(Exception e) {
-     jLabel11.setText("NO");
-
-}
-
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ListeFeatProd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
           
           }
         
     }//GEN-LAST:event_tableClientMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -469,8 +459,6 @@ try {
     private javax.swing.JButton btnModifierClient;
     private javax.swing.JButton btnSupprimerClient;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -488,6 +476,7 @@ try {
     private javax.swing.JLabel labPrenomMari;
     private javax.swing.JLabel labTel;
     private javax.swing.JLabel labVille;
+    private javax.swing.JLabel labelPhoto;
     private javax.swing.JTable tableClient;
     // End of variables declaration//GEN-END:variables
 }

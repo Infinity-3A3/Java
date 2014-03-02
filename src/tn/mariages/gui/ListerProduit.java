@@ -25,8 +25,9 @@ public class ListerProduit extends javax.swing.JFrame {
 
     /**
      * Creates new form Lister_Prod
-     */
-    public ListerProduit() {
+     */    public ListerProduit() {
+        
+
         initComponents();
     }
 
@@ -133,8 +134,7 @@ public class ListerProduit extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
-        TableModel_tableProduits tbm = new TableModel_tableProduits();
+      
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
