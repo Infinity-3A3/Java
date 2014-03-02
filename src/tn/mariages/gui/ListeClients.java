@@ -94,7 +94,6 @@ public class ListeClients extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableClient);
 
-        btnSupprimerClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
         btnSupprimerClient.setText("Supprimer");
         btnSupprimerClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +101,6 @@ public class ListeClients extends javax.swing.JFrame {
             }
         });
 
-        btnModifierClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
         btnModifierClient.setText("Modifier");
         btnModifierClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +108,6 @@ public class ListeClients extends javax.swing.JFrame {
             }
         });
 
-        btnAjouterClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_plus.png"))); // NOI18N
         btnAjouterClient.setText("Ajouter");
         btnAjouterClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +131,7 @@ public class ListeClients extends javax.swing.JFrame {
                         .addComponent(btnModifierClient, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSupprimerClient)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAjouterClient, btnModifierClient, btnSupprimerClient});
@@ -273,7 +270,7 @@ public class ListeClients extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(labVille))
-                        .addGap(0, 52, Short.MAX_VALUE))
+                        .addGap(0, 62, Short.MAX_VALUE))
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
