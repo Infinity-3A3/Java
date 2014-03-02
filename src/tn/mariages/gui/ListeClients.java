@@ -17,21 +17,15 @@
 
 package tn.mariages.gui;
 
-import java.awt.Button;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.ClientDAO;
-import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.entities.Client;
 
 /**
@@ -275,7 +269,7 @@ public class ListeClients extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(labVille))
                         .addGap(0, 62, Short.MAX_VALUE))
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labTel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
