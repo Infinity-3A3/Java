@@ -29,13 +29,14 @@ import tn.mariages.dao.ProduitDAO;
 public class MyTableProduit extends AbstractTableModel{
     
     List<Produit> mylist = new ArrayList<>();
-    String [] headers  = {"Nom Produit ","Nom Prestataire","Categorie","Date d'ajout","Prix"};
+    String [] headers  = {"idprod","Nom Produit ","Nom Prestataire","Categorie","Date d'ajout","Prix"};
 
     public MyTableProduit() {
         mylist = new ProduitDAO().DisplayAllProd();
     }
     
     
+   
     
 
     @Override
@@ -52,14 +53,16 @@ public class MyTableProduit extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch(columnIndex){
             case 0 : 
+                return mylist.get(rowIndex).getIdProd();
+            case 1 : 
                 return mylist.get(rowIndex).getNomProd();
-            case 1 :
-                return  mylist.get(rowIndex).getIdPrest();
             case 2 :
-                return mylist.get(rowIndex).getCategorieProd();
+                return  mylist.get(rowIndex).getIdPrest();
             case 3 :
-                return mylist.get(rowIndex).getDateAjoutProd();
+                return mylist.get(rowIndex).getCategorieProd();
             case 4 :
+                return mylist.get(rowIndex).getDateAjoutProd();
+            case 5 :
                 return mylist.get(rowIndex).getPrixProd();
             default :
         return null;
