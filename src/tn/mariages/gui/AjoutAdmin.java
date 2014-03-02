@@ -20,7 +20,6 @@ package tn.mariages.gui;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import org.apache.commons.validator.EmailValidator;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.entities.Admin;
 

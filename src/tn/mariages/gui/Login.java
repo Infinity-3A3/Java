@@ -282,7 +282,7 @@ File f2=new File("Pass.txt");
     }//GEN-LAST:event_formWindowOpened
 
     private void btnMdpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMdpActionPerformed
-MotDePasseOublié mdp=new MotDePasseOublié();
+MotDePasseOublie mdp=new MotDePasseOublie();
 mdp.setVisible(true);
     }//GEN-LAST:event_btnMdpActionPerformed
 
