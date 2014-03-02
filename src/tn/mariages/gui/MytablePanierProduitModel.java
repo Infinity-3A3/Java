@@ -16,86 +16,73 @@
  */
 package tn.mariages.gui;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import tn.mariages.dao.PaquetDAO;
 import tn.mariages.dao.ProduitDAO;
-import tn.mariages.dao.panierPaquetDAO;
 import tn.mariages.dao.panierProduitDAO;
 import tn.mariages.entities.PanierPaquet;
 import tn.mariages.entities.PanierProduit;
-import tn.mariages.entities.Paquet;
-import tn.mariages.entities.Produit;
 
 /**
  *
  * @author cyrine
  */
-
-
-  
-public class MyTablePanier  extends AbstractTableModel{
+public class MytablePanierProduitModel extends AbstractTableModel{
     
     
-    List<PanierPaquet> mylist;
-    String [] headers  = {"idclient","idPaquet","Nom Paquet ","Prix","Supprimer"};
+    List<PanierProduit> mylist;
+    String [] headers  = {"idclient","idProduit","Nom Produit ","Prix","Supprimer"};
     Boolean rowlist[][] = new Boolean[50][50];
 
-    public MyTablePanier() {
-    
-     mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(23);
-    for (int i = 0; i < getRowCount(); i++) {
+    public MytablePanierProduitModel() {
+        panierProduitDAO panierproddao= new panierProduitDAO();
+                
+        
+        mylist=panierproddao.DiplayPanierProduitByClient(23);
+         for (int i = 0; i < getRowCount(); i++) {
         rowlist[i][4]=Boolean.FALSE;
        
             }
-     
+        
     }
 
     @Override
     public int getRowCount() {
-
-            return mylist.size();
+        return mylist.size();
     }
 
     @Override
     public int getColumnCount() {
-
+     
        return headers.length;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         
-       PaquetDAO pdao=new PaquetDAO();
-         
-        
-        
- 
-          
+    ProduitDAO pdao=new ProduitDAO();
          switch(columnIndex){
              case 0 : 
                 
                 return mylist.get(rowIndex).getIdClient();
             case 1 : 
                 
-                return mylist.get(rowIndex).getIdPaquet();
+                return mylist.get(rowIndex).getIdProd();
             case 2 :
                 
-                return pdao.FindPaquetById(mylist.get(rowIndex).getIdPaquet()).getNomPaquet() ;
+                return pdao.DisplayProdByID(mylist.get(rowIndex).getIdProd()).getNomProd();
             case 3 :
-                return pdao.FindPaquetById(mylist.get(rowIndex).getIdPaquet()).getPrixPaquet();
+                return pdao.DisplayProdByID(mylist.get(rowIndex).getIdProd()).getPrixProd();
             case 4 :
                 return rowlist[rowIndex][4];
                
             default :
         return null;
-        }
-
-         
     
-    }
-    @Override
+    
+    }}
+         
+         @Override
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
       boolean b = (Boolean) aValue;
             if(columnIndex==4)
@@ -127,5 +114,13 @@ public class MyTablePanier  extends AbstractTableModel{
          }
     
     
-   
-}
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+

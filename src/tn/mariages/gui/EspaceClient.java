@@ -42,6 +42,28 @@ public class EspaceClient extends javax.swing.JFrame {
      */
     public EspaceClient() {
         initComponents();
+         tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+        tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        
+         tablePaquet.getColumnModel().getColumn(4).setMinWidth(0);
+        tablePaquet.getColumnModel().getColumn(4).setMaxWidth(0);
+        
+        
+         tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        tablepanierproduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tablepanierproduit.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        tablepanierproduit.getColumnModel().getColumn(1).setMinWidth(0);
+        tablepanierproduit.getColumnModel().getColumn(1).setMaxWidth(0);
+        
+        tablePanier.getColumnModel().getColumn(0).setMinWidth(0);
+        tablePanier.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        tablePanier.getColumnModel().getColumn(1).setMinWidth(0);
+        tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
         
     }
      public EspaceClient(int id,String type) {
@@ -104,8 +126,10 @@ public class EspaceClient extends javax.swing.JFrame {
         Supprimer = new javax.swing.JButton();
         Prixtotal = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablepanierproduit = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        CmbCategori = new javax.swing.JComboBox();
+        cmbCategorieProduit = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         tfNomProduit = new javax.swing.JTextField();
@@ -115,10 +139,6 @@ public class EspaceClient extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablePaquet = new javax.swing.JTable();
-        jLabel14 = new javax.swing.JLabel();
-        CmbCategoriePaquet = new javax.swing.JComboBox();
-        jLabel15 = new javax.swing.JLabel();
-        CmbSpecialitePaquet = new javax.swing.JComboBox();
         jLabel16 = new javax.swing.JLabel();
         TFnOMpaquet = new javax.swing.JTextField();
         btnAjoutPaquPanier = new javax.swing.JButton();
@@ -283,50 +303,58 @@ public class EspaceClient extends javax.swing.JFrame {
 
         jLabel12.setText("Prix total:");
 
+        tablepanierproduit.setModel(new MytablePanierProduitModel());
+        jScrollPane2.setViewportView(tablepanierproduit);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Supprimer)
-                .addGap(59, 59, 59))
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
                         .addComponent(jLabel12)
                         .addGap(85, 85, 85)
-                        .addComponent(Prixtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                        .addComponent(Prixtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 26, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Supprimer)
+                                .addGap(209, 209, 209))))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Prixtotal)
                     .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Supprimer)
-                .addContainerGap())
+                .addGap(29, 29, 29)
+                .addComponent(Supprimer))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produit", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
-        CmbCategori.addItemListener(new java.awt.event.ItemListener() {
+        cmbCategorieProduit.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                CmbCategoriItemStateChanged(evt);
+                cmbCategorieProduitItemStateChanged(evt);
             }
         });
-        CmbCategori.addActionListener(new java.awt.event.ActionListener() {
+        cmbCategorieProduit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CmbCategoriActionPerformed(evt);
+                cmbCategorieProduitActionPerformed(evt);
             }
         });
 
@@ -359,7 +387,7 @@ public class EspaceClient extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CmbCategori, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbCategorieProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel13)
                 .addGap(18, 18, 18)
@@ -375,7 +403,7 @@ public class EspaceClient extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CmbCategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCategorieProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel13)
                     .addComponent(tfNomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -396,10 +424,6 @@ public class EspaceClient extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tablePaquet);
 
-        jLabel14.setText("Catégorie:");
-
-        jLabel15.setText("Spécialité:");
-
         jLabel16.setText("Nom:");
 
         btnAjoutPaquPanier.addActionListener(new java.awt.event.ActionListener() {
@@ -413,40 +437,31 @@ public class EspaceClient extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CmbCategoriePaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CmbSpecialitePaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TFnOMpaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnAjoutPaquPanier, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(btnAjoutPaquPanier, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TFnOMpaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(CmbCategoriePaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
-                    .addComponent(CmbSpecialitePaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
                     .addComponent(TFnOMpaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAjoutPaquPanier, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -462,9 +477,9 @@ public class EspaceClient extends javax.swing.JFrame {
             AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AjouterPanierLayout.createSequentialGroup()
                 .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -485,7 +500,7 @@ public class EspaceClient extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 267, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 19, Short.MAX_VALUE))
         );
 
@@ -499,7 +514,7 @@ public class EspaceClient extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(AjouterPanier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 4, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -507,30 +522,17 @@ public class EspaceClient extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
      
-         tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
-        tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
         
-        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
         
-        tablePanier.getColumnModel().getColumn(0).setMinWidth(0);
-        tablePanier.getColumnModel().getColumn(0).setMaxWidth(0);
-        
-        tablePanier.getColumnModel().getColumn(1).setMinWidth(0);
-        tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
-        
-        tablePanier.getColumnModel().getColumn(2).setWidth(000);
+       
         
         for (int i = 0; i < categorie.length; i++) {
-            CmbCategori.addItem(categorie[i]);
+            cmbCategorieProduit.addItem(categorie[i]);
 
         }
         
         
-        for (int i = 0; i < categorie.length; i++) {
-            CmbCategoriePaquet.addItem(categorie[i]);
-
-        }
+        
         double prix=0;
         PaquetDAO pdao=new PaquetDAO();
           List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(23);
@@ -541,6 +543,15 @@ public class EspaceClient extends javax.swing.JFrame {
                prix+=paquet.getPrixPaquet();
                
               }
+              ProduitDAO pd=new ProduitDAO();
+              List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(23);
+              for(PanierProduit p1 : mylist1){
+             
+               Produit produit=pd.DisplayProdByID(p1.getIdProd());
+               prix+=produit.getPrixProd();
+               
+              }
+              
               Prixtotal.setText(prix+"");
           
         
@@ -565,7 +576,33 @@ public class EspaceClient extends javax.swing.JFrame {
            System.out.println("date"+panierProd.toString());
             panierproduitdao.insertPanierProduit(panierProd);
             
-         
+         MytablePanierProduitModel  model1 = new MytablePanierProduitModel();
+                    tablepanierproduit.setModel(model1);
+                    tablepanierproduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tablepanierproduit.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        tablepanierproduit.getColumnModel().getColumn(1).setMinWidth(0);
+        tablepanierproduit.getColumnModel().getColumn(1).setMaxWidth(0);
+        double prix=0;
+        PaquetDAO pdao=new PaquetDAO();
+          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(23);
+          
+              for(PanierPaquet p1 : mylist){
+             
+               Paquet paquet=pdao.FindPaquetById( p1.getIdPaquet());
+               prix+=paquet.getPrixPaquet();
+               
+              }
+              
+              ProduitDAO pd=new ProduitDAO();
+              List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(23);
+              for(PanierProduit p1 : mylist1){
+             
+               Produit produit=pd.DisplayProdByID(p1.getIdProd());
+               prix+=produit.getPrixProd();
+               
+              }
+              Prixtotal.setText(prix+"");
            
         }else
         {
@@ -595,7 +632,31 @@ public class EspaceClient extends javax.swing.JFrame {
             panierpaquetddao.insertPanierPaquet(panierPaquet);
             MyTablePanier  model = new MyTablePanier();
                     tablePanier.setModel(model);
-            
+                    tablePanier.getColumnModel().getColumn(0).setMinWidth(0);
+        tablePanier.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        tablePanier.getColumnModel().getColumn(1).setMinWidth(0);
+        tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
+                double prix=0;
+        PaquetDAO pdao=new PaquetDAO();
+          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(23);
+          
+              for(PanierPaquet p1 : mylist){
+             
+               Paquet paquet=pdao.FindPaquetById( p1.getIdPaquet());
+               prix+=paquet.getPrixPaquet();
+               
+              }
+              
+              ProduitDAO pd=new ProduitDAO();
+              List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(23);
+              for(PanierProduit p1 : mylist1){
+             
+               Produit produit=pd.DisplayProdByID(p1.getIdProd());
+               prix+=produit.getPrixProd();
+               
+              }
+              Prixtotal.setText(prix+"");
         
      
         }else
@@ -610,16 +671,62 @@ public class EspaceClient extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAjoutPaquPanierActionPerformed
 
-    private void CmbCategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbCategoriActionPerformed
-         
+    private void cmbCategorieProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategorieProduitActionPerformed
+if(cmbCategorieProduit.getSelectedIndex()==0){
+            tableProduit.setModel(new MyTableProduit());
+             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+       
+        }
+        if(cmbCategorieProduit.getSelectedIndex()==1){
+            tableProduit.setModel(new MyTableProduitByCat(categorie[1]));
+             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        }
+        if(cmbCategorieProduit.getSelectedIndex()==2){
+            tableProduit.setModel(new MyTableProduitByCat(categorie[2]));
+             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        }
+        if(cmbCategorieProduit.getSelectedIndex()==3){
+            tableProduit.setModel(new MyTableProduitByCat(categorie[3]));
+             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        }
+        if(cmbCategorieProduit.getSelectedIndex()==4){
+            tableProduit.setModel(new MyTableProduitByCat(categorie[4]));
+             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        }
+        if(cmbCategorieProduit.getSelectedIndex()==5){
+            tableProduit.setModel(new MyTableProduitByCat(categorie[5]));
+             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        }
+        if(cmbCategorieProduit.getSelectedIndex()==6){
+            tableProduit.setModel(new MyTableProduitByCat(categorie[6]));
+             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        }
+        if(cmbCategorieProduit.getSelectedIndex()==7){
+            tableProduit.setModel(new MyTableProduitByCat(categorie[7]));
+             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        }
                  
-        
-        
-    }//GEN-LAST:event_CmbCategoriActionPerformed
+     
+    }//GEN-LAST:event_cmbCategorieProduitActionPerformed
 
-    private void CmbCategoriItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbCategoriItemStateChanged
+    private void cmbCategorieProduitItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCategorieProduitItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_CmbCategoriItemStateChanged
+    }//GEN-LAST:event_cmbCategorieProduitItemStateChanged
 
     private void SupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SupprimerActionPerformed
 
@@ -628,32 +735,85 @@ public class EspaceClient extends javax.swing.JFrame {
 
                 if(dialogButton == JOptionPane.YES_OPTION){ //The ISSUE is here
                     
+                    panierProduitDAO produitDAO=new panierProduitDAO();
                     panierPaquetDAO paquetDAo = new panierPaquetDAO();
+                    int id[]=new int[50];
+                    int id1[]=new int[50];
                     int ids[]=new int[50];
+                    int ids1[]=new int[50];
                     int j=-1;
                     int k=-1;
                     for(int i=0;i<tablePanier.getRowCount();i++){
                     Boolean b =(Boolean)tablePanier.getValueAt(i, 4);
+                    
                     if(b)
                     {
                         j++;
                         k++;
                          ids[j]=(int)tablePanier.getValueAt(i, 0);
-                         ids[k]=(int)tablePanier.getValueAt(i, 1);
+                         ids1[k]=(int)tablePanier.getValueAt(i, 1);
                     }
                       
                       
                     }
                     
-                    while(j!=-1 && k!=-1)
+                    for(int i=0;i<tablepanierproduit.getRowCount();i++){
+                    Boolean b =(Boolean)tablepanierproduit.getValueAt(i, 4);
+                    
+                    if(b)
                     {
-                        
-                        paquetDAo.deletePaniePaquet(ids[j],ids[k]);
+                        j++;
+                        k++;
+                         id[j]=(int)tablepanierproduit.getValueAt(i, 0);
+                         id1[k]=(int)tablepanierproduit.getValueAt(i, 1);
+                    }
+                      
+                      
+                    }
+                    
+                    while(j!=-1 )
+                    {
+                        produitDAO.deletePanierProduit(id[j], id1[k]);
+                        paquetDAo.deletePaniePaquet(ids[j],ids1[k]);
                         j--;
                         k--;
                     }
                    MyTablePanier  model = new MyTablePanier();
                     tablePanier.setModel(model);
+                    tablePanier.getColumnModel().getColumn(0).setMinWidth(0);
+        tablePanier.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        tablePanier.getColumnModel().getColumn(1).setMinWidth(0);
+        tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
+                    
+                    
+                    MytablePanierProduitModel  model1 = new MytablePanierProduitModel();
+                    tablepanierproduit.setModel(model1);
+                    tablepanierproduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tablepanierproduit.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+        tablepanierproduit.getColumnModel().getColumn(1).setMinWidth(0);
+        tablepanierproduit.getColumnModel().getColumn(1).setMaxWidth(0);
+                    double prix=0;
+        PaquetDAO pdao=new PaquetDAO();
+       ProduitDAO pd=new ProduitDAO();
+          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(23);
+          List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(23);
+              for(PanierPaquet p : mylist){
+             
+               Paquet paquet=pdao.FindPaquetById( p.getIdPaquet());
+               prix+=paquet.getPrixPaquet();
+               
+              }
+              
+              for(PanierProduit p1 : mylist1){
+             
+               Produit produit=pd.DisplayProdByID(p1.getIdProd());
+               prix+=produit.getPrixProd();
+               
+              }
+              
+              Prixtotal.setText(prix+"");
                 }
 
     }//GEN-LAST:event_SupprimerActionPerformed
@@ -697,7 +857,8 @@ public class EspaceClient extends javax.swing.JFrame {
     private void BtnModifierProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModifierProfilActionPerformed
                
              this.setVisible(true);
-             ModifierClient modifclient=new ModifierClient();
+             
+             ModifierClient modifclient=new ModifierClient(23);
              modifclient.setVisible(true);
     }//GEN-LAST:event_BtnModifierProfilActionPerformed
 
@@ -745,9 +906,6 @@ try
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AjouterPanier;
     private javax.swing.JButton BtnModifierProfil;
-    private javax.swing.JComboBox CmbCategori;
-    private javax.swing.JComboBox CmbCategoriePaquet;
-    private javax.swing.JComboBox CmbSpecialitePaquet;
     private javax.swing.JLabel LabBudget;
     private javax.swing.JLabel LabDateDebut;
     private javax.swing.JLabel LabDateFin;
@@ -761,13 +919,12 @@ try
     private javax.swing.JTextField TFnOMpaquet;
     private javax.swing.JButton btnAjoutPaquPanier;
     private javax.swing.JButton btnAjoutProdPanier;
+    private javax.swing.JComboBox cmbCategorieProduit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -782,6 +939,7 @@ try
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel labNomMari;
@@ -789,6 +947,7 @@ try
     private javax.swing.JTable tablePanier;
     private javax.swing.JTable tablePaquet;
     private javax.swing.JTable tableProduit;
+    private javax.swing.JTable tablepanierproduit;
     private javax.swing.JTextField tfNomProduit;
     // End of variables declaration//GEN-END:variables
 }
