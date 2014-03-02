@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.PaquetDAO;
 import tn.mariages.dao.PrestataireDAO;
@@ -27,6 +28,7 @@ public class AjoutPaquet extends javax.swing.JFrame {
     Paquet paq =new Paquet();
     PrestataireDAO prestDAO=new PrestataireDAO();
         Prestataire prest = new Prestataire();
+    private JFileChooser Img;
     public AjoutPaquet() {
         initComponents();
         BtnModifierPaquet.setVisible(false);
@@ -69,6 +71,7 @@ public class AjoutPaquet extends javax.swing.JFrame {
         cmbProduitPaquet = new javax.swing.JComboBox();
         tfImage = new javax.swing.JTextField();
         BtnAjouterPaquet = new javax.swing.JButton();
+        btnParcourir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -123,6 +126,13 @@ public class AjoutPaquet extends javax.swing.JFrame {
             }
         });
 
+        btnParcourir.setText("Parcourir");
+        btnParcourir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnParcourirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -134,28 +144,31 @@ public class AjoutPaquet extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5))
-                        .addGap(74, 74, 74)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfPrixPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfNomPaquet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cmbProduitPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(163, 163, 163)
                         .addComponent(BtnAjouterPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(BtnModifierPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnAnnulerPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BtnAnnulerPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnParcourir)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5))
+                                .addGap(74, 74, 74)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfPrixPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tfNomPaquet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cmbProduitPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(148, Short.MAX_VALUE))
         );
 
@@ -186,7 +199,9 @@ public class AjoutPaquet extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(tfImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnParcourir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnModifierPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnAnnulerPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,7 +243,7 @@ public class AjoutPaquet extends javax.swing.JFrame {
         Pattern pattern = Pattern.compile("^\\d+$");
       Matcher matcher = pattern.matcher(tfPrixPaquet.getText());
         
-        if(tfPrixPaquet.getText().equals("") || tfNomPaquet.getText().equals("") || tfDescPaquet.getText().equals("") || tfImage.getText().equals("") ||!matcher.matches()){
+        if(tfPrixPaquet.getText().equals("") || tfNomPaquet.getText().equals("") || tfDescPaquet.getText().equals("") || tfImage.getText().equals("")||!matcher.matches() ||tfDescPaquet.getText().length()<10){
            String ch="";
            if(tfNomPaquet.getText().equals(""))
                ch+="Veuillez saisir le Nom de votre paquet \n";
@@ -290,7 +305,7 @@ public class AjoutPaquet extends javax.swing.JFrame {
         Pattern pattern = Pattern.compile("^\\d+$");
       Matcher matcher = pattern.matcher(tfPrixPaquet.getText());
         
-        if(tfPrixPaquet.getText().equals("") || tfNomPaquet.getText().equals("") || tfDescPaquet.getText().equals("") || tfImage.getText().equals("")||!matcher.matches()){
+        if(tfPrixPaquet.getText().equals("") || tfNomPaquet.getText().equals("") || tfDescPaquet.getText().equals("") || tfImage.getText().equals("")||!matcher.matches() ||tfDescPaquet.getText().length()<10){
            String ch="";
            if(tfNomPaquet.getText().equals(""))
                ch+="Veuillez saisir le Nom de votre paquet \n";
@@ -326,6 +341,13 @@ public class AjoutPaquet extends javax.swing.JFrame {
             //System.out.println(prest);
         }
     }//GEN-LAST:event_BtnAjouterPaquetActionPerformed
+
+    private void btnParcourirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParcourirActionPerformed
+        
+        Img = new JFileChooser();
+        Img.showOpenDialog(this);
+        tfImage.setText(Img.getSelectedFile().getAbsolutePath());
+    }//GEN-LAST:event_btnParcourirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,6 +387,7 @@ public class AjoutPaquet extends javax.swing.JFrame {
     private javax.swing.JButton BtnAjouterPaquet;
     private javax.swing.JButton BtnAnnulerPaquet;
     private javax.swing.JButton BtnModifierPaquet;
+    private javax.swing.JButton btnParcourir;
     private javax.swing.JComboBox cmbProduitPaquet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
