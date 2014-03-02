@@ -49,6 +49,55 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="61" pref="61" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="cmbClients" min="-2" pref="175" max="-2" attributes="0"/>
+                      <Component id="tfTitre" min="-2" pref="154" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="cbUrgent" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jScrollPane1" pref="207" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jDateToDo" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="cbRDV" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbPay" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -57,65 +106,12 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="cbUrgent" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="cbRDV" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="btnAjouterToDo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                  <Component id="ModifierToDo" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="btnAjouterToDo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="btnModifier" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace min="45" pref="45" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="61" pref="61" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cmbClients" min="-2" pref="175" max="-2" attributes="0"/>
-                              <Component id="tfTitre" min="-2" pref="154" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="cbPay" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
-                                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jDateChooser1" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane1" pref="206" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -139,22 +135,27 @@
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="66" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cbUrgent" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cbRDV" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cbPay" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnAjouterToDo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ModifierToDo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jDateToDo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="50" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbUrgent" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbRDV" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbPay" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnAjouterToDo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnModifier" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
           </Group>
@@ -213,7 +214,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Date debut :"/>
+            <Property name="text" type="java.lang.String" value="Date :"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="cbUrgent">
@@ -242,12 +243,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAjouterToDoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="ModifierToDo">
+        <Component class="javax.swing.JButton" name="btnModifier">
           <Properties>
             <Property name="text" type="java.lang.String" value="Modifier"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ModifierToDoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModifierActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
@@ -258,7 +259,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateToDo">
         </Component>
       </SubComponents>
     </Container>

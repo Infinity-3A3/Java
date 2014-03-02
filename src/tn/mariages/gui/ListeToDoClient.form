@@ -48,26 +48,24 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="454" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                                  <Component id="btnAjouter" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                                  <Component id="btnModifier" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                                  <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="btnAjouter" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="btnModifier" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="btnSupprimer" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -76,13 +74,13 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="83" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="147" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="161" max="-2" attributes="0"/>
+                  <EmptySpace pref="35" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnAjouter" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnModifier" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSupprimer" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -90,14 +88,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="14" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Liste des Admins"/>
-          </Properties>
-        </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -105,10 +95,10 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tableListeAdmins">
+            <Component class="javax.swing.JTable" name="tabelListeToDoClient">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new TableListeAdminsModel()&#xd;&#xa;" type="code"/>
+                  <Connection code="new TableListeToDoClientModel()&#xd;&#xa;" type="code"/>
                 </Property>
               </Properties>
             </Component>
@@ -118,9 +108,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ajouter"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAjouterActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnModifier">
           <Properties>
@@ -130,13 +117,21 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModifierActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="btnSupprimer">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Supprimer"/>
+            <Property name="text" type="java.lang.String" value="supprimer"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSupprimerActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Taches a faire"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

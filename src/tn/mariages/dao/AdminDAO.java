@@ -108,7 +108,7 @@ public class AdminDAO {
             return admin;
 
         } catch (SQLException ex) {
-           //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+         
             
             return null;
         }
@@ -134,7 +134,7 @@ public class AdminDAO {
 
         } catch (SQLException ex) {
            //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("erreur lors de la recherche du depot "+ex.getMessage());
+            System.out.println("erreur lors de l'admin "+ex.getMessage());
             return null;
         }
     }
@@ -164,7 +164,27 @@ public class AdminDAO {
             return null;
         }
     }
-       
+      
+         
+           public boolean findAdminByEmailBoolean(String email){
+  
+     String requete = "select * from admin where mailAdmin=?";
+        try {
+            PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, email);
+            ResultSet resultat = ps.executeQuery();
+            if(resultat.next())
+        
+return true;
+        } catch (SQLException ex) {
+           //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("erreur lors de l'admin "+ex.getMessage());
+          
+        }
+          return false;
+    }
+         
+         
        
        
          public boolean connectAdmin(String login,String pwd)
@@ -174,8 +194,8 @@ public class AdminDAO {
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
             ps.setString(1, login);
-            ps.setString(2, pwd);
-    
+
+
             ResultSet resultat = ps.executeQuery();
           if (resultat.next())
               return true;
@@ -213,20 +233,12 @@ return false;
             return listeadmins;
         } catch (SQLException ex) {
            //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+            System.out.println("erreur lors du chargement des depots "+ex.getMessage()); 
             return null;
         }
     }
     
   
     
-    
-    
-    public static void main(String[] args) {
-        String login="ggggg";
-        String pwd="ccccccc";
-        AdminDAO a =new AdminDAO();
-        System.out.println(a.connectAdmin(login, pwd));
-    }
-    
+ 
 }
