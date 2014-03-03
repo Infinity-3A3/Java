@@ -29,6 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -184,7 +185,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
@@ -217,7 +218,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
                 .addContainerGap(169, Short.MAX_VALUE))
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         labelNomProd.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         labelNomProd.setText("Nom_Produit");
@@ -259,7 +260,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel3.setFont(new java.awt.Font("Meiryo", 1, 14)); // NOI18N
         jLabel3.setText("Produit ajouté par:");
@@ -297,7 +298,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labelNomPret)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(labelPrix))
@@ -311,11 +312,9 @@ public class ListeFeatProd extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(0, 10, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PanelImgProd, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -356,13 +355,13 @@ public class ListeFeatProd extends javax.swing.JFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -401,9 +400,16 @@ tableFeatProd.setModel(new TableModel_tableFeatProd());
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
       
-        
-                
-       
+        boolean test= false;
+                for(int i=0;i<tableFeatProd.getRowCount();i++)
+                    {
+                        Boolean a =(Boolean)tableFeatProd.getValueAt(i, 2);
+                        if(a)
+                        { test=true; break; }                
+                        
+                      }
+       if(test)
+       {  
          int dialogButton = JOptionPane.YES_NO_OPTION;
                 JOptionPane.showConfirmDialog (null, "Voulez vous supprimer tous les Produits selectionnés?","Warning",dialogButton);
 
@@ -431,8 +437,17 @@ tableFeatProd.setModel(new TableModel_tableFeatProd());
                         }
                    TableModel_tableFeatProd  model = new TableModel_tableFeatProd();
                     tableFeatProd.setModel(model);
+                    tableFeatProd.getColumnModel().getColumn(0).setMinWidth(0);
+                    tableFeatProd.getColumnModel().getColumn(0).setMaxWidth(0);
                 }
-      
+       }
+       else
+       {
+            int diag = JOptionPane.PLAIN_MESSAGE;
+                JOptionPane.showConfirmDialog (null, "Aucun élément sélectionné !","Warning",diag);
+
+    
+       }
         
     }//GEN-LAST:event_btnDelActionPerformed
 
@@ -471,7 +486,8 @@ tableFeatProd.setModel(new TableModel_tableFeatProd());
             TableModel_tableFeatProd tmtfp = new TableModel_tableFeatProd();
             tableFeatProd.setModel(tmtfp);
             tmtfp.fireTableDataChanged();
-
+tableFeatProd.getColumnModel().getColumn(0).setMinWidth(0);
+tableFeatProd.getColumnModel().getColumn(0).setMaxWidth(0);
 
 
     }//GEN-LAST:event_formWindowGainedFocus
@@ -479,6 +495,8 @@ tableFeatProd.setModel(new TableModel_tableFeatProd());
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
 jPanel3.setSize(0, 0);
+tableFeatProd.getColumnModel().getColumn(0).setMinWidth(0);
+tableFeatProd.getColumnModel().getColumn(0).setMaxWidth(0);
 
     }//GEN-LAST:event_formWindowOpened
 
