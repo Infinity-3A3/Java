@@ -31,7 +31,7 @@ public class MytablePanierProduitModel extends AbstractTableModel{
     
     
     List<PanierProduit> mylist;
-    String [] headers  = {"idclient","idProduit","Nom Produit ","Prix","Supprimer"};
+    String [] headers  = {"idclient","idProduit","Nom Produit ","Prix produit","Supprimer"};
     Boolean rowlist[][] = new Boolean[50][50];
 
     public MytablePanierProduitModel() {

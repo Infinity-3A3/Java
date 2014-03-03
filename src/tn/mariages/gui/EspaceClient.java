@@ -72,6 +72,9 @@ public class EspaceClient extends javax.swing.JFrame {
             Client c=new Client ();
             ClientDAO clDAo=new ClientDAO();
             c=clDAo.findClientById(id);
+            Idclient.setText(c.getIdClient()+"");
+            Idclient.setVisible(false);
+            NomClient.setText(c.getNomDeFamille()+ " "+c.getPrenomMari());
             labNomMari.setText(c.getPrenomMari());
             LabPrenomEpouse.setText(c.getPrenomEpouse());
             LabNom.setText(c.getNomDeFamille());
@@ -143,6 +146,9 @@ public class EspaceClient extends javax.swing.JFrame {
         TFnOMpaquet = new javax.swing.JTextField();
         btnAjoutPaquPanier = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        Deconnexion = new javax.swing.JButton();
+        Idclient = new javax.swing.JLabel();
+        NomClient = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -471,6 +477,12 @@ public class EspaceClient extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Espace client");
 
+        Deconnexion.setText("Dec");
+
+        Idclient.setText("jLabel14");
+
+        NomClient.setText("jLabel14");
+
         javax.swing.GroupLayout AjouterPanierLayout = new javax.swing.GroupLayout(AjouterPanier);
         AjouterPanier.setLayout(AjouterPanierLayout);
         AjouterPanierLayout.setHorizontalGroup(
@@ -486,13 +498,24 @@ public class EspaceClient extends javax.swing.JFrame {
             .addGroup(AjouterPanierLayout.createSequentialGroup()
                 .addGap(498, 498, 498)
                 .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Idclient)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(NomClient, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Deconnexion)
+                .addContainerGap())
         );
         AjouterPanierLayout.setVerticalGroup(
             AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AjouterPanierLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Idclient))
+                    .addComponent(Deconnexion)
+                    .addComponent(NomClient))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -906,6 +929,8 @@ try
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AjouterPanier;
     private javax.swing.JButton BtnModifierProfil;
+    private javax.swing.JButton Deconnexion;
+    private javax.swing.JLabel Idclient;
     private javax.swing.JLabel LabBudget;
     private javax.swing.JLabel LabDateDebut;
     private javax.swing.JLabel LabDateFin;
@@ -914,6 +939,7 @@ try
     private javax.swing.JLabel LabPrenomEpouse;
     private javax.swing.JLabel LabTel;
     private javax.swing.JLabel LabVille;
+    private javax.swing.JLabel NomClient;
     private javax.swing.JLabel Prixtotal;
     private javax.swing.JButton Supprimer;
     private javax.swing.JTextField TFnOMpaquet;
