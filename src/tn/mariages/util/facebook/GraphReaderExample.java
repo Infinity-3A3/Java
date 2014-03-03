@@ -94,7 +94,7 @@ public class GraphReaderExample {
       System.out.println("* Fetching single objects *");
     
     User user = facebookClient.fetchObject("me", User.class);
-
+        
     System.out.println("Name: " + user.getName());
     System.out.println("Username: " + user.getUsername());
      System.out.println("Email: " + user.getEmail());

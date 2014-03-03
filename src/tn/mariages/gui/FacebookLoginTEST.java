@@ -194,60 +194,72 @@ public class FacebookLoginTEST extends javax.swing.JFrame {
 
     private void btnfbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfbActionPerformed
 
-
- final JFrame loginFrame = new JFrame();
-                        JPanel webBrowserPanel = new JPanel(new BorderLayout());
-                        // this is the JWebBrowser i mentioned earlier
-                        final JWebBrowser webBrowser = new JWebBrowser();
-                        // You can set this fields to false, or even let them activated
-                        webBrowser.setMenuBarVisible(false);
-                        webBrowser.setButtonBarVisible(false);
-                        webBrowser.setLocationBarVisible(false);
-                        final String fb_url = "http://www.facebook.com/";
-                        webBrowser.navigate(fb_url);
-
-                        // Here we add to our JWebBrowser an Adapter and override the 
-                        // locationChanging() method. Here we can check, if we are 
-                        // changing the location
-                        // in our case the String fb_url, then this JWebBrowser can be 
-                        // disposed.
-                        // The Timer is set for 2 seconds, so we can still see if the 
-                        // login was successfull or not.
-                            webBrowser.addWebBrowserListener(new WebBrowserAdapter() {
-                            @Override
-                       public void locationChanging(WebBrowserNavigationEvent e) {
-                                super.locationChanging(e);
-                                System.out.println(e.getNewResourceLocation());
-
-                                if (!e.getNewResourceLocation().equals(fb_url)) {
-                                    Timer timer = new Timer(2000, new ActionListener() {
-                                        @Override
-                                        public void actionPerformed(ActionEvent arg0) {
-                                            loginFrame.dispose();
-                                        }
-                                    });
-                                    timer.start();
-                                }
-                            }
-                            
-                            
-                        });
-                                
-                        webBrowserPanel.add(webBrowser, BorderLayout.CENTER);
-                        loginFrame.add(webBrowserPanel);
-                        loginFrame.setSize(500, 500);
-                        loginFrame.setVisible(true);
-                        
-                      
-btnfb.setVisible(false);
-  this.auth();
-//his.authActionPerformed(ActionEvent.mo);
-
-GraphReaderExample gre = new GraphReaderExample(access_token);
+final JFrame authFrame = new JFrame();
+    // Create the JWebBrowser and add the WebBrowserAdapter
+    JPanel webBrowserPanel = new JPanel(new BorderLayout());
+    final JWebBrowser webBrowser = new JWebBrowser();
+    webBrowser.navigate(firstRequest);
+    webBrowser.addWebBrowserListener(new WebBrowserAdapter() {
+      @Override
+      public void locationChanged(WebBrowserNavigationEvent e) {
+        super.locationChanged(e);
+        // Check if first request was not done
+        if (!firstRequestDone) {
+          // Check if you left the location and were redirected to the next 
+          // location
+          if (e.getNewResourceLocation().contains("http://www.facebook.com/connect/login_success.html?code=")){
+            // If it successfully redirects you, get the verification code
+            // and go for a second request
+            String[] splits = e.getNewResourceLocation().split("=");
+            String stage2temp = secondRequest + splits[1];
+            webBrowser.navigate(stage2temp);
+            firstRequestDone = true;
+          }
+        } else {
+          // If secondRequest is not done yet, you perform this and get the 
+          // access_token
+          if (!secondRequestDone) {
+            System.out.println(webBrowser.getHTMLContent());
+            // Create reader with the html content
+            StringReader readerSTR = new StringReader(webBrowser.getHTMLContent());
+            // Create a callback for html parser
+            HTMLEditorKit.ParserCallback callback = 
+            new HTMLEditorKit.ParserCallback() {
+              public void handleText(char[] data,int pos) {
+                System.out.println(data);
+                // because there is only one line with the access_token 
+                // in the html content you can parse it.
+                String string = new String(data);
+                String[] temp1 = string.split("&");
+                String[] temp2 = temp1[0].split("=");
+                access_token = temp2[1];
+              }
+            };
+            try {
+              // Call the parse method 
+              new ParserDelegator().parse(readerSTR,callback,false);
+            } catch (IOException e1) {
+              e1.printStackTrace();
+            }
+            // After everything is done, you can dispose the jframe
+            authFrame.dispose();      
+         GraphReaderExample gre = new GraphReaderExample(access_token);
          List<String> user = gre.getUSER();
          for (int i = 0; i < user.size(); i++) {
              System.out.println(user.get(i)+"\n");
         }
+          }
+        }
+      }
+    });
+    webBrowserPanel.add(webBrowser,BorderLayout.CENTER);
+    authFrame.add(webBrowserPanel);
+    authFrame.setSize(400, 500);
+    authFrame.setVisible(true);
+  
+ 
+        
+        
     }//GEN-LAST:event_btnfbActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
