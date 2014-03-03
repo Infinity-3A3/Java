@@ -172,15 +172,10 @@ return null;
             
 
         String requete = "SELECT * FROM `produit` WHERE `idProd` = (SELECT `idProd` FROM `featuredprod` WHERE `idFeat` = "+id+" )";
-        System.out.println("TEST 1");
         Statement statement;
-        System.out.println("TEST 2");
         try {
-            System.out.println("TEST 3");
             statement = MyConnection.getInstance().cnx.createStatement();
-            System.out.println("TEST 4");
             ResultSet resultat=statement.executeQuery(requete);
-System.out.println("TEST 5");
                 while(resultat.next())
                 {    Produit p = new Produit();
 
@@ -198,12 +193,11 @@ System.out.println("TEST 5");
                 p.setImgProd_2(resultat.getString(12));
                 p.setImgProd_3(resultat.getString(13));
                 p.setImgProd_4(resultat.getString(14));
-        System.out.println("TEST 6");
 
                      return p;}
         }
     catch (SQLException ex) {
-    System.out.println("erreur lors du chargement du Produit =>  "+ex.getMessage());
+    System.out.println("erreur lors du chargement du  Feat =>  "+ex.getMessage());
         return null;        }
    
    return null;         

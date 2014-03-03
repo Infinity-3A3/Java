@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import tn.mariages.dao.FeaturedProdDAO;
+import tn.mariages.dao.ProduitDAO;
 import tn.mariages.entities.FeaturedProd;
+import tn.mariages.entities.Produit;
 
 /**
  *
@@ -35,14 +37,14 @@ public class TableModel_tableFeatProd extends AbstractTableModel {
     
     List<FeaturedProd> listFp = new ArrayList<FeaturedProd>();
     
-    String [] header={"IdFeat","Widget","Supprimer"};
-    Boolean rowlist[][] = new Boolean[3][3];
+    String [] header={"IdFeat","Nom Produit","Widget","Supprimer"};
+    Boolean rowlist[][] = new Boolean[4][4];
 
     
     public TableModel_tableFeatProd() {
         listFp = fpDAO.DisplayAllFeatProd();
         for(int i =0;i< getRowCount();i++){
-            rowlist[i][2]=Boolean.FALSE;
+            rowlist[i][3]=Boolean.FALSE;
         }
         
     }
@@ -65,8 +67,14 @@ public class TableModel_tableFeatProd extends AbstractTableModel {
         //fp=fpDAO.DisplayFeatProdByID(listFp.get(rowIndex).getIdFeat());
     switch(columnIndex){
         case 0: return listFp.get(rowIndex).getIdFeat();
-        case 1: return listFp.get(rowIndex).getWidget();
-        case 2: return rowlist[rowIndex][2];
+        case 1:
+         
+         FeaturedProdDAO fpDAO = new FeaturedProdDAO();
+         Produit p =  fpDAO.DisplayProdInFeatProdById(listFp.get(rowIndex).getIdFeat());
+            
+            return p.getNomProd();
+        case 2: return listFp.get(rowIndex).getWidget();
+        case 3: return rowlist[rowIndex][2];
     
                             default:return null;
 
@@ -80,8 +88,8 @@ public class TableModel_tableFeatProd extends AbstractTableModel {
          
          
         boolean b = (Boolean) aValue;
-            if(columnIndex==2) {
-                rowlist[rowIndex][2]=b;
+            if(columnIndex==3) {
+                rowlist[rowIndex][3]=b;
         }
             
         fireTableCellUpdated(rowIndex, columnIndex);
@@ -90,7 +98,7 @@ public class TableModel_tableFeatProd extends AbstractTableModel {
     
      @Override
     public Class<?> getColumnClass(int columnIndex) {
-        if(columnIndex==2){
+        if(columnIndex==3){
             return Boolean.class;
         }
         return super.getColumnClass(columnIndex); //To change body of generated methods, choose Tools | Templates.
@@ -104,7 +112,7 @@ public class TableModel_tableFeatProd extends AbstractTableModel {
     
    @Override
     public boolean isCellEditable(int row, int column) {
-    return (column > 1);
+    return (column > 2);
   }
    
     

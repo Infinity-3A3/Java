@@ -31,7 +31,7 @@ import tn.mariages.entities.Prestataire;
 public class MyTablepPremiumProduit extends AbstractTableModel{
     
     List<Produit> mylist = new ArrayList<>();
-    String [] headers  = {"Id Prod","Nom Produit ","Nom Prestataire","Categorie","Date d'ajout","Prix"};
+    String [] headers  = {"Id Prod","Nom Produit ","Nom Prestataire","Categorie","Date d'ajout","Prix (DT)"};
 
     public MyTablepPremiumProduit() {
         mylist = new ProduitDAO().DisplayAllProdIfPremium();
