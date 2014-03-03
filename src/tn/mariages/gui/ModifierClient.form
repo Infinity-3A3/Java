@@ -119,8 +119,8 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="tfNumTelClient" max="32767" attributes="0"/>
-                                      <Component id="SpinBudget" pref="136" max="32767" attributes="0"/>
+                                      <Component id="tfNumTelClient" pref="136" max="32767" attributes="0"/>
+                                      <Component id="SpinBudget" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -134,7 +134,7 @@
                           <Component id="btnParcourir" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="77" max="32767" attributes="0"/>
+                  <EmptySpace pref="113" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -197,7 +197,7 @@
                       <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfDateFin" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="10" max="32767" attributes="0"/>
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfimgclient" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -316,8 +316,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="tfDateFin">
         </Component>
-        <Component class="javax.swing.JSpinner" name="SpinBudget">
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
             <Property name="text" type="java.lang.String" value="Image:"/>
@@ -339,6 +337,8 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="SpinBudget">
         </Component>
       </SubComponents>
     </Container>
