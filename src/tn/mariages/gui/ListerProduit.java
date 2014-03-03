@@ -14,9 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package tn.mariages.gui;
 
+import aurelienribon.dialogdemo.MyDialog;
+import aurelienribon.dialogdemo.SwingUtils;
+import com.alee.laf.WebLookAndFeel;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import tn.mariages.dao.ProduitDAO;
 
 /**
@@ -25,7 +29,7 @@ import tn.mariages.dao.ProduitDAO;
  */
 public class ListerProduit extends javax.swing.JFrame {
 
-        String[] Categories = {"Tous","Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
+    String[] Categories = {"Tous", "Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
 
     /**
      * Creates new form Lister_Prod
@@ -162,48 +166,50 @@ public class ListerProduit extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-           for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 7; i++) {
             cmbCategorieProduit.addItem(Categories[i]);
         }
        // TODO add your handling code here:
-        
-       
+
+
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       new AjoutProduit().setVisible(true);
+        
+        
+        SwingUtils.fadeIn(new MyDialog(this));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cmbCategorieProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategorieProduitActionPerformed
-        if(cmbCategorieProduit.getSelectedIndex()==0){
+        if (cmbCategorieProduit.getSelectedIndex() == 0) {
             jTable1.setModel(new MyTableProduit());
         }
-        if(cmbCategorieProduit.getSelectedIndex()==1){
+        if (cmbCategorieProduit.getSelectedIndex() == 1) {
             jTable1.setModel(new MyTableProduitByCat(Categories[1]));
         }
-        if(cmbCategorieProduit.getSelectedIndex()==2){
+        if (cmbCategorieProduit.getSelectedIndex() == 2) {
             jTable1.setModel(new MyTableProduitByCat(Categories[2]));
         }
-        if(cmbCategorieProduit.getSelectedIndex()==3){
+        if (cmbCategorieProduit.getSelectedIndex() == 3) {
             jTable1.setModel(new MyTableProduitByCat(Categories[3]));
         }
-        if(cmbCategorieProduit.getSelectedIndex()==4){
+        if (cmbCategorieProduit.getSelectedIndex() == 4) {
             jTable1.setModel(new MyTableProduitByCat(Categories[4]));
         }
-        if(cmbCategorieProduit.getSelectedIndex()==5){
+        if (cmbCategorieProduit.getSelectedIndex() == 5) {
             jTable1.setModel(new MyTableProduitByCat(Categories[5]));
         }
-        if(cmbCategorieProduit.getSelectedIndex()==6){
+        if (cmbCategorieProduit.getSelectedIndex() == 6) {
             jTable1.setModel(new MyTableProduitByCat(Categories[6]));
         }
-        if(cmbCategorieProduit.getSelectedIndex()==7){
+        if (cmbCategorieProduit.getSelectedIndex() == 7) {
             jTable1.setModel(new MyTableProduitByCat(Categories[7]));
         }
-        
+
     }//GEN-LAST:event_cmbCategorieProduitActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-     
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -217,10 +223,10 @@ public class ListerProduit extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+//                if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName());
+//                    break;
+//                }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(ListerProduit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -236,6 +242,8 @@ public class ListerProduit extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                WebLookAndFeel.install();
+                WebLookAndFeel.setDecorateAllWindows(true);
                 new ListerProduit().setVisible(true);
             }
         });

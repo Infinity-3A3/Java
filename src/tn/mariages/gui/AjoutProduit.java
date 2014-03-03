@@ -16,6 +16,9 @@
  */
 package tn.mariages.gui;
 
+import aurelienribon.dialogdemo.MyDialog;
+import aurelienribon.dialogdemo.SwingUtils;
+import com.alee.laf.WebLookAndFeel;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Date;
@@ -282,6 +285,7 @@ public class AjoutProduit extends javax.swing.JFrame {
         p.setImgProd_1(tfImgProd.getText());
         myDAO.InsertProduit(p);
 
+         
     }//GEN-LAST:event_btnAjoutProduitActionPerformed
 
     private void cmbCategorieProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategorieProduitActionPerformed
@@ -321,10 +325,11 @@ public class AjoutProduit extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+                javax.swing.UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName());
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(AjoutProduit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -341,6 +346,8 @@ public class AjoutProduit extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                WebLookAndFeel.install();
+                WebLookAndFeel.setDecorateAllWindows(true);
               new AjoutProduit().setVisible(true);
 
             }
