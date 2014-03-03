@@ -74,12 +74,13 @@ public class CommentaireDAO {
         }
         
         
-        public void deleteCommentaire(Commentaire c)
+        public void deleteCommentaire(int id,int id2)
         {
-                    String requete = "delete from commenataire where idClient=?";
+                    String requete = "delete from commentaire where idClient=? and idProd=?";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
-            ps.setInt(1, c.getIdClient());
+            ps.setInt(1, id);
+            ps.setInt(2, id2);
             ps.executeUpdate();
             System.out.println("Commentaire supprimé");
         } catch (SQLException ex) {
@@ -157,9 +158,41 @@ return null;
         
 }
 
+          public String DisplayNameClient (int id){
+        
+       String requete = "select nomDeFamille from client c, commentaire co where co.idClient = c.idClient and c.idClient ="+id+""; 
+        Statement statement;
+        try {
+            statement = MyConnection.getInstance().cnx.createStatement();
+            ResultSet resultat=statement.executeQuery(requete);
+            System.out.println("hhh");
+            String s = null;
+            resultat.next();
+            
+                
+                s = resultat.getString(1);
+            
+            return s;
+            
+            
+        }
+catch (SQLException ex) {
+System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+return null;
+}
+        
+        
+}
+          
+          public static void main(String[] args) {
+   String s = new CommentaireDAO().DisplayNameClient(2);
+              System.out.println(s);
+}
   
 
 }
+
+ 
 
 
     

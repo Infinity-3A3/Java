@@ -136,8 +136,8 @@ public class Reclamations extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-ReclamationDAO rdao=new ReclamationDAO();
-List<Reclamation> maliste= new ArrayList<Reclamation>();
+//ReclamationDAO rdao=new ReclamationDAO();
+//List<Reclamation> maliste= new ArrayList<Reclamation>();
 
 
 

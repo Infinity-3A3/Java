@@ -31,7 +31,7 @@ import tn.mariages.entities.ProduitPaquet;
  * @author khaled
  */
 public class TableProduitPaquetModel extends AbstractTableModel {
-
+    
     List<ProduitPaquet> listeproduits = new ArrayList<ProduitPaquet>();
     ProduitPaquetDAO pdao = new ProduitPaquetDAO();
     String[] header = {"ID Produit", "Nom prestataire", "Nom du produit", "Categorie", "Prix Hors paquet", "Supprimer"};
