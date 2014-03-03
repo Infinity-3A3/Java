@@ -22,14 +22,11 @@ import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.parser.ParserDelegator;
 import tn.mariages.util.facebook.GraphReaderExample;
@@ -42,7 +39,7 @@ import tn.mariages.util.facebook.GraphReaderExample;
 public class FacebookLoginTEST extends javax.swing.JFrame {
 
     
-     public static String API_KEY = "1422860571264717";
+  public static String API_KEY = "1422860571264717";
   public static String SECRET = "263401ccd735a71496a83d4c8b9e8425";
 
   public static String firstRequest = "https://graph.facebook.com/oauth/authorize?"
@@ -60,84 +57,7 @@ public class FacebookLoginTEST extends javax.swing.JFrame {
   public static String access_token = "CAAUOFYrqRs0BAPNdYRxuXVrZBNQ7gIM5iNnAJw92pVglOlSCUd25DRdhQ1AZAwRKPZAZCpUIKIxZCYIhD8CIZCgGhqrlYdyJujOyrhRPitOMp3SG1DmkchoDZABXN7QtUTK9BDCDqpcBzcPqxdqhE4WEX6qGYOoGzY0F2GVtyybJtt6529EF3ny";
   public static boolean firstRequestDone = false;
   public static boolean secondRequestDone = false; 
-    
-   private void auth()
-    {
-         
-        final JFrame authFrame = new JFrame();
-                      // Create the JWebBrowser and add the WebBrowserAdapter
-                      JPanel webBrowserPanel = new JPanel(new BorderLayout());
-                      final JWebBrowser webBrowser = new JWebBrowser();
-                      webBrowser.navigate(firstRequest);
-                      webBrowser.addWebBrowserListener(new WebBrowserAdapter() {
-                        @Override
-                        public void locationChanged(WebBrowserNavigationEvent e) {
-                          super.locationChanged(e);
-                          // Check if first request was not done
-                          if (!firstRequestDone) {
-                            // Check if you left the location and were redirected to the next 
-                            // location
-                            if (e.getNewResourceLocation().contains("http://www.facebook.com/connect/login_success.html?code=")){
-                              // If it successfully redirects you, get the verification code
-                              // and go for a second request
-                              String[] splits = e.getNewResourceLocation().split("=");
-                              String stage2temp = secondRequest + splits[1];
-                                System.out.println("First ="+splits[1]);
-                              webBrowser.navigate(stage2temp);
-                              firstRequestDone = true;
-                            }
-                          } 
-                          else {
-                            // If secondRequest is not done yet, you perform this and get the 
-                            // access_token
-                            if (!secondRequestDone) {
-                              System.out.println(webBrowser.getHTMLContent());
-                              // Create reader with the html content
-                              StringReader readerSTR = new StringReader(webBrowser.getHTMLContent());
-                              // Create a callback for html parser
-                              HTMLEditorKit.ParserCallback callback = 
-                              new HTMLEditorKit.ParserCallback() {
-                                  @Override
-                                public void handleText(char[] data,int pos) {
-                                  System.out.println(data);
-                                  // because there is only one line with the access_token 
-                                  // in the html content you can parse it.
-                                  String string = new String(data);
-                                  String[] temp1 = string.split("&");
-                                  String[] temp2 = temp1[0].split("=");
-                                      System.out.println("access tocken="+temp2);
-                                  access_token = temp2[1];
-                                }
-                              };
-                              try {
-                                // Call the parse method 
-                                new ParserDelegator().parse(readerSTR,callback,false);
-                              } catch (IOException e1) {
-                                e1.printStackTrace();
-                              }
-                               Timer timer = new Timer(2000, new ActionListener() {
-                                        @Override
-                                        public void actionPerformed(ActionEvent arg0) {
-                                            authFrame.dispose();
-                                        }
-                                    });
-                                    timer.start();
-        
-                                 
-                            }
-                          }
-                        }
-                      });
-                      webBrowserPanel.add(webBrowser,BorderLayout.CENTER);
-                      authFrame.add(webBrowserPanel);
-                      authFrame.setSize(500, 500);
-                      authFrame.setVisible(true);
-           
-                     
-        
-        
-    }
-    
+   
     
     /**
      * Creates new form FacebookLoginTEST
@@ -243,11 +163,14 @@ final JFrame authFrame = new JFrame();
             }
             // After everything is done, you can dispose the jframe
             authFrame.dispose();      
-         GraphReaderExample gre = new GraphReaderExample(access_token);
-         List<String> user = gre.getUSER();
-         for (int i = 0; i < user.size(); i++) {
-             System.out.println(user.get(i)+"\n");
-        }
+         
+            
+            GraphReaderExample gre = new GraphReaderExample(access_token);
+                    List<String> user = gre.getUSER();
+                    for (int i = 0; i < user.size(); i++) {
+                        System.out.println(user.get(i)+"\n");
+                   }
+
           }
         }
       }
@@ -263,11 +186,8 @@ final JFrame authFrame = new JFrame();
     }//GEN-LAST:event_btnfbActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-                
                 NativeInterface.open();
                 NativeInterface.initialize();
-    
-  
     }//GEN-LAST:event_formWindowOpened
 
    
@@ -301,6 +221,7 @@ final JFrame authFrame = new JFrame();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new FacebookLoginTEST().setVisible(true);
             }
