@@ -378,7 +378,30 @@ return null;
       
     }
  
- 
+   public String DisplayNameProd(int id){
+        
+       String requete = "select nomProd from Produit where idProd ="+id+""; 
+        Statement statement;
+        try {
+            statement = MyConnection.getInstance().cnx.createStatement();
+            ResultSet resultat=statement.executeQuery(requete);
+            String s = null;
+            resultat.next();
+            
+                
+                s = resultat.getString(1);
+            
+            return s;
+            
+            
+        }
+catch (SQLException ex) {
+System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+return null;
+}
+        
+        
+}
 
  
 }

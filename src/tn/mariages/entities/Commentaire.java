@@ -25,6 +25,7 @@ public class Commentaire {
     private int idClient;
     private int idProd;
     
+    
     private String dateCom;
     private String texteCom;
 
@@ -98,6 +99,11 @@ public class Commentaire {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return  texteCom;
     }
     
     

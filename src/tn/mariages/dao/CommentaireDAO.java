@@ -76,7 +76,8 @@ public class CommentaireDAO {
                     String requete = "delete from commenataire where idClient=?";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
-            ps.setInt(1, c.getIdClient());
+            ps.setInt(1, id);
+            ps.setInt(2, id2);
             ps.executeUpdate();
             System.out.println("Commentaire supprimé");
         } catch (SQLException ex) {
@@ -176,16 +177,11 @@ String requete = "SELECT `idProd` , count(`idProd`) FROM `commentaire` group by 
             }
        }
 
-    public static void main(String[] args) {
-        CommentaireDAO c = new CommentaireDAO();
-      HashMap<Integer, Integer> top10Coms = c.getTop10Coms();
-      Iterator<Integer> i = top10Coms.keySet().iterator();
-      
-       while(i.hasNext()){
-           System.out.println(" TEST ");
-    Integer key = i.next();
-    System.out.println("key: " + key + " value: " + top10Coms.get(key));
-        }
+}
+
+ 
+
+
     
     }
   
