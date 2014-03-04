@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.JOptionPane;
 import tn.mariages.dao.CommentaireDAO;
 import tn.mariages.entities.Commentaire;
 
@@ -170,19 +171,28 @@ public class ListeCommentaires extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComActionPerformed
+        
+        boolean s = new CommentaireDAO().IdExiste(1);
+        System.out.println(s);
+        if(s==false)
+        {
+            
         String date_format="yyyy-MM-dd";
         Calendar cal=Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat(date_format);
         String dt = sdf.format(cal.getTime());
+        
         texteAjoutCom.setVisible(false);
         btnCom.setVisible(false);
-        Commentaire com = new Commentaire(2,id,dt,texteAjoutCom.getText());
+        
+        Commentaire com = new Commentaire(1,id,dt,texteAjoutCom.getText());
         CommentaireDAO c = new CommentaireDAO();
         c.insertCommentaire(com);
-                                        
-
         ajouterCom();
-
+        
+        }
+        else
+           JOptionPane.showMessageDialog(this, "Voulez avez deja commenté ");
     }//GEN-LAST:event_btnComActionPerformed
 
     /**
