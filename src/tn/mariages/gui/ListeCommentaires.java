@@ -30,7 +30,9 @@ import tn.mariages.entities.Commentaire;
  * @author omar
  */
 public class ListeCommentaires extends javax.swing.JFrame {
-
+   private int id_prod;
+   private int id_C;
+   private String type; // "a" , "c" , "p"
     /**
      * Creates new form ListeCommentaires
      */
@@ -43,13 +45,17 @@ public class ListeCommentaires extends javax.swing.JFrame {
         
     }
     
-    int id;   
-    public ListeCommentaires(int id) {
-           this.id=id;
+   
+    public ListeCommentaires(int id_prod) {
+           this.id_prod=id_prod;
         initComponents();
     }
 
-
+ public ListeCommentaires(int id_client, int id_prod) {
+     this.id_C=id_client;    
+     this.id_prod=id_prod;
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -148,7 +154,7 @@ public class ListeCommentaires extends javax.swing.JFrame {
     {
          CommentaireDAO c = new CommentaireDAO();
         List<Commentaire> listeCommentaire= new ArrayList<>();
-        listeCommentaire = c.DisplayAllCommentairesbyIdProd(id);   
+        listeCommentaire = c.DisplayAllCommentairesbyIdProd(id_prod);   
         int i;
         String res="";
         for(i=0;i<listeCommentaire.size();i++)
@@ -185,7 +191,7 @@ public class ListeCommentaires extends javax.swing.JFrame {
         texteAjoutCom.setVisible(false);
         btnCom.setVisible(false);
         
-        Commentaire com = new Commentaire(1,id,dt,texteAjoutCom.getText());
+        Commentaire com = new Commentaire(id_C,id_prod,dt,texteAjoutCom.getText());
         CommentaireDAO c = new CommentaireDAO();
         c.insertCommentaire(com);
         ajouterCom();

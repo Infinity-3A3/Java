@@ -128,7 +128,13 @@ public class ListePaquets_client extends javax.swing.JFrame {
         {
         
             int id=(int) produit_table.getModel().getValueAt(produit_table.getSelectedRow(), 0);
-            ListeCommentaires c = new ListeCommentaires(id);
+           
+            
+            int idclient =1;
+           
+            
+            
+            ListeCommentaires c = new ListeCommentaires(idclient,id);
         
         c.setVisible(true); 
         
