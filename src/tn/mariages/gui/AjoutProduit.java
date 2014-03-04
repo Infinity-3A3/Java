@@ -34,13 +34,18 @@ import tn.mariages.entities.Produit;
 public class AjoutProduit extends javax.swing.JFrame {
 
     String[] Categories = {"Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
-
+int id_prest;
     /**
      *
      * Creates new form AjoutProduit
      */
     public AjoutProduit() {
         initComponents();
+    }
+    public AjoutProduit(int id_prest) {
+        initComponents();
+        this.id_prest=id_prest;
+        cmbPrestataire.setVisible(false);
     }
 
     /**
@@ -272,13 +277,16 @@ public class AjoutProduit extends javax.swing.JFrame {
         PrestataireDAO myDAO1 = new PrestataireDAO();
         Produit p = new Produit();
         Date myDate = new Date();
+        if(cmbPrestataire.isVisible()){
+            id_prest = myDAO1.findPrestByNomPrest(cmbPrestataire.getSelectedItem().toString()).getIdPrest();
+        }
         p.setNomProd(tfnomProduit.getText());
         p.setCategorieProd(cmbCategorieProduit.getSelectedItem().toString());
         p.setPrixProd(Integer.parseInt(tfPrixProduit.getText()));
         p.setDescProd(tfDescProduit.getText());
         p.setShortDescProd(tfDescProduit.getText().substring(0, 10) + "...");
         p.setDateAjoutProd(myDate.toString());
-        p.setIdPrest(myDAO1.findPrestByNomPrest(cmbPrestataire.getSelectedItem().toString()).getIdPrest());
+        p.setIdPrest(id_prest);
         p.setImgProd_1(tfImgProd.getText());
         myDAO.InsertProduit(p);
 

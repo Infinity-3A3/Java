@@ -25,6 +25,7 @@ public class AjoutPaquet extends javax.swing.JFrame {
     /**
      * Creates new form AjoutPaquet
      */
+    int id_prest;
     Paquet paq =new Paquet();
     PrestataireDAO prestDAO=new PrestataireDAO();
         Prestataire prest = new Prestataire();
@@ -44,6 +45,13 @@ public class AjoutPaquet extends javax.swing.JFrame {
         tfImage.setText(p.getImgPaquet());
         tfPrixPaquet.setText(p.getPrixPaquet().toString());
         
+    }
+
+    AjoutPaquet(int id_prest) {
+        initComponents();
+        this.id_prest=id_prest;
+        BtnModifierPaquet.setVisible(false);
+        cmbProduitPaquet.setVisible(false);
     }
 
     /**
@@ -264,9 +272,13 @@ public class AjoutPaquet extends javax.swing.JFrame {
         }
         else
         {
-            prest=prestDAO.findPrestByNomPrest((String)cmbProduitPaquet.getItemAt(cmbProduitPaquet.getSelectedIndex()));
+            if(cmbProduitPaquet.isVisible()){
+                            prest=prestDAO.findPrestByNomPrest((String)cmbProduitPaquet.getItemAt(cmbProduitPaquet.getSelectedIndex()));
+                            id_prest=prest.getIdPrest();
+            }
+                
             p.setIdPaquet(paq.getIdPaquet());
-            p.setIdPrest(prest.getIdPrest());
+            p.setIdPrest(id_prest);
             p.setNomPaquet(tfNomPaquet.getText());
             p.setDescPaquet(tfDescPaquet.getText());
             p.setPrixPaquet(Double.parseDouble(tfPrixPaquet.getText()));
