@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package tn.mariages.gui;
 
 import java.awt.Dimension;
@@ -32,9 +31,9 @@ public class ListePaquets_client extends javax.swing.JFrame {
      */
     public ListePaquets_client() {
         initComponents();
-           paquet_table.getColumnModel().getColumn(0).setMinWidth(1);
-   paquet_table.getColumnModel().getColumn(0).setMaxWidth(1);
-   paquet_table.getColumnModel().getColumn(0).setWidth(1);
+        paquet_table.getColumnModel().getColumn(0).setMinWidth(1);
+        paquet_table.getColumnModel().getColumn(0).setMaxWidth(1);
+        paquet_table.getColumnModel().getColumn(0).setWidth(1);
     }
 
     /**
@@ -103,10 +102,10 @@ public class ListePaquets_client extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void paquet_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paquet_tableMouseClicked
-         if (paquet_table.getSelectedRow() != -1) {
+        if (paquet_table.getSelectedRow() != -1) {
             PaquetDAO pdao = new PaquetDAO();
             int id = (Integer) paquet_table.getValueAt(paquet_table.getSelectedRow(), 0);
-            String nom =(String) pdao.FindPaquetById(id).getNomPaquet();
+            String nom = (String) pdao.FindPaquetById(id).getNomPaquet();
             //labelpaquet.setText(labelpaquet.getText()+nom);
             TableProduitPaquetModel Mod = new TableProduitPaquetModel(id);
             produit_table.setModel(Mod);
@@ -114,8 +113,6 @@ public class ListePaquets_client extends javax.swing.JFrame {
             Dimension d = new Dimension(648, 570);
             this.setSize(d);
             //jPanel3.setVisible(true);
-            
-            
 
         } else {
             int dialogButton = JOptionPane.CANCEL_OPTION;
@@ -124,21 +121,16 @@ public class ListePaquets_client extends javax.swing.JFrame {
     }//GEN-LAST:event_paquet_tableMouseClicked
 
     private void produit_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_produit_tableMouseClicked
-                if(evt.getClickCount()==2)
-        {
-        
-            int id=(int) produit_table.getModel().getValueAt(produit_table.getSelectedRow(), 0);
-           
-            
-            int idclient =1;
-           
-            
-            
-            ListeCommentaires c = new ListeCommentaires(idclient,id);
-        
-        c.setVisible(true); 
-        
-            
+        if (evt.getClickCount() == 2) {
+
+            int id = (int) produit_table.getModel().getValueAt(produit_table.getSelectedRow(), 0);
+
+            int idclient = 1;
+
+            ListeCommentaires c = new ListeCommentaires(idclient, id);
+
+            c.setVisible(true);
+
         }
     }//GEN-LAST:event_produit_tableMouseClicked
 
