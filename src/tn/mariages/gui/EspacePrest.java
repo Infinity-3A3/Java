@@ -102,6 +102,13 @@ public class EspacePrest extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -569,27 +576,28 @@ public class EspacePrest extends javax.swing.JFrame {
 
     private void btnSuppPaquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppPaquetActionPerformed
 
-        if(tablePaquet.getSelectedRow()!=-1){
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        JOptionPane.showConfirmDialog(null, "Voulez vous supprimer tous les paquets selectionnés?", "Warning", dialogButton);
 
-            Paquet  p=new Paquet();
-           // PanierPaquet   panierPaquet=new PanierPaquet();
-          //  panierPaquetDAO panierpaquetddao=new panierPaquetDAO();
-            PaquetDAO paquetdao=new PaquetDAO();
-            p= paquetdao.FindPaquetById((int) tablePaquet.getValueAt(tablePaquet.getSelectedRow(), 0));
-            //panierPaquet.setIdPaquet(p.getIdPaquet());
-           // panierPaquet.setIdClient(23);
+        if (dialogButton == JOptionPane.YES_OPTION) { //The ISSUE is here
 
-           // panierPaquet.setDateAjout("2014-02-08");
+            PaquetDAO pDAO = new PaquetDAO();
+            int ids[] = new int[50];
+            int j = -1;
+            for (int i = 0; i < tablePaquet.getRowCount(); i++) {
+                Boolean b = (Boolean) tablePaquet.getValueAt(i, 6);
+                if (b) {
+                    j++;
+                    ids[j] = (int) tablePaquet.getValueAt(i, 0);
+                }
 
-           // panierpaquetddao.insertPanierPaquet(panierPaquet);
-            MyTablePanier  model = new MyTablePanier();
-            //tablePanier.setModel(model);
-
-        }else
-        {
-            int d=JOptionPane.OK_CANCEL_OPTION;
-            JOptionPane.showConfirmDialog(null, "Vous n'avez pas sélectionnez un paquet","erreur",d);
-
+            }
+            while (j != -1) {
+                pDAO.deletePaquet(ids[j]);
+                j--;
+            }
+            TableListPaquetModel model = new TableListPaquetModel(id_prest);
+            tablePaquet.setModel(model);
         }
 
     }//GEN-LAST:event_btnSuppPaquetActionPerformed
@@ -623,19 +631,44 @@ public class EspacePrest extends javax.swing.JFrame {
 
     private void btnSuppProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppProduitActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnSuppProduitActionPerformed
 
     private void btnAjoutProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutProdActionPerformed
         // TODO add your handling code here:
+        new AjoutProduit().setVisible(true);
+        
+        
+        
     }//GEN-LAST:event_btnAjoutProdActionPerformed
 
     private void btnModifPaquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifPaquetActionPerformed
         // TODO add your handling code here:
+        if (tablePaquet.getSelectedRow() != -1) {
+            Paquet p = new Paquet();
+            PaquetDAO pDAO = new PaquetDAO();
+            p = pDAO.FindPaquetById((int) tablePaquet.getValueAt(tablePaquet.getSelectedRow(), 0));
+            AjoutPaquet Modif = new AjoutPaquet(p);
+            Modif.setVisible(true);
+        } else {
+            int dialogButton = JOptionPane.CANCEL_OPTION;
+            JOptionPane.showConfirmDialog(null, "Vous n'avez selectionné aucun paquet", "Warning", dialogButton);
+        }
     }//GEN-LAST:event_btnModifPaquetActionPerformed
 
     private void btnAjoutPaquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutPaquetActionPerformed
         // TODO add your handling code here:
+        AjoutPaquet Ajout = new AjoutPaquet(id_prest);
+        Ajout.setVisible(true);
     }//GEN-LAST:event_btnAjoutPaquetActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        MyTableProduitPrest modelprod= new MyTableProduitPrest(id_prest);
+        tableProduit.setModel(modelprod);
+        TableListPaquetModel modelpaq = new TableListPaquetModel(id_prest);
+        tablePaquet.setModel(modelpaq);
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
