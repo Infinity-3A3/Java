@@ -36,6 +36,8 @@ public class EspacePrest extends javax.swing.JFrame {
      * Creates new form EspacePrest
      */
     int id_prest = 1;
+    String[] Categories = {"Tous","Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
+
     public EspacePrest() {
         initComponents();
     }
@@ -90,10 +92,6 @@ public class EspacePrest extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablePaquet = new javax.swing.JTable();
-        jLabel14 = new javax.swing.JLabel();
-        CmbCategoriePaquet = new javax.swing.JComboBox();
-        jLabel15 = new javax.swing.JLabel();
-        CmbSpecialitePaquet = new javax.swing.JComboBox();
         jLabel16 = new javax.swing.JLabel();
         TFnOMpaquet = new javax.swing.JTextField();
         btnSuppPaquet = new javax.swing.JButton();
@@ -389,16 +387,6 @@ public class EspacePrest extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tablePaquet);
 
-        jLabel14.setText("Catégorie:");
-
-        CmbCategoriePaquet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CmbCategoriePaquetActionPerformed(evt);
-            }
-        });
-
-        jLabel15.setText("Spécialité:");
-
         jLabel16.setText("Nom:");
 
         btnSuppPaquet.addActionListener(new java.awt.event.ActionListener() {
@@ -427,16 +415,9 @@ public class EspacePrest extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CmbCategoriePaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CmbSpecialitePaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(138, 138, 138)
                         .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(42, 42, 42)
                         .addComponent(TFnOMpaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel4Layout.createSequentialGroup()
@@ -446,20 +427,16 @@ public class EspacePrest extends javax.swing.JFrame {
                             .addGap(100, 100, 100)
                             .addComponent(btnSuppPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(50, 50, 50))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(CmbCategoriePaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
-                    .addComponent(CmbSpecialitePaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
-                    .addComponent(TFnOMpaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(TFnOMpaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -524,8 +501,8 @@ public class EspacePrest extends javax.swing.JFrame {
     private void BtnModifierProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModifierProfilActionPerformed
 
         this.setVisible(true);
-        ModifierClient modifclient=new ModifierClient();
-        modifclient.setVisible(true);
+        Modif_Prest PrestataireModif=new Modif_Prest();
+        PrestataireModif.setVisible(true);
     }//GEN-LAST:event_BtnModifierProfilActionPerformed
 
     private void CmbCategoriItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbCategoriItemStateChanged
@@ -533,7 +510,30 @@ public class EspacePrest extends javax.swing.JFrame {
     }//GEN-LAST:event_CmbCategoriItemStateChanged
 
     private void CmbCategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbCategoriActionPerformed
-
+        if(CmbCategori.getSelectedIndex()==0){
+            tableProduit.setModel(new MyTableProduitPrest(id_prest));
+        }
+        if(CmbCategori.getSelectedIndex()==1){
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[1],id_prest));
+        }
+        if(CmbCategori.getSelectedIndex()==2){
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[2],id_prest));
+        }
+        if(CmbCategori.getSelectedIndex()==3){
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[3],id_prest));
+        }
+        if(CmbCategori.getSelectedIndex()==4){
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[4],id_prest));
+        }
+        if(CmbCategori.getSelectedIndex()==5){
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[5],id_prest));
+        }
+        if(CmbCategori.getSelectedIndex()==6){
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[6],id_prest));
+        }
+        if(CmbCategori.getSelectedIndex()==7){
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[7],id_prest));
+        }
     }//GEN-LAST:event_CmbCategoriActionPerformed
 
     private void btnModifProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifProduitActionPerformed
@@ -602,10 +602,6 @@ public class EspacePrest extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSuppPaquetActionPerformed
 
-    private void CmbCategoriePaquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbCategoriePaquetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CmbCategoriePaquetActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         MyTableProduitPrest modelprod= new MyTableProduitPrest(id_prest);
@@ -626,6 +622,10 @@ public class EspacePrest extends javax.swing.JFrame {
         LabDesc.setText(p.getDescPrest());
         labemail.setText(p.getEmailPrest());
         //lab.setText(p.getNomPrest());
+        
+         for (int i = 0; i < 7; i++) {
+            CmbCategori.addItem(Categories[i]);
+        }
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -717,8 +717,6 @@ public class EspacePrest extends javax.swing.JFrame {
     private javax.swing.JPanel AjouterPanier;
     private javax.swing.JButton BtnModifierProfil;
     private javax.swing.JComboBox CmbCategori;
-    private javax.swing.JComboBox CmbCategoriePaquet;
-    private javax.swing.JComboBox CmbSpecialitePaquet;
     private javax.swing.JLabel LabAdr;
     private javax.swing.JLabel LabCateg;
     private javax.swing.JLabel LabCateg1;
@@ -741,8 +739,6 @@ public class EspacePrest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
