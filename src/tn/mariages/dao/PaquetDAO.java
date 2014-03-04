@@ -141,6 +141,7 @@ public class PaquetDAO {
         }
     }
     
+    
     public Paquet FindPaquetById (int id){
 
 
@@ -165,6 +166,36 @@ public class PaquetDAO {
                 
             }
             return p;
+            
+        } catch (SQLException ex) {
+            System.out.println("erreur lors du chargement des paquets "+ex.getMessage());
+            return null;
+        }
+    }
+     public List<Paquet> FindPaquetByPrest (int id){
+
+ List<Paquet> listePaquets = new ArrayList<Paquet>();
+        
+
+        String requete = "select * from paquet where idPrest="+id+" ;";
+        try {
+           Statement statement = MyConnection.getInstance()
+                  .cnx.createStatement();
+            ResultSet resultat = statement.executeQuery(requete);
+            
+            while(resultat.next()){
+                Paquet p =new Paquet();
+                p.setIdPaquet(resultat.getInt(1));
+                p.setIdPrest(resultat.getInt(2));
+                p.setNomPaquet(resultat.getString(3));
+                p.setDescPaquet(resultat.getString(4));
+                p.setShortDescPaquet(resultat.getString(5));
+                p.setImgPaquet(resultat.getString(6));
+                p.setPrixPaquet(resultat.getDouble(7));
+
+                   listePaquets.add(p);
+            }
+            return listePaquets;
             
         } catch (SQLException ex) {
             System.out.println("erreur lors du chargement des paquets "+ex.getMessage());
