@@ -35,7 +35,7 @@ public class TableListPaquetModel extends AbstractTableModel {
 
     List<Paquet> listPaquet = new ArrayList<Paquet>();
     String[] header = {"ID Paquet", "Nom Du Prestataire", "Nom Du Paquet", "Description", "Image", "Prix Du Paquet", "Supprimer"};
-    
+
     Boolean rowlist[][] = new Boolean[50][50];
 
     public TableListPaquetModel() {
@@ -43,8 +43,14 @@ public class TableListPaquetModel extends AbstractTableModel {
         for (int i = 0; i < getRowCount(); i++) {
             rowlist[i][6] = Boolean.FALSE;
         }
-        
-        
+    }
+
+    public TableListPaquetModel(int id_prest) {
+        listPaquet = new PaquetDAO().FindPaquetByPrest(id_prest);
+        for (int i = 0; i < getRowCount(); i++) {
+            rowlist[i][6] = Boolean.FALSE;
+        }
+
     }
 
     @Override
