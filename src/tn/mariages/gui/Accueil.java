@@ -114,6 +114,11 @@ public class Accueil extends javax.swing.JFrame {
         jButton4.setMaximumSize(new java.awt.Dimension(40, 40));
         jButton4.setMinimumSize(new java.awt.Dimension(40, 40));
         jButton4.setPreferredSize(new java.awt.Dimension(40, 40));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/basket.png"))); // NOI18N
         jButton5.setToolTipText("Paquets");
@@ -280,6 +285,15 @@ LC.setLocation((dim.width/2-this.getSize().width/2)-50, (dim.height/2-this.getSi
 LC.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ListerProduit Lprod = new ListerProduit();
+        Lprod.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+       Lprod.setLocation((dim.width/2-this.getSize().width/2)-50, (dim.height/2-this.getSize().height/2)+100);
+       Lprod.setVisible(true);
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

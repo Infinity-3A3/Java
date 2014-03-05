@@ -40,8 +40,10 @@ public class ListeClients extends javax.swing.JFrame {
      */
     public ListeClients() {
         initComponents();
-        Dimension d = new Dimension(700, 340);
+        Dimension d = new Dimension(750, 340);
         this.setSize(d);
+    tableClient.getColumnModel().getColumn(0).setMinWidth(0);
+    tableClient.getColumnModel().getColumn(0).setMaxWidth(0);
     }
 
     /**
@@ -127,16 +129,16 @@ public class ListeClients extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(211, 211, 211)
                         .addComponent(btnAjouterClient, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnModifierClient, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSupprimerClient)))
-                .addContainerGap(136, Short.MAX_VALUE))
+                        .addComponent(btnSupprimerClient))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAjouterClient, btnModifierClient, btnSupprimerClient});
@@ -146,7 +148,7 @@ public class ListeClients extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGap(18, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAjouterClient, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModifierClient)
@@ -235,7 +237,7 @@ public class ListeClients extends javax.swing.JFrame {
                             .addComponent(labDateFin))))
                 .addGap(60, 60, 60)
                 .addComponent(labelPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +273,7 @@ public class ListeClients extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(labVille))
-                        .addGap(0, 62, Short.MAX_VALUE)))
+                        .addGap(0, 55, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -280,10 +282,7 @@ public class ListeClients extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,12 +298,6 @@ public class ListeClients extends javax.swing.JFrame {
 
     private void btnSupprimerClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSupprimerClientActionPerformed
          
-
-
-                                          
-
-    
-        
          int dialogButton = JOptionPane.YES_NO_OPTION;
                 JOptionPane.showConfirmDialog (null, "Voulez vous supprimer tous les paquets selectionnés?","Warning",dialogButton);
 
@@ -349,7 +342,7 @@ public class ListeClients extends javax.swing.JFrame {
 
     private void btnModifierClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifierClientActionPerformed
     if(tableClient.getSelectedRow()!=-1){
-            Client c=new Client();
+            Client c= new Client();
             ClientDAO clientdao=new ClientDAO();
             c= clientdao.findClientById((int) tableClient.getValueAt(tableClient.getSelectedRow(), 0));
            
@@ -386,7 +379,7 @@ public class ListeClients extends javax.swing.JFrame {
                   labTel.setText(c.getTelClient());
            
                   ImageIcon icon;
-                  Dimension d = new Dimension(700, 580);
+                  Dimension d = new Dimension(750, 580);
                     this.setSize(d);
             try {
                 icon = new ImageIcon(new URL(c.getImgClient().toString()));
