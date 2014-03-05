@@ -139,6 +139,8 @@ public class EspaceClient extends javax.swing.JFrame {
         btnAjoutProdPanier = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tableProduit = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        btnRec = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablePaquet = new javax.swing.JTable();
@@ -382,6 +384,20 @@ public class EspaceClient extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tableProduit);
 
+        jButton1.setText("Commentaires");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnRec.setText("Ajouter Reclamation");
+        btnRec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -400,7 +416,11 @@ public class EspaceClient extends javax.swing.JFrame {
                 .addComponent(tfNomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
+                .addComponent(jButton1)
+                .addGap(69, 69, 69)
+                .addComponent(btnRec)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAjoutProdPanier)
                 .addGap(67, 67, 67))
         );
@@ -415,9 +435,20 @@ public class EspaceClient extends javax.swing.JFrame {
                     .addComponent(tfNomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(btnAjoutProdPanier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(23, 23, 23))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(btnAjoutProdPanier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)))
+                        .addGap(23, 23, 23))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(btnRec)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquet", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
@@ -509,13 +540,15 @@ public class EspaceClient extends javax.swing.JFrame {
         AjouterPanierLayout.setVerticalGroup(
             AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AjouterPanierLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Idclient))
-                    .addComponent(Deconnexion)
-                    .addComponent(NomClient))
+                .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AjouterPanierLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Idclient))
+                            .addComponent(Deconnexion)))
+                    .addComponent(NomClient, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -885,6 +918,25 @@ if(cmbCategorieProduit.getSelectedIndex()==0){
              modifclient.setVisible(true);
     }//GEN-LAST:event_BtnModifierProfilActionPerformed
 
+    private void btnRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecActionPerformed
+        AjouterReclamation rec = new AjouterReclamation();
+        rec.setVisible(true);
+    }//GEN-LAST:event_btnRecActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            
+
+            int id = (int) tableProduit.getModel().getValueAt(tableProduit.getSelectedRow(), 0);
+
+            int idclient = 1;
+
+            ListeCommentaires c = new ListeCommentaires(idclient, id);
+
+            c.setVisible(true);
+
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -945,7 +997,9 @@ try
     private javax.swing.JTextField TFnOMpaquet;
     private javax.swing.JButton btnAjoutPaquPanier;
     private javax.swing.JButton btnAjoutProdPanier;
+    private javax.swing.JButton btnRec;
     private javax.swing.JComboBox cmbCategorieProduit;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

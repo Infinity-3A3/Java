@@ -223,6 +223,51 @@ public class ProduitDAO {
         }
 
     }
+    public List<Produit> DisplayProdByCategorieAndPrest(String s,int id) {
+
+        List<Produit> listeProd = new ArrayList<Produit>();
+
+        String requete = "select * from produit where categorieProd = ? and Idprest= ?";
+
+        
+        try {
+            PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
+            ps.setString(1, s);
+            ps.setInt(2, id);
+            ResultSet resultat = ps.executeQuery();
+            while (resultat.next()) {
+
+                Produit p = new Produit();
+
+                /*SELECT `idProd`, `idPrest`, `nomProd`, `descProd`, `shortDescProd`, `categorieProd`, 
+                 `dateAjoutProd`, `prixProd`, `exclusifPaquet`, `imgProd_P`, `imgProd_1`, `imgProd_2`, `imgProd_3`, `imgProd_4`
+                 */
+                p.setIdProd(resultat.getInt(1));
+                p.setIdPrest(resultat.getInt(2));
+                p.setNomProd(resultat.getString(3));
+                p.setDescProd(resultat.getString(4));
+                p.setShortDescProd(resultat.getString(5));
+                p.setCategorieProd(resultat.getString(6));
+                p.setDateAjoutProd(resultat.getString(7));
+                p.setPrixProd(resultat.getDouble(8));
+                p.setExclusifPaquet(resultat.getBoolean(9));
+                p.setImgProd_P(resultat.getString(10));
+                p.setImgProd_1(resultat.getString(11));
+                p.setImgProd_2(resultat.getString(12));
+                p.setImgProd_3(resultat.getString(13));
+                p.setImgProd_4(resultat.getString(14));
+
+                listeProd.add(p);
+            }
+
+            return listeProd;
+        } catch (SQLException ex) {
+            System.out.println("erreur lors du chargement des depots " + ex.getMessage());
+            return null;
+
+        }
+
+    }
 
     public void DeleteProd(int id) {
         String requete = "delete from Produit where idProd=?";
@@ -333,7 +378,30 @@ return null;
       
     }
  
- 
+   public String DisplayNameProd(int id){
+        
+       String requete = "select nomProd from Produit where idProd ="+id+""; 
+        Statement statement;
+        try {
+            statement = MyConnection.getInstance().cnx.createStatement();
+            ResultSet resultat=statement.executeQuery(requete);
+            String s = null;
+            resultat.next();
+            
+                
+                s = resultat.getString(1);
+            
+            return s;
+            
+            
+        }
+catch (SQLException ex) {
+System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+return null;
+}
+        
+        
+}
 
  
 }

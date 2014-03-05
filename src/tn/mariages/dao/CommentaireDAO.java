@@ -36,7 +36,8 @@ import tn.mariages.util.MyConnection;
  */
 public class CommentaireDAO {
     
-  public void insertCommentaire(Commentaire c) {
+    public void insertCommentaire(Commentaire c)
+    {
         try {
             String requete="insert into commentaire (idClient,idProd,dateCom,texteCom) values (?,?,?,?)";
             
@@ -56,7 +57,8 @@ public class CommentaireDAO {
         }
     }
         
-  public void updateCommentaire(Commentaire c){
+        public void updateCommentaire(Commentaire c)
+        {
         try {
             String requete="update commentaire set idClient=?,idProd=?,dateCom=?,texteCom=? ";
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
@@ -71,12 +73,15 @@ public class CommentaireDAO {
         }
 
         }
-            
-  public void deleteCommentaire(Commentaire c){
-                    String requete = "delete from commenataire where idClient=?";
+        
+        
+        public void deleteCommentaire(int id,int id2)
+        {
+                    String requete = "delete from commentaire where idClient=? and idProd=?";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
-            ps.setInt(1, c.getIdClient());
+            ps.setInt(1, id);
+            ps.setInt(2, id2);
             ps.executeUpdate();
             System.out.println("Commentaire supprimé");
         } catch (SQLException ex) {
@@ -86,7 +91,7 @@ public class CommentaireDAO {
 
         }
         
-  public List<Commentaire> DisplayAllCommentaires (){
+        public List<Commentaire> DisplayAllCommentaires (){
         
         List<Commentaire> listeCommentaire= new ArrayList<>();
 
@@ -120,7 +125,7 @@ return null;
         
 }
         
-  public List<Commentaire> DisplayAllCommentairesbyIdProd (int id){
+       public List<Commentaire> DisplayAllCommentairesbyIdProd (int id){
         
         List<Commentaire> listeCommentaire= new ArrayList<>();
 
@@ -145,15 +150,71 @@ return null;
                      return listeCommentaire;
                     
         }
-        catch (SQLException ex) {
-    System.out.println("erreur lors du chargement des depots "+ex.getMessage());
-    return null;
-            }
+catch (SQLException ex) {
+System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+return null;
+
+}
         
         
 }
 
-  public HashMap<Integer, Integer> getTop10Coms(){
+          public String DisplayNameClient (int id){
+        
+       String requete = "select nomDeFamille from client c, commentaire co where co.idClient = c.idClient and c.idClient ="+id+""; 
+        Statement statement;
+        try {
+            statement = MyConnection.getInstance().cnx.createStatement();
+            ResultSet resultat=statement.executeQuery(requete);
+            System.out.println("hhh");
+            String s = null;
+            resultat.next();
+            
+                
+                s = resultat.getString(1);
+            
+            return s;
+            
+            
+        }
+catch (SQLException ex) {
+System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+return null;
+} 
+}
+    
+                  public boolean IdExiste (int id){
+        
+       String requete = "select idClient from Commentaire where idClient ="+id+""; 
+        Statement statement;
+        try {
+            statement = MyConnection.getInstance().cnx.createStatement();
+            ResultSet resultat=statement.executeQuery(requete);
+            String s = null;
+            resultat.next();
+            int res=resultat.getRow();
+            if(res==0)
+            {
+                return false;
+            }
+            else return true;
+ 
+        }
+catch (SQLException ex) {
+System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+return true;
+
+} 
+}
+          
+          
+          
+          public static void main(String[] args) {
+   boolean s = new CommentaireDAO().IdExiste(1);
+              System.out.println(s);
+}
+          
+            public HashMap<Integer, Integer> getTop10Coms(){
       
         HashMap<Integer, Integer> topComs = new HashMap<Integer, Integer>();
 String requete = "SELECT `idProd` , count(`idProd`) FROM `commentaire` group by `idProd`";
@@ -176,17 +237,12 @@ String requete = "SELECT `idProd` , count(`idProd`) FROM `commentaire` group by 
             }
        }
 
-    public static void main(String[] args) {
-        CommentaireDAO c = new CommentaireDAO();
-      HashMap<Integer, Integer> top10Coms = c.getTop10Coms();
-      Iterator<Integer> i = top10Coms.keySet().iterator();
-      
-       while(i.hasNext()){
-           System.out.println(" TEST ");
-    Integer key = i.next();
-    System.out.println("key: " + key + " value: " + top10Coms.get(key));
-        }
-    
-    }
+          
   
+
 }
+
+ 
+
+
+    
