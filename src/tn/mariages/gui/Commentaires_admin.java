@@ -81,11 +81,11 @@ public class Commentaires_admin extends javax.swing.JFrame {
             }
         });
         table.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tableKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tableKeyReleased(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tableKeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(table);

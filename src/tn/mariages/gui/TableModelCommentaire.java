@@ -48,6 +48,8 @@ public class TableModelCommentaire extends AbstractTableModel{
             }
       }
 
+    
+
     @Override
     public int getRowCount() {
        return listeCom.size();

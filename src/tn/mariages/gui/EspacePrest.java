@@ -36,6 +36,7 @@ public class EspacePrest extends javax.swing.JFrame {
      * Creates new form EspacePrest
      */
     int id_prest = 1;
+    int id_prod;
     String[] Categories = {"Tous","Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
 
     public EspacePrest() {
@@ -76,9 +77,11 @@ public class EspacePrest extends javax.swing.JFrame {
         LabVille = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablecomm = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jTabbedPane3 = new javax.swing.JTabbedPane();
-        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         CmbCategori = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
@@ -259,11 +262,15 @@ public class EspacePrest extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Panier", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
-        jTabbedPane1.addTab("tab1", jTabbedPane2);
-        jTabbedPane1.addTab("tab2", jTabbedPane3);
+        tablecomm.setModel(new TableModelCommPrest());
+        jScrollPane1.setViewportView(tablecomm);
+
+        jTabbedPane1.addTab("tab1", jScrollPane1);
 
         jLabel3.setText("jLabel3");
         jTabbedPane1.addTab("tab3", jLabel3);
+        jTabbedPane1.addTab("tab1", jTabbedPane2);
+        jTabbedPane1.addTab("tab2", jTabbedPane3);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -277,8 +284,8 @@ public class EspacePrest extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 29, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produit", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
@@ -546,7 +553,12 @@ public class EspacePrest extends javax.swing.JFrame {
         ProduitDAO pdao=new ProduitDAO();
 
         p=pdao.DisplayProdByID((int)tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));
-
+        if(evt.getClickCount()==1){
+            TableModelCommPrest model = new TableModelCommPrest(p.getIdProd());
+            tablecomm.setModel(model);
+            
+        }
+        else
         if(evt.getClickCount()==2){
 
             this.setVisible(true);
@@ -626,6 +638,7 @@ public class EspacePrest extends javax.swing.JFrame {
          for (int i = 0; i < 7; i++) {
             CmbCategori.addItem(Categories[i]);
         }
+         
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -750,6 +763,7 @@ public class EspacePrest extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -760,6 +774,7 @@ public class EspacePrest extends javax.swing.JFrame {
     private javax.swing.JLabel labemail;
     private javax.swing.JTable tablePaquet;
     private javax.swing.JTable tableProduit;
+    private javax.swing.JTable tablecomm;
     private javax.swing.JTextField tfNomProduit;
     // End of variables declaration//GEN-END:variables
 }
