@@ -74,7 +74,7 @@ public class TableModel_tableFeatProd extends AbstractTableModel {
             
             return p.getNomProd();
         case 2: return listFp.get(rowIndex).getWidget();
-        case 3: return rowlist[rowIndex][2];
+        case 3: return rowlist[rowIndex][3];
     
                             default:return null;
 
