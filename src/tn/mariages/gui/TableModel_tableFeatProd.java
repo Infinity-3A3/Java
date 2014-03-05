@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import tn.mariages.dao.FeaturedProdDAO;
-import tn.mariages.dao.ProduitDAO;
 import tn.mariages.entities.FeaturedProd;
 import tn.mariages.entities.Produit;
 
@@ -74,7 +73,7 @@ public class TableModel_tableFeatProd extends AbstractTableModel {
             
             return p.getNomProd();
         case 2: return listFp.get(rowIndex).getWidget();
-        case 3: return rowlist[rowIndex][2];
+        case 3: return rowlist[rowIndex][3];
     
                             default:return null;
 
@@ -112,7 +111,7 @@ public class TableModel_tableFeatProd extends AbstractTableModel {
     
    @Override
     public boolean isCellEditable(int row, int column) {
-    return (column > 2);
+        return (column == 3);
   }
    
     

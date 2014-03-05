@@ -17,25 +17,19 @@
 
 package tn.mariages.gui;
 
-import java.awt.Image;
+import com.alee.laf.WebLookAndFeel;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.UIManager;
 import tn.mariages.dao.FeaturedProdDAO;
-import tn.mariages.dao.PrestataireDAO;
-import tn.mariages.entities.FeaturedProd;
 import tn.mariages.entities.Produit;
 
 /**
@@ -76,9 +70,9 @@ public class ListeFeatProd extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         labelNomProd = new javax.swing.JLabel();
-        labelShortDesc = new javax.swing.JLabel();
         labelCategorie = new javax.swing.JLabel();
         labelDateAjout = new javax.swing.JLabel();
+        labelShortDesc = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         labelNomPret = new javax.swing.JLabel();
@@ -98,10 +92,10 @@ public class ListeFeatProd extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -155,8 +149,8 @@ public class ListeFeatProd extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(147, 147, 147)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                .addGap(83, 83, 83)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDel)
                 .addContainerGap())
@@ -177,15 +171,15 @@ public class ListeFeatProd extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
@@ -223,15 +217,13 @@ public class ListeFeatProd extends javax.swing.JFrame {
         labelNomProd.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         labelNomProd.setText("Nom_Produit");
 
-        labelShortDesc.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
-        labelShortDesc.setText("Short_Desc");
-        labelShortDesc.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
         labelCategorie.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         labelCategorie.setText("Categorie");
 
         labelDateAjout.setFont(new java.awt.Font("Meiryo UI", 0, 14)); // NOI18N
         labelDateAjout.setText("Date_Ajou");
+
+        labelShortDesc.setText("jLabel6");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -241,23 +233,23 @@ public class ListeFeatProd extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelNomProd)
-                    .addComponent(labelShortDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCategorie)
-                    .addComponent(labelDateAjout))
-                .addGap(25, 25, 25))
+                    .addComponent(labelDateAjout)
+                    .addComponent(labelShortDesc))
+                .addGap(26, 26, 26))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelNomProd)
-                .addGap(61, 61, 61)
-                .addComponent(labelShortDesc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(54, 54, 54)
+                .addComponent(labelShortDesc)
+                .addGap(40, 40, 40)
                 .addComponent(labelCategorie)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(20, 20, 20)
                 .addComponent(labelDateAjout)
-                .addGap(31, 31, 31))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -298,7 +290,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labelNomPret)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(labelPrix))
@@ -372,9 +364,7 @@ public class ListeFeatProd extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -393,8 +383,11 @@ public class ListeFeatProd extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
         AjoutFeatProd afp = new AjoutFeatProd();
-        afp.setVisible(true);
-
+Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+       afp.setLocation((dim.width/2-this.getSize().width/2)-50, (dim.height/2-this.getSize().height/2)+20);
+       afp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+       afp.setVisible(true);
+        
 tableFeatProd.setModel(new TableModel_tableFeatProd());
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -403,7 +396,7 @@ tableFeatProd.setModel(new TableModel_tableFeatProd());
         boolean test= false;
                 for(int i=0;i<tableFeatProd.getRowCount();i++)
                     {
-                        Boolean a =(Boolean)tableFeatProd.getValueAt(i, 2);
+                        Boolean a =(Boolean)tableFeatProd.getValueAt(i, 3);
                         if(a)
                         { test=true; break; }                
                         
@@ -423,7 +416,7 @@ tableFeatProd.setModel(new TableModel_tableFeatProd());
                     
                     for(int i=0;i<tableFeatProd.getRowCount();i++)
                     {
-                        Boolean b =(Boolean)tableFeatProd.getValueAt(i, 2);
+                        Boolean b =(Boolean)tableFeatProd.getValueAt(i, 3);
 
                         if(b)
                         {j++; ids[j]=(int)tableFeatProd.getValueAt(i, 0);}
@@ -454,6 +447,8 @@ tableFeatProd.setModel(new TableModel_tableFeatProd());
     private void tableFeatProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableFeatProdMouseClicked
       if(evt.getClickCount()==2)
       {
+          this.setSize(875 ,500);
+
         int row= tableFeatProd.getSelectedRow();
             int idFeat =(int) tableFeatProd.getValueAt(row, 0);
            System.out.println("ID ==> "+idFeat);
@@ -462,7 +457,22 @@ tableFeatProd.setModel(new TableModel_tableFeatProd());
          if(p!=null){
             System.out.println(p.toString());
             labelNomProd.setText(p.getNomProd());
-            labelShortDesc.setText(p.getShortDescProd());
+            String desc = "<html> ",inter;
+            int j=0;
+             for (int i = 0; i < p.getShortDescProd().length()-1; i++) {
+                j++;
+                 inter=p.getShortDescProd().substring(i, i+1);
+                if(j>=10 && (inter.equals(" ") || inter.equals(".") ))
+                        {
+                            j=0;
+                            inter="<br>";
+                        }
+                    desc+=inter;
+             }
+                    desc+="</html>";
+             System.out.println(" => "+desc);
+            
+            labelShortDesc.setText(desc);
             labelDateAjout.setText(p.getDateAjoutProd());
             labelPrix.setText(p.getPrixProd()+"");
             ///
@@ -476,7 +486,7 @@ tableFeatProd.setModel(new TableModel_tableFeatProd());
                 Logger.getLogger(ListeFeatProd.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            
+
          }
          }
 
@@ -488,11 +498,14 @@ tableFeatProd.setModel(new TableModel_tableFeatProd());
             tmtfp.fireTableDataChanged();
 tableFeatProd.getColumnModel().getColumn(0).setMinWidth(0);
 tableFeatProd.getColumnModel().getColumn(0).setMaxWidth(0);
-
+        System.out.println(""+this.getSize());
+jPanel3.setSize(0, 0);
 
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+this.setSize(510 ,500);
 
 jPanel3.setSize(0, 0);
 tableFeatProd.getColumnModel().getColumn(0).setMinWidth(0);
@@ -528,7 +541,9 @@ tableFeatProd.getColumnModel().getColumn(0).setMaxWidth(0);
         //</editor-fold>
 try
     {
-    //    org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+      org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+               UIManager.put("RootPane.setupButtonVisible", false);
+
     }
     catch(Exception e)
     {
@@ -555,11 +570,11 @@ try
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
+    public javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCategorie;
     private javax.swing.JLabel labelDateAjout;
@@ -570,7 +585,4 @@ try
     private javax.swing.JTable tableFeatProd;
     // End of variables declaration//GEN-END:variables
 
-    private ImageIcon createImageIcon(String imagegif, String sample_image) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
