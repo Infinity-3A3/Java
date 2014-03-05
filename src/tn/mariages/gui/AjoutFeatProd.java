@@ -142,25 +142,28 @@ public class AjoutFeatProd extends javax.swing.JFrame {
 
     @SuppressWarnings({"deprecation", "deprecation"})
     private void btnAjoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutActionPerformed
-
+       
         int sRow = TableFavProd.getSelectedRow();
-        int idProd = (int)  TableFavProd.getValueAt(sRow,0);
-        System.out.println(""+idProd);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-Date date = new Date();
-        
-  FeaturedProd fp = new FeaturedProd(dateFormat.format(date), CbWidget.getSelectedItem().toString(), idProd);
-           
-        FeaturedProdDAO fpDAO = new FeaturedProdDAO();
-        boolean test = fpDAO.InsertFeatProduit(fp);
-        if(test){  JOptionPane.showMessageDialog(this, "Produit ajouté avec succès.");
-        
-        ListeFeatProd lfp = new ListeFeatProd();
-        lfp.setVisible(true); 
-        this.dispose();
-        }
-        else {  JOptionPane.showMessageDialog(this, "Problème d'ajout"); }
+         if(sRow!=-1){
+                int idProd = (int)  TableFavProd.getValueAt(sRow,0);
+                System.out.println(""+idProd);
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
 
+          FeaturedProd fp = new FeaturedProd(dateFormat.format(date), CbWidget.getSelectedItem().toString(), idProd);
+
+                FeaturedProdDAO fpDAO = new FeaturedProdDAO();
+                boolean test = fpDAO.InsertFeatProduit(fp);
+                if(test){  JOptionPane.showMessageDialog(this, "Produit ajouté avec succès.");
+
+                ListeFeatProd lfp = new ListeFeatProd();
+                lfp.setVisible(true); 
+                this.dispose();
+                }
+                else {  JOptionPane.showMessageDialog(this, "Element déjà ajouté"); }
+         }
+         else
+  JOptionPane.showMessageDialog(this, "Veuillez sélectionner un élément.");           
   
     }//GEN-LAST:event_btnAjoutActionPerformed
 

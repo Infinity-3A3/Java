@@ -1,21 +1,22 @@
+package tn.mariages.util;
+
 
 
 
 import java.util.HashMap;
 import java.util.Iterator;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import tn.mariages.dao.CommentaireDAO;
 import tn.mariages.dao.ProduitDAO;
-import tn.mariages.dao.panierProduitDAO;
-import tn.mariages.entities.PanierProduit;
 import tn.mariages.entities.Produit;
 
 
-public class PieChartComs extends JFrame{
+public class PieChartComs extends JInternalFrame {
     DefaultPieDataset dataset;//Dataset qui va contenir les Données
     JFreeChart graphe;        //Graphe
     ChartPanel cp;            //Panel
