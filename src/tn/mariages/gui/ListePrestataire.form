@@ -117,9 +117,6 @@
         </Container>
         <Component class="javax.swing.JButton" name="BtnAjouterPres">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/icons/circle_plus.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Ajouter "/>
           </Properties>
           <Events>
@@ -128,9 +125,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="BtnModifierPres">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/icons/Modify-icon.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Modifier"/>
           </Properties>
           <Events>
@@ -139,9 +133,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="BtnSupprimePres">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/icons/circle_delete.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Supprimer"/>
           </Properties>
           <Events>

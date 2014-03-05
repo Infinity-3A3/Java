@@ -4,6 +4,8 @@
  */
 package tn.mariages.gui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.*;
@@ -22,17 +24,17 @@ public class AjoutPrestataire extends javax.swing.JFrame {
 
     Prestataire prest = new Prestataire();
     PrestataireDAO presDAO = new PrestataireDAO();
-    String[] specialite = {"--Choisir ville--"};
-    String[] categorie = {"--Choisir catégorie--", "La mariée", "le mari", "Beauté", "La réception", "Gastronomie", "Annimation", "Voyages", "Photographe"};
+    String[] specialite = {"--Choisir Specialite--"};
+    String[] categorie = {"--Choisir categorie--", "La mariée", "le mari", "Beauté", "La réception", "Gastronomie", "Annimation", "Voyages", "Photographe"};
     String[] ville = {"--Choisir ville--", "tunis", "arriana", "hammamet", "Sousse", "Carthage", "Mannouba"};
-    String[] specialitMari = {"--Choisir spécialité--", "Costume", "Chaussure"};
-    String[] specialitMariee = {"--Choisir spécialité--", "Robe marriée", "Haute couture", "Lingerie", "Bijoutier"};
-    String[] specialitBeaute = {"--Choisir spécialité--", "Produit esthétique", "Maquillage Pro", "Sallon d'ethetique"};
-    String[] specialitRecept = {"--Choisir spécialité--", "Forum", "Top happiness", "Le relais"};
-    String[] specialitGastr = {"--Choisir spécialité--", "Traiteur", "Patisserie"};
-    String[] specialitAnnim = {"--Choisir spécialité--", "Troupe musical", "Chanteurs", "Danseuse orientals"};
-    String[] specialitVoyage = {"--Choisir spécialité--", "Agence de voyage"};
-    String[] specialitPhotographe = {"--Choisir spécialité--", "Photographe paysagiste", "photographe classique"};
+    String[] specialitMari = {"--Choisir Specialite--", "Costume", "Chaussure"};
+    String[] specialitMariee = {"--Choisir Specialite--", "Robe marriée", "Haute couture", "Lingerie", "Bijoutier"};
+    String[] specialitBeaute = {"--Choisir Specialite--", "Produit esthétique", "Maquillage Pro", "Sallon d'ethetique"};
+    String[] specialitRecept = {"--Choisir Specialite--", "Forum", "Top happiness", "Le relais"};
+    String[] specialitGastr = {"--Choisir Specialite--", "Traiteur", "Patisserie"};
+    String[] specialitAnnim = {"--Choisir Specialite--", "Troupe musical", "Chanteurs", "Danseuse orientals"};
+    String[] specialitVoyage = {"--Choisir Specialite--", "Agence de voyage"};
+    String[] specialitPhotographe = {"--Choisir Specialite--", "Photographe paysagiste", "photographe classique"};
 
     public AjoutPrestataire() {
         initComponents();
@@ -440,7 +442,14 @@ public class AjoutPrestataire extends javax.swing.JFrame {
     Matcher matcher3 = pattern2.matcher(jtEmailPrest.getText());
       Matcher matcher = pattern.matcher(jtNumFixePrest.getText());
          Matcher matcher2 = pattern.matcher(jtNumMobilPrest.getText());
-       if(jtNomPrest.getText().equals("")|| jtDescPrest.getText().equals("")|| jtEmailPrest.getText().equals("") || jtpwdPrest.getText().equals("") || jtAdrPrest.getText().equals("") || cmbVillePrest.getSelectedItem().equals("--Choisir ville--")|| cmbSpecialitePrest.getSelectedItem().equals("--Choisir spécialité--")|| cmbCategoriePrest.getSelectedItem().equals("--Choisir catégorie--")||!matcher.matches()||!matcher2.matches()||!matcher3.matches()){
+         
+         Prestataire prestataire=new Prestataire();
+         PrestataireDAO prestataireDAO=new PrestataireDAO();
+         List <Prestataire> mylist=new ArrayList<Prestataire>();
+         mylist=prestataireDAO.DisplayAllPrestataire();
+         
+         
+       if(jtNomPrest.getText().equals("")|| jtDescPrest.getText().equals("")|| jtEmailPrest.getText().equals("") || jtpwdPrest.getText().equals("") || jtAdrPrest.getText().equals("") || cmbVillePrest.getSelectedItem().equals("--Choisir ville--")|| cmbSpecialitePrest.getSelectedItem().equals("--Choisir Specialite--")|| cmbCategoriePrest.getSelectedItem().equals("--Choisir catégorie--")||!matcher.matches()||!matcher2.matches()||!matcher3.matches()){
            String ch="";
            if(jtNomPrest.getText().equals(""))
                ch+="Veuillez saisir le Nom du prestataire \n";
@@ -470,6 +479,12 @@ public class AjoutPrestataire extends javax.swing.JFrame {
                ch+="Veuillez donner le numero de telephone mobile du prestataire  \n";
              if(cmbCategoriePrest.getSelectedItem().toString().equals(""))
                ch+="Veuillez donner la catégorie  du prestataire  \n";
+             
+              for (Prestataire prest : mylist) {
+                if(prestataireDAO.findPrestByEmail(jtEmailPrest.getText()).equals(prest))
+                     ch+="l'email que vous avez saisi existe deja \n";
+            }
+             
               if(cmbSpecialitePrest.getSelectedItem().toString().equals(""))
                ch+="Veuillez donner la specialité  du prestataire  \n";
             int dialogButton = JOptionPane.OK_CANCEL_OPTION;
