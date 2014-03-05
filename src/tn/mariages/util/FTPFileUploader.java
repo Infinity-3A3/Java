@@ -13,15 +13,15 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPConnectionClosedException;
 import org.apache.commons.net.ftp.FTPFile;
 
-class FTPFileUploader  {
+public class FTPFileUploader  {
    
     public static FTPFileUploader instance;
     FTPClient client = new FTPClient();
     FileInputStream fis = null;
     boolean result;
     private String ftpServerAddress="FTP.mariages.tn"; 
-    private String userName="java@mariages.tn"; 
-    private String password="xxxxxxx"; // a rajouter 
+    private String userName="user@mariages.tn"; 
+    private String password="infinityFTP3A3"; // a rajouter 
      /*
                 Changer le pwd puis right click > Git > Ignore > Exclude from commit
             */
