@@ -42,7 +42,7 @@ public class DetailPaquet extends javax.swing.JFrame {
         NomPaquet.setText(p.getNomPaquet());
         DescPaquet.setText(p.getDescPaquet());
         PrixPaquet.setText(p.getPrixPaquet().toString());
-       TableProduitPaquetModel model =new TableProduitPaquetModel();
+       TableProduitPaquetModel model =new TableProduitPaquetModel(p.getIdPaquet());
        tableproduitdet.setModel(model);
         
         

@@ -452,7 +452,7 @@ public class AjoutPrestataire extends javax.swing.JFrame {
        if(jtNomPrest.getText().equals("")|| jtDescPrest.getText().equals("")|| jtEmailPrest.getText().equals("") || jtpwdPrest.getText().equals("") || jtAdrPrest.getText().equals("") || cmbVillePrest.getSelectedItem().equals("--Choisir ville--")|| cmbSpecialitePrest.getSelectedItem().equals("--Choisir Specialite--")|| cmbCategoriePrest.getSelectedItem().equals("--Choisir catégorie--")||!matcher.matches()||!matcher2.matches()||!matcher3.matches()){
            String ch="";
            if(jtNomPrest.getText().equals(""))
-               ch+="Veuillez saisir le Nom du prestataire \n";
+               ch+="Veuillez saisir le Nom du prestataire \n\n";
            
             if(jtDescPrest.getText().equals(""))
                ch+="Veuillez preciser la description du prestataire  \n";

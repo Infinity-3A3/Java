@@ -41,7 +41,10 @@ public class EspaceClient extends javax.swing.JFrame {
      * Creates new form EspaceClient
      */
     public EspaceClient() {
+        
+        
         initComponents();
+        
          tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
         tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
         
@@ -71,7 +74,7 @@ public class EspaceClient extends javax.swing.JFrame {
       if(type.equals("c")){
             Client c=new Client ();
             ClientDAO clDAo=new ClientDAO();
-            c=clDAo.findClientById(id);
+            c=clDAo.findClientById(23);
             Idclient.setText(c.getIdClient()+"");
             Idclient.setVisible(false);
             NomClient.setText(c.getNomDeFamille()+ " "+c.getPrenomMari());
@@ -140,7 +143,6 @@ public class EspaceClient extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tableProduit = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        btnRec = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablePaquet = new javax.swing.JTable();
@@ -151,6 +153,7 @@ public class EspaceClient extends javax.swing.JFrame {
         Deconnexion = new javax.swing.JButton();
         Idclient = new javax.swing.JLabel();
         NomClient = new javax.swing.JLabel();
+        btnRec = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -391,13 +394,6 @@ public class EspaceClient extends javax.swing.JFrame {
             }
         });
 
-        btnRec.setText("Ajouter Reclamation");
-        btnRec.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRecActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -416,13 +412,11 @@ public class EspaceClient extends javax.swing.JFrame {
                 .addComponent(tfNomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jButton1)
-                .addGap(69, 69, 69)
-                .addComponent(btnRec)
+                .addGap(123, 123, 123)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAjoutProdPanier)
-                .addGap(67, 67, 67))
+                .addGap(80, 80, 80))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,20 +429,11 @@ public class EspaceClient extends javax.swing.JFrame {
                     .addComponent(tfNomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(btnAjoutProdPanier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)))
-                        .addGap(23, 23, 23))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(btnRec)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(btnAjoutProdPanier, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquet", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
@@ -509,10 +494,22 @@ public class EspaceClient extends javax.swing.JFrame {
         jLabel10.setText("Espace client");
 
         Deconnexion.setText("Dec");
+        Deconnexion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeconnexionActionPerformed(evt);
+            }
+        });
 
         Idclient.setText("jLabel14");
 
         NomClient.setText("jLabel14");
+
+        btnRec.setText("Ajouter Reclamation");
+        btnRec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AjouterPanierLayout = new javax.swing.GroupLayout(AjouterPanier);
         AjouterPanier.setLayout(AjouterPanierLayout);
@@ -531,9 +528,11 @@ public class EspaceClient extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Idclient)
+                .addGap(53, 53, 53)
+                .addComponent(btnRec)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(NomClient, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Deconnexion)
                 .addContainerGap())
         );
@@ -547,8 +546,10 @@ public class EspaceClient extends javax.swing.JFrame {
                             .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(Idclient))
-                            .addComponent(Deconnexion)))
-                    .addComponent(NomClient, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Deconnexion)
+                                .addComponent(NomClient))))
+                    .addComponent(btnRec, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -591,7 +592,7 @@ public class EspaceClient extends javax.swing.JFrame {
         
         double prix=0;
         PaquetDAO pdao=new PaquetDAO();
-          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(23);
+          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(Integer.parseInt(Idclient.getText()));
           
               for(PanierPaquet p : mylist){
              
@@ -600,7 +601,7 @@ public class EspaceClient extends javax.swing.JFrame {
                
               }
               ProduitDAO pd=new ProduitDAO();
-              List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(23);
+              List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(Integer.parseInt(Idclient.getText()));
               for(PanierProduit p1 : mylist1){
              
                Produit produit=pd.DisplayProdByID(p1.getIdProd());
@@ -626,7 +627,7 @@ public class EspaceClient extends javax.swing.JFrame {
             panierProduitDAO panierproduitdao=new panierProduitDAO();
             p= proddao.DisplayProdByID((int) tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));
             panierProd.setIdProd(p.getIdProd());
-              panierProd.setIdClient(23);
+              panierProd.setIdClient(Integer.parseInt(Idclient.getText()));
              
             panierProd.setDateAjout(p.getDateAjoutProd());
            System.out.println("date"+panierProd.toString());
@@ -641,7 +642,7 @@ public class EspaceClient extends javax.swing.JFrame {
         tablepanierproduit.getColumnModel().getColumn(1).setMaxWidth(0);
         double prix=0;
         PaquetDAO pdao=new PaquetDAO();
-          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(23);
+          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(Integer.parseInt(Idclient.getText()));
           
               for(PanierPaquet p1 : mylist){
              
@@ -651,7 +652,7 @@ public class EspaceClient extends javax.swing.JFrame {
               }
               
               ProduitDAO pd=new ProduitDAO();
-              List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(23);
+              List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(Integer.parseInt(Idclient.getText()));
               for(PanierProduit p1 : mylist1){
              
                Produit produit=pd.DisplayProdByID(p1.getIdProd());
@@ -681,7 +682,7 @@ public class EspaceClient extends javax.swing.JFrame {
             PaquetDAO paquetdao=new PaquetDAO();
             p= paquetdao.FindPaquetById((int) tablePaquet.getValueAt(tablePaquet.getSelectedRow(), 0));
             panierPaquet.setIdPaquet(p.getIdPaquet());
-              panierPaquet.setIdClient(23);
+              panierPaquet.setIdClient(Integer.parseInt(Idclient.getText()));
              
             panierPaquet.setDateAjout("2014-02-08");
         
@@ -695,7 +696,7 @@ public class EspaceClient extends javax.swing.JFrame {
         tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
                 double prix=0;
         PaquetDAO pdao=new PaquetDAO();
-          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(23);
+          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(Integer.parseInt(Idclient.getText()));
           
               for(PanierPaquet p1 : mylist){
              
@@ -705,7 +706,7 @@ public class EspaceClient extends javax.swing.JFrame {
               }
               
               ProduitDAO pd=new ProduitDAO();
-              List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(23);
+              List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(Integer.parseInt(Idclient.getText()));
               for(PanierProduit p1 : mylist1){
              
                Produit produit=pd.DisplayProdByID(p1.getIdProd());
@@ -853,8 +854,8 @@ if(cmbCategorieProduit.getSelectedIndex()==0){
                     double prix=0;
         PaquetDAO pdao=new PaquetDAO();
        ProduitDAO pd=new ProduitDAO();
-          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(23);
-          List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(23);
+          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(Integer.parseInt(Idclient.getText()));
+          List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(Integer.parseInt(Idclient.getText()));
               for(PanierPaquet p : mylist){
              
                Paquet paquet=pdao.FindPaquetById( p.getIdPaquet());
@@ -914,7 +915,7 @@ if(cmbCategorieProduit.getSelectedIndex()==0){
                
              this.setVisible(true);
              
-             ModifierClient modifclient=new ModifierClient(23);
+             ModifierClient modifclient=new ModifierClient(Integer.parseInt(Idclient.getText()));
              modifclient.setVisible(true);
     }//GEN-LAST:event_BtnModifierProfilActionPerformed
 
@@ -928,7 +929,7 @@ if(cmbCategorieProduit.getSelectedIndex()==0){
 
             int id = (int) tableProduit.getModel().getValueAt(tableProduit.getSelectedRow(), 0);
 
-            int idclient = 1;
+            int idclient = Integer.parseInt(Idclient.getText());
 
             ListeCommentaires c = new ListeCommentaires(idclient, id);
 
@@ -936,6 +937,13 @@ if(cmbCategorieProduit.getSelectedIndex()==0){
 
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void DeconnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeconnexionActionPerformed
+       this.setVisible(false);
+          Authentication authen =new Authentication();
+          authen.setVisible(true);
+
+    }//GEN-LAST:event_DeconnexionActionPerformed
 
     /**
      * @param args the command line arguments
