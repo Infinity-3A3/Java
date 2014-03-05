@@ -34,7 +34,7 @@ import tn.mariages.util.MyConnection;
  */
 public class ProduitPaquetDAO {
     
-    public void insertProduitPaquet(ProduitPaquet p){
+    public Boolean insertProduitPaquet(ProduitPaquet p){
 
         String requete = "insert into produitpaquet (idProd,idPaquet,dateAjout) values (?,?,?)";
         try {
@@ -45,8 +45,10 @@ public class ProduitPaquetDAO {
            
             ps.executeUpdate();
             System.out.println("Ajout effectuée avec succès");
+            return true;
         } catch (SQLException ex) {
             System.out.println("erreur lors de l'insertion "+ex.getMessage());
+            return false;
         }
     }
     

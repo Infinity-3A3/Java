@@ -202,7 +202,36 @@ public class PaquetDAO {
             return null;
         }
     }
-    
+    public Paquet FindPaquetByNom (String s){
+
+
+        
+
+        String requete = "select * from paquet where NomPaquet='"+s+"' ;";
+        try {
+           Statement statement = MyConnection.getInstance()
+                  .cnx.createStatement();
+            ResultSet resultat = statement.executeQuery(requete);
+            Paquet p =new Paquet();
+            while(resultat.next()){
+                
+                p.setIdPaquet(resultat.getInt(1));
+                p.setIdPrest(resultat.getInt(2));
+                p.setNomPaquet(resultat.getString(3));
+                p.setDescPaquet(resultat.getString(4));
+                p.setShortDescPaquet(resultat.getString(5));
+                p.setImgPaquet(resultat.getString(6));
+                p.setPrixPaquet(resultat.getDouble(7));
+
+                
+            }
+            return p;
+            
+        } catch (SQLException ex) {
+            System.out.println("erreur lors du chargement des paquets "+ex.getMessage());
+            return null;
+        }
+    }
       
 }
 
