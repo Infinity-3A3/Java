@@ -4,6 +4,7 @@
  */
 package tn.mariages.gui;
 
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -27,7 +28,11 @@ public class ListePrestataire extends javax.swing.JFrame {
      * Creates new form ListePrestataire
      */
     public   ListePrestataire() {
-        initComponents();   
+        initComponents(); 
+        
+        Dimension d = new Dimension(688, 380);
+        this.setSize(d);
+        
     }
     
           Prestataire prest=new Prestataire();
@@ -86,7 +91,6 @@ public class ListePrestataire extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablePrest);
 
-        BtnAjouterPres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_plus.png"))); // NOI18N
         BtnAjouterPres.setText("Ajouter ");
         BtnAjouterPres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +98,6 @@ public class ListePrestataire extends javax.swing.JFrame {
             }
         });
 
-        BtnModifierPres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
         BtnModifierPres.setText("Modifier");
         BtnModifierPres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +105,6 @@ public class ListePrestataire extends javax.swing.JFrame {
             }
         });
 
-        BtnSupprimePres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
         BtnSupprimePres.setText("Supprimer");
         BtnSupprimePres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -364,7 +366,8 @@ public class ListePrestataire extends javax.swing.JFrame {
                 Logger.getLogger(ListeFeatProd.class.getName()).log(Level.SEVERE, null, ex);
             }
        
-       
+       Dimension d = new Dimension(688, 580);
+            this.setSize(d);
        
        
        }

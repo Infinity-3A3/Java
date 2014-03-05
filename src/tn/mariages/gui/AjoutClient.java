@@ -1,6 +1,8 @@
 
 package tn.mariages.gui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
@@ -274,8 +276,14 @@ public class AjoutClient extends javax.swing.JFrame {
     Matcher matcher3 = pattern2.matcher(tfEmailClient.getText());
       Matcher matcher = pattern.matcher(tfTelClient.getText());
          Matcher matcher2 = pattern.matcher(spinBudget.getText());   
+         
+         
+         Client client=new Client();
+         ClientDAO clientdao=new ClientDAO();
+         List <Client> mylist=new ArrayList<Client>();
+        mylist=clientdao.DisplayAllClients();
         
-        if(tfPrenomMari.getText().equals("")|| tfPrenomEpouse.getText().equals("")|| tfNom.getText().equals("") ||jDateChooser1.getDateFormatString().equals("")|| jDateChooser2.getDateFormatString().equals("")|| tfImageclient.getText().equals("") || tfEmailClient.getText().equals("") || tfPwdClient.getText().equals("")||!matcher.matches()||!matcher2.matches()||!matcher3.matches() ){
+        if(tfPrenomMari.getText().equals("")|| tfPrenomEpouse.getText().equals("")||tfPwdClient.getText().length()<6|| tfNom.getText().equals("") ||jDateChooser1.getDateFormatString().equals("")|| jDateChooser2.getDateFormatString().equals("")|| tfImageclient.getText().equals("") || tfEmailClient.getText().equals("") || tfPwdClient.getText().equals("")||!matcher.matches()||!matcher2.matches()||!matcher3.matches() ){
     
      String ch="";
            if(tfPrenomMari.getText().equals(""))
@@ -305,6 +313,12 @@ public class AjoutClient extends javax.swing.JFrame {
                   ch+="Veuiller bien remplir le champ du numero de telephone mobile  du prestataire  \n";
               if(tfPwdClient.getText().equals(""))
                ch+="Veuillez saisir votre mot de pasee  \n";
+               if(tfPwdClient.getText().length()<6)
+                 ch+="le mot de passe doit contenir au moins 6 caracteres";
+              for (Client cl : mylist) {
+                if(clientdao.findClientByEmail(tfEmailClient.getText()).equals(cl))
+                     ch+="l'email que vous avez saisi existe deja \n";
+            }
               
               if(jDateChooser2.getDateFormatString().equals(""))
                ch+="Veuillez saisir la date fin de la période de mariage  \n";
@@ -342,7 +356,7 @@ java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
           String dateFin=jDateChooser2.toString();
           String img=tfImageclient.getText();
             System.out.println("date"+dateFin);
-          Client client=new Client();
+        
           client.setPrenomMari(prMari);
           client.setPrenomEpouse(prEpouse);
           client.setNomDeFamille(nom);

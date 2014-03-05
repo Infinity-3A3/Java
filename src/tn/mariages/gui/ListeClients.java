@@ -17,6 +17,7 @@
 
 package tn.mariages.gui;
 
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -39,6 +40,8 @@ public class ListeClients extends javax.swing.JFrame {
      */
     public ListeClients() {
         initComponents();
+        Dimension d = new Dimension(700, 340);
+        this.setSize(d);
     }
 
     /**
@@ -268,8 +271,7 @@ public class ListeClients extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(labVille))
-                        .addGap(0, 62, Short.MAX_VALUE))
-                    .addComponent(labTel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 62, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -384,6 +386,8 @@ public class ListeClients extends javax.swing.JFrame {
                   labTel.setText(c.getTelClient());
            
                   ImageIcon icon;
+                  Dimension d = new Dimension(700, 580);
+                    this.setSize(d);
             try {
                 icon = new ImageIcon(new URL(c.getImgClient().toString()));
                  icon = new ImageIcon(icon.getImage().getScaledInstance(150, 150, BufferedImage.SCALE_SMOOTH));

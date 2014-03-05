@@ -17,6 +17,7 @@
 
 package tn.mariages.gui;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,6 +67,7 @@ public class Modif_Prest extends javax.swing.JFrame {
 //        if(p.isPremium()){
        chkPremiumPrest.setSelected(p.isPremium());
 //        }
+      
         tfDatePayementPrest.setText(p.getDatePayement());
         labelIdPrest.setVisible(false);
      }
@@ -514,8 +516,8 @@ Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:
            
            prest.setCompteValide(chkCmptValidePrest.isSelected());
                      prest.setMailValide(chkEmailValidePrest.isSelected());
-
-           prest.setDatePayement(tfDatePayementPrest.getText());
+               
+           prest.setDatePayement(tfDatePayementPrest.toString());
            prest.setPremium(chkPremiumPrest.isSelected());
            
                   prest.setSpecialite(cmbSpecialitePrest.getSelectedItem().toString());
@@ -529,10 +531,6 @@ Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:
              ListePrestataire lp=new ListePrestataire();
              lp.setVisible(true);
          }    }//GEN-LAST:event_btnValiderModifPrestActionPerformed
-
-    private void tfDatePayementPrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDatePayementPrestActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfDatePayementPrestActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
  
@@ -559,6 +557,10 @@ Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:
                     chemin = chemin.replace("\\", "/");    }                                            
     
                    tfImagePrest.setText(chemin);    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tfDatePayementPrestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDatePayementPrestActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDatePayementPrestActionPerformed
 
     /**
      * @param args the command line arguments
