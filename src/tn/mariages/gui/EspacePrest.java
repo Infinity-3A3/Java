@@ -17,13 +17,19 @@
 
 package tn.mariages.gui;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.PaquetDAO;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.ProduitDAO;
+import tn.mariages.dao.ProduitPaquetDAO;
 import tn.mariages.entities.Paquet;
 import tn.mariages.entities.Prestataire;
 import tn.mariages.entities.Produit;
+import tn.mariages.entities.ProduitPaquet;
 
 
 /**
@@ -41,6 +47,8 @@ public class EspacePrest extends javax.swing.JFrame {
 
     public EspacePrest() {
         initComponents();
+        btnvalider.setVisible(false);
+        cmbNomPaquet.setVisible(false);
     }
 
     /**
@@ -92,6 +100,9 @@ public class EspacePrest extends javax.swing.JFrame {
         tableProduit = new javax.swing.JTable();
         btnSuppProduit = new javax.swing.JButton();
         btnAjoutProd = new javax.swing.JButton();
+        btnAjoutProdPaq = new javax.swing.JButton();
+        cmbNomPaquet = new javax.swing.JComboBox();
+        btnvalider = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablePaquet = new javax.swing.JTable();
@@ -104,10 +115,10 @@ public class EspacePrest extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -257,7 +268,7 @@ public class EspacePrest extends javax.swing.JFrame {
                             .addComponent(LabSpec))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnModifierProfil)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Panier", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
@@ -331,35 +342,54 @@ public class EspacePrest extends javax.swing.JFrame {
             }
         });
 
+        btnAjoutProdPaq.setText("Ajouter dans un paquet");
+        btnAjoutProdPaq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAjoutProdPaqActionPerformed(evt);
+            }
+        });
+
+        btnvalider.setText("Valider");
+        btnvalider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnvaliderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CmbCategori, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel13)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfNomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(btnAjoutProd)
-                        .addGap(142, 142, 142)
-                        .addComponent(btnModifProduit))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(29, 29, 29)
+                            .addComponent(jLabel11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(CmbCategori, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(30, 30, 30)
+                            .addComponent(jLabel13)
+                            .addGap(18, 18, 18)
+                            .addComponent(tfNomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(413, Short.MAX_VALUE)
-                    .addComponent(btnSuppProduit)
-                    .addGap(57, 57, 57)))
+                        .addComponent(btnAjoutProd)
+                        .addGap(43, 43, 43)
+                        .addComponent(btnModifProduit)
+                        .addGap(52, 52, 52)
+                        .addComponent(btnSuppProduit)
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(cmbNomPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnvalider))
+                            .addComponent(btnAjoutProdPaq, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,14 +404,17 @@ public class EspacePrest extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnModifProduit, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
-                    .addComponent(btnAjoutProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(174, 174, 174)
+                    .addComponent(btnModifProduit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAjoutProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSuppProduit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(13, 13, 13)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnAjoutProdPaq)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbNomPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnvalider))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Paquet", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
@@ -683,6 +716,54 @@ public class EspacePrest extends javax.swing.JFrame {
         tablePaquet.setModel(modelpaq);
     }//GEN-LAST:event_formWindowGainedFocus
 
+    private void btnAjoutProdPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutProdPaqActionPerformed
+        // TODO add your handling code here:
+        if(tableProduit.getSelectedRow()==-1){
+            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
+        JOptionPane.showConfirmDialog(null, "Vous n'avez selectionné aucun produit", "Warning", dialogButton);
+        }
+        else { //The ISSUE is here
+
+        PaquetDAO pDAO = new PaquetDAO();
+        List<Paquet> liste = new ArrayList<Paquet>();
+        liste=pDAO.FindPaquetByPrest(id_prest);
+        
+        for(int i=0;i<pDAO.DisplayAllPaquets().size();i++)
+        {
+            cmbNomPaquet.addItem(liste.get(i).getNomPaquet());
+        }
+        cmbNomPaquet.setVisible(true);
+        btnvalider.setVisible(true);
+          
+        }
+        
+    }//GEN-LAST:event_btnAjoutProdPaqActionPerformed
+
+    private void btnvaliderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvaliderActionPerformed
+        // TODO add your handling code here:
+        PaquetDAO pDAO = new PaquetDAO();
+        ProduitPaquet prodpaq = new ProduitPaquet();
+        ProduitPaquetDAO prodpaqDAO = new ProduitPaquetDAO();
+        int id_paq=pDAO.FindPaquetByNom(cmbNomPaquet.getSelectedItem().toString()).getIdPaquet();
+             prodpaq.setIdPaquet(id_paq);
+             String date_format="yyyy-MM-dd";
+            Calendar cal=Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat(date_format);
+            String dt = sdf.format(cal.getTime());
+             prodpaq.setDateAjout(dt);
+            
+                
+                prodpaq.setIdProd((Integer)tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));               
+               boolean test= prodpaqDAO.insertProduitPaquet(prodpaq);
+                 
+        if(test){  JOptionPane.showMessageDialog(this, "Produit ajouté avec succès.");
+        }
+        else {  JOptionPane.showMessageDialog(this, "Problème d'ajout"); }
+
+  
+     
+    }//GEN-LAST:event_btnvaliderActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -744,10 +825,13 @@ public class EspacePrest extends javax.swing.JFrame {
     private javax.swing.JTextField TFnOMpaquet;
     private javax.swing.JButton btnAjoutPaquet;
     private javax.swing.JButton btnAjoutProd;
+    private javax.swing.JButton btnAjoutProdPaq;
     private javax.swing.JButton btnModifPaquet;
     private javax.swing.JButton btnModifProduit;
     private javax.swing.JButton btnSuppPaquet;
     private javax.swing.JButton btnSuppProduit;
+    private javax.swing.JButton btnvalider;
+    private javax.swing.JComboBox cmbNomPaquet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
