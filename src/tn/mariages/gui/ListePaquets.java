@@ -42,6 +42,8 @@ public class ListePaquets extends javax.swing.JFrame {
     
     public ListePaquets() {
         initComponents();
+         tablelisteProduit.getColumnModel().getColumn(1).setMinWidth(0);
+ tablelisteProduit.getColumnModel().getColumn(1).setMaxWidth(0);
         tablelisteProduit.setVisible(false);
         btnAnnuler.setVisible(false);
         btnProduitsPaquets.setVisible(false);
@@ -49,7 +51,7 @@ public class ListePaquets extends javax.swing.JFrame {
         jPanel3.setVisible(false);
         btnAjouterProduit.setVisible(false);
         btnSupprimerProduit.setVisible(false);
-        Dimension d = new Dimension(688, 350);
+        Dimension d = new Dimension(700, 350);
         this.setSize(d);
     }
 
@@ -104,7 +106,7 @@ public class ListePaquets extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tablelistepaquet.setModel(new TableListPaquetModel());
         jScrollPane1.setViewportView(tablelistepaquet);
@@ -182,7 +184,7 @@ public class ListePaquets extends javax.swing.JFrame {
                 .addGap(99, 99, 99))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tablelisteproduitpaquet.setModel(new TableProduitPaquetModel());
         jScrollPane2.setViewportView(tablelisteproduitpaquet);
@@ -211,15 +213,18 @@ public class ListePaquets extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(labelpaquet)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(labelpaquet)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnAjouterProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSupprimerProduit)))
-                .addContainerGap())
+                        .addComponent(btnSupprimerProduit)
+                        .addGap(26, 26, 26))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,13 +234,13 @@ public class ListePaquets extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSupprimerProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAjouterProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAjouterProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSupprimerProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tablelisteProduit.setModel(new TableListeAjoutProduitPaquet());
         jScrollPane3.setViewportView(tablelisteProduit);
@@ -294,22 +299,20 @@ public class ListePaquets extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -379,6 +382,10 @@ public class ListePaquets extends javax.swing.JFrame {
         TableListPaquetModel model = new TableListPaquetModel();
         tablelistepaquet.setModel(model);
         model.fireTableDataChanged();
+                    tablelistepaquet.getColumnModel().getColumn(0).setMinWidth(0);
+                    tablelistepaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+                    tablelisteproduitpaquet.getColumnModel().getColumn(0).setMinWidth(0);
+                    tablelisteproduitpaquet.getColumnModel().getColumn(0).setMaxWidth(0);
 
     }//GEN-LAST:event_formWindowGainedFocus
 
@@ -436,6 +443,10 @@ public class ListePaquets extends javax.swing.JFrame {
             TableProduitPaquetModel Mod = new TableProduitPaquetModel(id);
             tablelisteproduitpaquet.setModel(Mod);
             Mod.fireTableDataChanged();
+            tablelistepaquet.getColumnModel().getColumn(0).setMinWidth(0);
+                    tablelistepaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+                    tablelisteproduitpaquet.getColumnModel().getColumn(0).setMinWidth(0);
+                    tablelisteproduitpaquet.getColumnModel().getColumn(0).setMaxWidth(0);
             Dimension d = new Dimension(688, 600);
             this.setSize(d);
             jPanel3.setVisible(true);
@@ -494,6 +505,10 @@ public class ListePaquets extends javax.swing.JFrame {
             TableProduitPaquetModel Mod = new TableProduitPaquetModel(id_paq);
             tablelisteproduitpaquet.setModel(Mod);
             Mod.fireTableDataChanged();
+            tablelistepaquet.getColumnModel().getColumn(0).setMinWidth(0);
+                    tablelistepaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+                    tablelisteproduitpaquet.getColumnModel().getColumn(0).setMinWidth(0);
+                    tablelisteproduitpaquet.getColumnModel().getColumn(0).setMaxWidth(0);
     }//GEN-LAST:event_btnProduitsPaquetsActionPerformed
 
     private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed

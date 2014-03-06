@@ -293,9 +293,9 @@ LC.setVisible(true);
 
         ListerProduit LP = new ListerProduit();
 LP.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-LP.setLocation((dim.width/2-this.getSize().width/2), (dim.height/2-this.getSize().height/2)+100);
+LP.setLocation((dim.width/2-this.getSize().width/2)-350, (dim.height/2-this.getSize().height/2)+100);
         LP.setVisible(true);
-
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -303,7 +303,7 @@ Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
 ListePaquets LP = new ListePaquets();
 LP.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-LP.setLocation((dim.width/2-this.getSize().width/2)-50, (dim.height/2-this.getSize().height/2)+100);
+LP.setLocation((dim.width/2-this.getSize().width/2)-400, (dim.height/2-this.getSize().height/2)+100);
 LP.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 

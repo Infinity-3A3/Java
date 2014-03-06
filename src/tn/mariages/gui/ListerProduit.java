@@ -228,7 +228,8 @@ public class ListerProduit extends javax.swing.JFrame {
             cmbCategorieProduit.addItem(Categories[i]);
         }
         // TODO add your handling code here:
-
+ jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+ jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
 
     }//GEN-LAST:event_formWindowOpened
 
