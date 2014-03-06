@@ -350,6 +350,7 @@ public class ListePaquets extends javax.swing.JFrame {
     private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
         // TODO add your handling code here:
         AjoutPaquet Ajout = new AjoutPaquet();
+        Ajout.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Ajout.setVisible(true);
         
 
@@ -363,6 +364,7 @@ public class ListePaquets extends javax.swing.JFrame {
             PaquetDAO pDAO = new PaquetDAO();
             p = pDAO.FindPaquetById((int) tablelistepaquet.getValueAt(tablelistepaquet.getSelectedRow(), 0));
             AjoutPaquet Modif = new AjoutPaquet(p);
+            Modif.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             Modif.setVisible(true);
         } else {
             int dialogButton = JOptionPane.CANCEL_OPTION;

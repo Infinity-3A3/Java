@@ -14,13 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package tn.mariages.gui;
 
+import com.alee.managers.notification.NotificationManager;
+import com.alee.managers.notification.WebNotificationPopup;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.PaquetDAO;
 import tn.mariages.dao.PrestataireDAO;
@@ -30,7 +32,6 @@ import tn.mariages.entities.Paquet;
 import tn.mariages.entities.Prestataire;
 import tn.mariages.entities.Produit;
 import tn.mariages.entities.ProduitPaquet;
-
 
 /**
  *
@@ -43,7 +44,7 @@ public class EspacePrest extends javax.swing.JFrame {
      */
     int id_prest = 1;
     int id_prod;
-    String[] Categories = {"Tous","Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
+    String[] Categories = {"Tous", "Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
 
     public EspacePrest() {
         initComponents();
@@ -541,7 +542,8 @@ public class EspacePrest extends javax.swing.JFrame {
     private void BtnModifierProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModifierProfilActionPerformed
 
         this.setVisible(true);
-        Modif_Prest PrestataireModif=new Modif_Prest();
+        Modif_Prest PrestataireModif = new Modif_Prest();
+        PrestataireModif.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         PrestataireModif.setVisible(true);
     }//GEN-LAST:event_BtnModifierProfilActionPerformed
 
@@ -550,52 +552,62 @@ public class EspacePrest extends javax.swing.JFrame {
     }//GEN-LAST:event_CmbCategoriItemStateChanged
 
     private void CmbCategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbCategoriActionPerformed
-        if(CmbCategori.getSelectedIndex()==0){
+        if (CmbCategori.getSelectedIndex() == 0) {
             tableProduit.setModel(new MyTableProduitPrest(id_prest));
         }
-        if(CmbCategori.getSelectedIndex()==1){
-            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[1],id_prest));
+        if (CmbCategori.getSelectedIndex() == 1) {
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[1], id_prest));
         }
-        if(CmbCategori.getSelectedIndex()==2){
-            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[2],id_prest));
+        if (CmbCategori.getSelectedIndex() == 2) {
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[2], id_prest));
         }
-        if(CmbCategori.getSelectedIndex()==3){
-            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[3],id_prest));
+        if (CmbCategori.getSelectedIndex() == 3) {
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[3], id_prest));
         }
-        if(CmbCategori.getSelectedIndex()==4){
-            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[4],id_prest));
+        if (CmbCategori.getSelectedIndex() == 4) {
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[4], id_prest));
         }
-        if(CmbCategori.getSelectedIndex()==5){
-            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[5],id_prest));
+        if (CmbCategori.getSelectedIndex() == 5) {
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[5], id_prest));
         }
-        if(CmbCategori.getSelectedIndex()==6){
-            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[6],id_prest));
+        if (CmbCategori.getSelectedIndex() == 6) {
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[6], id_prest));
         }
-        if(CmbCategori.getSelectedIndex()==7){
-            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[7],id_prest));
+        if (CmbCategori.getSelectedIndex() == 7) {
+            tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[7], id_prest));
         }
     }//GEN-LAST:event_CmbCategoriActionPerformed
 
     private void btnModifProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifProduitActionPerformed
+        if (tableProduit.getSelectedRow() != -1) {
+            Produit p = new Produit();
 
+            p = new ProduitDAO().DisplayProdByID((int) tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));
+            ModifierProduit modifProd= new ModifierProduit(p.getIdProd(),id_prest);  
+                    
+            modifProd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            modifProd.setVisible(true);
+        } else {
+            int dialogButton = JOptionPane.CANCEL_OPTION;
+            JOptionPane.showConfirmDialog(null, "Vous n'avez selectionné aucun paquet", "Warning", dialogButton);
+        }
     }//GEN-LAST:event_btnModifProduitActionPerformed
 
     private void tableProduitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProduitMouseClicked
 
-        Produit p=new Produit();
-        ProduitDAO pdao=new ProduitDAO();
+        Produit p = new Produit();
+        ProduitDAO pdao = new ProduitDAO();
 
-        p=pdao.DisplayProdByID((int)tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));
-        if(evt.getClickCount()==1){
+        p = pdao.DisplayProdByID((int) tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));
+        if (evt.getClickCount() == 1) {
             TableModelCommPrest model = new TableModelCommPrest(p.getIdProd());
             tablecomm.setModel(model);
-            
-        }
-        else
-        if(evt.getClickCount()==2){
+
+        } else if (evt.getClickCount() == 2) {
 
             this.setVisible(true);
-            DetailsProduit detailproduit=new DetailsProduit(p);
+            DetailsProduit detailproduit = new DetailsProduit(p);
+            detailproduit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             detailproduit.setVisible(true);
 
         }
@@ -604,15 +616,16 @@ public class EspacePrest extends javax.swing.JFrame {
 
     private void tablePaquetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePaquetMouseClicked
 
-        Paquet p=new Paquet();
-        PaquetDAO pdao=new PaquetDAO();
-        p=pdao.FindPaquetById((int)tablePaquet.getValueAt(tablePaquet.getSelectedRow(), 0));
+        Paquet p = new Paquet();
+        PaquetDAO pdao = new PaquetDAO();
+        p = pdao.FindPaquetById((int) tablePaquet.getValueAt(tablePaquet.getSelectedRow(), 0));
 
-        if(evt.getClickCount()==2){
+        if (evt.getClickCount() == 2) {
 
             this.setVisible(true);
 
-            DetailPaquet detailpaquet=new DetailPaquet(p);
+            DetailPaquet detailpaquet = new DetailPaquet(p);
+            detailpaquet.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             detailpaquet.setVisible(true);
 
         }
@@ -649,14 +662,14 @@ public class EspacePrest extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        MyTableProduitPrest modelprod= new MyTableProduitPrest(id_prest);
+        MyTableProduitPrest modelprod = new MyTableProduitPrest(id_prest);
         tableProduit.setModel(modelprod);
         TableListPaquetModel modelpaq = new TableListPaquetModel(id_prest);
         tablePaquet.setModel(modelpaq);
-        
+
         Prestataire p = new Prestataire();
-        PrestataireDAO pdao = new  PrestataireDAO();
-        p=pdao.findPrestById(id_prest);
+        PrestataireDAO pdao = new PrestataireDAO();
+        p = pdao.findPrestById(id_prest);
         labNom.setText(p.getNomPrest());
         LabAdr.setText(p.getAdrPrest());
         LabTelFix.setText(p.getTelFixePrest().toString());
@@ -667,25 +680,47 @@ public class EspacePrest extends javax.swing.JFrame {
         LabDesc.setText(p.getDescPrest());
         labemail.setText(p.getEmailPrest());
         //lab.setText(p.getNomPrest());
-        
-         for (int i = 0; i < 7; i++) {
+
+        for (int i = 0; i < 7; i++) {
             CmbCategori.addItem(Categories[i]);
         }
-         
-        
+
+
     }//GEN-LAST:event_formWindowOpened
 
     private void btnSuppProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppProduitActionPerformed
         // TODO add your handling code here:
-        
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        JOptionPane.showConfirmDialog(null, "Voulez vous supprimer tous les produits selectionnés?", "Warning", dialogButton);
+
+        if (dialogButton == JOptionPane.YES_OPTION) { //The ISSUE is here
+            for (int i = 0; i < tableProduit.getRowCount(); i++) {
+                Boolean b = (Boolean) tableProduit.getValueAt(i, 6);
+                if (b) {
+                    new ProduitDAO().DeleteProd((int) tableProduit.getValueAt(i, 0));
+                    
+                    
+                    WebNotificationPopup pop = new WebNotificationPopup();
+                    pop.setContent("Le Produit a ete supprimer avec succes");
+                    pop.setDisplayTime(5000);
+
+                    NotificationManager.showNotification(pop);
+
+                }
+            }
+            MyTableProduit model = new MyTableProduit();
+            tableProduit.setModel(model);
+            CmbCategori.setSelectedIndex(0);
+        }
+
     }//GEN-LAST:event_btnSuppProduitActionPerformed
 
     private void btnAjoutProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutProdActionPerformed
         // TODO add your handling code here:
-        new AjoutProduit().setVisible(true);
-        
-        
-        
+        AjoutProduit ajout= new AjoutProduit(id_prest);
+                ajout.setVisible(true);
+        ajout.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
     }//GEN-LAST:event_btnAjoutProdActionPerformed
 
     private void btnModifPaquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifPaquetActionPerformed
@@ -695,6 +730,7 @@ public class EspacePrest extends javax.swing.JFrame {
             PaquetDAO pDAO = new PaquetDAO();
             p = pDAO.FindPaquetById((int) tablePaquet.getValueAt(tablePaquet.getSelectedRow(), 0));
             AjoutPaquet Modif = new AjoutPaquet(p);
+            Modif.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             Modif.setVisible(true);
         } else {
             int dialogButton = JOptionPane.CANCEL_OPTION;
@@ -705,12 +741,13 @@ public class EspacePrest extends javax.swing.JFrame {
     private void btnAjoutPaquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutPaquetActionPerformed
         // TODO add your handling code here:
         AjoutPaquet Ajout = new AjoutPaquet(id_prest);
+        Ajout.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Ajout.setVisible(true);
     }//GEN-LAST:event_btnAjoutPaquetActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
-        MyTableProduitPrest modelprod= new MyTableProduitPrest(id_prest);
+        MyTableProduitPrest modelprod = new MyTableProduitPrest(id_prest);
         tableProduit.setModel(modelprod);
         TableListPaquetModel modelpaq = new TableListPaquetModel(id_prest);
         tablePaquet.setModel(modelpaq);
@@ -718,25 +755,23 @@ public class EspacePrest extends javax.swing.JFrame {
 
     private void btnAjoutProdPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutProdPaqActionPerformed
         // TODO add your handling code here:
-        if(tableProduit.getSelectedRow()==-1){
+        if (tableProduit.getSelectedRow() == -1) {
             int dialogButton = JOptionPane.OK_CANCEL_OPTION;
-        JOptionPane.showConfirmDialog(null, "Vous n'avez selectionné aucun produit", "Warning", dialogButton);
-        }
-        else { //The ISSUE is here
+            JOptionPane.showConfirmDialog(null, "Vous n'avez selectionné aucun produit", "Warning", dialogButton);
+        } else { //The ISSUE is here
 
-        PaquetDAO pDAO = new PaquetDAO();
-        List<Paquet> liste = new ArrayList<Paquet>();
-        liste=pDAO.FindPaquetByPrest(id_prest);
-        
-        for(int i=0;i<pDAO.DisplayAllPaquets().size();i++)
-        {
-            cmbNomPaquet.addItem(liste.get(i).getNomPaquet());
+            PaquetDAO pDAO = new PaquetDAO();
+            List<Paquet> liste = new ArrayList<Paquet>();
+            liste = pDAO.FindPaquetByPrest(id_prest);
+
+            for (int i = 0; i < pDAO.DisplayAllPaquets().size(); i++) {
+                cmbNomPaquet.addItem(liste.get(i).getNomPaquet());
+            }
+            cmbNomPaquet.setVisible(true);
+            btnvalider.setVisible(true);
+
         }
-        cmbNomPaquet.setVisible(true);
-        btnvalider.setVisible(true);
-          
-        }
-        
+
     }//GEN-LAST:event_btnAjoutProdPaqActionPerformed
 
     private void btnvaliderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvaliderActionPerformed
@@ -744,24 +779,24 @@ public class EspacePrest extends javax.swing.JFrame {
         PaquetDAO pDAO = new PaquetDAO();
         ProduitPaquet prodpaq = new ProduitPaquet();
         ProduitPaquetDAO prodpaqDAO = new ProduitPaquetDAO();
-        int id_paq=pDAO.FindPaquetByNom(cmbNomPaquet.getSelectedItem().toString()).getIdPaquet();
-             prodpaq.setIdPaquet(id_paq);
-             String date_format="yyyy-MM-dd";
-            Calendar cal=Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat(date_format);
-            String dt = sdf.format(cal.getTime());
-             prodpaq.setDateAjout(dt);
-            
-                
-                prodpaq.setIdProd((Integer)tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));               
-               boolean test= prodpaqDAO.insertProduitPaquet(prodpaq);
-                 
-        if(test){  JOptionPane.showMessageDialog(this, "Produit ajouté avec succès.");
-        }
-        else {  JOptionPane.showMessageDialog(this, "Problème d'ajout"); }
+        int id_paq = pDAO.FindPaquetByNom(cmbNomPaquet.getSelectedItem().toString()).getIdPaquet();
+        prodpaq.setIdPaquet(id_paq);
+        String date_format = "yyyy-MM-dd";
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(date_format);
+        String dt = sdf.format(cal.getTime());
+        prodpaq.setDateAjout(dt);
 
-  
-     
+        prodpaq.setIdProd((Integer) tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));
+        boolean test = prodpaqDAO.insertProduitPaquet(prodpaq);
+
+        if (test) {
+            JOptionPane.showMessageDialog(this, "Produit ajouté avec succès.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Problème d'ajout");
+        }
+
+
     }//GEN-LAST:event_btnvaliderActionPerformed
 
     /**
@@ -790,14 +825,11 @@ public class EspacePrest extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(EspacePrest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        try
-    {
-        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
-    }
-    catch(Exception e)
-    {
-        //TODO exception
-    }
+        try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+        } catch (Exception e) {
+            //TODO exception
+        }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
