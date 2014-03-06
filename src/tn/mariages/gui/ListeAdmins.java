@@ -16,11 +16,10 @@
  */
 
 package tn.mariages.gui;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.AdminDAO;
-import tn.mariages.dao.ToDoDAO;
 import tn.mariages.entities.Admin;
-import tn.mariages.entities.ToDo;
 import tn.mariages.gui.TableListeAdminsModel;
 /**
  *
@@ -146,17 +145,19 @@ public class ListeAdmins extends javax.swing.JFrame {
         admin=adminDAO.findAdminById((int)tableListeAdmins.getValueAt(tableListeAdmins.getSelectedRow(), 0));
        
         AjoutAdmin modifierAdmin = new AjoutAdmin(admin);
+        modifierAdmin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         modifierAdmin.setVisible(true);
         }
         else
         {
             int dialogButton = JOptionPane.OK_CANCEL_OPTION;
-                JOptionPane.showConfirmDialog (null, "Vous n'avez selectionné aucun paquet","Warning",dialogButton);
+                JOptionPane.showConfirmDialog (null, "Vous n'avez selectionné aucun compte","Warning",dialogButton);
         }
     }//GEN-LAST:event_btnModifierActionPerformed
 
     private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
       AjoutAdmin ajoutAdmin=new AjoutAdmin();
+      ajoutAdmin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       ajoutAdmin.setVisible(true);
     }//GEN-LAST:event_btnAjouterActionPerformed
 

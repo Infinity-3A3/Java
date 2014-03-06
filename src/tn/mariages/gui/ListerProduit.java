@@ -298,7 +298,9 @@ public class ListerProduit extends javax.swing.JFrame {
             Produit p = new Produit();
 
             p = new ProduitDAO().DisplayProdByID((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-            new ModifierProduit(p.getIdProd()).setVisible(true);
+          ModifierProduit MP = new ModifierProduit(p.getIdProd());
+        MP.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        MP.setVisible(true);
         } else {
             int dialogButton = JOptionPane.CANCEL_OPTION;
             JOptionPane.showConfirmDialog(null, "Vous n'avez selectionné aucun paquet", "Warning", dialogButton);
