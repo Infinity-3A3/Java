@@ -583,10 +583,10 @@ public class EspacePrest extends javax.swing.JFrame {
             Produit p = new Produit();
 
             p = new ProduitDAO().DisplayProdByID((int) tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));
-            ModifierProduit modifProd= new ModifierProduit(p.getIdProd(),id_prest);  
-                    
+           /* ModifierProduit modifProd= new ModifierProduit(p.getIdProd(),id_prest);
+            
             modifProd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            modifProd.setVisible(true);
+            modifProd.setVisible(true);*/
         } else {
             int dialogButton = JOptionPane.CANCEL_OPTION;
             JOptionPane.showConfirmDialog(null, "Vous n'avez selectionné aucun paquet", "Warning", dialogButton);
