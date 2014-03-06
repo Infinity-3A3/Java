@@ -194,7 +194,7 @@ public class AdminDAO {
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
             ps.setString(1, login);
-
+ps.setString(2, pwd);
 
             ResultSet resultat = ps.executeQuery();
           if (resultat.next())
