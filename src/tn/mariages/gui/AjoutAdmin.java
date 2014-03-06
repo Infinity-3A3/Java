@@ -194,7 +194,7 @@ tfPwd.setText("");        // TODO add your handling code here:
            
             
             if(tfEmail.getText().equals(""))
-               ch+="Veuillez Saisir l'email de l'admin  \n";
+               ch+="Veuillez Saisir l'email de l'admin  \n\n";
             
             for (Admin admin : listeadmins) {
                 if(adminDAO.findAdminByEmail(tfEmail.getText()).equals(admin))

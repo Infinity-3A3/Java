@@ -40,7 +40,9 @@ public class ListeClients extends javax.swing.JFrame {
      */
     public ListeClients() {
         initComponents();
-        Dimension d = new Dimension(750, 340);
+        tableClient.getColumnModel().getColumn(0).setMinWidth(0);
+        tableClient.getColumnModel().getColumn(0).setMaxWidth(0);
+        Dimension d = new Dimension(700, 340);
         this.setSize(d);
     tableClient.getColumnModel().getColumn(0).setMinWidth(0);
     tableClient.getColumnModel().getColumn(0).setMaxWidth(0);
