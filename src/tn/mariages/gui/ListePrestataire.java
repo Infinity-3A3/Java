@@ -27,7 +27,8 @@ public class ListePrestataire extends javax.swing.JFrame {
      */
     public   ListePrestataire() {
         initComponents(); 
-        
+        tablePrest.getColumnModel().getColumn(0).setMinWidth(0);
+        tablePrest.getColumnModel().getColumn(0).setMaxWidth(0);
         Dimension d = new Dimension(688, 380);
         this.setSize(d);
         tablePrest.getColumnModel().getColumn(0).setMinWidth(0);
