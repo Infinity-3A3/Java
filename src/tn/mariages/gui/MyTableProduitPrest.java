@@ -40,6 +40,9 @@ public class MyTableProduitPrest extends AbstractTableModel{
     public MyTableProduitPrest(int id) {
         mylist = new ProduitDAO().DisplayProdByPrest(id);
     }
+    public MyTableProduitPrest(int id,String s) {
+        mylist = new ProduitDAO().DisplayProdByPrestByNom(id, s);
+    }
     
     
    

@@ -338,6 +338,18 @@ public class EspacePrest extends javax.swing.JFrame {
 
         jLabel13.setText("Nom:");
 
+        tfNomProduit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfNomProduitKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfNomProduitKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfNomProduitKeyTyped(evt);
+            }
+        });
+
         btnModifProduit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifProduitActionPerformed(evt);
@@ -850,6 +862,36 @@ public class EspacePrest extends javax.swing.JFrame {
         // TODO add your handling code here:
         textComm.setText(tablecomm.getValueAt(tablecomm.getSelectedRow(), 3).toString());
     }//GEN-LAST:event_tablecommMousePressed
+
+    private void tfNomProduitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomProduitKeyTyped
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tfNomProduitKeyTyped
+
+    private void tfNomProduitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomProduitKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tfNomProduitKeyPressed
+
+    private void tfNomProduitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomProduitKeyReleased
+        // TODO add your handling code here:
+        String s = tfNomProduit.getText();
+        if(!s.equals("")){
+        MyTableProduitPrest modelprod = new MyTableProduitPrest(id_prest,s);
+        tableProduit.setModel(modelprod);
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProduit.repaint();
+        }
+        else
+        {
+            MyTableProduitPrest modelprod = new MyTableProduitPrest(id_prest);
+        tableProduit.setModel(modelprod);
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProduit.repaint();
+        }
+    }//GEN-LAST:event_tfNomProduitKeyReleased
 
     /**
      * @param args the command line arguments
