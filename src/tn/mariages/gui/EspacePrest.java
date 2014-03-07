@@ -336,7 +336,7 @@ public class EspacePrest extends javax.swing.JFrame {
 
         jLabel11.setText("Catégorie:");
 
-        jLabel13.setText("Nom:");
+        jLabel13.setText("Nom Produit :");
 
         tfNomProduit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -461,7 +461,13 @@ public class EspacePrest extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tablePaquet);
 
-        jLabel16.setText("Nom:");
+        jLabel16.setText("Nom Paquet :");
+
+        TFnOMpaquet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TFnOMpaquetKeyReleased(evt);
+            }
+        });
 
         btnSuppPaquet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -892,6 +898,26 @@ public class EspacePrest extends javax.swing.JFrame {
             tableProduit.repaint();
         }
     }//GEN-LAST:event_tfNomProduitKeyReleased
+
+    private void TFnOMpaquetKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFnOMpaquetKeyReleased
+        // TODO add your handling code here:
+        String s = TFnOMpaquet.getText();
+        if(!s.equals("")){
+        TableListPaquetModel modelpaq = new TableListPaquetModel(id_prest,s);
+        tablePaquet.setModel(modelpaq);
+        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+            tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+            tablePaquet.repaint();
+        }
+        else
+        {
+            TableListPaquetModel modelpaq = new TableListPaquetModel(id_prest);
+        tablePaquet.setModel(modelpaq);
+        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+            tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+            tablePaquet.repaint();
+        }
+    }//GEN-LAST:event_TFnOMpaquetKeyReleased
 
     /**
      * @param args the command line arguments
