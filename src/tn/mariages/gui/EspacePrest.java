@@ -576,6 +576,8 @@ public class EspacePrest extends javax.swing.JFrame {
         if (CmbCategori.getSelectedIndex() == 7) {
             tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[7], id_prest));
         }
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+                    tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
     }//GEN-LAST:event_CmbCategoriActionPerformed
 
     private void btnModifProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifProduitActionPerformed
@@ -602,6 +604,8 @@ public class EspacePrest extends javax.swing.JFrame {
         if (evt.getClickCount() == 1) {
             TableModelCommPrest model = new TableModelCommPrest(p.getIdProd());
             tablecomm.setModel(model);
+            tablecomm.getColumnModel().getColumn(0).setMinWidth(0);
+                    tablecomm.getColumnModel().getColumn(0).setMaxWidth(0);
 
         } else if (evt.getClickCount() == 2) {
 
@@ -656,6 +660,8 @@ public class EspacePrest extends javax.swing.JFrame {
             }
             TableListPaquetModel model = new TableListPaquetModel(id_prest);
             tablePaquet.setModel(model);
+            tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+                    tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
         }
 
     }//GEN-LAST:event_btnSuppPaquetActionPerformed
@@ -666,6 +672,10 @@ public class EspacePrest extends javax.swing.JFrame {
         tableProduit.setModel(modelprod);
         TableListPaquetModel modelpaq = new TableListPaquetModel(id_prest);
         tablePaquet.setModel(modelpaq);
+        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+        tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
 
         Prestataire p = new Prestataire();
         PrestataireDAO pdao = new PrestataireDAO();
@@ -710,6 +720,8 @@ public class EspacePrest extends javax.swing.JFrame {
             }
             MyTableProduit model = new MyTableProduit();
             tableProduit.setModel(model);
+            tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
             CmbCategori.setSelectedIndex(0);
         }
 
@@ -749,8 +761,12 @@ public class EspacePrest extends javax.swing.JFrame {
         // TODO add your handling code here:
         MyTableProduitPrest modelprod = new MyTableProduitPrest(id_prest);
         tableProduit.setModel(modelprod);
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
         TableListPaquetModel modelpaq = new TableListPaquetModel(id_prest);
         tablePaquet.setModel(modelpaq);
+        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+        tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void btnAjoutProdPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutProdPaqActionPerformed
