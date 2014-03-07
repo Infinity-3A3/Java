@@ -31,7 +31,7 @@ import tn.mariages.dao.ProduitDAO;
 public class MyTableProduit extends AbstractTableModel {
 
     List<Produit> mylist = new ArrayList<>();
-    String[] headers = {"idprod", "Nom Produit ", "Nom Prestataire", "Categorie", "Date d'ajout", "Prix", "Supprimer"};
+    String[] header = {"idprod", "Nom Produit ", "Nom Prestataire", "Categorie", "Date d'ajout", "Prix", "Supprimer"};
     Boolean rowlist[][] = new Boolean[50][50];
 
     public MyTableProduit() {
@@ -48,12 +48,13 @@ public class MyTableProduit extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return headers.length;
+        return header.length;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         DecimalFormat f = new DecimalFormat("##");
+        
         switch (columnIndex) {
             case 0:
                 return mylist.get(rowIndex).getIdProd();
@@ -76,7 +77,7 @@ public class MyTableProduit extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        return headers[column];//To change body of generated methods, choose Tools | Templates.
+        return header[column];//To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

@@ -282,7 +282,7 @@ public class AjoutProduit extends javax.swing.JFrame {
         ProduitDAO myDAO = new ProduitDAO();
         PrestataireDAO myDAO1 = new PrestataireDAO();
         Produit p = new Produit();
-        Date myDate = new Date();
+        Date myDate = new Date("dd/mm/yyyy");
         if (cmbPrestataire.isVisible()) {
             id_prest = myDAO1.findPrestByNomPrest(cmbPrestataire.getSelectedItem().toString()).getIdPrest();
         }
