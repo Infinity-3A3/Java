@@ -16,6 +16,7 @@
  */
 package tn.mariages.gui;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import tn.mariages.entities.Produit;
@@ -52,6 +53,7 @@ public class MyTableProduit extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        DecimalFormat f = new DecimalFormat("##");
         switch (columnIndex) {
             case 0:
                 return mylist.get(rowIndex).getIdProd();
@@ -64,7 +66,7 @@ public class MyTableProduit extends AbstractTableModel {
             case 4:
                 return mylist.get(rowIndex).getDateAjoutProd();
             case 5:
-                return mylist.get(rowIndex).getPrixProd();
+                return f.format(mylist.get(rowIndex).getPrixProd());
             case 6:
                 return rowlist[rowIndex][6];
             default:

@@ -21,6 +21,7 @@ import aurelienribon.dialogdemo.SwingUtils;
 import com.alee.laf.WebLookAndFeel;
 import java.awt.Image;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -187,7 +188,7 @@ public class ModifierProduit extends javax.swing.JFrame {
                                 .addComponent(cmbCategorieProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(tfPrixProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(tfImgProd, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +219,7 @@ public class ModifierProduit extends javax.swing.JFrame {
                     .addComponent(tfImgProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAjoutImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReset)
                     .addComponent(jButton1))
@@ -229,17 +230,11 @@ public class ModifierProduit extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -296,9 +291,10 @@ public class ModifierProduit extends javax.swing.JFrame {
                 cmbPrestataire.setSelectedIndex(i);
             }
         }
+         DecimalFormat f = new DecimalFormat("##");
         tfnomProduit.setText(p.getNomProd());
         tfDescProduit.setText(p.getDescProd());
-        tfPrixProduit.setText(String.valueOf(p.getPrixProd()));
+        tfPrixProduit.setText(String.valueOf(f.format(p.getPrixProd())));
         tfImgProd.setText(p.getImgProd_P());
     }//GEN-LAST:event_formWindowOpened
 
@@ -314,6 +310,7 @@ public class ModifierProduit extends javax.swing.JFrame {
         if (cmbPrestataire.isVisible()) {
             id_prest = myDAO1.findPrestByNomPrest(cmbPrestataire.getSelectedItem().toString()).getIdPrest();
         }
+        p.setIdProd(id);
         p.setNomProd(tfnomProduit.getText());
         p.setCategorieProd(cmbCategorieProduit.getSelectedItem().toString());
         p.setPrixProd(Integer.parseInt(tfPrixProduit.getText()));

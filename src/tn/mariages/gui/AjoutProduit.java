@@ -54,8 +54,7 @@ public class AjoutProduit extends javax.swing.JFrame {
 
     String[] Categories = {"Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
     int id_prest;
-        private static final Map<String, ImageIcon> iconsCache = new HashMap<String, ImageIcon>();
-
+    private static final Map<String, ImageIcon> iconsCache = new HashMap<String, ImageIcon>();
 
     /**
      *
@@ -233,7 +232,7 @@ public class AjoutProduit extends javax.swing.JFrame {
                     .addComponent(tfImgProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAjoutImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAjoutProduit)
                     .addComponent(btnReset))
@@ -266,9 +265,12 @@ public class AjoutProduit extends javax.swing.JFrame {
     private void btnAjoutImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutImageActionPerformed
         ImgChooser = new JFileChooser();
         ImgChooser.showOpenDialog(this);
-        if(ImgChooser.getSelectedFile()!=null)
-        tfImgProd.setText(ImgChooser.getSelectedFile().getAbsolutePath());
-       
+        if (ImgChooser.getSelectedFile() != null) {
+            tfImgProd.setText(ImgChooser.getSelectedFile().getAbsolutePath());
+            
+        }
+
+
     }//GEN-LAST:event_btnAjoutImageActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
@@ -291,18 +293,16 @@ public class AjoutProduit extends javax.swing.JFrame {
         p.setShortDescProd(tfDescProduit.getText().substring(0, 10) + "...");
         p.setDateAjoutProd(myDate.toString());
         p.setIdPrest(id_prest);
-        if(tfImgProd.getText()!=null){
-        try {
-            FTPFileUploader.getInstance().UploadPic(tfImgProd.getText(), "/prod/");
-        } catch (IOException ex) {
-            Logger.getLogger(AjoutProduit.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        p.setImgProd_P("http://mariages.tn/prod/"+ImgChooser.getSelectedFile().getName());
-        }
-        else
-        {
-             
-        p.setImgProd_P("http://placehold.it/150x150&text=Img%20Produit");
+        if (tfImgProd.getText() != null) {
+            try {
+                FTPFileUploader.getInstance().UploadPic(tfImgProd.getText(), "/prod/");
+            } catch (IOException ex) {
+                Logger.getLogger(AjoutProduit.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            p.setImgProd_P("http://mariages.tn/prod/" + ImgChooser.getSelectedFile().getName());
+        } else {
+
+            p.setImgProd_P("http://placehold.it/150x150&text=Img%20Produit");
         }
         p.setImgProd_1("http://placehold.it/150x150&text=Img%20Produit");
         p.setImgProd_2("http://placehold.it/150x150&text=Img%20Produit");
@@ -335,8 +335,6 @@ public class AjoutProduit extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbPrestataireActionPerformed
 
-    
-    
     /**
      * @param args the command line arguments
      */
