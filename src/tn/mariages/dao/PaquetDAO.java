@@ -207,7 +207,7 @@ public class PaquetDAO {
 
         
 
-        String requete = "select * from paquet where NomPaquet='"+s+"' ;";
+        String requete = "select * from paquet where NomPaquet like '"+s+"%' ;";
         try {
            Statement statement = MyConnection.getInstance()
                   .cnx.createStatement();
@@ -226,6 +226,37 @@ public class PaquetDAO {
                 
             }
             return p;
+            
+        } catch (SQLException ex) {
+            System.out.println("erreur lors du chargement des paquets "+ex.getMessage());
+            return null;
+        }
+    }
+    
+    public List<Paquet> FindPaquetPrestByNom (int id,String s){
+
+
+        List<Paquet> listePaquets = new ArrayList<Paquet>();
+
+        String requete = "select * from paquet where idprest="+id+" and NomPaquet like '"+s+"%' ;";
+        try {
+           Statement statement = MyConnection.getInstance()
+                  .cnx.createStatement();
+            ResultSet resultat = statement.executeQuery(requete);
+            Paquet p =new Paquet();
+            while(resultat.next()){
+                
+                p.setIdPaquet(resultat.getInt(1));
+                p.setIdPrest(resultat.getInt(2));
+                p.setNomPaquet(resultat.getString(3));
+                p.setDescPaquet(resultat.getString(4));
+                p.setShortDescPaquet(resultat.getString(5));
+                p.setImgPaquet(resultat.getString(6));
+                p.setPrixPaquet(resultat.getDouble(7));
+
+                listePaquets.add(p);
+            }
+            return listePaquets;
             
         } catch (SQLException ex) {
             System.out.println("erreur lors du chargement des paquets "+ex.getMessage());
