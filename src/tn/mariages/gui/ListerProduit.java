@@ -97,7 +97,7 @@ public class ListerProduit extends javax.swing.JFrame {
             }
         });
 
-        pnlProduits.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produits", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Meiryo UI", 0, 24))); // NOI18N
+        pnlProduits.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produits", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Meiryo UI", 0, 24))); // NOI18N
 
         btnAjoutProd.setText("Ajouter Produit");
         btnAjoutProd.addActionListener(new java.awt.event.ActionListener() {
@@ -121,9 +121,13 @@ public class ListerProduit extends javax.swing.JFrame {
         });
 
         jTable1.setAutoCreateRowSorter(true);
+        jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable1.setModel(new MyTableProduit()
         );
         jTable1.setToolTipText("");
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.setRowSorter(null);
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setText("Filtrer par categories : ");
@@ -172,7 +176,7 @@ public class ListerProduit extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(cmbCategorieProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)

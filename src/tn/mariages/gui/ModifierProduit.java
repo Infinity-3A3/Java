@@ -20,15 +20,19 @@ import aurelienribon.dialogdemo.MyDialog;
 import aurelienribon.dialogdemo.SwingUtils;
 import com.alee.laf.WebLookAndFeel;
 import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.ProduitDAO;
 import tn.mariages.entities.Prestataire;
 import tn.mariages.entities.Produit;
+import tn.mariages.util.FTPFileUploader;
 
 /**
  *
@@ -39,6 +43,7 @@ public class ModifierProduit extends javax.swing.JFrame {
     String[] Categories = {"Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
     int id;
     Produit p = new Produit();
+    private int id_prest;
 
     /**
      *
@@ -53,6 +58,7 @@ public class ModifierProduit extends javax.swing.JFrame {
         this.id = id;
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,6 +86,7 @@ public class ModifierProduit extends javax.swing.JFrame {
         tfDescProduit = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         cmbPrestataire = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -144,6 +151,13 @@ public class ModifierProduit extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Mettre a jour");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -151,7 +165,10 @@ public class ModifierProduit extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnReset)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnReset))
                     .addComponent(tfnomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +219,9 @@ public class ModifierProduit extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAjoutImage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(btnReset)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReset)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -280,12 +299,47 @@ public class ModifierProduit extends javax.swing.JFrame {
         tfnomProduit.setText(p.getNomProd());
         tfDescProduit.setText(p.getDescProd());
         tfPrixProduit.setText(String.valueOf(p.getPrixProd()));
-        tfImgProd.setText(p.getImgProd_1());
+        tfImgProd.setText(p.getImgProd_P());
     }//GEN-LAST:event_formWindowOpened
 
     private void cmbPrestataireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPrestataireActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbPrestataireActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         ProduitDAO myDAO = new ProduitDAO();
+        PrestataireDAO myDAO1 = new PrestataireDAO();
+        Produit p = new Produit();
+        Date myDate = new Date();
+        if (cmbPrestataire.isVisible()) {
+            id_prest = myDAO1.findPrestByNomPrest(cmbPrestataire.getSelectedItem().toString()).getIdPrest();
+        }
+        p.setNomProd(tfnomProduit.getText());
+        p.setCategorieProd(cmbCategorieProduit.getSelectedItem().toString());
+        p.setPrixProd(Integer.parseInt(tfPrixProduit.getText()));
+        p.setDescProd(tfDescProduit.getText());
+        p.setShortDescProd(tfDescProduit.getText().substring(0, 10) + "...");
+        p.setDateAjoutProd(myDate.toString());
+        p.setIdPrest(id_prest);
+        if(tfImgProd.getText()!=null){
+        try {
+            FTPFileUploader.getInstance().UploadPic(tfImgProd.getText(), "/prod/");
+        } catch (IOException ex) {
+            Logger.getLogger(AjoutProduit.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        p.setImgProd_P("http://mariages.tn/prod/"+ImgChooser.getSelectedFile().getName());
+        }
+        else
+        {
+             
+        p.setImgProd_P("http://placehold.it/150x150&text=Img%20Produit");
+        }
+        p.setImgProd_1("http://placehold.it/150x150&text=Img%20Produit");
+        p.setImgProd_2("http://placehold.it/150x150&text=Img%20Produit");
+        p.setImgProd_3("http://placehold.it/150x150&text=Img%20Produit");
+        p.setImgProd_4("http://placehold.it/150x150&text=Img%20Produit");
+        myDAO.UpdateProd(p);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,6 +388,7 @@ public class ModifierProduit extends javax.swing.JFrame {
     private javax.swing.JButton btnReset;
     private javax.swing.JComboBox cmbCategorieProduit;
     private javax.swing.JComboBox cmbPrestataire;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
