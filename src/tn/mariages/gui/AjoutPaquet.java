@@ -52,6 +52,8 @@ public class AjoutPaquet extends javax.swing.JFrame {
         this.id_prest=id_prest;
         BtnModifierPaquet.setVisible(false);
         cmbProduitPaquet.setVisible(false);
+        jLabel6.setVisible(false);
+                
     }
 
     /**

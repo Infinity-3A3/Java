@@ -69,6 +69,7 @@ public class AjoutProduit extends javax.swing.JFrame {
         initComponents();
         this.id_prest = id_prest;
         cmbPrestataire.setVisible(false);
+        jLabel6.setVisible(false);
     }
 
     /**
