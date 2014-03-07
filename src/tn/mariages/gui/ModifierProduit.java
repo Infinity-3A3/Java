@@ -87,7 +87,7 @@ public class ModifierProduit extends javax.swing.JFrame {
         tfDescProduit = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         cmbPrestataire = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        btnmaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -152,10 +152,10 @@ public class ModifierProduit extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Mettre a jour");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnmaj.setText("Mettre a jour");
+        btnmaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnmajActionPerformed(evt);
             }
         });
 
@@ -167,7 +167,7 @@ public class ModifierProduit extends javax.swing.JFrame {
                 .addGap(71, 71, 71)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnmaj)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnReset))
                     .addComponent(tfnomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,7 +222,7 @@ public class ModifierProduit extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReset)
-                    .addComponent(jButton1))
+                    .addComponent(btnmaj))
                 .addContainerGap())
         );
 
@@ -302,7 +302,7 @@ public class ModifierProduit extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbPrestataireActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnmajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmajActionPerformed
          ProduitDAO myDAO = new ProduitDAO();
         PrestataireDAO myDAO1 = new PrestataireDAO();
         Produit p = new Produit();
@@ -336,7 +336,7 @@ public class ModifierProduit extends javax.swing.JFrame {
         p.setImgProd_3("http://placehold.it/150x150&text=Img%20Produit");
         p.setImgProd_4("http://placehold.it/150x150&text=Img%20Produit");
         myDAO.UpdateProd(p);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnmajActionPerformed
 
     /**
      * @param args the command line arguments
@@ -383,9 +383,9 @@ public class ModifierProduit extends javax.swing.JFrame {
     private javax.swing.JFileChooser ImgChooser;
     private javax.swing.JButton btnAjoutImage;
     private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnmaj;
     private javax.swing.JComboBox cmbCategorieProduit;
     private javax.swing.JComboBox cmbPrestataire;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
