@@ -22,7 +22,9 @@ import com.alee.laf.WebLookAndFeel;
 import java.awt.Image;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -50,16 +52,15 @@ public class ModifierProduit extends javax.swing.JFrame {
      *
      * Creates new form AjoutProduit
      */
-    
     public ModifierProduit() {
-        
+
         initComponents();
     }
+
     public ModifierProduit(int id) {
         this.id = id;
         initComponents();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -267,17 +268,17 @@ public class ModifierProduit extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbCategorieProduitActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        p=new ProduitDAO().DisplayProdByID(id);
+        p = new ProduitDAO().DisplayProdByID(id);
         for (int i = 0; i < 7; i++) {
-            
+
             cmbCategorieProduit.addItem(Categories[i]);
         }
-         for (int i = 0; i < 7; i++) {
-             if(p.getCategorieProd().equals(Categories[i])){
-                 cmbCategorieProduit.setSelectedIndex(i);
-             }
-         }
-         
+        for (int i = 0; i < 7; i++) {
+            if (p.getCategorieProd().equals(Categories[i])) {
+                cmbCategorieProduit.setSelectedIndex(i);
+            }
+        }
+
         PrestataireDAO myAO = new PrestataireDAO();
         List<Prestataire> myList = new ArrayList<>();
         myList = myAO.DisplayAllPrestataire();
@@ -286,12 +287,12 @@ public class ModifierProduit extends javax.swing.JFrame {
 
         }
         int pres = new ProduitDAO().DisplayProdByID(this.id).getIdPrest();
-         for (int i = 0; i < myList.size(); i++) {
-            if(new PrestataireDAO().findPrestById(pres).getNomPrest().equals(myList.get(i).getNomPrest())){
+        for (int i = 0; i < myList.size(); i++) {
+            if (new PrestataireDAO().findPrestById(pres).getNomPrest().equals(myList.get(i).getNomPrest())) {
                 cmbPrestataire.setSelectedIndex(i);
             }
         }
-         DecimalFormat f = new DecimalFormat("##");
+        DecimalFormat f = new DecimalFormat("##");
         tfnomProduit.setText(p.getNomProd());
         tfDescProduit.setText(p.getDescProd());
         tfPrixProduit.setText(String.valueOf(f.format(p.getPrixProd())));
@@ -303,10 +304,13 @@ public class ModifierProduit extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbPrestataireActionPerformed
 
     private void btnmajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmajActionPerformed
-         ProduitDAO myDAO = new ProduitDAO();
+        ProduitDAO myDAO = new ProduitDAO();
         PrestataireDAO myDAO1 = new PrestataireDAO();
         Produit p = new Produit();
-        Date myDate = new Date();
+        String date_format = "yyyy-MM-dd";
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(date_format);
+        String dt = sdf.format(cal.getTime());
         if (cmbPrestataire.isVisible()) {
             id_prest = myDAO1.findPrestByNomPrest(cmbPrestataire.getSelectedItem().toString()).getIdPrest();
         }
@@ -316,20 +320,18 @@ public class ModifierProduit extends javax.swing.JFrame {
         p.setPrixProd(Integer.parseInt(tfPrixProduit.getText()));
         p.setDescProd(tfDescProduit.getText());
         p.setShortDescProd(tfDescProduit.getText().substring(0, 10) + "...");
-        p.setDateAjoutProd(myDate.toString());
+        p.setDateAjoutProd(dt);
         p.setIdPrest(id_prest);
-        if(tfImgProd.getText()!=null){
-        try {
-            FTPFileUploader.getInstance().UploadPic(tfImgProd.getText(), "/prod/");
-        } catch (IOException ex) {
-            Logger.getLogger(AjoutProduit.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        p.setImgProd_P("http://mariages.tn/prod/"+ImgChooser.getSelectedFile().getName());
-        }
-        else
-        {
-             
-        p.setImgProd_P("http://placehold.it/150x150&text=Img%20Produit");
+        if (tfImgProd.getText() != null) {
+            try {
+                FTPFileUploader.getInstance().UploadPic(tfImgProd.getText(), "/prod/");
+            } catch (IOException ex) {
+                Logger.getLogger(AjoutProduit.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            p.setImgProd_P("http://mariages.tn/prod/" + ImgChooser.getSelectedFile().getName());
+        } else {
+
+            p.setImgProd_P("http://placehold.it/150x150&text=Img%20Produit");
         }
         p.setImgProd_1("http://placehold.it/150x150&text=Img%20Produit");
         p.setImgProd_2("http://placehold.it/150x150&text=Img%20Produit");

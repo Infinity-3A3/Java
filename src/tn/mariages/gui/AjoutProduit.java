@@ -31,7 +31,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -267,7 +269,7 @@ public class AjoutProduit extends javax.swing.JFrame {
         ImgChooser.showOpenDialog(this);
         if (ImgChooser.getSelectedFile() != null) {
             tfImgProd.setText(ImgChooser.getSelectedFile().getAbsolutePath());
-            
+
         }
 
 
@@ -282,7 +284,10 @@ public class AjoutProduit extends javax.swing.JFrame {
         ProduitDAO myDAO = new ProduitDAO();
         PrestataireDAO myDAO1 = new PrestataireDAO();
         Produit p = new Produit();
-        Date myDate = new Date("dd/mm/yyyy");
+        String date_format = "yyyy-MM-dd";
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(date_format);
+        String dt = sdf.format(cal.getTime());
         if (cmbPrestataire.isVisible()) {
             id_prest = myDAO1.findPrestByNomPrest(cmbPrestataire.getSelectedItem().toString()).getIdPrest();
         }
@@ -291,7 +296,7 @@ public class AjoutProduit extends javax.swing.JFrame {
         p.setPrixProd(Integer.parseInt(tfPrixProduit.getText()));
         p.setDescProd(tfDescProduit.getText());
         p.setShortDescProd(tfDescProduit.getText().substring(0, 10) + "...");
-        p.setDateAjoutProd(myDate.toString());
+        p.setDateAjoutProd(dt);
         p.setIdPrest(id_prest);
         if (tfImgProd.getText() != null) {
             try {
