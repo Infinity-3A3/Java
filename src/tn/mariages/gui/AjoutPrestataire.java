@@ -449,7 +449,7 @@ public class AjoutPrestataire extends javax.swing.JFrame {
          mylist=prestataireDAO.DisplayAllPrestataire();
          
          
-       if(jtNomPrest.getText().equals("")|| jtDescPrest.getText().equals("")|| jtEmailPrest.getText().equals("") || jtpwdPrest.getText().equals("") || jtAdrPrest.getText().equals("") || cmbVillePrest.getSelectedItem().equals("--Choisir ville--")|| cmbSpecialitePrest.getSelectedItem().equals("--Choisir Specialite--")|| cmbCategoriePrest.getSelectedItem().equals("--Choisir catégorie--")||!matcher.matches()||!matcher2.matches()||!matcher3.matches()){
+       if(jtNomPrest.getText().equals("")||jtpwdPrest.getText().length()<6|| jtDescPrest.getText().equals("")|| jtEmailPrest.getText().equals("") || jtpwdPrest.getText().equals("") || jtAdrPrest.getText().equals("") || cmbVillePrest.getSelectedItem().equals("--Choisir ville--")|| cmbSpecialitePrest.getSelectedItem().equals("--Choisir Specialite--")|| cmbCategoriePrest.getSelectedItem().equals("--Choisir catégorie--")||!matcher.matches()||!matcher2.matches()||!matcher3.matches()){
            String ch="";
            if(jtNomPrest.getText().equals(""))
                ch+="Veuillez saisir le Nom du prestataire \n\n";
@@ -460,6 +460,8 @@ public class AjoutPrestataire extends javax.swing.JFrame {
                ch+="Veuillez donner l'adresse du prestataire  \n";
             if(cmbVillePrest.getSelectedItem().toString().equals(""))
                ch+="Veuillez donner la ville du prestataire  \n";
+            if(jtpwdPrest.getText().length()<6)
+                 ch+="le mot de passe doit contenir au moins 6 caracteres";
             if(jtNumMobilPrest.getText().equals(""))
                ch+="Veuillez donner le numero de telephone mobile  du prestataire  \n";
              else if(!matcher2.matches())

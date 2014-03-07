@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import tn.mariages.dao.PrestataireDAO;
@@ -75,6 +76,13 @@ public class ListePrestataire extends javax.swing.JFrame {
         LabTel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -222,7 +230,7 @@ public class ListePrestataire extends javax.swing.JFrame {
                 .addComponent(BtnModifierPres, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BtnSupprimePres, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -250,9 +258,7 @@ public class ListePrestataire extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,6 +274,7 @@ public class ListePrestataire extends javax.swing.JFrame {
     private void BtnAjouterPresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAjouterPresActionPerformed
          setVisible(true);
          AjoutPrestataire ajoutPrest=new AjoutPrestataire();
+           ajoutPrest.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
          ajoutPrest.setVisible(true);
 
 
@@ -321,6 +328,7 @@ public class ListePrestataire extends javax.swing.JFrame {
             
          this.setVisible(true);
         Modif_Prest modifPrest=new Modif_Prest(prest);
+          modifPrest.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
          modifPrest.setVisible(true);
            
         }else
@@ -370,6 +378,12 @@ public class ListePrestataire extends javax.swing.JFrame {
        
        }
     }//GEN-LAST:event_tablePrestMouseClicked
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+                     
+                    MyTablePrest  model = new MyTablePrest();
+                    tablePrest.setModel(model);
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments

@@ -38,11 +38,17 @@ ToDo todo1=new ToDo();
          jLabel4.setText("AJouter une todo");
        
     }
-
+public AjouterToDoClient(int id) {
+        initComponents();
+        btnModifier.setVisible(false);
+         jLabel4.setText("AJouter une todo");
+         idcl.setText(id+"");
+         idcl.setVisible(false);
+    }
     
      public AjouterToDoClient(ToDo t) {
         initComponents();
-            jLabel4.setText("Modifier le paquet "+t.getIdToDo());
+           jLabel4.setText("Modifier le paquet "+t.getIdToDo());
      btnAjouter.setVisible(false);
      tfTitre.setText(t.getTitreToDo());
      tfDescription.setText(t.getDescToDo());
@@ -51,6 +57,8 @@ ToDo todo1=new ToDo();
      cbRDV.setSelected(t.isLabelRDV());
      cbPayement.setSelected(t.isLabelPayement());
      todo1=t;
+  
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,6 +83,7 @@ ToDo todo1=new ToDo();
         btnAjouter = new javax.swing.JButton();
         btnModifier = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        idcl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -186,6 +195,8 @@ ToDo todo1=new ToDo();
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(idcl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -193,7 +204,11 @@ ToDo todo1=new ToDo();
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(idcl)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -232,7 +247,7 @@ ToDo todo1=new ToDo();
        
       ToDoDAO todoDAO=new ToDoDAO();
      
-      todo.setIdClient(1);
+      todo.setIdClient(Integer.parseInt(idcl.getText()));
       todo.setTitreToDo(tfTitre.getText());
       todo.setDescToDo(tfDescription.getText());
    todo.setDateToDo(date1.toString());
@@ -278,7 +293,7 @@ ToDo todo1=new ToDo();
      
       ToDoDAO todoDAO=new ToDoDAO();
     todo.setIdToDo(todo1.getIdToDo());
-      todo.setIdClient(1);
+      todo.setIdClient(todo1.getIdClient());
       todo.setTitreToDo(tfTitre.getText());
       todo.setDescToDo(tfDescription.getText());
       todo.setDateToDo(date1.toString());
@@ -339,6 +354,7 @@ ToDo todo1=new ToDo();
     private javax.swing.JCheckBox cbRDV;
     private javax.swing.JCheckBox cbUrgent;
     private com.toedter.calendar.JDateChooser dateToDo;
+    private javax.swing.JLabel idcl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -17,6 +17,7 @@
 package tn.mariages.gui;
 
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.ClientDAO;
 import tn.mariages.dao.PaquetDAO;
@@ -40,6 +41,7 @@ public class EspaceClient extends javax.swing.JFrame {
     /**
      * Creates new form EspaceClient
      */
+    int id;
     public EspaceClient() {
         
         
@@ -67,6 +69,22 @@ public class EspaceClient extends javax.swing.JFrame {
         
         tablePanier.getColumnModel().getColumn(1).setMinWidth(0);
         tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
+        Client c=new Client ();
+            ClientDAO clDAo=new ClientDAO();
+            c=clDAo.findClientById(23);
+            Idclient.setText(c.getIdClient()+"");
+            Idclient.setVisible(false);
+            NomClient.setText(c.getNomDeFamille()+ " "+c.getPrenomMari());
+            labNomMari.setText(c.getPrenomMari());
+            LabPrenomEpouse.setText(c.getPrenomEpouse());
+            LabNom.setText(c.getNomDeFamille());
+            labemail.setText(c.getEmailClient());
+            LabVille.setText(c.getVilleClient());
+            LabTel.setText(c.getTelClient());
+            LabBudget.setText(c.getBudget()+"");
+            LabDateDebut.setText(c.getDateDebut());
+            LabDateFin.setText(c.getDateFin());
+          this.id=c.getIdClient();
         
     }
      public EspaceClient(int id,String type) {
@@ -87,7 +105,8 @@ public class EspaceClient extends javax.swing.JFrame {
             LabBudget.setText(c.getBudget()+"");
             LabDateDebut.setText(c.getDateDebut());
             LabDateFin.setText(c.getDateFin());
-            
+            this.id=c.getIdClient();
+                        Idclient.setVisible(false);
       }
         
         
@@ -126,6 +145,7 @@ public class EspaceClient extends javax.swing.JFrame {
         LabDateFin = new javax.swing.JLabel();
         BtnModifierProfil = new javax.swing.JButton();
         LabImageClient = new javax.swing.JLabel();
+        ListToDo = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablePanier = new javax.swing.JTable();
@@ -156,6 +176,13 @@ public class EspaceClient extends javax.swing.JFrame {
         btnRec = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -209,6 +236,13 @@ public class EspaceClient extends javax.swing.JFrame {
 
         LabImageClient.setText("jLabel12");
 
+        ListToDo.setText("Liste toDo");
+        ListToDo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListToDoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -229,25 +263,29 @@ public class EspaceClient extends javax.swing.JFrame {
                     .addComponent(LabImageClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(124, 124, 124)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(BtnModifierProfil)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel9))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(LabDateFin)
-                                .addComponent(LabBudget)
-                                .addComponent(LabDateDebut)
-                                .addComponent(LabTel)
-                                .addComponent(labemail)
-                                .addComponent(LabVille)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(BtnModifierProfil)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel7)
+                                        .addComponent(jLabel9))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(LabDateFin)
+                                        .addComponent(LabBudget)
+                                        .addComponent(LabDateDebut)
+                                        .addComponent(LabTel)
+                                        .addComponent(labemail)
+                                        .addComponent(LabVille)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ListToDo)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,8 +295,9 @@ public class EspaceClient extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(labemail))
-                        .addGap(16, 16, 16)
+                            .addComponent(labemail)
+                            .addComponent(ListToDo))
+                        .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(LabVille))
@@ -431,7 +470,7 @@ public class EspaceClient extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAjoutProdPanier, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addComponent(btnAjoutProdPanier, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(23, 23, 23))
         );
@@ -916,34 +955,68 @@ if(cmbCategorieProduit.getSelectedIndex()==0){
              this.setVisible(true);
              
              ModifierClient modifclient=new ModifierClient(Integer.parseInt(Idclient.getText()));
+             modifclient.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
              modifclient.setVisible(true);
     }//GEN-LAST:event_BtnModifierProfilActionPerformed
 
     private void btnRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecActionPerformed
         AjouterReclamation rec = new AjouterReclamation();
+        rec.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         rec.setVisible(true);
     }//GEN-LAST:event_btnRecActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             
-
+ if(tableProduit.getSelectedRow()!=-1){
             int id = (int) tableProduit.getModel().getValueAt(tableProduit.getSelectedRow(), 0);
 
             int idclient = Integer.parseInt(Idclient.getText());
 
             ListeCommentaires c = new ListeCommentaires(idclient, id);
-
+            c.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             c.setVisible(true);
-
+ }else
+        {
+            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
+                JOptionPane.showConfirmDialog (null, "Vous n'avez selectionné aucun produit","Warning",dialogButton);
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void DeconnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeconnexionActionPerformed
        this.setVisible(false);
           Authentication authen =new Authentication();
+          authen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
           authen.setVisible(true);
 
     }//GEN-LAST:event_DeconnexionActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        
+Client c=new Client ();
+            ClientDAO clDAo=new ClientDAO();
+            c=clDAo.findClientById(id);
+            Idclient.setText(c.getIdClient()+"");
+            Idclient.setVisible(false);
+            NomClient.setText(c.getNomDeFamille()+ " "+c.getPrenomMari());
+            labNomMari.setText(c.getPrenomMari());
+            LabPrenomEpouse.setText(c.getPrenomEpouse());
+            LabNom.setText(c.getNomDeFamille());
+            labemail.setText(c.getEmailClient());
+            LabVille.setText(c.getVilleClient());
+            LabTel.setText(c.getTelClient());
+            LabBudget.setText(c.getBudget()+"");
+            LabDateDebut.setText(c.getDateDebut());
+            LabDateFin.setText(c.getDateFin());        
+        
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void ListToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListToDoActionPerformed
+                this.setVisible(true);
+                ListeToDoClient lstToDoCl=new ListeToDoClient(id);
+                lstToDoCl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+               lstToDoCl.setVisible(true);
+    }//GEN-LAST:event_ListToDoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -999,6 +1072,7 @@ try
     private javax.swing.JLabel LabPrenomEpouse;
     private javax.swing.JLabel LabTel;
     private javax.swing.JLabel LabVille;
+    private javax.swing.JButton ListToDo;
     private javax.swing.JLabel NomClient;
     private javax.swing.JLabel Prixtotal;
     private javax.swing.JButton Supprimer;

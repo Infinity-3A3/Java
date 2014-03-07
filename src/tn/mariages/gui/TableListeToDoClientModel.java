@@ -39,8 +39,8 @@ public class TableListeToDoClientModel extends AbstractTableModel{
     String [] header={"id","Titre","Description","Date","label","Supprimer"};
     //List<Boolean> rowList=new ArrayList<Boolean>(getRowCount());
     Boolean rowlist[][] = new Boolean[50][50];
-    public TableListeToDoClientModel(){
-    listToDo=new ToDoDAO().DisplayAllToDoByClient(1);
+    public TableListeToDoClientModel(int id){
+    listToDo=new ToDoDAO().DisplayAllToDoByClient(id);
     for (int i = 0; i < getRowCount(); i++) {
         rowlist[i][5]=Boolean.FALSE;
       

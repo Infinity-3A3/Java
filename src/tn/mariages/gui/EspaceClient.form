@@ -9,6 +9,7 @@
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <Events>
+    <EventHandler event="windowGainedFocus" listener="java.awt.event.WindowFocusListener" parameters="java.awt.event.WindowEvent" handler="formWindowGainedFocus"/>
     <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
   </Events>
   <AuxValues>
@@ -139,30 +140,36 @@
                       </Group>
                       <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="BtnModifierProfil" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="LabDateFin" min="-2" max="-2" attributes="0"/>
-                                      <Component id="LabBudget" min="-2" max="-2" attributes="0"/>
-                                      <Component id="LabDateDebut" min="-2" max="-2" attributes="0"/>
-                                      <Component id="LabTel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labemail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="LabVille" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="BtnModifierProfil" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="LabDateFin" min="-2" max="-2" attributes="0"/>
+                                              <Component id="LabBudget" min="-2" max="-2" attributes="0"/>
+                                              <Component id="LabDateDebut" min="-2" max="-2" attributes="0"/>
+                                              <Component id="LabTel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="labemail" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="LabVille" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="ListToDo" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -175,8 +182,9 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="labemail" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ListToDo" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="LabVille" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -334,6 +342,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel12"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="ListToDo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Liste toDo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ListToDoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -503,7 +519,7 @@
                       <Component id="jScrollPane4" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnAjoutProdPanier" pref="47" max="32767" attributes="0"/>
+                          <Component id="btnAjoutProdPanier" pref="51" max="32767" attributes="0"/>
                           <Component id="jButton1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>

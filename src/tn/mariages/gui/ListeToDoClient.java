@@ -32,6 +32,17 @@ public class ListeToDoClient extends javax.swing.JFrame {
      */
     public ListeToDoClient() {
         initComponents();
+   tabelListeToDoClient.getColumnModel().getColumn(0).setMinWidth(0);
+        tabelListeToDoClient.getColumnModel().getColumn(0).setMaxWidth(0);
+  }
+    int id;
+     public ListeToDoClient(int id) {
+        initComponents();
+        tabelListeToDoClient.getColumnModel().getColumn(0).setMinWidth(0);
+        tabelListeToDoClient.getColumnModel().getColumn(0).setMaxWidth(0);
+        idclinet.setText(id+"");
+        idclinet.setVisible(false);
+        this.id=id;
    
   }
 
@@ -51,14 +62,27 @@ public class ListeToDoClient extends javax.swing.JFrame {
         btnModifier = new javax.swing.JButton();
         btnSupprimer = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        idclinet = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
-        tabelListeToDoClient.setModel(new TableListeToDoClientModel()
+        tabelListeToDoClient.setModel(new TableListeToDoClientModel(id)
         );
         jScrollPane1.setViewportView(tabelListeToDoClient);
 
         btnAjouter.setText("Ajouter");
+        btnAjouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAjouterActionPerformed(evt);
+            }
+        });
 
         btnModifier.setText("Modifier");
         btnModifier.addActionListener(new java.awt.event.ActionListener() {
@@ -105,13 +129,15 @@ public class ListeToDoClient extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAjouter)
                     .addComponent(btnModifier)
                     .addComponent(btnSupprimer))
                 .addContainerGap())
         );
+
+        idclinet.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,11 +147,15 @@ public class ListeToDoClient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(idclinet)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(idclinet)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -175,10 +205,23 @@ public class ListeToDoClient extends javax.swing.JFrame {
                         todoDAO.deleteToDo(id[j]);
                         j--;
                     }
-                    TableListeToDoClientModel model = new TableListeToDoClientModel();
+                    TableListeToDoClientModel model = new TableListeToDoClientModel(Integer.parseInt(idclinet.getText()));
                     tabelListeToDoClient.setModel(model);
                 }
     }//GEN-LAST:event_btnSupprimerActionPerformed
+
+    private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
+            this.setVisible(true);
+         AjouterToDoClient ajouttodocl =new AjouterToDoClient(Integer.parseInt(idclinet.getText()));
+                ajouttodocl.setVisible(true);
+
+    }//GEN-LAST:event_btnAjouterActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+                
+              TableListeToDoClientModel model = new TableListeToDoClientModel(Integer.parseInt(idclinet.getText()));
+                    tabelListeToDoClient.setModel(model);
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
@@ -219,6 +262,7 @@ public class ListeToDoClient extends javax.swing.JFrame {
     private javax.swing.JButton btnAjouter;
     private javax.swing.JButton btnModifier;
     private javax.swing.JButton btnSupprimer;
+    private javax.swing.JLabel idclinet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
