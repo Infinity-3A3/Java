@@ -88,11 +88,9 @@ public class EspacePrest extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablecomm = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         textComm = new javax.swing.JTextPane();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         CmbCategori = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
@@ -294,12 +292,9 @@ public class EspacePrest extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab1", jScrollPane1);
 
-        jLabel3.setText("jLabel3");
-        jTabbedPane1.addTab("tab3", jLabel3);
-        jTabbedPane1.addTab("tab1", jTabbedPane2);
-        jTabbedPane1.addTab("tab2", jTabbedPane3);
-
         jScrollPane2.setViewportView(textComm);
+
+        jLabel3.setText("Commentaire : ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -308,6 +303,9 @@ public class EspacePrest extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane2)
                     .addComponent(jTabbedPane1))
                 .addContainerGap())
@@ -315,9 +313,11 @@ public class EspacePrest extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -836,15 +836,15 @@ public class EspacePrest extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnvaliderActionPerformed
 
-    private void tablecommKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablecommKeyPressed
-        // TODO add your handling code here:
-        textComm.setText(tablecomm.getValueAt(tablecomm.getSelectedRow(), 3).toString());
-    }//GEN-LAST:event_tablecommKeyPressed
-
     private void tablecommKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablecommKeyReleased
         // TODO add your handling code here:
         textComm.setText(tablecomm.getValueAt(tablecomm.getSelectedRow(), 3).toString());
     }//GEN-LAST:event_tablecommKeyReleased
+
+    private void tablecommKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablecommKeyPressed
+        // TODO add your handling code here:
+        textComm.setText(tablecomm.getValueAt(tablecomm.getSelectedRow(), 3).toString());
+    }//GEN-LAST:event_tablecommKeyPressed
 
     private void tablecommMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablecommMousePressed
         // TODO add your handling code here:
@@ -936,8 +936,6 @@ public class EspacePrest extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JLabel jlab;
     private javax.swing.JLabel labNom;
     private javax.swing.JLabel labemail;
