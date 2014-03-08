@@ -13,7 +13,6 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.*;
 import tn.mariages.dao.panierProduitDAO;
-import tn.mariages.entities.PanierProduit;
 
 public class BarChart extends ApplicationFrame {
     public BarChart(final String title) throws IOException {
@@ -24,6 +23,7 @@ public class BarChart extends ApplicationFrame {
         chartPanel.setPreferredSize(new java.awt.Dimension(400, 400));
         setContentPane(chartPanel);
     }
+    
 public CategoryDataset createDataset() throws IOException {
         // 0. Création d'un diagramme.
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -92,7 +92,9 @@ public CategoryDataset createDataset() throws IOException {
         renderer.setItemLabelsVisible(true); 
         return chart;
     }
-    public static void main(final String[] args) throws IOException {
+    
+        
+        public static void main(final String[] args) throws IOException {
         final BarChart demo = new BarChart("Ventes par mois");
         
         demo.pack();

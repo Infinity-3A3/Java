@@ -20,8 +20,11 @@ package tn.mariages.gui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -29,7 +32,24 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.ui.ApplicationFrame;
+import org.jfree.ui.RefineryUtilities;
+import tn.mariages.dao.CommentaireDAO;
+import tn.mariages.dao.ProduitDAO;
+import tn.mariages.dao.panierProduitDAO;
+import tn.mariages.entities.PanierProduit;
+import tn.mariages.entities.Produit;
 
 /**
  *
@@ -290,7 +310,35 @@ LFP.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-//STATS x 3
+       //<editor-fold defaultstate="collapsed" desc="Bar Chart">      
+        BarChart demo;
+        try {
+            demo = new BarChart("Ventes par mois");
+            demo.pack();
+        RefineryUtilities.centerFrameOnScreen(demo);
+               demo.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        demo.setSize(700, 350);
+        demo.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Accueil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+
+     // </editor-fold>   
+       // <editor-fold defaultstate="collapsed" desc="Stat Ventes Prod">
+         StatVentesProd pchart = new StatVentesProd();
+        pchart.setLocation(200, 300);
+         pchart.setSize(400, 400);
+        pchart.setVisible(true);
+       // </editor-fold>
+        
+        PieChartComs pchartc;
+        pchartc = new PieChartComs();
+        pchartc.setSize(400,400);
+        pchartc.setLocation(600, 300);
+        pchartc.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -389,3 +437,151 @@ try
     private javax.swing.JButton jbtnRec;
     // End of variables declaration//GEN-END:variables
 }
+
+// <editor-fold defaultstate="collapsed" desc=" BarChart Class">
+class BarChart extends JFrame {
+
+public BarChart(final String title) throws IOException {
+        super(title);
+        final CategoryDataset dataset = createDataset();
+        final JFreeChart graphe = createChart(dataset);
+        final ChartPanel chartPanel = new ChartPanel(graphe);
+        chartPanel.setPreferredSize(new java.awt.Dimension(400, 400));
+        setContentPane(chartPanel);
+    }
+    
+public CategoryDataset createDataset() throws IOException {
+        // 0. Création d'un diagramme.
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+       //Valeurs statiques
+     
+        panierProduitDAO ppDAO = new panierProduitDAO();
+        int[] sellsByMonth = ppDAO.getSellsByMonth();
+        String mois;
+        for (int i = 0; i < 12; i++) {
+           switch (i)
+            {
+     
+          case 0:
+    mois="Janvier"; break;
+          case 1:
+    mois="Février"; break;      
+          case 2:
+    mois="Mars"; break;      
+          case 3:
+    mois="Avril"; break;      
+          case 4:
+    mois="Mai"; break;      
+          case 5:
+    mois="Juin"; break;      
+          case 6:
+    mois="Juillet"; break;
+            case 7:
+    mois="Août"; break;
+           case 8:
+    mois="Septembre"; break;
+           case 9:
+    mois="Octobre"; break;
+           case 10:
+    mois="Novembre"; break;
+          case 11:
+    mois="Décembre"; break;
+            
+  default:
+   mois="";             
+                }
+            
+        dataset.addValue(sellsByMonth[i], mois, " ");
+    }
+       /* dataset.addValue(10, "Taux de défaut de couverture", " ");
+        dataset.addValue(12, " Taux de couverture Outdoor", " ");
+        dataset.addValue(25, "Taux de couverture Indoor", " ");
+        dataset.addValue(19, "Taux de couverture Incar", " ");*/
+       return dataset;
+    }
+public JFreeChart createChart(CategoryDataset dataset) {
+        final JFreeChart chart = ChartFactory.createBarChart(
+                " Ventes par mois ", // chart title
+                " ", // domain axis label
+                "  Le nombre de produit ", // range axis label
+                dataset, // data
+                PlotOrientation.VERTICAL, // orientation
+                true, // include legend
+                true, // tooltips
+                true // urls
+                );
+
+ final CategoryPlot plot = chart.getCategoryPlot();
+        final CategoryAxis axis = plot.getDomainAxis();
+        axis.setCategoryLabelPositions(CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 2.0));
+        final CategoryItemRenderer renderer = plot.getRenderer();
+        renderer.setItemLabelsVisible(true); 
+        return chart;
+    }      
+}
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="Stat ventes prod">
+class StatVentesProd extends JFrame{
+    DefaultPieDataset dataset;//Dataset qui va contenir les Données
+    JFreeChart graphe;        //Graphe
+    ChartPanel cp;            //Panel
+    public StatVentesProd() {
+        dataset = new DefaultPieDataset();
+
+        panierProduitDAO ppDAO = new panierProduitDAO();
+     PanierProduit pp = new PanierProduit();
+     HashMap<Integer, Integer> top10BestSeller = ppDAO.getTop10BestSeller();
+        ProduitDAO pDAO = new ProduitDAO();
+     Iterator<Integer> i = top10BestSeller.keySet().iterator();
+
+   while(i.hasNext()){
+  Integer key = i.next();
+  System.out.println("key: " + key + " value: " + top10BestSeller.get(key));
+            Produit DisplayProdByID = pDAO.DisplayProdByID(key);
+            
+    dataset.setValue(""+DisplayProdByID.getNomProd(),new Double(top10BestSeller.get(key)));
+    
+    }
+      
+graphe = ChartFactory.createPieChart("Top Ventes Produits", dataset);
+        cp = new ChartPanel(graphe);
+        this.add(cp);
+    }
+
+}
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="Top Coms">
+@SuppressWarnings("serial")
+class PieChartComs extends JFrame {
+    DefaultPieDataset dataset;//Dataset qui va contenir les Données
+    JFreeChart graphe;        //Graphe
+    ChartPanel cp;            //Panel
+    public PieChartComs() {
+        dataset = new DefaultPieDataset();
+
+        
+        CommentaireDAO cDAO = new CommentaireDAO();
+        HashMap<Integer, Integer> top10Coms = cDAO.getTop10Coms();
+        Produit p = new Produit();
+        ProduitDAO pDAO = new ProduitDAO();
+     Iterator<Integer> i = top10Coms.keySet().iterator();
+
+   while(i.hasNext()){
+  Integer key = i.next();
+  System.out.println("key: " + key + " value: " + top10Coms.get(key));
+            Produit DisplayProdByID = pDAO.DisplayProdByID(key);
+            
+   dataset.setValue(""+DisplayProdByID.getNomProd(),new Double(top10Coms.get(key)));
+       System.out.println("1");
+    }
+      
+graphe = ChartFactory.createPieChart("Top Commentaires", dataset);
+        cp = new ChartPanel(graphe);
+        this.add(cp);
+    }
+	 
+}
+// </editor-fold>
+

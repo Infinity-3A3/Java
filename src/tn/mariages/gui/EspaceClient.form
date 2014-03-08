@@ -339,9 +339,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="LabImageClient">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel12"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="ListToDo">
               <Properties>
