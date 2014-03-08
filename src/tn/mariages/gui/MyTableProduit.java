@@ -16,6 +16,7 @@
  */
 package tn.mariages.gui;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import tn.mariages.entities.Produit;
@@ -30,7 +31,7 @@ import tn.mariages.dao.ProduitDAO;
 public class MyTableProduit extends AbstractTableModel {
 
     List<Produit> mylist = new ArrayList<>();
-    String[] headers = {"idprod", "Nom Produit ", "Nom Prestataire", "Categorie", "Date d'ajout", "Prix", "Supprimer"};
+    String[] header = {"idprod", "Nom Produit ", "Nom Prestataire", "Categorie", "Date d'ajout", "Prix", "Supprimer"};
     Boolean rowlist[][] = new Boolean[50][50];
 
     public MyTableProduit() {
@@ -47,11 +48,13 @@ public class MyTableProduit extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return headers.length;
+        return header.length;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        DecimalFormat f = new DecimalFormat("##");
+        
         switch (columnIndex) {
             case 0:
                 return mylist.get(rowIndex).getIdProd();
@@ -64,7 +67,7 @@ public class MyTableProduit extends AbstractTableModel {
             case 4:
                 return mylist.get(rowIndex).getDateAjoutProd();
             case 5:
-                return mylist.get(rowIndex).getPrixProd();
+                return f.format(mylist.get(rowIndex).getPrixProd());
             case 6:
                 return rowlist[rowIndex][6];
             default:
@@ -74,7 +77,7 @@ public class MyTableProduit extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        return headers[column];//To change body of generated methods, choose Tools | Templates.
+        return header[column];//To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

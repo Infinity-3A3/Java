@@ -31,7 +31,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -54,8 +56,7 @@ public class AjoutProduit extends javax.swing.JFrame {
 
     String[] Categories = {"Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
     int id_prest;
-        private static final Map<String, ImageIcon> iconsCache = new HashMap<String, ImageIcon>();
-
+    private static final Map<String, ImageIcon> iconsCache = new HashMap<String, ImageIcon>();
 
     /**
      *
@@ -90,15 +91,14 @@ public class AjoutProduit extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         tfnomProduit = new javax.swing.JTextField();
         tfPrixProduit = new javax.swing.JTextField();
-        btnAjoutImage = new javax.swing.JButton();
         cmbCategorieProduit = new javax.swing.JComboBox();
         btnAjoutProduit = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
-        tfImgProd = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tfDescProduit = new WebTextArea();
         jLabel6 = new javax.swing.JLabel();
         cmbPrestataire = new javax.swing.JComboBox();
+        webFileDrop1 = new com.alee.extended.filechooser.WebFileDrop();
 
         ImgChooser.setFileHidingEnabled(false);
 
@@ -130,13 +130,6 @@ public class AjoutProduit extends javax.swing.JFrame {
         tfPrixProduit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPrixProduitActionPerformed(evt);
-            }
-        });
-
-        btnAjoutImage.setText("Parcourir");
-        btnAjoutImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAjoutImageActionPerformed(evt);
             }
         });
 
@@ -172,6 +165,9 @@ public class AjoutProduit extends javax.swing.JFrame {
             }
         });
 
+        webFileDrop1.setBorder(new javax.swing.border.MatteBorder(null));
+        webFileDrop1.setDropText("Placez vos images ici");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -188,19 +184,16 @@ public class AjoutProduit extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
                         .addGap(71, 71, 71)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cmbPrestataire, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cmbCategorieProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfPrixProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfImgProd, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cmbPrestataire, javax.swing.GroupLayout.Alignment.LEADING, 0, 277, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(cmbCategorieProduit, javax.swing.GroupLayout.Alignment.LEADING, 0, 277, Short.MAX_VALUE)
+                            .addComponent(tfPrixProduit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnAjoutProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnAjoutImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(webFileDrop1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(tfnomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(154, Short.MAX_VALUE))
         );
@@ -228,12 +221,10 @@ public class AjoutProduit extends javax.swing.JFrame {
                     .addComponent(tfPrixProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(tfImgProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAjoutImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                    .addComponent(webFileDrop1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAjoutProduit)
                     .addComponent(btnReset))
@@ -263,24 +254,21 @@ public class AjoutProduit extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfPrixProduitActionPerformed
 
-    private void btnAjoutImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutImageActionPerformed
-        ImgChooser = new JFileChooser();
-        ImgChooser.showOpenDialog(this);
-        if(ImgChooser.getSelectedFile()!=null)
-        tfImgProd.setText(ImgChooser.getSelectedFile().getAbsolutePath());
-       
-    }//GEN-LAST:event_btnAjoutImageActionPerformed
-
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-
-
+            tfnomProduit.setText("");
+            tfDescProduit.setText("");
+            tfPrixProduit.setText("");
+            
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnAjoutProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutProduitActionPerformed
         ProduitDAO myDAO = new ProduitDAO();
         PrestataireDAO myDAO1 = new PrestataireDAO();
         Produit p = new Produit();
-        Date myDate = new Date();
+        String date_format = "yyyy-MM-dd";
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(date_format);
+        String dt = sdf.format(cal.getTime());
         if (cmbPrestataire.isVisible()) {
             id_prest = myDAO1.findPrestByNomPrest(cmbPrestataire.getSelectedItem().toString()).getIdPrest();
         }
@@ -289,25 +277,26 @@ public class AjoutProduit extends javax.swing.JFrame {
         p.setPrixProd(Integer.parseInt(tfPrixProduit.getText()));
         p.setDescProd(tfDescProduit.getText());
         p.setShortDescProd(tfDescProduit.getText().substring(0, 10) + "...");
-        p.setDateAjoutProd(myDate.toString());
+        p.setDateAjoutProd(dt);
         p.setIdPrest(id_prest);
-        if(tfImgProd.getText()!=null){
-        try {
-            FTPFileUploader.getInstance().UploadPic(tfImgProd.getText(), "/prod/");
-        } catch (IOException ex) {
-            Logger.getLogger(AjoutProduit.class.getName()).log(Level.SEVERE, null, ex);
+       String[] images = {"\"http://placehold.it/150x150&text=Img%20Produit\"", "\"http://placehold.it/150x150&text=Img%20Produit\" ", "\"http://placehold.it/150x150&text=Img%20Produit\"", "\"http://placehold.it/150x150&text=Img%20Produit\"", "\"http://placehold.it/150x150&text=Img%20Produit\""};
+        for (int i = 0; i < webFileDrop1.getSelectedFiles().size(); i++) {
+            if(webFileDrop1.getSelectedFiles().get(i).getAbsolutePath()!=null){
+                 try {
+                FTPFileUploader.getInstance().UploadPic(webFileDrop1.getSelectedFiles().get(0).getAbsolutePath(), "/prod/");
+            } catch (IOException ex) {
+                Logger.getLogger(AjoutProduit.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                images[i] = "http://mariages.tn/prod/" + webFileDrop1.getSelectedFiles().get(i).getName();
+            }else{
+               images[i]= "http://placehold.it/150x150&text=Img%20Produit";
+            }
         }
-        p.setImgProd_P("http://mariages.tn/prod/"+ImgChooser.getSelectedFile().getName());
-        }
-        else
-        {
-             
-        p.setImgProd_P("http://placehold.it/150x150&text=Img%20Produit");
-        }
-        p.setImgProd_1("http://placehold.it/150x150&text=Img%20Produit");
-        p.setImgProd_2("http://placehold.it/150x150&text=Img%20Produit");
-        p.setImgProd_3("http://placehold.it/150x150&text=Img%20Produit");
-        p.setImgProd_4("http://placehold.it/150x150&text=Img%20Produit");
+       p.setImgProd_P(images[0]);
+       p.setImgProd_1(images[1]);
+       p.setImgProd_2(images[2]);
+       p.setImgProd_3(images[3]);
+       p.setImgProd_4(images[4]);
         myDAO.InsertProduit(p);
 
 
@@ -335,8 +324,6 @@ public class AjoutProduit extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbPrestataireActionPerformed
 
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -385,7 +372,6 @@ public class AjoutProduit extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser ImgChooser;
-    private javax.swing.JButton btnAjoutImage;
     private javax.swing.JButton btnAjoutProduit;
     private javax.swing.JButton btnReset;
     private javax.swing.JComboBox cmbCategorieProduit;
@@ -399,9 +385,9 @@ public class AjoutProduit extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea tfDescProduit;
-    private javax.swing.JTextField tfImgProd;
     private javax.swing.JTextField tfPrixProduit;
     private javax.swing.JTextField tfnomProduit;
+    private com.alee.extended.filechooser.WebFileDrop webFileDrop1;
     // End of variables declaration//GEN-END:variables
 
 }

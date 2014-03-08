@@ -20,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import tn.mariages.entities.Produit;
@@ -110,10 +111,12 @@ public class ProduitDAO {
 
         String requete = "UPDATE `produit` SET `nomProd`=?,`descProd`=?,`shortDescProd`=?,"
                 + "       `categorieProd`=?,`dateAjoutProd`=?,`prixProd`=?,`exclusifPaquet`=?,"
-                + "       `imgProd_P`=?,`imgProd_1`=?,`imgProd_2`=?,`imgProd_3`=?,`imgProd_4`=? ;";
+                + "       `imgProd_P`=?,`imgProd_1`=?,`imgProd_2`=?,`imgProd_3`=?,`imgProd_4`=?, `idPrest`=? where idProd=?;";
         try {
             PreparedStatement ps = MyConnection.getInstance().cnx.prepareStatement(requete);
 
+            
+        
             ps.setString(1, p.getNomProd());
             ps.setString(2, p.getDescProd());
             ps.setString(3, p.getShortDescProd());
@@ -126,6 +129,8 @@ public class ProduitDAO {
             ps.setString(10, p.getImgProd_2());
             ps.setString(11, p.getImgProd_3());
             ps.setString(12, p.getImgProd_4());
+            ps.setInt(13, p.getIdPrest());
+            ps.setInt(14, p.getIdProd());
 
             ps.executeUpdate();
             System.out.println("mise à jour effectué avecc succees");
