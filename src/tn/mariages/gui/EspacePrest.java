@@ -18,12 +18,19 @@ package tn.mariages.gui;
 
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.notification.WebNotificationPopup;
+import java.awt.image.BufferedImage;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import tn.mariages.dao.PaquetDAO;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.ProduitDAO;
@@ -42,7 +49,7 @@ public class EspacePrest extends javax.swing.JFrame {
     /**
      * Creates new form EspacePrest
      */
-    int id_prest = 1;
+    int id_prest;
     int id_prod;
     String[] Categories = {"Tous", "Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
 
@@ -52,6 +59,27 @@ public class EspacePrest extends javax.swing.JFrame {
         cmbNomPaquet.setVisible(false);
     }
 
+    
+    public EspacePrest(int id,String cmt) {
+        id_prest=id;
+         
+         try
+    {
+        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible", false);
+
+    }
+    catch(Exception e)
+    {
+        //TODO exception
+    }
+         
+        initComponents();
+        btnvalider.setVisible(false);
+        cmbNomPaquet.setVisible(false);
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -169,9 +197,10 @@ public class EspacePrest extends javax.swing.JFrame {
             }
         });
 
-        LabImagePres.setText("jLabel12");
-
         LabPremium.setText("jLabel3");
+        LabPremium.setMaximumSize(new java.awt.Dimension(32, 32));
+        LabPremium.setMinimumSize(new java.awt.Dimension(470, 414));
+        LabPremium.setPreferredSize(new java.awt.Dimension(32, 32));
 
         jlab.setText("Ville: ");
 
@@ -183,18 +212,18 @@ public class EspacePrest extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labNom)
-                                .addComponent(LabDesc)))
-                        .addComponent(LabImagePres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(LabPremium))
-                .addGap(124, 124, 124)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labNom)
+                            .addComponent(LabDesc)))
+                    .addComponent(LabImagePres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LabPremium, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
@@ -227,13 +256,13 @@ public class EspacePrest extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(LabPremium)
-                        .addGap(5, 5, 5)
+                        .addGap(19, 19, 19)
                         .addComponent(LabImagePres, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(labNom))
+                            .addComponent(labNom)
+                            .addComponent(LabPremium, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -305,7 +334,7 @@ public class EspacePrest extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 474, Short.MAX_VALUE))
                     .addComponent(jScrollPane2)
                     .addComponent(jTabbedPane1))
                 .addContainerGap())
@@ -705,6 +734,7 @@ public class EspacePrest extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSuppPaquetActionPerformed
 
+    @SuppressWarnings("unchecked")
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         MyTableProduitPrest modelprod = new MyTableProduitPrest(id_prest);
@@ -729,6 +759,23 @@ public class EspacePrest extends javax.swing.JFrame {
         LabDesc.setText(p.getDescPrest());
         labemail.setText(p.getEmailPrest());
         //lab.setText(p.getNomPrest());
+        ImageIcon icon;
+            try {
+                icon = new ImageIcon(new URL(p.getImgPrest().toString()));
+                 icon = new ImageIcon(icon.getImage().getScaledInstance(180, 180, BufferedImage.SCALE_SMOOTH));
+ LabImagePres.setIcon(icon);     
+
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ListeFeatProd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if(p.isPremium()==true)
+            {
+                System.out.println("TRUE");
+                icon = new ImageIcon("\\resources\\icons\\premium.png"); // to be changed
+            icon = new ImageIcon(icon.getImage().getScaledInstance(32, 32, BufferedImage.SCALE_SMOOTH));
+            LabPremium.setIcon(icon);
+            }
 
         for (int i = 0; i < 7; i++) {
             CmbCategori.addItem(Categories[i]);

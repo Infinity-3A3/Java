@@ -41,7 +41,7 @@ graphe = ChartFactory.createPieChart("Top Ventes Produits", dataset);
         this.add(cp);
     }
 	 public static void main (String args[]){
-        PieChart pchart = new PieChart();
+        PieChart_1 pchart = new PieChart_1();
         pchart.setVisible(true);
 
     }

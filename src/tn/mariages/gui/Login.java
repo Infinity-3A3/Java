@@ -8,30 +8,72 @@ package tn.mariages.gui;
  */
 
 
+import chrriis.dj.nativeswing.swtimpl.NativeInterface;
+import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import javax.swing.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.parser.ParserDelegator;
 import tn.mariages.dao.ClientDAO;
 
 import tn.mariages.entities.ToDo;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.dao.ToDoDAO;
+import tn.mariages.entities.Client;
+import tn.mariages.entities.Prestataire;
+import static tn.mariages.gui.FacebookLoginTEST.access_token;
+import static tn.mariages.gui.FacebookLoginTEST.firstRequest;
+import static tn.mariages.gui.FacebookLoginTEST.firstRequestDone;
+import static tn.mariages.gui.FacebookLoginTEST.secondRequest;
+import static tn.mariages.gui.FacebookLoginTEST.secondRequestDone;
+import tn.mariages.util.facebook.GraphReaderExample;
 /**
  *
  * @author RAED
  */
 public class Login extends javax.swing.JFrame {
 
+     
+  public static String API_KEY = "1422860571264717";
+  public static String SECRET = "263401ccd735a71496a83d4c8b9e8425";
+
+  public static String firstRequest = "https://graph.facebook.com/oauth/authorize?"
+  + "client_id="
+  + API_KEY
+  + "&redirect_uri=http://www.facebook.com/connect/login_success.html&"
+  + "scope=publish_stream,offline_access,create_event,read_stream,email,user_birthday";
+  
+  public static String secondRequest="https://graph.facebook.com/oauth/access_token?"
+  + "client_id="
+  + API_KEY
+  + "&redirect_uri=http://www.facebook.com/connect/login_success.html&"
+  + "client_secret=" + SECRET + "&code=";
+
+  public static String access_token = "CAAUOFYrqRs0BAPNdYRxuXVrZBNQ7gIM5iNnAJw92pVglOlSCUd25DRdhQ1AZAwRKPZAZCpUIKIxZCYIhD8CIZCgGhqrlYdyJujOyrhRPitOMp3SG1DmkchoDZABXN7QtUTK9BDCDqpcBzcPqxdqhE4WEX6qGYOoGzY0F2GVtyybJtt6529EF3ny";
+  public static boolean firstRequestDone = false;
+  public static boolean secondRequestDone = false; 
+   
+    
+    
+    
     /**
      * Creates new form Login
      */
@@ -60,6 +102,8 @@ public class Login extends javax.swing.JFrame {
         btnInscriClient = new javax.swing.JButton();
         btnInscriPrest = new javax.swing.JButton();
         btnMdp = new javax.swing.JButton();
+        Logo = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -68,6 +112,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setText("E-mail ");
@@ -94,7 +139,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnConnect.setText("Se connecter");
+        btnConnect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/signin_button3.png"))); // NOI18N
+        btnConnect.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnConnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConnectActionPerformed(evt);
@@ -122,6 +168,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tn/mariages/util/facebook/img/facebook_login.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -134,9 +187,17 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnMdp)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(Logo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 51, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnConnect))
                     .addComponent(cbRememberMe)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,15 +208,13 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(tfEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfPwd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(119, 119, 119))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(btnConnect)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(163, Short.MAX_VALUE)
+                .addContainerGap(82, Short.MAX_VALUE)
+                .addComponent(Logo)
+                .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -167,7 +226,9 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbRememberMe)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnInscriClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -186,7 +247,10 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -247,6 +311,7 @@ public class Login extends javax.swing.JFrame {
         ClientDAO clientDAO=new ClientDAO();
         PrestataireDAO prestatiareDAO=new PrestataireDAO();
         AdminDAO adminDAO=new AdminDAO();
+        
         if(adminDAO.connectAdmin(email, pwd)){
         
        dispose();
@@ -258,7 +323,7 @@ public class Login extends javax.swing.JFrame {
             todoDAO.DeleteToDos(clientDAO.findClientByEmail(email).getIdClient());
             List <ToDo> listeTodo=new ArrayList<ToDo>();
             listeTodo=todoDAO.NotifyClient(clientDAO.findClientByEmail(email).getIdClient());
-            String notify="N'oubliez pas les choses a faire demain : \n\n";
+            String notify="N'oubliez pas les taches à faire demain : \n\n";
             for (ToDo toDo : listeTodo) {
                 notify+="Titre : "+toDo.getTitreToDo()+"\n";
                    notify+="Description : "+toDo.getDescToDo()+"\n\n";
@@ -283,8 +348,9 @@ accueil.setLocation(-70, -16);
         else if(prestatiareDAO.connectPrestataire(email, pwd))
         {  
             dispose();
-       Accueil accueil=new Accueil();
-       accueil.setVisible(true);
+             Prestataire findPrestByEmail = prestatiareDAO.findPrestByEmail(email);
+      EspacePrest EP = new EspacePrest(findPrestByEmail.getIdPrest(), "p");
+      EP.setVisible(true);
         }
         else{
          int dialogButton = JOptionPane.OK_OPTION;
@@ -298,7 +364,10 @@ accueil.setLocation(-70, -16);
     }//GEN-LAST:event_tfPwdFocusGained
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-String email1="";
+               btnConnect.setBorder(BorderFactory.createEmptyBorder());
+               jButton1.setBorder(BorderFactory.createEmptyBorder());
+
+        String email1="";
 String pwd1="";
 int pwd2=0;
 File f1=new File("email.txt");
@@ -330,7 +399,19 @@ File f2=new File("Pass.txt");
       tfEmail.setText(email1);
       tfPwd.setText(pwd1);
 
+      ImageIcon icon;
+            try {
+                icon = new ImageIcon(new URL("http://www.images.tn/upload/original/1394208853.png"));  /// TO CHANGE
+       icon = new ImageIcon(icon.getImage().getScaledInstance(100, 100, BufferedImage.SCALE_SMOOTH));
+        Logo.setIcon(icon);
+       
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ListeFeatProd.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
+            
+             NativeInterface.open();
+                NativeInterface.initialize();
     }//GEN-LAST:event_formWindowOpened
 
     private void btnMdpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMdpActionPerformed
@@ -348,8 +429,110 @@ mdp.setVisible(true);
        this.dispose();
                
         InscriptionPrestataire inscriPrest=new InscriptionPrestataire();
-       inscriPrest.setVisible(true);
+       inscriPrest.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        inscriPrest.setVisible(true);
     }//GEN-LAST:event_btnInscriPrestActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        final JFrame authFrame = new JFrame();
+       
+    // Create the JWebBrowser and add the WebBrowserAdapter
+    JPanel webBrowserPanel = new JPanel(new BorderLayout());
+    final JWebBrowser webBrowser = new JWebBrowser();
+    webBrowser.navigate(firstRequest);
+    webBrowser.addWebBrowserListener(new WebBrowserAdapter() {
+      @Override
+      public void locationChanged(WebBrowserNavigationEvent e) {
+        super.locationChanged(e);
+        // Check if first request was not done
+        if (!firstRequestDone) {
+          // Check if you left the location and were redirected to the next 
+          // location
+          if (e.getNewResourceLocation().contains("http://www.facebook.com/connect/login_success.html?code=")){
+            // If it successfully redirects you, get the verification code
+            // and go for a second request
+            String[] splits = e.getNewResourceLocation().split("=");
+            String stage2temp = secondRequest + splits[1];
+            webBrowser.navigate(stage2temp);
+            firstRequestDone = true;
+          }
+        } else {
+          // If secondRequest is not done yet, you perform this and get the 
+          // access_token
+          if (!secondRequestDone) {
+            System.out.println(webBrowser.getHTMLContent());
+            // Create reader with the html content
+            StringReader readerSTR = new StringReader(webBrowser.getHTMLContent());
+            // Create a callback for html parser
+            HTMLEditorKit.ParserCallback callback = 
+            new HTMLEditorKit.ParserCallback() {
+              public void handleText(char[] data,int pos) {
+                System.out.println(data);
+                // because there is only one line with the access_token 
+                // in the html content you can parse it.
+                String string = new String(data);
+                String[] temp1 = string.split("&");
+                String[] temp2 = temp1[0].split("=");
+                access_token = temp2[1];
+              }
+            };
+            try {
+              // Call the parse method 
+              new ParserDelegator().parse(readerSTR,callback,false);
+            } catch (IOException e1) {
+              e1.printStackTrace();
+            }
+            // After everything is done, you can dispose the jframe
+            authFrame.dispose();      
+         
+            
+            GraphReaderExample gre = new GraphReaderExample(access_token);
+                    List<String> user = gre.getUSER();
+                    ClientDAO cDAO = new ClientDAO();
+                    Client C = new Client();
+                    System.out.println("EMAIL "+user.get(3));
+                    if(cDAO.findClientByEmailBoolean(user.get(3)))
+                    {
+                        
+                        EspaceClient EC = new EspaceClient(cDAO.findClientByEmail(user.get(3)).getIdClient(),"c");
+                        EC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        EC.setVisible(true);
+                        
+                    }
+                    else
+                    {
+                        InscriptionClient insC = new InscriptionClient();
+                        insC.tfEmailClient.setText(user.get(3));
+                        insC.tfNom.setText(user.get(2));
+                        if(user.get(6).equals("male"))
+                        {
+                            insC.tfPrenomMari.setText(user.get(1));
+                        }
+                        else if(!user.get(6).equals("male") && user.get(6)!=null)
+                        {
+                            insC.tfPrenomEpouse.setText(user.get(1));
+                        }
+                        insC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                         insC.setVisible(true);
+                    }
+//                    for (int i = 0; i < user.size(); i++) {
+//                        System.out.println(user.get(i)+"\n");
+//                   }
+
+          }
+        }
+      }
+    });
+     this.dispose();
+    webBrowserPanel.add(webBrowser,BorderLayout.CENTER);
+    authFrame.add(webBrowserPanel);
+    authFrame.setSize(400, 500);
+    authFrame.setVisible(true);
+  
+        
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
     /**
@@ -378,16 +561,16 @@ mdp.setVisible(true);
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-try
-    {
-        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
-            UIManager.put("RootPane.setupButtonVisible", false);
-
-    }
-    catch(Exception e)
-    {
-        //TODO exception
-    }
+//try
+//    {
+//        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+//            UIManager.put("RootPane.setupButtonVisible", false);
+//
+//    }
+//    catch(Exception e)
+//    {
+//        //TODO exception
+//    }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -397,11 +580,13 @@ try
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Logo;
     private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnInscriClient;
     private javax.swing.JButton btnInscriPrest;
     private javax.swing.JButton btnMdp;
     private javax.swing.JCheckBox cbRememberMe;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

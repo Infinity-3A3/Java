@@ -16,11 +16,12 @@ import tn.mariages.entities.PanierProduit;
 import tn.mariages.entities.Produit;
 
 
-public class PieChart extends JFrame{
+@SuppressWarnings("serial")
+public class StatVentesProd extends JFrame{
     DefaultPieDataset dataset;//Dataset qui va contenir les Données
     JFreeChart graphe;        //Graphe
     ChartPanel cp;            //Panel
-    public PieChart() {
+    public StatVentesProd() {
         dataset = new DefaultPieDataset();
 
         panierProduitDAO ppDAO = new panierProduitDAO();
@@ -43,7 +44,8 @@ graphe = ChartFactory.createPieChart("Top Ventes Produits", dataset);
         this.add(cp);
     }
 	 public static void main (String args[]){
-        PieChart pchart = new PieChart();
+        StatVentesProd pchart = new StatVentesProd();
+        pchart.setSize(400, 400);
         pchart.setVisible(true);
 
     }

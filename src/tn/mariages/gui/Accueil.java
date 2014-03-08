@@ -42,6 +42,7 @@ public class Accueil extends javax.swing.JFrame {
      */
     public Accueil() {
         initComponents();
+        
     }
 
     /**
@@ -63,6 +64,7 @@ public class Accueil extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jbtnRec = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -150,26 +152,36 @@ public class Accueil extends javax.swing.JFrame {
             }
         });
 
+        jbtnRec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/warning.png"))); // NOI18N
+        jbtnRec.setToolTipText("Réclamations");
+        jbtnRec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRecActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtnRec, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 17, Short.MAX_VALUE)
+                .addGap(0, 15, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,7 +195,8 @@ public class Accueil extends javax.swing.JFrame {
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtnRec, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -241,13 +254,13 @@ public class Accueil extends javax.swing.JFrame {
         
          ImageIcon icon;
             try {
-                icon = new ImageIcon(new URL("http://placehold.it/200x200"));  /// TO CHANGE
-                 icon = new ImageIcon(icon.getImage().getScaledInstance(300, 300, BufferedImage.SCALE_SMOOTH));
+                icon = new ImageIcon(new URL("http://www.images.tn/upload/original/1394208853.png"));  /// TO CHANGE
+                 icon = new ImageIcon(icon.getImage().getScaledInstance(400, 400, BufferedImage.SCALE_SMOOTH));
         JLabel logoLabel = new JLabel(icon);
 
         logoPanel.add(logoLabel);
         logoLabel.setAlignmentX(CENTER_ALIGNMENT);
-        logoLabel.setAlignmentY(h/2);
+        logoLabel.setAlignmentY(400);
             } catch (MalformedURLException ex) {
                 Logger.getLogger(ListeFeatProd.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -261,7 +274,7 @@ Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
 ListePrestataire LPrs = new ListePrestataire();
 LPrs.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-LPrs.setLocation((dim.width/2-this.getSize().width/2)-150, (dim.height/2-this.getSize().height/2)+100);
+LPrs.setLocationRelativeTo(null);
 LPrs.setVisible(true);
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -271,7 +284,7 @@ LPrs.setVisible(true);
        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
        LFP.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-       LFP.setLocation((dim.width/2-this.getSize().width/2)-90, (dim.height/2-this.getSize().height/2)+100);
+LFP.setLocationRelativeTo(null);
        
        LFP.setVisible(true);    
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -285,7 +298,7 @@ LPrs.setVisible(true);
 
 ListeClients LC = new ListeClients();
 LC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-LC.setLocation((dim.width/2-this.getSize().width/2)-150, (dim.height/2-this.getSize().height/2)+100);
+LC.setLocationRelativeTo(null);
 LC.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -294,7 +307,7 @@ LC.setVisible(true);
 
         ListerProduit LP = new ListerProduit();
 LP.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-LP.setLocation((dim.width/2-this.getSize().width/2)-350, (dim.height/2-this.getSize().height/2)+100);
+LP.setLocationRelativeTo(null);
         LP.setVisible(true);
         
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -304,7 +317,7 @@ Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
 ListePaquets LP = new ListePaquets();
 LP.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-LP.setLocation((dim.width/2-this.getSize().width/2)-400, (dim.height/2-this.getSize().height/2)+100);
+LP.setLocationRelativeTo(null);
 LP.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -313,8 +326,16 @@ LP.setVisible(true);
         ListeAdmins LA = new ListeAdmins();
 Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 LA.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-LA.setLocation((dim.width/2-this.getSize().width/2)-200, (dim.height/2-this.getSize().height/2)+100);
+LA.setLocationRelativeTo(null);
         LA.setVisible(true);    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jbtnRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRecActionPerformed
+Reclamations rec = new Reclamations();
+rec.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+rec.setLocationRelativeTo(null);
+rec.setVisible(true); 
+
+    }//GEN-LAST:event_jbtnRecActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,5 +386,6 @@ try
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jbtnRec;
     // End of variables declaration//GEN-END:variables
 }

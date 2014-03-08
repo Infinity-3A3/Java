@@ -16,7 +16,7 @@ import tn.mariages.dao.ProduitDAO;
 import tn.mariages.entities.Produit;
 
 
-public class PieChartComs extends JInternalFrame {
+public class PieChartComs extends JFrame {
     DefaultPieDataset dataset;//Dataset qui va contenir les Données
     JFreeChart graphe;        //Graphe
     ChartPanel cp;            //Panel
@@ -36,7 +36,7 @@ public class PieChartComs extends JInternalFrame {
             Produit DisplayProdByID = pDAO.DisplayProdByID(key);
             
    dataset.setValue(""+DisplayProdByID.getNomProd(),new Double(top10Coms.get(key)));
-    
+       System.out.println("1");
     }
       
 graphe = ChartFactory.createPieChart("Top Commentaires", dataset);
@@ -45,6 +45,7 @@ graphe = ChartFactory.createPieChart("Top Commentaires", dataset);
     }
 	 public static void main (String args[]){
         PieChartComs pchart = new PieChartComs();
+        pchart.setSize(400,400);
         pchart.setVisible(true);
 
     }
