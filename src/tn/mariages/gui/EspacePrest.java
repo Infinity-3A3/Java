@@ -16,6 +16,7 @@
  */
 package tn.mariages.gui;
 
+
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.notification.WebNotificationPopup;
 import java.awt.image.BufferedImage;
@@ -39,6 +40,22 @@ import tn.mariages.entities.Paquet;
 import tn.mariages.entities.Prestataire;
 import tn.mariages.entities.Produit;
 import tn.mariages.entities.ProduitPaquet;
+
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 /**
  *
@@ -141,6 +158,7 @@ public class EspacePrest extends javax.swing.JFrame {
         btnModifPaquet = new javax.swing.JButton();
         btnAjoutPaquet = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        btnPDF = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -558,6 +576,13 @@ public class EspacePrest extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Espace prestataire");
 
+        btnPDF.setText("Générer PDF");
+        btnPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPDFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout AjouterPanierLayout = new javax.swing.GroupLayout(AjouterPanier);
         AjouterPanier.setLayout(AjouterPanierLayout);
         AjouterPanierLayout.setHorizontalGroup(
@@ -573,13 +598,17 @@ public class EspacePrest extends javax.swing.JFrame {
             .addGroup(AjouterPanierLayout.createSequentialGroup()
                 .addGap(498, 498, 498)
                 .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnPDF)
+                .addGap(51, 51, 51))
         );
         AjouterPanierLayout.setVerticalGroup(
             AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AjouterPanierLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPDF))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(AjouterPanierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -966,6 +995,31 @@ public class EspacePrest extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TFnOMpaquetKeyReleased
 
+    private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
+               Connection connection;
+        try {
+            // - Connexion à la base
+            connection = MySQLConnexion.getInstance();
+            // - Chargement et compilation du rapport (charger le fichier jrxml déjà généré)
+            JasperDesign jasperDesign = JRXmlLoader.load("C:\\Users\\omar\\Downloads\\Documents\\gl + pidev\\virus\\paquet.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            // - Paramètres à envoyer au rapport
+            Map parameters = new HashMap();
+            parameters.put("Titre", "Titre");
+
+            parameters.put("idPrest", 1);
+
+            // - Execution du rapport
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
+
+            // - Création du rapport au format PDF
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\omar\\Downloads\\Documents\\gl + pidev\\virus\\paquet.pdf");
+            System.out.println("success");
+        } catch (JRException e) {
+            System.out.println("erreur de compilation" + e.getMessage());
+        }
+    }//GEN-LAST:event_btnPDFActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1027,6 +1081,7 @@ public class EspacePrest extends javax.swing.JFrame {
     private javax.swing.JButton btnAjoutProdPaq;
     private javax.swing.JButton btnModifPaquet;
     private javax.swing.JButton btnModifProduit;
+    private javax.swing.JButton btnPDF;
     private javax.swing.JButton btnSuppPaquet;
     private javax.swing.JButton btnSuppProduit;
     private javax.swing.JButton btnvalider;
