@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.AdminDAO;
+import tn.mariages.dao.ClientDAO;
+import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.entities.Admin;
 
 /**
@@ -180,11 +182,12 @@ tfPwd.setText("");        // TODO add your handling code here:
 
     private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
  AdminDAO adminDAO=new AdminDAO();
-         
+       ClientDAO clientDAO=new ClientDAO();
+       PrestataireDAO prestataireDAO=new PrestataireDAO();
           
           List <Admin> listeadmins=new ArrayList<Admin>();
           listeadmins=adminDAO.DisplayAllAdmins();
-        if(tfNom.getText().equals("") || tfEmail.getText().equals("") ||tfPwd.getText().equals("")||tfPwd.getText().length()<6|| !tfEmail.getText().matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" )){
+        if(tfNom.getText().equals("") || tfEmail.getText().equals("") ||tfPwd.getText().equals("")||tfPwd.getText().length()<6|| !tfEmail.getText().matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" ) ||clientDAO.findClientByEmailBoolean(tfEmail.getText())|| prestataireDAO.findPrestByEmailBoolean(tfEmail.getText())||adminDAO.findAdminByEmailBoolean(tfEmail.getText())){
       
     
           
@@ -196,10 +199,9 @@ tfPwd.setText("");        // TODO add your handling code here:
             if(tfEmail.getText().equals(""))
                ch+="Veuillez Saisir l'email de l'admin  \n\n";
             
-            for (Admin admin : listeadmins) {
-                if(adminDAO.findAdminByEmail(tfEmail.getText()).equals(admin))
-                     ch+="l'email que vous avez saisi existe deja \n";
-            }
+           if(clientDAO.findClientByEmailBoolean(tfEmail.getText())|| prestataireDAO.findPrestByEmailBoolean(tfEmail.getText())||adminDAO.findAdminByEmailBoolean(tfEmail.getText())){
+           ch+="Cette adresse mail existe deja";
+           }
             
          
                
