@@ -20,6 +20,12 @@ package tn.mariages.gui;
 
 
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.entities.Admin;
@@ -129,11 +135,11 @@ public class MotDePasseOublie extends javax.swing.JFrame {
  
 public String generate(int length)
 {
-	    String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"; // Tu supprimes les lettres dont tu ne veux pas
+	    String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"; 
 	    String pass = "";
 	    for(int x=0;x<length;x++)
 	    {
-	       int i = (int)Math.floor(Math.random() * 62); // Si tu supprimes des lettres tu diminues ce nb
+	       int i = (int)Math.floor(Math.random() * 62); 
 	       pass += chars.charAt(i);
 	    }
 	   
@@ -152,24 +158,54 @@ public String generate(int length)
        Prestataire prestataire=new Prestataire();
         SimpleMail s1=new SimpleMail();
    String mdp=generate(10);
+   
+     MessageDigest md = null;
+    try {
+        md = MessageDigest.getInstance("SHA-1");
+    } catch (NoSuchAlgorithmException ex) {
+        Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        ByteArrayInputStream fis = new ByteArrayInputStream(mdp.getBytes());
+
+        byte[] dataBytes = new byte[1024];
+
+        int nread = 0; 
+    try {
+        while ((nread = fis.read(dataBytes)) != -1) {
+            md.update(dataBytes, 0, nread);
+        }
+    } catch (IOException ex) {
+        Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+        byte[] mdbytes = md.digest();
+
+        //convert the byte to hex format method 1
+        StringBuffer pwd1 = new StringBuffer();
+        for (int i = 0; i < mdbytes.length; i++) {
+          pwd1.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+   
+   
+   
    if(adminDAO.findAdminByEmailBoolean(tfEmail.getText())){
        admin=adminDAO.findAdminByEmail(tfEmail.getText());
    s1.SendMail(tfEmail.getText(), "Mot de passe oublié", "Votre nouveau mot de passe : "+mdp);
-   admin.setPwdAdmin(mdp);
+   admin.setPwdAdmin(pwd1.toString());
    adminDAO.updateAdmin(admin);
    }
    
    else if(clientDAO.findClientByEmailBoolean(tfEmail.getText())){
    client=clientDAO.findClientByEmail(tfEmail.getText());
    s1.SendMail(tfEmail.getText(), "Mot de passe oublié", "Votre nouveau mot de passe : "+mdp);
-   client.setPwdClient(mdp);
+   client.setPwdClient(pwd1.toString());
    clientDAO.updateClient(client);
    }
    
    else if(prestataireDAO.findPrestByEmailBoolean(tfEmail.getText())){
    prestataire=prestataireDAO.findPrestByEmail(tfEmail.getText());
    s1.SendMail(tfEmail.getText(), "Mot de passe oublié", "Votre nouveau mot de passe : "+mdp);
-   prestataire.setPwdPrest(mdp);
+   prestataire.setPwdPrest(pwd1.toString());
    prestataireDAO.updatePrestataire(prestataire);
    
    }
