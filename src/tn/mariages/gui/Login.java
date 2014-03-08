@@ -16,6 +16,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import javax.swing.*;
@@ -24,6 +25,8 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -307,6 +310,36 @@ public class Login extends javax.swing.JFrame {
         }
 
         
+         MessageDigest md = null;
+    try {
+        md = MessageDigest.getInstance("SHA-1");
+    } catch (NoSuchAlgorithmException ex) {
+        Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        ByteArrayInputStream fis = new ByteArrayInputStream(pwd.getBytes());
+
+        byte[] dataBytes = new byte[1024];
+
+        int nread = 0; 
+    try {
+        while ((nread = fis.read(dataBytes)) != -1) {
+            md.update(dataBytes, 0, nread);
+        }
+    } catch (IOException ex) {
+        Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+        byte[] mdbytes = md.digest();
+
+        //convert the byte to hex format method 1
+        StringBuffer pwd1 = new StringBuffer();
+        for (int i = 0; i < mdbytes.length; i++) {
+          pwd1.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        
+        
+        
+        
         
         ClientDAO clientDAO=new ClientDAO();
         PrestataireDAO prestatiareDAO=new PrestataireDAO();
@@ -318,7 +351,7 @@ public class Login extends javax.swing.JFrame {
        Accueil accueil=new Accueil();
        accueil.setVisible(true);
         }
-        else if(clientDAO.connectClient(email, pwd)){
+        else if(clientDAO.connectClient(email, pwd1.toString())){
             ToDoDAO todoDAO=new ToDoDAO();
             todoDAO.DeleteToDos(clientDAO.findClientByEmail(email).getIdClient());
             List <ToDo> listeTodo=new ArrayList<ToDo>();
@@ -345,7 +378,7 @@ accueil.setLocation(-70, -16);
         
         }
         
-        else if(prestatiareDAO.connectPrestataire(email, pwd))
+        else if(prestatiareDAO.connectPrestataire(email, pwd1.toString()))
         {  
             dispose();
              Prestataire findPrestByEmail = prestatiareDAO.findPrestByEmail(email);

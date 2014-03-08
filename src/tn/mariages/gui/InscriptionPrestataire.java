@@ -16,6 +16,12 @@
  */
 
 package tn.mariages.gui;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
@@ -59,6 +65,19 @@ Prestataire prest = new Prestataire();
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+         erreurAdresse.setVisible(false);
+      erreurCategorie.setVisible(false);
+      erreurEmail.setVisible(false);
+      erreurMdp.setVisible(false);
+      erreurMdp1.setVisible(false);
+      erreurNom.setVisible(false);
+      erreurSpec.setVisible(false);
+      erreurville.setVisible(false);
+      
+      erreurDesc.setVisible(false);
+      jLabel1.setVisible(false);
+      jLabel16.setVisible(false);
+      jLabel14.setVisible(false);
     }
 
     /**
@@ -520,6 +539,34 @@ erreurAdresse.setVisible(false);
 
         }else{
 
+             MessageDigest md = null;
+    try {
+        md = MessageDigest.getInstance("SHA-1");
+    } catch (NoSuchAlgorithmException ex) {
+        Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        ByteArrayInputStream fis = new ByteArrayInputStream(jtpwdPrest.getText().getBytes());
+
+        byte[] dataBytes = new byte[1024];
+
+        int nread = 0; 
+    try {
+        while ((nread = fis.read(dataBytes)) != -1) {
+            md.update(dataBytes, 0, nread);
+        }
+    } catch (IOException ex) {
+        Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+        byte[] mdbytes = md.digest();
+
+        //convert the byte to hex format method 1
+        StringBuffer pwd1 = new StringBuffer();
+        for (int i = 0; i < mdbytes.length; i++) {
+          pwd1.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+            
+            
             prest.setNomPrest(jtNomPrest.getText());
 
             prest.setDescPrest(jtDescPrest.getText());
@@ -529,7 +576,7 @@ erreurAdresse.setVisible(false);
             prest.setImgPrest(jtImgPrest.getText());
             prest.setEmailPrest(jtEmailPrest.getText());
 
-            prest.setPwdPrest(jtpwdPrest.getText());
+            prest.setPwdPrest(pwd1.toString());
             prest.setCategorie(cmbCategoriePrest.getSelectedItem().toString());
 
           
@@ -692,19 +739,7 @@ this.dispose();
     }//GEN-LAST:event_btnAnnulerPrestActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-      erreurAdresse.setVisible(false);
-      erreurCategorie.setVisible(false);
-      erreurEmail.setVisible(false);
-      erreurMdp.setVisible(false);
-      erreurMdp1.setVisible(false);
-      erreurNom.setVisible(false);
-      erreurSpec.setVisible(false);
-      erreurville.setVisible(false);
-      
-      erreurDesc.setVisible(false);
-      jLabel1.setVisible(false);
-      jLabel16.setVisible(false);
-      jLabel14.setVisible(false);
+     
         
         
         
