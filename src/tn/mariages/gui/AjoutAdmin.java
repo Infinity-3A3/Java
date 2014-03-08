@@ -17,8 +17,14 @@
 
 package tn.mariages.gui;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.dao.ClientDAO;
@@ -195,6 +201,13 @@ tfPwd.setText("");        // TODO add your handling code here:
            if(tfNom.getText().equals(""))
                ch+="Veuillez saisir le nom de l'admin \n";
            
+           
+           
+           
+           
+           
+           
+           
             
             if(tfEmail.getText().equals(""))
                ch+="Veuillez Saisir l'email de l'admin  \n\n";
@@ -220,11 +233,37 @@ tfPwd.setText("");        // TODO add your handling code here:
   }
   else{
        
-     
+     MessageDigest md = null;
+    try {
+        md = MessageDigest.getInstance("SHA-1");
+    } catch (NoSuchAlgorithmException ex) {
+        Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        ByteArrayInputStream fis = new ByteArrayInputStream(tfPwd.getText().getBytes());
+
+        byte[] dataBytes = new byte[1024];
+
+        int nread = 0; 
+    try {
+        while ((nread = fis.read(dataBytes)) != -1) {
+            md.update(dataBytes, 0, nread);
+        }
+    } catch (IOException ex) {
+        Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+        byte[] mdbytes = md.digest();
+
+        //convert the byte to hex format method 1
+        StringBuffer pwd1 = new StringBuffer();
+        for (int i = 0; i < mdbytes.length; i++) {
+          pwd1.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+
        Admin admin=new Admin();
        admin.setNomAdmin(tfNom.getText());
        admin.setMailAdmin(tfEmail.getText());
-       admin.setPwdAdmin(tfPwd.getText());
+       admin.setPwdAdmin(pwd1.toString());
        
        adminDAO.insertAdmin(admin);
         this.dispose();  }
