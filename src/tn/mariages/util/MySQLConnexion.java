@@ -1,4 +1,4 @@
-package tn.mariages.gui;
+package tn.mariages.util;
 
 /*
  * To change this template, choose Tools | Templates

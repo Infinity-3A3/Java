@@ -716,7 +716,7 @@ this.dispose();// TODO add your handling code here:
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField spinBudget;
     public javax.swing.JTextField tfEmailClient;
-    private javax.swing.JTextField tfImageclient;
+    public javax.swing.JTextField tfImageclient;
     public javax.swing.JTextField tfNom;
     public javax.swing.JTextField tfPrenomEpouse;
     public javax.swing.JTextField tfPrenomMari;

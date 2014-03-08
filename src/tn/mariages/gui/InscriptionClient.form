@@ -365,6 +365,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfImageclient">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btParcourir">
           <Properties>
