@@ -43,11 +43,6 @@ graphe = ChartFactory.createPieChart("Top Ventes Produits", dataset);
         cp = new ChartPanel(graphe);
         this.add(cp);
     }
-	 public static void main (String args[]){
-        StatVentesProd pchart = new StatVentesProd();
-        pchart.setSize(400, 400);
-        pchart.setVisible(true);
 
-    }
 }
 

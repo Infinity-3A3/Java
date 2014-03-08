@@ -123,7 +123,7 @@ public class EspaceClient extends javax.swing.JFrame {
             LabDateDebut.setText(c.getDateDebut());
             LabDateFin.setText(c.getDateFin());
             this.id=c.getIdClient();
-            
+            System.out.println("IMG: "+c.getImgClient());
              ImageIcon icon;
             try {
                 icon = new ImageIcon(new URL(c.getImgClient().toString()));
@@ -261,8 +261,6 @@ public class EspaceClient extends javax.swing.JFrame {
                 BtnModifierProfilActionPerformed(evt);
             }
         });
-
-        LabImageClient.setText("jLabel12");
 
         ListToDo.setText("Liste toDo");
         ListToDo.addActionListener(new java.awt.event.ActionListener() {
