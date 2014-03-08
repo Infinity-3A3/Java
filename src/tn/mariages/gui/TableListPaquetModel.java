@@ -16,6 +16,7 @@
  */
 package tn.mariages.gui;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -73,6 +74,7 @@ public class TableListPaquetModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        DecimalFormat f = new DecimalFormat("##");
         prest = presDAO.findPrestById(listPaquet.get(rowIndex).getIdPrest());
         switch (columnIndex) {
             case 0:
@@ -86,7 +88,7 @@ public class TableListPaquetModel extends AbstractTableModel {
             case 4:
                 return listPaquet.get(rowIndex).getImgPaquet();
             case 5:
-                return listPaquet.get(rowIndex).getPrixPaquet();
+                return f.format(listPaquet.get(rowIndex).getPrixPaquet());
             case 6:
                 return rowlist[rowIndex][6];
 
