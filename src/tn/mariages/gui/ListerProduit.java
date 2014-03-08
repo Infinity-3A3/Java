@@ -232,8 +232,8 @@ public class ListerProduit extends javax.swing.JFrame {
             cmbCategorieProduit.addItem(Categories[i]);
         }
         // TODO add your handling code here:
- jTable1.getColumnModel().getColumn(0).setMinWidth(0);
- jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -302,9 +302,9 @@ public class ListerProduit extends javax.swing.JFrame {
             Produit p = new Produit();
 
             p = new ProduitDAO().DisplayProdByID((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-          ModifierProduit MP = new ModifierProduit(p.getIdProd());
-        MP.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        MP.setVisible(true);
+            ModifierProduit MP = new ModifierProduit(p.getIdProd());
+            MP.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            MP.setVisible(true);
         } else {
             int dialogButton = JOptionPane.CANCEL_OPTION;
             JOptionPane.showConfirmDialog(null, "Vous n'avez selectionné aucun paquet", "Warning", dialogButton);

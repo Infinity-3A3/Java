@@ -66,22 +66,17 @@
                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cmbPrestataire" min="-2" pref="277" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane1" min="-2" pref="277" max="-2" attributes="0"/>
-                                  <Component id="cmbCategorieProduit" alignment="0" min="-2" pref="277" max="-2" attributes="0"/>
-                                  <Component id="tfPrixProduit" alignment="0" min="-2" pref="277" max="-2" attributes="0"/>
-                                  <Component id="tfImgProd" alignment="0" min="-2" pref="277" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="cmbPrestataire" alignment="0" pref="277" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" alignment="0" pref="277" max="32767" attributes="0"/>
+                              <Component id="cmbCategorieProduit" alignment="0" pref="277" max="32767" attributes="0"/>
+                              <Component id="tfPrixProduit" alignment="0" pref="277" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="btnAjoutProduit" min="-2" pref="113" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="btnAjoutImage" max="32767" attributes="0"/>
-                                      <Component id="btnReset" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="btnReset" min="-2" pref="75" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="webFileDrop1" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="tfnomProduit" alignment="1" min="-2" pref="277" max="-2" attributes="0"/>
@@ -119,13 +114,11 @@
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfImgProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <Component id="webFileDrop1" min="-2" pref="117" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnAjoutImage" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="136" max="32767" attributes="0"/>
+                  <EmptySpace pref="73" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnAjoutProduit" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnReset" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -171,14 +164,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfPrixProduitActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnAjoutImage">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Parcourir"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAjoutImageActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JComboBox" name="cmbCategorieProduit">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -204,8 +189,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="tfImgProd">
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -240,6 +223,16 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbPrestataireActionPerformed"/>
           </Events>
         </Component>
+        <Container class="com.alee.extended.filechooser.WebFileDrop" name="webFileDrop1">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
+                <MatteColorBorder/>
+              </Border>
+            </Property>
+            <Property name="dropText" type="java.lang.String" value="Placez vos images ici"/>
+          </Properties>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>
