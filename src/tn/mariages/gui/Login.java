@@ -38,6 +38,7 @@ import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.dao.ToDoDAO;
 import tn.mariages.entities.Client;
+import tn.mariages.entities.Prestataire;
 import static tn.mariages.gui.FacebookLoginTEST.access_token;
 import static tn.mariages.gui.FacebookLoginTEST.firstRequest;
 import static tn.mariages.gui.FacebookLoginTEST.firstRequestDone;
@@ -138,7 +139,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnConnect.setText("Se connecter");
+        btnConnect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/signin_button3.png"))); // NOI18N
+        btnConnect.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnConnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConnectActionPerformed(evt);
@@ -166,7 +168,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Login w\\ Facebook");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tn/mariages/util/facebook/img/facebook_login.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -190,7 +192,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(Logo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 51, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
@@ -210,7 +212,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
+                .addContainerGap(82, Short.MAX_VALUE)
                 .addComponent(Logo)
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,7 +247,10 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -306,6 +311,7 @@ public class Login extends javax.swing.JFrame {
         ClientDAO clientDAO=new ClientDAO();
         PrestataireDAO prestatiareDAO=new PrestataireDAO();
         AdminDAO adminDAO=new AdminDAO();
+        
         if(adminDAO.connectAdmin(email, pwd)){
         
        dispose();
@@ -317,7 +323,7 @@ public class Login extends javax.swing.JFrame {
             todoDAO.DeleteToDos(clientDAO.findClientByEmail(email).getIdClient());
             List <ToDo> listeTodo=new ArrayList<ToDo>();
             listeTodo=todoDAO.NotifyClient(clientDAO.findClientByEmail(email).getIdClient());
-            String notify="N'oubliez pas les choses a faire demain : \n\n";
+            String notify="N'oubliez pas les taches à faire demain : \n\n";
             for (ToDo toDo : listeTodo) {
                 notify+="Titre : "+toDo.getTitreToDo()+"\n";
                    notify+="Description : "+toDo.getDescToDo()+"\n\n";
@@ -342,8 +348,9 @@ accueil.setLocation(-70, -16);
         else if(prestatiareDAO.connectPrestataire(email, pwd))
         {  
             dispose();
-       Accueil accueil=new Accueil();
-       accueil.setVisible(true);
+             Prestataire findPrestByEmail = prestatiareDAO.findPrestByEmail(email);
+      EspacePrest EP = new EspacePrest(findPrestByEmail.getIdPrest(), "p");
+      EP.setVisible(true);
         }
         else{
          int dialogButton = JOptionPane.OK_OPTION;
@@ -357,7 +364,10 @@ accueil.setLocation(-70, -16);
     }//GEN-LAST:event_tfPwdFocusGained
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-String email1="";
+               btnConnect.setBorder(BorderFactory.createEmptyBorder());
+               jButton1.setBorder(BorderFactory.createEmptyBorder());
+
+        String email1="";
 String pwd1="";
 int pwd2=0;
 File f1=new File("email.txt");
