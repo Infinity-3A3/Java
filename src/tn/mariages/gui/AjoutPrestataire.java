@@ -15,6 +15,8 @@ import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.entities.Prestataire;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager;
+import tn.mariages.dao.AdminDAO;
+import tn.mariages.dao.ClientDAO;
 
 /**
  *
@@ -445,11 +447,14 @@ public class AjoutPrestataire extends javax.swing.JFrame {
          
          Prestataire prestataire=new Prestataire();
          PrestataireDAO prestataireDAO=new PrestataireDAO();
+         ClientDAO clientDAO=new ClientDAO();
+         AdminDAO adminDAO=new AdminDAO();
          List <Prestataire> mylist=new ArrayList<Prestataire>();
          mylist=prestataireDAO.DisplayAllPrestataire();
          
          
-       if(jtNomPrest.getText().equals("")||jtpwdPrest.getText().length()<6|| jtDescPrest.getText().equals("")|| jtEmailPrest.getText().equals("") || jtpwdPrest.getText().equals("") || jtAdrPrest.getText().equals("") || cmbVillePrest.getSelectedItem().equals("--Choisir ville--")|| cmbSpecialitePrest.getSelectedItem().equals("--Choisir Specialite--")|| cmbCategoriePrest.getSelectedItem().equals("--Choisir catégorie--")||!matcher.matches()||!matcher2.matches()||!matcher3.matches()){
+       if(jtNomPrest.getText().equals("")||jtpwdPrest.getText().length()<6|| jtDescPrest.getText().equals("")|| jtEmailPrest.getText().equals("") || jtpwdPrest.getText().equals("") || jtAdrPrest.getText().equals("") || cmbVillePrest.getSelectedItem().equals("--Choisir ville--")|| cmbSpecialitePrest.getSelectedItem().equals("--Choisir Specialite--")|| cmbCategoriePrest.getSelectedItem().equals("--Choisir catégorie--")||!matcher.matches()||!matcher2.matches()||!matcher3.matches()||clientDAO.findClientByEmailBoolean(jtEmailPrest.getText())|| prestataireDAO.findPrestByEmailBoolean(jtEmailPrest.getText())||adminDAO.findAdminByEmailBoolean(jtEmailPrest.getText()))
+    {
            String ch="";
            if(jtNomPrest.getText().equals(""))
                ch+="Veuillez saisir le Nom du prestataire \n\n";
@@ -482,10 +487,11 @@ public class AjoutPrestataire extends javax.swing.JFrame {
              if(cmbCategoriePrest.getSelectedItem().toString().equals(""))
                ch+="Veuillez donner la catégorie  du prestataire  \n";
              
-              for (Prestataire prest : mylist) {
-                if(prestataireDAO.findPrestByEmail(jtEmailPrest.getText()).equals(prest))
+              if(clientDAO.findClientByEmailBoolean(jtEmailPrest.getText())|| prestataireDAO.findPrestByEmailBoolean(jtEmailPrest.getText())||adminDAO.findAdminByEmailBoolean(jtEmailPrest.getText()))
+              {
                      ch+="l'email que vous avez saisi existe deja \n";
-            }
+            
+              }
              
               if(cmbSpecialitePrest.getSelectedItem().toString().equals(""))
                ch+="Veuillez donner la specialité  du prestataire  \n";

@@ -7,7 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import tn.mariages.dao.AdminDAO;
 import tn.mariages.dao.ClientDAO;
+import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.entities.Client;
 
 /**
@@ -280,10 +282,13 @@ public class AjoutClient extends javax.swing.JFrame {
          
          Client client=new Client();
          ClientDAO clientdao=new ClientDAO();
+         AdminDAO adminDAO=new AdminDAO();
+         PrestataireDAO prestataireDAO=new PrestataireDAO();
          List <Client> mylist=new ArrayList<Client>();
         mylist=clientdao.DisplayAllClients();
         
-        if(tfPrenomMari.getText().equals("")|| tfPrenomEpouse.getText().equals("")||tfPwdClient.getText().length()<6|| tfNom.getText().equals("") ||jDateChooser1.getDateFormatString().equals("")|| jDateChooser2.getDateFormatString().equals("")|| tfImageclient.getText().equals("") || tfEmailClient.getText().equals("") || tfPwdClient.getText().equals("")||!matcher.matches()||!matcher2.matches()||!matcher3.matches() ){
+        if(tfPrenomMari.getText().equals("")|| tfPrenomEpouse.getText().equals("")||tfPwdClient.getText().length()<6|| tfNom.getText().equals("") ||jDateChooser1.getDateFormatString().equals("")|| jDateChooser2.getDateFormatString().equals("")|| tfImageclient.getText().equals("") || tfEmailClient.getText().equals("") || tfPwdClient.getText().equals("")||!matcher.matches()||!matcher2.matches()||!matcher3.matches()||clientdao.findClientByEmailBoolean(tfEmailClient.getText())|| prestataireDAO.findPrestByEmailBoolean(tfEmailClient.getText())||adminDAO.findAdminByEmailBoolean(tfEmailClient.getText()))
+     {
     
      String ch="";
            if(tfPrenomMari.getText().equals(""))
@@ -315,11 +320,11 @@ public class AjoutClient extends javax.swing.JFrame {
                ch+="Veuillez saisir votre mot de pasee  \n";
                if(tfPwdClient.getText().length()<6)
                  ch+="le mot de passe doit contenir au moins 6 caracteres";
-              for (Client cl : mylist) {
-                if(clientdao.findClientByEmail(tfEmailClient.getText()).equals(cl))
+              if(clientdao.findClientByEmailBoolean(tfEmailClient.getText())|| prestataireDAO.findPrestByEmailBoolean(tfEmailClient.getText())||adminDAO.findAdminByEmailBoolean(tfEmailClient.getText()))
+              {
                      ch+="l'email que vous avez saisi existe deja \n";
-            }
-              
+            
+              }
               if(jDateChooser2.getDateFormatString().equals(""))
                ch+="Veuillez saisir la date fin de la période de mariage  \n";
              if(tfImageclient.getText().equals(""))
