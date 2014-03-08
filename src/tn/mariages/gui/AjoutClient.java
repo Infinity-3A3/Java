@@ -367,12 +367,12 @@ public class AjoutClient extends javax.swing.JFrame {
             String dateFin = jDateChooser2.toString();
             
             try {
-                FTPFileUploader.getInstance().UploadPic(fc.getSelectedFile().getAbsolutePath(), "/prod/");
+                FTPFileUploader.getInstance().UploadPic(fc.getSelectedFile().getAbsolutePath(), "/client/");
             } catch (IOException ex) {
                 Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println("date" + dateFin);
-            String img = "http://mariages.tn/prod/"+fc.getSelectedFile().getName();
+            String img = "http://mariages.tn/client/"+fc.getSelectedFile().getName();
             client.setPrenomMari(prMari);
             client.setPrenomEpouse(prEpouse);
             client.setNomDeFamille(nom);

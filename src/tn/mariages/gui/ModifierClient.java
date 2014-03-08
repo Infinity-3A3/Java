@@ -397,11 +397,11 @@ public class ModifierClient extends javax.swing.JFrame {
             } else {
 
                 try {
-                    FTPFileUploader.getInstance().UploadPic(fc.getSelectedFile().getAbsolutePath(), "/prod/");
+                    FTPFileUploader.getInstance().UploadPic(fc.getSelectedFile().getAbsolutePath(), "/client/");
                 } catch (IOException ex) {
                     Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                String img = "http://mariages.tn/prod/" + fc.getSelectedFile().getName();
+                String img = "http://mariages.tn/client/" + fc.getSelectedFile().getName();
                 cl.setImgClient(img);
             }
 

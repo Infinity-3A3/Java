@@ -296,11 +296,11 @@ public class AjoutPaquet extends javax.swing.JFrame {
             } else {
 
                 try {
-                    FTPFileUploader.getInstance().UploadPic(Img.getSelectedFile().getAbsolutePath(), "/prod/");
+                    FTPFileUploader.getInstance().UploadPic(Img.getSelectedFile().getAbsolutePath(), "/paquet/");
                 } catch (IOException ex) {
                     Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                String img = "http://mariages.tn/prod/" + Img.getSelectedFile().getName();
+                String img = "http://mariages.tn/paquet/" + Img.getSelectedFile().getName();
                 p.setImgPaquet(img);
             }
             pDAO.updatePaquet(p);           
@@ -366,11 +366,11 @@ public class AjoutPaquet extends javax.swing.JFrame {
             p.setPrixPaquet(Double.parseDouble(tfPrixPaquet.getText()));
             p.setShortDescPaquet(tfDescPaquet.getText().substring(0, 10)+"...");
             try {
-                FTPFileUploader.getInstance().UploadPic(Img.getSelectedFile().getAbsolutePath(), "/prod/");
+                FTPFileUploader.getInstance().UploadPic(Img.getSelectedFile().getAbsolutePath(), "/paquet/");
             } catch (IOException ex) {
                 Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String img = "http://mariages.tn/prod/"+Img.getSelectedFile().getName();
+            String img = "http://mariages.tn/paquet/"+Img.getSelectedFile().getName();
             p.setImgPaquet(img);
             pDAO.insertPaquet(p);           
             this.dispose();
