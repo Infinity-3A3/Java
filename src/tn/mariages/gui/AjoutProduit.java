@@ -69,6 +69,7 @@ public class AjoutProduit extends javax.swing.JFrame {
         initComponents();
         this.id_prest = id_prest;
         cmbPrestataire.setVisible(false);
+        jLabel6.setVisible(false);
     }
 
     /**
@@ -267,7 +268,7 @@ public class AjoutProduit extends javax.swing.JFrame {
         ImgChooser.showOpenDialog(this);
         if(ImgChooser.getSelectedFile()!=null)
         tfImgProd.setText(ImgChooser.getSelectedFile().getAbsolutePath());
-        System.out.println(ImgChooser.getSelectedFile().getName());
+       
     }//GEN-LAST:event_btnAjoutImageActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed

@@ -20,7 +20,9 @@ package tn.mariages.gui;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.ProduitDAO;
+import tn.mariages.entities.Prestataire;
 import tn.mariages.entities.Produit;
 
 /**
@@ -50,11 +52,15 @@ public class MyTableProduitByCatnPrest extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        Prestataire p = new Prestataire() ;
+        PrestataireDAO pdao= new PrestataireDAO();
+        p=pdao.findPrestById(mylist.get(rowIndex).getIdPrest());
+        
         switch(columnIndex){
             case 0 : 
                 return mylist.get(rowIndex).getNomProd();
             case 1 :
-                return  mylist.get(rowIndex).getIdPrest();
+                return p.getNomPrest();
             case 2 :
                 return mylist.get(rowIndex).getCategorieProd();
             case 3 :

@@ -52,6 +52,14 @@ public class TableListPaquetModel extends AbstractTableModel {
         }
 
     }
+    public TableListPaquetModel(int id_prest , String s) {
+        listPaquet = new PaquetDAO().FindPaquetPrestByNom(id_prest, s);
+        for (int i = 0; i < getRowCount(); i++) {
+            rowlist[i][6] = Boolean.FALSE;
+        }
+
+    }
+    
 
     @Override
     public int getRowCount() {

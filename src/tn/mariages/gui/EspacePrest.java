@@ -88,9 +88,9 @@ public class EspacePrest extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablecomm = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textComm = new javax.swing.JTextPane();
         jLabel3 = new javax.swing.JLabel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         CmbCategori = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
@@ -116,10 +116,10 @@ public class EspacePrest extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-            }
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -220,7 +220,7 @@ public class EspacePrest extends javax.swing.JFrame {
                                     .addComponent(LabTelMobile)
                                     .addComponent(LabCateg)
                                     .addComponent(LabTelFix))))))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,14 +275,26 @@ public class EspacePrest extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Panier", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         tablecomm.setModel(new TableModelCommPrest());
+        tablecomm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablecommMousePressed(evt);
+            }
+        });
+        tablecomm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tablecommKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tablecommKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablecomm);
 
         jTabbedPane1.addTab("tab1", jScrollPane1);
 
-        jLabel3.setText("jLabel3");
-        jTabbedPane1.addTab("tab3", jLabel3);
-        jTabbedPane1.addTab("tab1", jTabbedPane2);
-        jTabbedPane1.addTab("tab2", jTabbedPane3);
+        jScrollPane2.setViewportView(textComm);
+
+        jLabel3.setText("Commentaire : ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -290,14 +302,23 @@ public class EspacePrest extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jTabbedPane1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)
+                    .addComponent(jTabbedPane1))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 29, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produit", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
@@ -315,7 +336,19 @@ public class EspacePrest extends javax.swing.JFrame {
 
         jLabel11.setText("Catégorie:");
 
-        jLabel13.setText("Nom:");
+        jLabel13.setText("Nom Produit :");
+
+        tfNomProduit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfNomProduitKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfNomProduitKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfNomProduitKeyTyped(evt);
+            }
+        });
 
         btnModifProduit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -428,7 +461,13 @@ public class EspacePrest extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tablePaquet);
 
-        jLabel16.setText("Nom:");
+        jLabel16.setText("Nom Paquet :");
+
+        TFnOMpaquet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TFnOMpaquetKeyReleased(evt);
+            }
+        });
 
         btnSuppPaquet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -453,7 +492,7 @@ public class EspacePrest extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(11, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(138, 138, 138)
@@ -484,7 +523,7 @@ public class EspacePrest extends javax.swing.JFrame {
                     .addComponent(btnSuppPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModifPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAjoutPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -576,6 +615,8 @@ public class EspacePrest extends javax.swing.JFrame {
         if (CmbCategori.getSelectedIndex() == 7) {
             tableProduit.setModel(new MyTableProduitByCatnPrest(Categories[7], id_prest));
         }
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+                    tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
     }//GEN-LAST:event_CmbCategoriActionPerformed
 
     private void btnModifProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifProduitActionPerformed
@@ -602,6 +643,8 @@ public class EspacePrest extends javax.swing.JFrame {
         if (evt.getClickCount() == 1) {
             TableModelCommPrest model = new TableModelCommPrest(p.getIdProd());
             tablecomm.setModel(model);
+            tablecomm.getColumnModel().getColumn(0).setMinWidth(0);
+                    tablecomm.getColumnModel().getColumn(0).setMaxWidth(0);
 
         } else if (evt.getClickCount() == 2) {
 
@@ -656,6 +699,8 @@ public class EspacePrest extends javax.swing.JFrame {
             }
             TableListPaquetModel model = new TableListPaquetModel(id_prest);
             tablePaquet.setModel(model);
+            tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+                    tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
         }
 
     }//GEN-LAST:event_btnSuppPaquetActionPerformed
@@ -666,6 +711,10 @@ public class EspacePrest extends javax.swing.JFrame {
         tableProduit.setModel(modelprod);
         TableListPaquetModel modelpaq = new TableListPaquetModel(id_prest);
         tablePaquet.setModel(modelpaq);
+        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+        tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
 
         Prestataire p = new Prestataire();
         PrestataireDAO pdao = new PrestataireDAO();
@@ -710,6 +759,8 @@ public class EspacePrest extends javax.swing.JFrame {
             }
             MyTableProduit model = new MyTableProduit();
             tableProduit.setModel(model);
+            tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
             CmbCategori.setSelectedIndex(0);
         }
 
@@ -749,8 +800,12 @@ public class EspacePrest extends javax.swing.JFrame {
         // TODO add your handling code here:
         MyTableProduitPrest modelprod = new MyTableProduitPrest(id_prest);
         tableProduit.setModel(modelprod);
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
         TableListPaquetModel modelpaq = new TableListPaquetModel(id_prest);
         tablePaquet.setModel(modelpaq);
+        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+        tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void btnAjoutProdPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutProdPaqActionPerformed
@@ -798,6 +853,71 @@ public class EspacePrest extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnvaliderActionPerformed
+
+    private void tablecommKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablecommKeyReleased
+        // TODO add your handling code here:
+        textComm.setText(tablecomm.getValueAt(tablecomm.getSelectedRow(), 3).toString());
+    }//GEN-LAST:event_tablecommKeyReleased
+
+    private void tablecommKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablecommKeyPressed
+        // TODO add your handling code here:
+        textComm.setText(tablecomm.getValueAt(tablecomm.getSelectedRow(), 3).toString());
+    }//GEN-LAST:event_tablecommKeyPressed
+
+    private void tablecommMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablecommMousePressed
+        // TODO add your handling code here:
+        textComm.setText(tablecomm.getValueAt(tablecomm.getSelectedRow(), 3).toString());
+    }//GEN-LAST:event_tablecommMousePressed
+
+    private void tfNomProduitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomProduitKeyTyped
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tfNomProduitKeyTyped
+
+    private void tfNomProduitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomProduitKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tfNomProduitKeyPressed
+
+    private void tfNomProduitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomProduitKeyReleased
+        // TODO add your handling code here:
+        String s = tfNomProduit.getText();
+        if(!s.equals("")){
+        MyTableProduitPrest modelprod = new MyTableProduitPrest(id_prest,s);
+        tableProduit.setModel(modelprod);
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProduit.repaint();
+        }
+        else
+        {
+            MyTableProduitPrest modelprod = new MyTableProduitPrest(id_prest);
+        tableProduit.setModel(modelprod);
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProduit.repaint();
+        }
+    }//GEN-LAST:event_tfNomProduitKeyReleased
+
+    private void TFnOMpaquetKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFnOMpaquetKeyReleased
+        // TODO add your handling code here:
+        String s = TFnOMpaquet.getText();
+        if(!s.equals("")){
+        TableListPaquetModel modelpaq = new TableListPaquetModel(id_prest,s);
+        tablePaquet.setModel(modelpaq);
+        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+            tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+            tablePaquet.repaint();
+        }
+        else
+        {
+            TableListPaquetModel modelpaq = new TableListPaquetModel(id_prest);
+        tablePaquet.setModel(modelpaq);
+        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+            tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+            tablePaquet.repaint();
+        }
+    }//GEN-LAST:event_TFnOMpaquetKeyReleased
 
     /**
      * @param args the command line arguments
@@ -880,17 +1000,17 @@ public class EspacePrest extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JLabel jlab;
     private javax.swing.JLabel labNom;
     private javax.swing.JLabel labemail;
     private javax.swing.JTable tablePaquet;
     private javax.swing.JTable tableProduit;
     private javax.swing.JTable tablecomm;
+    private javax.swing.JTextPane textComm;
     private javax.swing.JTextField tfNomProduit;
     // End of variables declaration//GEN-END:variables
 }
