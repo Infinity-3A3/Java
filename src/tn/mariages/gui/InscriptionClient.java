@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
+import javax.swing.UIManager;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.dao.ClientDAO;
@@ -36,6 +37,16 @@ public class InscriptionClient extends javax.swing.JFrame {
      * Creates new form InscriptionClient
      */
     public InscriptionClient() {
+        try
+    {
+        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible", false);
+
+    }
+    catch(Exception e)
+    {
+        //TODO exception
+    }
         initComponents();
           this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -582,8 +593,10 @@ erreurDate.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitterActionPerformed
-Authentication auth =new Authentication();
-auth.setVisible(true);
+//Authentication auth =new Authentication();
+//auth.setVisible(true);
+        Login log = new Login();
+        log.setVisible(true);
 this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_btnQuitterActionPerformed
 
@@ -613,9 +626,11 @@ this.dispose();// TODO add your handling code here:
             java.util.logging.Logger.getLogger(InscriptionClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-     try
+   try
     {
         org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible", false);
+
     }
     catch(Exception e)
     {
@@ -662,11 +677,11 @@ this.dispose();// TODO add your handling code here:
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField spinBudget;
-    private javax.swing.JTextField tfEmailClient;
+    public javax.swing.JTextField tfEmailClient;
     private javax.swing.JTextField tfImageclient;
-    private javax.swing.JTextField tfNom;
-    private javax.swing.JTextField tfPrenomEpouse;
-    private javax.swing.JTextField tfPrenomMari;
+    public javax.swing.JTextField tfNom;
+    public javax.swing.JTextField tfPrenomEpouse;
+    public javax.swing.JTextField tfPrenomMari;
     private javax.swing.JPasswordField tfPwdClient;
     private javax.swing.JPasswordField tfPwdClient1;
     private javax.swing.JTextField tfTelClient;

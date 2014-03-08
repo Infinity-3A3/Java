@@ -83,23 +83,26 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jButton7" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="jButton6" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="jButton5" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="jButton4" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="jButton3" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="jButton2" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="2" attributes="0">
+                              <Component id="jButton7" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="jButton6" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="jButton5" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="jButton4" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="jButton3" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="jButton2" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="jButton1" alignment="2" min="-2" pref="60" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jbtnRec" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="17" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
                       <Component id="jButton1" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton2" min="-2" pref="60" max="-2" attributes="0"/>
@@ -113,7 +116,8 @@
                       <Component id="jButton6" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton7" min="-2" pref="60" max="-2" attributes="0"/>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jbtnRec" min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -248,6 +252,17 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbtnRec">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/icons/warning.png"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" value="R&#xe9;clamations"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnRecActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

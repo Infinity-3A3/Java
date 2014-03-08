@@ -52,7 +52,6 @@ public class AjoutFeatProd extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnAjout = new javax.swing.JButton();
         CbWidget = new javax.swing.JComboBox();
-        btnAnuller = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -81,14 +80,6 @@ public class AjoutFeatProd extends javax.swing.JFrame {
         CbWidget.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Head_1", "Head_2", "Side_1", "Mid_1", "Foot_1" }));
         CbWidget.setToolTipText("Position");
 
-        btnAnuller.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/arrow_left.png"))); // NOI18N
-        btnAnuller.setText("Anuller");
-        btnAnuller.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnullerActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -99,14 +90,12 @@ public class AjoutFeatProd extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(CbWidget, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAjout)
-                        .addGap(53, 53, 53)
-                        .addComponent(btnAnuller)
-                        .addGap(19, 19, 19))))
+                        .addComponent(btnAjout)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,12 +105,10 @@ public class AjoutFeatProd extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CbWidget, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAjout)
-                        .addComponent(btnAnuller)))
-                .addContainerGap())
+                    .addComponent(btnAjout))
+                .addGap(9, 9, 9))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,11 +153,6 @@ public class AjoutFeatProd extends javax.swing.JFrame {
   JOptionPane.showMessageDialog(this, "Veuillez sélectionner un élément.");           
   
     }//GEN-LAST:event_btnAjoutActionPerformed
-
-    private void btnAnullerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnullerActionPerformed
- ListeFeatProd lfp = new ListeFeatProd();
-        lfp.setVisible(true); 
-        this.dispose();    }//GEN-LAST:event_btnAnullerActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 TableFavProd.getColumnModel().getColumn(0).setMinWidth(0);
@@ -218,7 +200,6 @@ TableFavProd.getColumnModel().getColumn(0).setMaxWidth(0);
     private javax.swing.JComboBox CbWidget;
     private javax.swing.JTable TableFavProd;
     private javax.swing.JButton btnAjout;
-    private javax.swing.JButton btnAnuller;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

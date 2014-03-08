@@ -16,12 +16,18 @@
  */
 package tn.mariages.gui;
 
+import java.awt.image.BufferedImage;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import tn.mariages.dao.ClientDAO;
 import tn.mariages.dao.PaquetDAO;
-import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.ProduitDAO;
 import tn.mariages.dao.panierPaquetDAO;
 import tn.mariages.dao.panierProduitDAO;
@@ -29,7 +35,6 @@ import tn.mariages.entities.Client;
 import tn.mariages.entities.PanierPaquet;
 import tn.mariages.entities.PanierProduit;
 import tn.mariages.entities.Paquet;
-import tn.mariages.entities.Prestataire;
 import tn.mariages.entities.Produit;
 
 /**
@@ -88,11 +93,23 @@ public class EspaceClient extends javax.swing.JFrame {
         
     }
      public EspaceClient(int id,String type) {
+         
+         try
+    {
+        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible", false);
+
+    }
+    catch(Exception e)
+    {
+        //TODO exception
+    }
+         
         initComponents();
       if(type.equals("c")){
             Client c=new Client ();
             ClientDAO clDAo=new ClientDAO();
-            c=clDAo.findClientById(23);
+            c=clDAo.findClientById(id);
             Idclient.setText(c.getIdClient()+"");
             Idclient.setVisible(false);
             NomClient.setText(c.getNomDeFamille()+ " "+c.getPrenomMari());
@@ -106,6 +123,17 @@ public class EspaceClient extends javax.swing.JFrame {
             LabDateDebut.setText(c.getDateDebut());
             LabDateFin.setText(c.getDateFin());
             this.id=c.getIdClient();
+            
+             ImageIcon icon;
+            try {
+                icon = new ImageIcon(new URL(c.getImgClient().toString()));
+                 icon = new ImageIcon(icon.getImage().getScaledInstance(180, 180, BufferedImage.SCALE_SMOOTH));
+ LabImageClient.setIcon(icon);     
+
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ListeFeatProd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
                         Idclient.setVisible(false);
       }
         

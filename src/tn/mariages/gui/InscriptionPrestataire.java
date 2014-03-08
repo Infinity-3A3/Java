@@ -19,6 +19,7 @@ package tn.mariages.gui;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
+import javax.swing.UIManager;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.ClientDAO;
 import tn.mariages.dao.AdminDAO;
@@ -45,6 +46,16 @@ Prestataire prest = new Prestataire();
      * Creates new form InscriptionPrestataire
      */
     public InscriptionPrestataire() {
+        try
+    {
+        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible", false);
+
+    }
+    catch(Exception e)
+    {
+        //TODO exception
+    }
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);

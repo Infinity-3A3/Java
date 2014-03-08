@@ -93,10 +93,11 @@ public CategoryDataset createDataset() throws IOException {
         return chart;
     }
     public static void main(final String[] args) throws IOException {
-        final BarChart demo = new BarChart("Test de la couverture ");
+        final BarChart demo = new BarChart("Ventes par mois");
         
         demo.pack();
         RefineryUtilities.centerFrameOnScreen(demo);
+        demo.setSize(700, 350);
         demo.setVisible(true);
 
     }
