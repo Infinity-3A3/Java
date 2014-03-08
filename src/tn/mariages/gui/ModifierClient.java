@@ -1,5 +1,8 @@
 package tn.mariages.gui;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
@@ -7,65 +10,69 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tn.mariages.dao.ClientDAO;
 import tn.mariages.entities.Client;
+import tn.mariages.util.FTPFileUploader;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Karim
  */
 public class ModifierClient extends javax.swing.JFrame {
 
-    
+    JFileChooser fc = new JFileChooser();
+
     public ModifierClient() {
         initComponents();
     }
-      public ModifierClient(Client c) {
+
+    public ModifierClient(Client c) {
         initComponents();
-        Client client=new Client();
-        client=c;
-        int budget=  client.getBudget();
-         labelid.setText(""+client.getIdClient());
-         tfNom.setText(client.getNomDeFamille());
-         tfPrenomMari.setText(client.getPrenomMari());
-         tfPrenomEpouse.setText(client.getPrenomEpouse());
-         tfEmail.setText(client.getEmailClient());
-         tfMotDePasse.setText(client.getPwdClient());
-         tfNumTelClient.setText(client.getTelClient());
-         SpinBudget.setText(String.valueOf(budget).toString());
-         tfDateDebut.setText(client.getDateDebut());
-         tfDateFin.setText(client.getDateFin()); 
-         cmbvilleclient.addItem(client.getVilleClient());
-         tfimgclient.setText(client.getImgClient());
+        Client client = new Client();
+        client = c;
+        int budget = client.getBudget();
+        labelid.setText("" + client.getIdClient());
+        tfNom.setText(client.getNomDeFamille());
+        tfPrenomMari.setText(client.getPrenomMari());
+        tfPrenomEpouse.setText(client.getPrenomEpouse());
+        tfEmail.setText(client.getEmailClient());
+        tfMotDePasse.setText(client.getPwdClient());
+        tfNumTelClient.setText(client.getTelClient());
+        SpinBudget.setText(String.valueOf(budget).toString());
+        tfDateDebut.setText(client.getDateDebut());
+        tfDateFin.setText(client.getDateFin());
+        cmbvilleclient.addItem(client.getVilleClient());
+        tfimgclient.setText(client.getImgClient());
         labelid.setVisible(false);
     }
-      public ModifierClient(int id) {
+
+    public ModifierClient(int id) {
         initComponents();
-        Client client=new Client();
-       ClientDAO clientDao=new ClientDAO();
-        client=clientDao.findClientById(id);
-        int budget=  client.getBudget();
-         labelid.setText(""+client.getIdClient());
-         tfNom.setText(client.getNomDeFamille());
-         tfPrenomMari.setText(client.getPrenomMari());
-         tfPrenomEpouse.setText(client.getPrenomEpouse());
-         tfEmail.setText(client.getEmailClient());
-         tfMotDePasse.setText(client.getPwdClient());
-         tfNumTelClient.setText(client.getTelClient());
-         SpinBudget.setText(String.valueOf(budget).toString());
-         tfDateDebut.setText(client.getDateDebut());
-         tfDateFin.setText(client.getDateFin()); 
-         cmbvilleclient.addItem(client.getVilleClient());
-         tfimgclient.setText(client.getImgClient());
+        Client client = new Client();
+        ClientDAO clientDao = new ClientDAO();
+        client = clientDao.findClientById(id);
+        int budget = client.getBudget();
+        labelid.setText("" + client.getIdClient());
+        tfNom.setText(client.getNomDeFamille());
+        tfPrenomMari.setText(client.getPrenomMari());
+        tfPrenomEpouse.setText(client.getPrenomEpouse());
+        tfEmail.setText(client.getEmailClient());
+        tfMotDePasse.setText(client.getPwdClient());
+        tfNumTelClient.setText(client.getTelClient());
+        SpinBudget.setText(String.valueOf(budget).toString());
+        tfDateDebut.setText(client.getDateDebut());
+        tfDateFin.setText(client.getDateFin());
+        cmbvilleclient.addItem(client.getVilleClient());
+        tfimgclient.setText(client.getImgClient());
         labelid.setVisible(false);
     }
-    
-    Client cl=new Client();
-     ClientDAO clientDao=new ClientDAO();
+
+    Client cl = new Client();
+    ClientDAO clientDao = new ClientDAO();
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -159,6 +166,11 @@ public class ModifierClient extends javax.swing.JFrame {
         });
 
         btnParcourir.setText("Parcourir");
+        btnParcourir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnParcourirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -265,32 +277,28 @@ public class ModifierClient extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbvilleclient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(tfimgclient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnParcourir)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(tfNumTelClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(182, 182, 182)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(tfimgclient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnParcourir)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(tfNumTelClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(SpinBudget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(tfDateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel13)
-                                    .addComponent(tfDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(2, 2, 2)))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SpinBudget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(tfDateDebut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(tfDateFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(60, 60, 60)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAnnulerModificationClient)
@@ -315,80 +323,93 @@ public class ModifierClient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModifierClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifierClientActionPerformed
-        Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" );  
-    Pattern pattern = Pattern.compile("^\\d+$");
-    Matcher matcher3 = pattern2.matcher(tfEmail.getText());
-      Matcher matcher = pattern.matcher(tfNumTelClient.getText());
-         Matcher matcher2 = pattern.matcher(SpinBudget.getText());   
-        
-        if(tfPrenomMari.getText().equals("")|| tfPrenomEpouse.getText().equals("")|| tfNom.getText().equals("") ||tfDateDebut.getText().equals("")|| tfDateFin.getText().equals("")|| tfimgclient.getText().equals("") || tfEmail.getText().equals("") || tfMotDePasse.getText().equals("")||!matcher.matches()||!matcher2.matches()||!matcher3.matches() ){
-    
-     String ch="";
-           if(tfPrenomMari.getText().equals(""))
-               ch+="Veuillez saisir le Prenom du mari \n";
-           
-            if(tfPrenomEpouse.getText().equals(""))
-               ch+="Veuillez saisir le Prenom de l'epouse  \n";
-            if(tfNom.getText().equals(""))
-               ch+="Veuillez saisir le nom de famille  \n";
-            if(cmbvilleclient.getSelectedItem().toString().equals(""))
-               ch+="Veuillez donner la ville du client  \n";
-             if(tfDateDebut.getText().equals(""))
-               ch+="Veuillez saisir la date début de la période de mariage  \n";
-            if(tfEmail.getText().equals(""))
-               ch+="Veuillez donner l'adresse email   du client  \n";
-             else if(!matcher3.matches())
-                  ch+="Veuillez donner l'adresse email du client \n";
-             
-             
-             if(SpinBudget.getText().equals(""))
-               ch+="Veuillez donner le budget du client  \n";
-             else if(!matcher2.matches())
-                  ch+="Veuiller bien remplir le champ du budget du client  du client  \n";
-             if(tfNumTelClient.getText().equals(""))
-               ch+="Veuillez donner le numero de telephone   du client  \n";
-             else if(!matcher.matches())
-                  ch+="Veuiller bien remplir le champ du numero de telephone mobile  du prestataire  \n";
-              if(tfMotDePasse.getText().equals(""))
-               ch+="Veuillez saisir votre mot de pasee  \n";
-              
-              if(tfDateFin.getText().equals(""))
-               ch+="Veuillez saisir la date fin de la période de mariage  \n";
-             if(tfimgclient.getText().equals(""))
-               ch+="Veuillez donner un chemin correct de votre photo  \n";
-              
+        Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+");
+        Pattern pattern = Pattern.compile("^\\d+$");
+        Matcher matcher3 = pattern2.matcher(tfEmail.getText());
+        Matcher matcher = pattern.matcher(tfNumTelClient.getText());
+        Matcher matcher2 = pattern.matcher(SpinBudget.getText());
+
+        if (tfPrenomMari.getText().equals("") || tfPrenomEpouse.getText().equals("") || tfNom.getText().equals("") || tfDateDebut.getText().equals("") || tfDateFin.getText().equals("") || tfimgclient.getText().equals("") || tfEmail.getText().equals("") || tfMotDePasse.getText().equals("") || !matcher.matches() || !matcher2.matches() || !matcher3.matches()) {
+
+            String ch = "";
+            if (tfPrenomMari.getText().equals("")) {
+                ch += "Veuillez saisir le Prenom du mari \n";
+            }
+
+            if (tfPrenomEpouse.getText().equals("")) {
+                ch += "Veuillez saisir le Prenom de l'epouse  \n";
+            }
+            if (tfNom.getText().equals("")) {
+                ch += "Veuillez saisir le nom de famille  \n";
+            }
+            if (cmbvilleclient.getSelectedItem().toString().equals("")) {
+                ch += "Veuillez donner la ville du client  \n";
+            }
+            if (tfDateDebut.getText().equals("")) {
+                ch += "Veuillez saisir la date début de la période de mariage  \n";
+            }
+            if (tfEmail.getText().equals("")) {
+                ch += "Veuillez donner l'adresse email   du client  \n";
+            } else if (!matcher3.matches()) {
+                ch += "Veuillez donner l'adresse email du client \n";
+            }
+
+            if (SpinBudget.getText().equals("")) {
+                ch += "Veuillez donner le budget du client  \n";
+            } else if (!matcher2.matches()) {
+                ch += "Veuiller bien remplir le champ du budget du client  du client  \n";
+            }
+            if (tfNumTelClient.getText().equals("")) {
+                ch += "Veuillez donner le numero de telephone   du client  \n";
+            } else if (!matcher.matches()) {
+                ch += "Veuiller bien remplir le champ du numero de telephone mobile  du prestataire  \n";
+            }
+            if (tfMotDePasse.getText().equals("")) {
+                ch += "Veuillez saisir votre mot de pasee  \n";
+            }
+
+            if (tfDateFin.getText().equals("")) {
+                ch += "Veuillez saisir la date fin de la période de mariage  \n";
+            }
+            if (tfimgclient.getText().equals("")) {
+                ch += "Veuillez donner un chemin correct de votre photo  \n";
+            }
+
             int dialogButton = JOptionPane.OK_CANCEL_OPTION;
-                JOptionPane.showConfirmDialog (null,ch,"Warning",dialogButton);
-     
-     
-     
-     
-     
-     
- }else{
-     
-     
-     
-   
-          cl.setIdClient(Integer.parseInt(labelid.getText()));
-     
-          cl.setPrenomMari(tfPrenomMari.getText());
-          cl.setPrenomEpouse(tfPrenomEpouse.getText());
-          cl.setNomDeFamille(tfNom.getText());
-         cl.setEmailClient(tfEmail.getText());
-         cl.setPwdClient(tfMotDePasse.getText());
-           cl.setVilleClient(cmbvilleclient.getSelectedItem().toString());
-         cl.setTelClient(tfNumTelClient.getText());
-         cl.setBudget(Integer.parseInt(SpinBudget.getText()));
-         cl.setDateDebut(tfDateDebut.getText());
-         cl.setDateFin(tfDateFin.getText());
-         cl.setImgClient(tfimgclient.getText());
-        
-         clientDao.updateClient(cl);
+            JOptionPane.showConfirmDialog(null, ch, "Warning", dialogButton);
+
+        } else {
+
+            cl.setIdClient(Integer.parseInt(labelid.getText()));
+
+            cl.setPrenomMari(tfPrenomMari.getText());
+            cl.setPrenomEpouse(tfPrenomEpouse.getText());
+            cl.setNomDeFamille(tfNom.getText());
+            cl.setEmailClient(tfEmail.getText());
+            cl.setPwdClient(tfMotDePasse.getText());
+            cl.setVilleClient(cmbvilleclient.getSelectedItem().toString());
+            cl.setTelClient(tfNumTelClient.getText());
+            cl.setBudget(Integer.parseInt(SpinBudget.getText()));
+            cl.setDateDebut(tfDateDebut.getText());
+            cl.setDateFin(tfDateFin.getText());
+            if (tfimgclient.getText().substring(0, 4).equals("http")) {
+                cl.setImgClient(tfimgclient.getText());
+            } else {
+
+                try {
+                    FTPFileUploader.getInstance().UploadPic(fc.getSelectedFile().getAbsolutePath(), "/client/");
+                } catch (IOException ex) {
+                    Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                String img = "http://mariages.tn/client/" + fc.getSelectedFile().getName();
+                cl.setImgClient(img);
+            }
+
+            clientDao.updateClient(cl);
             this.dispose();
-          
- }             
-           
+
+        }
+
 
     }//GEN-LAST:event_btnModifierClientActionPerformed
 
@@ -398,7 +419,7 @@ public class ModifierClient extends javax.swing.JFrame {
 
     private void btnAnnulerModificationClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerModificationClientActionPerformed
 
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnAnnulerModificationClientActionPerformed
 
     private void tfimgclientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfimgclientActionPerformed
@@ -410,19 +431,20 @@ public class ModifierClient extends javax.swing.JFrame {
     }//GEN-LAST:event_SpinBudgetActionPerformed
 
     private void btnParcourirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParcourirActionPerformed
-     String chemin="";
+       String chemin = "";
+
         
-       JFileChooser fc = new JFileChooser();
-       
-                int retval = fc.showOpenDialog(null);
-                
-                if (retval == JFileChooser.APPROVE_OPTION) {
-                    
-                    chemin = fc.getSelectedFile().getAbsolutePath();
-                    
-                    chemin = chemin.replace("\\", "/");    }                                            
-    
-                   tfimgclient.setText(chemin);
+
+        int retval = fc.showOpenDialog(null);
+
+        if (retval == JFileChooser.APPROVE_OPTION) {
+
+            chemin = fc.getSelectedFile().getAbsolutePath();
+
+            chemin = chemin.replace("\\", "/");
+        }
+
+        tfimgclient.setText(chemin);
 
     }//GEN-LAST:event_btnParcourirActionPerformed
 
@@ -452,14 +474,11 @@ public class ModifierClient extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ModifierClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-    try
-    {
-        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
-    }
-    catch(Exception e)
-    {
-        //TODO exception
-    }
+        try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+        } catch (Exception e) {
+            //TODO exception
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

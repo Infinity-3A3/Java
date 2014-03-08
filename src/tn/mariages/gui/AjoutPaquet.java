@@ -4,8 +4,12 @@
  */
 package tn.mariages.gui;
 
+import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
@@ -15,6 +19,7 @@ import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.entities.Paquet;
 import tn.mariages.entities.Prestataire;
 import tn.mariages.entities.Produit;
+import tn.mariages.util.FTPFileUploader;
 
 /**
  *
@@ -43,7 +48,8 @@ public class AjoutPaquet extends javax.swing.JFrame {
         tfNomPaquet.setText(p.getNomPaquet());
         tfDescPaquet.setText(p.getDescPaquet());
         tfImage.setText(p.getImgPaquet());
-        tfPrixPaquet.setText(p.getPrixPaquet().toString());
+        DecimalFormat f = new DecimalFormat("##");
+        tfPrixPaquet.setText(f.format(p.getPrixPaquet()));
         
     }
 
@@ -285,7 +291,18 @@ public class AjoutPaquet extends javax.swing.JFrame {
             p.setDescPaquet(tfDescPaquet.getText());
             p.setPrixPaquet(Double.parseDouble(tfPrixPaquet.getText()));
             p.setShortDescPaquet(tfDescPaquet.getText().substring(0, 10)+"...");
-            p.setImgPaquet(tfImage.getText());
+            if (tfImage.getText().substring(0, 4).equals("http")) {
+                p.setImgPaquet(tfImage.getText());
+            } else {
+
+                try {
+                    FTPFileUploader.getInstance().UploadPic(Img.getSelectedFile().getAbsolutePath(), "/paquet/");
+                } catch (IOException ex) {
+                    Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                String img = "http://mariages.tn/paquet/" + Img.getSelectedFile().getName();
+                p.setImgPaquet(img);
+            }
             pDAO.updatePaquet(p);           
             this.dispose();
             
@@ -348,11 +365,17 @@ public class AjoutPaquet extends javax.swing.JFrame {
             p.setDescPaquet(tfDescPaquet.getText());
             p.setPrixPaquet(Double.parseDouble(tfPrixPaquet.getText()));
             p.setShortDescPaquet(tfDescPaquet.getText().substring(0, 10)+"...");
-            p.setImgPaquet(tfImage.getText());
+            try {
+                FTPFileUploader.getInstance().UploadPic(Img.getSelectedFile().getAbsolutePath(), "/paquet/");
+            } catch (IOException ex) {
+                Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String img = "http://mariages.tn/paquet/"+Img.getSelectedFile().getName();
+            p.setImgPaquet(img);
             pDAO.insertPaquet(p);           
             this.dispose();
             
-            //System.out.println(prest);
+     
         }
     }//GEN-LAST:event_BtnAjouterPaquetActionPerformed
 

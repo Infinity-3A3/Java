@@ -1,8 +1,10 @@
-
 package tn.mariages.gui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
@@ -11,12 +13,14 @@ import tn.mariages.dao.AdminDAO;
 import tn.mariages.dao.ClientDAO;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.entities.Client;
+import tn.mariages.util.FTPFileUploader;
 
 /**
  *
  * @author khaled
  */
 public class AjoutClient extends javax.swing.JFrame {
+    JFileChooser fc = new JFileChooser();
 
     /**
      * Creates new form AjoutClient
@@ -24,7 +28,8 @@ public class AjoutClient extends javax.swing.JFrame {
     public AjoutClient() {
         initComponents();
     }
-     String[] ville={"Arriana","Mannouba","Carthage","El ghazela"};
+    String[] ville = {"Arriana", "Mannouba", "Carthage", "El ghazela"};
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -256,161 +261,167 @@ public class AjoutClient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfPrenomMariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPrenomMariActionPerformed
-      String chemin="";
-        
-       JFileChooser fc = new JFileChooser();
-       
-                int retval = fc.showOpenDialog(null);
-                
-                if (retval == JFileChooser.APPROVE_OPTION) {
-                    
-                    chemin = fc.getSelectedFile().getAbsolutePath();
-                    
-                    chemin = chemin.replace("\\", "/");    }                                            
-    
-                   tfImageclient.setText(chemin);
+        String chemin = "";
+
+        JFileChooser fc = new JFileChooser();
+
+        int retval = fc.showOpenDialog(null);
+
+        if (retval == JFileChooser.APPROVE_OPTION) {
+
+            chemin = fc.getSelectedFile().getAbsolutePath();
+
+            chemin = chemin.replace("\\", "/");
+        }
+
+        tfImageclient.setText(chemin);
 
     }//GEN-LAST:event_tfPrenomMariActionPerformed
 
     private void btnValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValiderActionPerformed
- Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" );  
-    Pattern pattern = Pattern.compile("^\\d+$");
-    Matcher matcher3 = pattern2.matcher(tfEmailClient.getText());
-      Matcher matcher = pattern.matcher(tfTelClient.getText());
-         Matcher matcher2 = pattern.matcher(spinBudget.getText());   
-         
-         
-         Client client=new Client();
-         ClientDAO clientdao=new ClientDAO();
-         AdminDAO adminDAO=new AdminDAO();
-         PrestataireDAO prestataireDAO=new PrestataireDAO();
-         List <Client> mylist=new ArrayList<Client>();
-        mylist=clientdao.DisplayAllClients();
-        
-        if(tfPrenomMari.getText().equals("")|| tfPrenomEpouse.getText().equals("")||tfPwdClient.getText().length()<6|| tfNom.getText().equals("") ||jDateChooser1.getDateFormatString().equals("")|| jDateChooser2.getDateFormatString().equals("")|| tfImageclient.getText().equals("") || tfEmailClient.getText().equals("") || tfPwdClient.getText().equals("")||!matcher.matches()||!matcher2.matches()||!matcher3.matches()||clientdao.findClientByEmailBoolean(tfEmailClient.getText())|| prestataireDAO.findPrestByEmailBoolean(tfEmailClient.getText())||adminDAO.findAdminByEmailBoolean(tfEmailClient.getText()))
-     {
-    
-     String ch="";
-           if(tfPrenomMari.getText().equals(""))
-               ch+="Veuillez saisir le Prenom du mari \n";
-           
-            if(tfPrenomEpouse.getText().equals(""))
-               ch+="Veuillez saisir le Prenom de l'epouse  \n";
-            if(tfNom.getText().equals(""))
-               ch+="Veuillez saisir le nom de famille  \n";
-            if(cmbVilleClient.getSelectedItem().toString().equals(""))
-               ch+="Veuillez donner la ville du client  \n";
-             if(jDateChooser1.getDateFormatString().equals(""))
-               ch+="Veuillez saisir la date début de la période de mariage  \n";
-            if(tfEmailClient.getText().equals(""))
-               ch+="Veuillez donner l'adresse email   du client  \n";
-             else if(!matcher3.matches())
-                  ch+="Veuillez donner l'adresse email du client \n";
-             
-             
-             if(spinBudget.getText().equals(""))
-               ch+="Veuillez donner le budget du client  \n";
-             else if(!matcher2.matches())
-                  ch+="Veuiller bien remplir le champ du budget du client  du client  \n";
-             if(tfTelClient.getText().equals(""))
-               ch+="Veuillez donner le numero de telephone   du client  \n";
-             else if(!matcher.matches())
-                  ch+="Veuiller bien remplir le champ du numero de telephone mobile  du prestataire  \n";
-              if(tfPwdClient.getText().equals(""))
-               ch+="Veuillez saisir votre mot de pasee  \n";
-               if(tfPwdClient.getText().length()<6)
-                 ch+="le mot de passe doit contenir au moins 6 caracteres";
-              if(clientdao.findClientByEmailBoolean(tfEmailClient.getText())|| prestataireDAO.findPrestByEmailBoolean(tfEmailClient.getText())||adminDAO.findAdminByEmailBoolean(tfEmailClient.getText()))
-              {
-                     ch+="l'email que vous avez saisi existe deja \n";
-            
-              }
-              if(jDateChooser2.getDateFormatString().equals(""))
-               ch+="Veuillez saisir la date fin de la période de mariage  \n";
-             if(tfImageclient.getText().equals(""))
-               ch+="Veuillez donner un chemin correct de votre photo  \n";
-              
+        Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+");
+        Pattern pattern = Pattern.compile("^\\d+$");
+        Matcher matcher3 = pattern2.matcher(tfEmailClient.getText());
+        Matcher matcher = pattern.matcher(tfTelClient.getText());
+        Matcher matcher2 = pattern.matcher(spinBudget.getText());
+
+        Client client = new Client();
+        ClientDAO clientdao = new ClientDAO();
+        AdminDAO adminDAO = new AdminDAO();
+        PrestataireDAO prestataireDAO = new PrestataireDAO();
+        List<Client> mylist = new ArrayList<Client>();
+        mylist = clientdao.DisplayAllClients();
+
+        if (tfPrenomMari.getText().equals("") || tfPrenomEpouse.getText().equals("") || tfPwdClient.getText().length() < 6 || tfNom.getText().equals("") || jDateChooser1.getDateFormatString().equals("") || jDateChooser2.getDateFormatString().equals("") || tfImageclient.getText().equals("") || tfEmailClient.getText().equals("") || tfPwdClient.getText().equals("") || !matcher.matches() || !matcher2.matches() || !matcher3.matches() || clientdao.findClientByEmailBoolean(tfEmailClient.getText()) || prestataireDAO.findPrestByEmailBoolean(tfEmailClient.getText()) || adminDAO.findAdminByEmailBoolean(tfEmailClient.getText())) {
+
+            String ch = "";
+            if (tfPrenomMari.getText().equals("")) {
+                ch += "Veuillez saisir le Prenom du mari \n";
+            }
+
+            if (tfPrenomEpouse.getText().equals("")) {
+                ch += "Veuillez saisir le Prenom de l'epouse  \n";
+            }
+            if (tfNom.getText().equals("")) {
+                ch += "Veuillez saisir le nom de famille  \n";
+            }
+            if (cmbVilleClient.getSelectedItem().toString().equals("")) {
+                ch += "Veuillez donner la ville du client  \n";
+            }
+            if (jDateChooser1.getDateFormatString().equals("")) {
+                ch += "Veuillez saisir la date début de la période de mariage  \n";
+            }
+            if (tfEmailClient.getText().equals("")) {
+                ch += "Veuillez donner l'adresse email   du client  \n";
+            } else if (!matcher3.matches()) {
+                ch += "Veuillez donner l'adresse email du client \n";
+            }
+
+            if (spinBudget.getText().equals("")) {
+                ch += "Veuillez donner le budget du client  \n";
+            } else if (!matcher2.matches()) {
+                ch += "Veuiller bien remplir le champ du budget du client  du client  \n";
+            }
+            if (tfTelClient.getText().equals("")) {
+                ch += "Veuillez donner le numero de telephone   du client  \n";
+            } else if (!matcher.matches()) {
+                ch += "Veuiller bien remplir le champ du numero de telephone mobile  du prestataire  \n";
+            }
+            if (tfPwdClient.getText().equals("")) {
+                ch += "Veuillez saisir votre mot de pasee  \n";
+            }
+            if (tfPwdClient.getText().length() < 6) {
+                ch += "le mot de passe doit contenir au moins 6 caracteres";
+            }
+            if (clientdao.findClientByEmailBoolean(tfEmailClient.getText()) || prestataireDAO.findPrestByEmailBoolean(tfEmailClient.getText()) || adminDAO.findAdminByEmailBoolean(tfEmailClient.getText())) {
+                ch += "l'email que vous avez saisi existe deja \n";
+
+            }
+            if (jDateChooser2.getDateFormatString().equals("")) {
+                ch += "Veuillez saisir la date fin de la période de mariage  \n";
+            }
+            if (tfImageclient.getText().equals("")) {
+                ch += "Veuillez donner un chemin correct de votre photo  \n";
+            }
+
             int dialogButton = JOptionPane.OK_CANCEL_OPTION;
-                JOptionPane.showConfirmDialog (null,ch,"Warning",dialogButton);
-     
-     
-     
-     
-     
-     
- }else{
-     
-     
-     
-     String prMari=tfPrenomMari.getText();
- 
-            String prEpouse=tfPrenomEpouse.getText();
-          String nom=tfNom.getText();
-          String email=tfEmailClient.getText();
-          String pwd=tfPwdClient.getText();
-          String tel=tfTelClient.getText();
-          String vville=cmbVilleClient.getSelectedItem().toString();
-          int  budget= Integer.parseInt(spinBudget.getText());
-       
-         
-         java.util.Date utilDate = jDateChooser1.getDate();
-java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-             java.util.Date utilDate2 = jDateChooser2.getDate();
-   java.sql.Date sqlDate2 = new java.sql.Date(utilDate2.getTime()); 
-         
-          String dateFin=jDateChooser2.toString();
-          String img=tfImageclient.getText();
-            System.out.println("date"+dateFin);
-        
-          client.setPrenomMari(prMari);
-          client.setPrenomEpouse(prEpouse);
-          client.setNomDeFamille(nom);
-         client.setEmailClient(email);
-         client.setPwdClient(pwd);
-         client.setTelClient(tel);;
-         client.setVilleClient(vville);
-         client.setBudget(budget);
-       client.setDateDebut(sqlDate.toString());
-        client.setDateFin(sqlDate2.toString());
-         client.setImgClient(img);
-         ClientDAO clientDao=new ClientDAO();
-         clientDao.insertClient(client);
-         this.setVisible(false);
-             ListeClients lp=new ListeClients();
-             lp.setVisible(true);
-          
- }  
-          
-                   
+            JOptionPane.showConfirmDialog(null, ch, "Warning", dialogButton);
+
+        } else {
+
+            String prMari = tfPrenomMari.getText();
+
+            String prEpouse = tfPrenomEpouse.getText();
+            String nom = tfNom.getText();
+            String email = tfEmailClient.getText();
+            String pwd = tfPwdClient.getText();
+            String tel = tfTelClient.getText();
+            String vville = cmbVilleClient.getSelectedItem().toString();
+            int budget = Integer.parseInt(spinBudget.getText());
+
+            java.util.Date utilDate = jDateChooser1.getDate();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            java.util.Date utilDate2 = jDateChooser2.getDate();
+            java.sql.Date sqlDate2 = new java.sql.Date(utilDate2.getTime());
+
+            String dateFin = jDateChooser2.toString();
+            
+            try {
+                FTPFileUploader.getInstance().UploadPic(fc.getSelectedFile().getAbsolutePath(), "/client/");
+            } catch (IOException ex) {
+                Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("date" + dateFin);
+            String img = "http://mariages.tn/client/"+fc.getSelectedFile().getName();
+            client.setPrenomMari(prMari);
+            client.setPrenomEpouse(prEpouse);
+            client.setNomDeFamille(nom);
+            client.setEmailClient(email);
+            client.setPwdClient(pwd);
+            client.setTelClient(tel);;
+            client.setVilleClient(vville);
+            client.setBudget(budget);
+            client.setDateDebut(sqlDate.toString());
+            client.setDateFin(sqlDate2.toString());
+            client.setImgClient(img);
+            ClientDAO clientDao = new ClientDAO();
+            clientDao.insertClient(client);
+            this.setVisible(false);
+            ListeClients lp = new ListeClients();
+            lp.setVisible(true);
+
+        }
+
 
     }//GEN-LAST:event_btnValiderActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-          for (int i=0;i<ville.length;i++){
-                 cmbVilleClient.addItem(ville[i]);
-                 
-             }
+        for (int i = 0; i < ville.length; i++) {
+            cmbVilleClient.addItem(ville[i]);
+
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnAnnulerActionPerformed
 
     private void btParcourirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btParcourirActionPerformed
- 
-       String chemin="";
+
+        String chemin = "";
+
         
-       JFileChooser fc = new JFileChooser();
-       
-                int retval = fc.showOpenDialog(null);
-                
-                if (retval == JFileChooser.APPROVE_OPTION) {
-                    
-                    chemin = fc.getSelectedFile().getAbsolutePath();
-                    
-                    chemin = chemin.replace("\\", "/");    }                                            
-    
-                   tfImageclient.setText(chemin);
+
+        int retval = fc.showOpenDialog(null);
+
+        if (retval == JFileChooser.APPROVE_OPTION) {
+
+            chemin = fc.getSelectedFile().getAbsolutePath();
+
+            chemin = chemin.replace("\\", "/");
+        }
+
+        tfImageclient.setText(chemin);
 
     }//GEN-LAST:event_btParcourirActionPerformed
 
@@ -440,14 +451,11 @@ java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             java.util.logging.Logger.getLogger(AjoutClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-   try
-    {
-        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
-    }
-    catch(Exception e)
-    {
-        //TODO exception
-    }
+        try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+        } catch (Exception e) {
+            //TODO exception
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
