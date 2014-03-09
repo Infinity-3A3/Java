@@ -60,6 +60,13 @@ public class TableListPaquetModel extends AbstractTableModel {
         }
 
     }
+    public TableListPaquetModel( String nom) {
+        listPaquet = new PaquetDAO().DisplayPaquetPrestByNom(nom);
+        for (int i = 0; i < getRowCount(); i++) {
+            rowlist[i][6] = Boolean.FALSE;
+        }
+
+    }
     
 
     @Override

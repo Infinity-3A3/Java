@@ -111,7 +111,7 @@ public class ProduitDAO {
 
         List<Produit> listeProd = new ArrayList<Produit>();
 
-        String requete = "select * from Produit where nomProd="+nom+"";
+        String requete = "select * from Produit where nomProd like '"+nom+"%'";
 
         Statement statement;
         try {
