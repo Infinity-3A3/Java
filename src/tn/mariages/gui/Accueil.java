@@ -125,11 +125,6 @@ public class Accueil extends javax.swing.JFrame {
         jButton5.setMaximumSize(new java.awt.Dimension(40, 40));
         jButton5.setMinimumSize(new java.awt.Dimension(40, 40));
         jButton5.setPreferredSize(new java.awt.Dimension(40, 40));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/chart_pie.png"))); // NOI18N
         jButton6.setToolTipText("Statistiques");
@@ -144,11 +139,6 @@ public class Accueil extends javax.swing.JFrame {
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/user_circle.png"))); // NOI18N
         jButton7.setToolTipText("Administration");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -221,14 +211,17 @@ public class Accueil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-     int h = Toolkit.getDefaultToolkit().getScreenSize().height;
-                int w = Toolkit.getDefaultToolkit().getScreenSize().width;
-   
+    
+    this.setLocation(-27, -16);
           Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-  
+   int h = Toolkit.getDefaultToolkit().getScreenSize().height;
+   int w = Toolkit.getDefaultToolkit().getScreenSize().width;
+        
+
         System.out.println("H "+h ); 
-   
+   this.setSize(144, h+16);
+   this.setExtendedState( this.MAXIMIZED_VERT ); 
    JFrame LogoFrame =new JFrame("Logo");
         LogoFrame.setSize(w-45, h+16);
         LogoFrame.setExtendedState( this.MAXIMIZED_VERT ); 
@@ -251,69 +244,56 @@ public class Accueil extends javax.swing.JFrame {
                 Logger.getLogger(ListeFeatProd.class.getName()).log(Level.SEVERE, null, ex);
             }
                 LogoFrame.setVisible(true);
+
+        
 // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                      Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
 ListePrestataire LPrs = new ListePrestataire();
 LPrs.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-LPrs.setLocation((dim.width/2-this.getSize().width/2)-150, (dim.height/2-this.getSize().height/2)+100);
+LPrs.setLocation((dim.width/2-this.getSize().width/2)-50, (dim.height/2-this.getSize().height/2)+100);
 LPrs.setVisible(true);
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   ListeFeatProd LFP = new ListeFeatProd();
-       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+       ListeFeatProd LFP = new ListeFeatProd();
+              Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
        LFP.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-       LFP.setLocation((dim.width/2-this.getSize().width/2)-90, (dim.height/2-this.getSize().height/2)+100);
+       LFP.setLocation((dim.width/2-this.getSize().width/2)-50, (dim.height/2-this.getSize().height/2)+100);
        
-       LFP.setVisible(true);    
+       LFP.setVisible(true);
+        
+        
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-//STATS x 3
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
 ListeClients LC = new ListeClients();
 LC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-LC.setLocation((dim.width/2-this.getSize().width/2)-150, (dim.height/2-this.getSize().height/2)+100);
+LC.setLocation((dim.width/2-this.getSize().width/2)-50, (dim.height/2-this.getSize().height/2)+100);
 LC.setVisible(true);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-      Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-
-        ListerProduit LP = new ListerProduit();
-LP.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-LP.setLocation((dim.width/2-this.getSize().width/2), (dim.height/2-this.getSize().height/2)+100);
-        LP.setVisible(true);
+        ListerProduit Lprod = new ListerProduit();
+        Lprod.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+       Lprod.setLocation((dim.width/2-this.getSize().width/2)-50, (dim.height/2-this.getSize().height/2)+100);
+       Lprod.setVisible(true);
 
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-
-ListePaquets LP = new ListePaquets();
-LP.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-LP.setLocation((dim.width/2-this.getSize().width/2)-50, (dim.height/2-this.getSize().height/2)+100);
-LP.setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-
-        ListeAdmins LA = new ListeAdmins();
-Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-LA.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-LA.setLocation((dim.width/2-this.getSize().width/2)-200, (dim.height/2-this.getSize().height/2)+100);
-        LA.setVisible(true);    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,13 +321,7 @@ try
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
               
-    Accueil ac =  new Accueil();
-    int h = Toolkit.getDefaultToolkit().getScreenSize().height;
-    int w = Toolkit.getDefaultToolkit().getScreenSize().width;
-    ac.setLocation(-27, -16);
-    ac.setSize(144, h+16);
-    ac.setExtendedState( ac.MAXIMIZED_VERT ); 
-    ac.setVisible(true);
+                new Accueil().setVisible(true);
                 
             }
         });

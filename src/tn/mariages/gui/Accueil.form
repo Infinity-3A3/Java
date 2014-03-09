@@ -217,9 +217,6 @@
                   <Dimension value="[40, 40]"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton6">
               <Properties>
@@ -248,9 +245,6 @@
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Administration"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
