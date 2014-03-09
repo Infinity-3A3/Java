@@ -16,25 +16,31 @@
  */
 package tn.mariages.gui;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import tn.mariages.entities.Produit;
 import javax.swing.table.AbstractTableModel;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.ProduitDAO;
-import tn.mariages.entities.Produit;
 
 /**
  *
  * @author Youssef
  */
-public class MyTableProduitByCat extends AbstractTableModel {
+public class Mytableprod extends AbstractTableModel {
 
-    public List<Produit> mylist = new ArrayList<>();
- String[] headers = {"idprod", "Nom Produit ", "Nom Prestataire", "Categorie", "Date d'ajout", "Prix"};
- 
+    List<Produit> mylist = new ArrayList<>();
+    String[] header = {"idprod", "Nom Produit ", "Nom Prestataire", "Categorie", "Date d'ajout", "Prix"};
+   
 
-    public MyTableProduitByCat(String a) {
-        mylist = new ProduitDAO().DisplayProdByCategorie(a);
+    public Mytableprod() {
+        mylist = new ProduitDAO().DisplayAllProd();
+        
+    }
+    
+    public Mytableprod(String nom) {
+        mylist = new ProduitDAO().DisplayAllProd( nom);
         
     }
 
@@ -45,11 +51,13 @@ public class MyTableProduitByCat extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return headers.length;
+        return header.length;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        DecimalFormat f = new DecimalFormat("##");
+        
         switch (columnIndex) {
             case 0:
                 return mylist.get(rowIndex).getIdProd();
@@ -62,7 +70,7 @@ public class MyTableProduitByCat extends AbstractTableModel {
             case 4:
                 return mylist.get(rowIndex).getDateAjoutProd();
             case 5:
-                return mylist.get(rowIndex).getPrixProd();
+                return f.format(mylist.get(rowIndex).getPrixProd());
             
             default:
                 return null;
@@ -71,8 +79,11 @@ public class MyTableProduitByCat extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        return headers[column];//To change body of generated methods, choose Tools | Templates.
+        return header[column];//To change body of generated methods, choose Tools | Templates.
     }
 
+    
+
    
+
 }

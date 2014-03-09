@@ -56,12 +56,17 @@ public class EspaceClient extends javax.swing.JFrame {
         tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
         
         
-         tablePaquet.getColumnModel().getColumn(4).setMinWidth(0);
-        tablePaquet.getColumnModel().getColumn(4).setMaxWidth(0);
+         tablePaquet.getColumnModel().getColumn(6).setMinWidth(0);
+        tablePaquet.getColumnModel().getColumn(6).setMaxWidth(0);
+        
+      
         
         
-         tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+         tableProd.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
+        
+          
+        
         
         tablepanierproduit.getColumnModel().getColumn(0).setMinWidth(0);
         tablepanierproduit.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -76,7 +81,7 @@ public class EspaceClient extends javax.swing.JFrame {
         tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
         Client c=new Client ();
             ClientDAO clDAo=new ClientDAO();
-            c=clDAo.findClientById(23);
+            c=clDAo.findClientById(1);
             Idclient.setText(c.getIdClient()+"");
             Idclient.setVisible(false);
             NomClient.setText(c.getNomDeFamille()+ " "+c.getPrenomMari());
@@ -90,7 +95,8 @@ public class EspaceClient extends javax.swing.JFrame {
             LabDateDebut.setText(c.getDateDebut());
             LabDateFin.setText(c.getDateFin());
           this.id=c.getIdClient();
-        
+         MyTablePanier  model = new MyTablePanier(Integer.parseInt(Idclient.getText()));
+                    tablePanier.setModel(model);
     }
      public EspaceClient(int id,String type) {
          
@@ -189,7 +195,7 @@ public class EspaceClient extends javax.swing.JFrame {
         tfNomProduit = new javax.swing.JTextField();
         btnAjoutProdPanier = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tableProduit = new javax.swing.JTable();
+        tableProd = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -204,6 +210,11 @@ public class EspaceClient extends javax.swing.JFrame {
         btnRec = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -436,7 +447,7 @@ public class EspaceClient extends javax.swing.JFrame {
 
         jLabel11.setText("Catégorie:");
 
-        jLabel13.setText("Nom:");
+        jLabel13.setText("Nom produit:");
 
         tfNomProduit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -450,13 +461,13 @@ public class EspaceClient extends javax.swing.JFrame {
             }
         });
 
-        tableProduit.setModel(new MyTableProduit());
-        tableProduit.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableProd.setModel(new Mytableprod());
+        tableProd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableProduitMouseClicked(evt);
+                tableProdMouseClicked(evt);
             }
         });
-        jScrollPane4.setViewportView(tableProduit);
+        jScrollPane4.setViewportView(tableProd);
 
         jButton1.setText("Commentaires");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -479,7 +490,7 @@ public class EspaceClient extends javax.swing.JFrame {
                 .addComponent(cmbCategorieProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel13)
-                .addGap(18, 18, 18)
+                .addGap(58, 58, 58)
                 .addComponent(tfNomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -517,7 +528,13 @@ public class EspaceClient extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tablePaquet);
 
-        jLabel16.setText("Nom:");
+        jLabel16.setText("Nom paquet:");
+
+        TFnOMpaquet.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TFnOMpaquetKeyReleased(evt);
+            }
+        });
 
         btnAjoutPaquPanier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -543,7 +560,7 @@ public class EspaceClient extends javax.swing.JFrame {
                                 .addGap(28, 28, 28))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(TFnOMpaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -690,13 +707,13 @@ public class EspaceClient extends javax.swing.JFrame {
 
     private void btnAjoutProdPanierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutProdPanierActionPerformed
             
-        if(tableProduit.getSelectedRow()!=-1){
+        if(tableProd.getSelectedRow()!=-1){
             
             Produit  p=new Produit();
             PanierProduit   panierProd=new PanierProduit();
             ProduitDAO proddao=new ProduitDAO();
             panierProduitDAO panierproduitdao=new panierProduitDAO();
-            p= proddao.DisplayProdByID((int) tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));
+            p= proddao.DisplayProdByID((int) tableProd.getValueAt(tableProd.getSelectedRow(), 0));
             panierProd.setIdProd(p.getIdProd());
               panierProd.setIdClient(Integer.parseInt(Idclient.getText()));
              
@@ -801,51 +818,51 @@ public class EspaceClient extends javax.swing.JFrame {
 
     private void cmbCategorieProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategorieProduitActionPerformed
 if(cmbCategorieProduit.getSelectedIndex()==0){
-            tableProduit.setModel(new MyTableProduit());
-             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProd.setModel(new Mytableprod());
+             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
        
         }
         if(cmbCategorieProduit.getSelectedIndex()==1){
-            tableProduit.setModel(new MyTableProduitByCat(categorie[1]));
-             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProd.setModel(new MyTableProduitByCat(categorie[1]));
+             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
         
         }
         if(cmbCategorieProduit.getSelectedIndex()==2){
-            tableProduit.setModel(new MyTableProduitByCat(categorie[2]));
-             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProd.setModel(new MyTableProduitByCat(categorie[2]));
+             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
         
         }
         if(cmbCategorieProduit.getSelectedIndex()==3){
-            tableProduit.setModel(new MyTableProduitByCat(categorie[3]));
-             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProd.setModel(new MyTableProduitByCat(categorie[3]));
+             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
         
         }
         if(cmbCategorieProduit.getSelectedIndex()==4){
-            tableProduit.setModel(new MyTableProduitByCat(categorie[4]));
-             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProd.setModel(new MyTableProduitByCat(categorie[4]));
+             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
         
         }
         if(cmbCategorieProduit.getSelectedIndex()==5){
-            tableProduit.setModel(new MyTableProduitByCat(categorie[5]));
-             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProd.setModel(new MyTableProduitByCat(categorie[5]));
+             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
         
         }
         if(cmbCategorieProduit.getSelectedIndex()==6){
-            tableProduit.setModel(new MyTableProduitByCat(categorie[6]));
-             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProd.setModel(new MyTableProduitByCat(categorie[6]));
+             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
         
         }
         if(cmbCategorieProduit.getSelectedIndex()==7){
-            tableProduit.setModel(new MyTableProduitByCat(categorie[7]));
-             tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProd.setModel(new MyTableProduitByCat(categorie[7]));
+             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
         
         }
                  
@@ -963,12 +980,12 @@ if(cmbCategorieProduit.getSelectedIndex()==0){
      
     }//GEN-LAST:event_tablePaquetMouseClicked
 
-    private void tableProduitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProduitMouseClicked
+    private void tableProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdMouseClicked
 
           Produit p=new Produit();
           ProduitDAO pdao=new ProduitDAO();
           
-          p=pdao.DisplayProdByID((int)tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));
+          p=pdao.DisplayProdByID((int)tableProd.getValueAt(tableProd.getSelectedRow(), 0));
         
           if(evt.getClickCount()==2){
               
@@ -980,7 +997,7 @@ if(cmbCategorieProduit.getSelectedIndex()==0){
           
                   
 
-    }//GEN-LAST:event_tableProduitMouseClicked
+    }//GEN-LAST:event_tableProdMouseClicked
 
     private void BtnModifierProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModifierProfilActionPerformed
                
@@ -999,8 +1016,8 @@ if(cmbCategorieProduit.getSelectedIndex()==0){
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             
- if(tableProduit.getSelectedRow()!=-1){
-            int id = (int) tableProduit.getModel().getValueAt(tableProduit.getSelectedRow(), 0);
+ if(tableProd.getSelectedRow()!=-1){
+            int id = (int) tableProd.getModel().getValueAt(tableProd.getSelectedRow(), 0);
 
             int idclient = Integer.parseInt(Idclient.getText());
 
@@ -1053,22 +1070,47 @@ Client c=new Client ();
     private void tfNomProduitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomProduitKeyReleased
       String nom = tfNomProduit.getText();
         if(!nom.equals("")){
-        MyTableProduit modelprod = new MyTableProduit(nom);
-        tableProduit.setModel(modelprod);
-        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
-            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
-            tableProduit.repaint();
+        Mytableprod modelprod = new Mytableprod(nom);
+        tableProd.setModel(modelprod);
+        tableProd.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProd.repaint();
         }
         else
         {
-            MyTableProduit modelprod = new MyTableProduit();
-        tableProduit.setModel(modelprod);
-        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
-            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
-            tableProduit.repaint();
+            Mytableprod modelprod = new Mytableprod();
+        tableProd.setModel(modelprod);
+        tableProd.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProd.repaint();
         }
 
     }//GEN-LAST:event_tfNomProduitKeyReleased
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseClicked
+
+    private void TFnOMpaquetKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFnOMpaquetKeyReleased
+        String nom = TFnOMpaquet.getText();
+        if(!nom.equals("")){
+        TableListPaquetModel modelpaq = new TableListPaquetModel(nom);
+        tablePaquet.setModel(modelpaq);
+        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+            tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+            tablePaquet.repaint();
+        }
+        else
+        {
+            TableListPaquetModel modelpaq = new TableListPaquetModel();
+        tablePaquet.setModel(modelpaq);
+        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+            tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+            tablePaquet.repaint();
+        }
+
+
+    }//GEN-LAST:event_TFnOMpaquetKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1160,7 +1202,7 @@ try
     private javax.swing.JLabel labemail;
     private javax.swing.JTable tablePanier;
     private javax.swing.JTable tablePaquet;
-    private javax.swing.JTable tableProduit;
+    private javax.swing.JTable tableProd;
     private javax.swing.JTable tablepanierproduit;
     private javax.swing.JTextField tfNomProduit;
     // End of variables declaration//GEN-END:variables
