@@ -434,6 +434,8 @@ File f2=new File("Pass.txt");
 
     private void btnMdpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMdpActionPerformed
 MotDePasseOublie mdp=new MotDePasseOublie();
+       mdp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 mdp.setVisible(true);
     }//GEN-LAST:event_btnMdpActionPerformed
 
