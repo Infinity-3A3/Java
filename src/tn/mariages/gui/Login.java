@@ -360,6 +360,7 @@ public class Login extends javax.swing.JFrame {
        accueil.setVisible(true);
         }
         else if(clientDAO.connectClient(email, pwd1.toString())){
+            Client c = clientDAO.findClientByEmail(email);
             ToDoDAO todoDAO=new ToDoDAO();
             todoDAO.DeleteToDos(clientDAO.findClientByEmail(email).getIdClient());
             List <ToDo> listeTodo=new ArrayList<ToDo>();
@@ -374,15 +375,9 @@ public class Login extends javax.swing.JFrame {
             
                 JOptionPane.showConfirmDialog (null,notify,"Rappel",dialogButton);
          dispose();
-       Accueil accueil=new Accueil();
-       int h = Toolkit.getDefaultToolkit().getScreenSize().height;
-       int w = Toolkit.getDefaultToolkit().getScreenSize().width;
-   
-       Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-accueil.setLocation(-70, -16);
-    accueil.setSize(144, h+16);
-    accueil.setExtendedState( accueil.MAXIMIZED_VERT ); 
-    accueil.setVisible(true);
+
+         EspaceClient EC = new EspaceClient(c.getIdClient(), "c");
+         EC.setVisible(true);
         
         }
         
