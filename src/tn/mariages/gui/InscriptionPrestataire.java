@@ -641,7 +641,9 @@ Prestataire prest = new Prestataire();
             prest.setTelFixePrest(jtNumMobilPrest.getText());
             presDAO.insertPrestataire(prest);
 
-            EspacePrest espace=new EspacePrest();
+            prest.setIdPrest(presDAO.findPrestByEmail(prest.getEmailPrest()).getIdPrest());
+            
+            EspacePrest espace=new EspacePrest(prest.getIdPrest(), "p");
             espace.setVisible(true);
             
          

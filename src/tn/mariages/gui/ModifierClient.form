@@ -51,21 +51,23 @@
               </Group>
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                          <Component id="tfMotDePasse" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="cmbvilleclient" min="-2" pref="136" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tfMotDePasse" min="-2" pref="135" max="-2" attributes="0"/>
                               <Component id="tfNom" min="-2" pref="135" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel8" min="-2" pref="116" max="-2" attributes="0"/>
@@ -81,13 +83,8 @@
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                          <Component id="cmbvilleclient" min="-2" pref="136" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <EmptySpace pref="70" max="32767" attributes="0"/>
+                  <EmptySpace pref="73" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
@@ -259,7 +256,7 @@
         <Component class="javax.swing.JButton" name="btnModifierClient">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/icons/Modify-icon.png"/>
+              <Image iconType="3" name="/resources/icons/circle_ok.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Modifer"/>
           </Properties>
@@ -270,7 +267,7 @@
         <Component class="javax.swing.JButton" name="btnAnnulerModificationClient">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/icons/close.png"/>
+              <Image iconType="3" name="/resources/icons/circle_delete.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Annuler"/>
           </Properties>
