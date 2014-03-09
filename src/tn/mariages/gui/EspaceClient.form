@@ -422,7 +422,7 @@
                 <Component class="javax.swing.JTable" name="tablePanier">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new MyTablePanier()" type="code"/>
+                      <Connection code="new MyTablePanier(id)" type="code"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -547,6 +547,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfNomProduit">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfNomProduitKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnAjoutProdPanier">
               <Events>
