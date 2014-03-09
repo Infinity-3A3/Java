@@ -258,6 +258,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnModifierClient">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/Modify-icon.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Modifer"/>
           </Properties>
           <Events>
@@ -266,6 +269,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAnnulerModificationClient">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/close.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Annuler"/>
           </Properties>
           <Events>

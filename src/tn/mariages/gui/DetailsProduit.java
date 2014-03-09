@@ -16,6 +16,7 @@
  */
 package tn.mariages.gui;
 
+import javax.swing.UIManager;
 import tn.mariages.entities.Produit;
 
 /**
@@ -191,7 +192,13 @@ public class DetailsProduit extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(DetailsProduit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+ try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible", false);
 
+        } catch (Exception e) {
+            //TODO exception
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

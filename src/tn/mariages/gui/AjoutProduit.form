@@ -66,22 +66,40 @@
                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="cmbPrestataire" alignment="0" pref="277" max="32767" attributes="0"/>
-                              <Component id="jScrollPane1" alignment="0" pref="277" max="32767" attributes="0"/>
-                              <Component id="cmbCategorieProduit" alignment="0" pref="277" max="32767" attributes="0"/>
-                              <Component id="tfPrixProduit" alignment="0" pref="277" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="cmbPrestataire" alignment="0" pref="277" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" alignment="0" pref="277" max="32767" attributes="0"/>
+                                  <Component id="cmbCategorieProduit" alignment="0" pref="277" max="32767" attributes="0"/>
+                                  <Component id="tfPrixProduit" alignment="0" pref="277" max="32767" attributes="0"/>
+                                  <Component id="webFileDrop1" alignment="0" max="32767" attributes="0"/>
+                              </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="btnAjoutProduit" min="-2" pref="113" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnReset" min="-2" pref="75" max="-2" attributes="0"/>
+                                  <Component id="btnReset" min="-2" pref="118" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="webFileDrop1" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="tfnomProduit" alignment="1" min="-2" pref="277" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="154" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="erreurnomP" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="erreurDes" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="erreurPres" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="erreurCat" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="erreurPrix" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="erreurImg" min="-2" pref="20" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="130" max="32767" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="514" max="32767" attributes="0"/>
+                      <Component id="erreurnomP6" min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -89,41 +107,64 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfnomProduit" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbPrestataire" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbCategorieProduit" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tfPrixProduit" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfnomProduit" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="erreurnomP" min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="erreurDes" min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cmbPrestataire" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="erreurPres" min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cmbCategorieProduit" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="erreurCat" min="-2" pref="20" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="tfPrixProduit" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="erreurPrix" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <Component id="webFileDrop1" min="-2" pref="117" max="-2" attributes="0"/>
+                      <Component id="erreurImg" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="73" max="32767" attributes="0"/>
+                  <EmptySpace pref="55" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnAjoutProduit" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnReset" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="294" max="32767" attributes="0"/>
+                      <Component id="erreurnomP6" min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -157,11 +198,13 @@
         <Component class="javax.swing.JTextField" name="tfnomProduit">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfnomProduitActionPerformed"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfnomProduitFocusLost"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tfPrixProduit">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfPrixProduitActionPerformed"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfPrixProduitFocusLost"/>
           </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbCategorieProduit">
@@ -172,10 +215,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbCategorieProduitActionPerformed"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cmbCategorieProduitFocusLost"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAjoutProduit">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/circle_plus.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ajouter"/>
           </Properties>
           <Events>
@@ -184,7 +231,10 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnReset">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Reset"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/close.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Annuler"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetActionPerformed"/>
@@ -202,6 +252,9 @@
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfDescProduitFocusLost"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new WebTextArea()"/>
               </AuxValues>
@@ -221,6 +274,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbPrestataireActionPerformed"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cmbPrestataireFocusLost"/>
           </Events>
         </Component>
         <Container class="com.alee.extended.filechooser.WebFileDrop" name="webFileDrop1">
@@ -233,6 +287,20 @@
             <Property name="dropText" type="java.lang.String" value="Placez vos images ici"/>
           </Properties>
         </Container>
+        <Component class="javax.swing.JLabel" name="erreurnomP">
+        </Component>
+        <Component class="javax.swing.JLabel" name="erreurDes">
+        </Component>
+        <Component class="javax.swing.JLabel" name="erreurPres">
+        </Component>
+        <Component class="javax.swing.JLabel" name="erreurCat">
+        </Component>
+        <Component class="javax.swing.JLabel" name="erreurPrix">
+        </Component>
+        <Component class="javax.swing.JLabel" name="erreurImg">
+        </Component>
+        <Component class="javax.swing.JLabel" name="erreurnomP6">
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

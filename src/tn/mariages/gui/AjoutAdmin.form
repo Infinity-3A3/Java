@@ -64,6 +64,12 @@
                                       <Component id="tfEmail" alignment="0" max="32767" attributes="0"/>
                                       <Component id="tfPwd" pref="159" max="32767" attributes="0"/>
                                   </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="erreurNom" pref="23" max="32767" attributes="0"/>
+                                      <Component id="erreurMail" max="32767" attributes="0"/>
+                                      <Component id="erreurMdp" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -74,7 +80,7 @@
                           <Component id="btnModifier" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="61" max="32767" attributes="0"/>
+                  <EmptySpace pref="34" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -84,21 +90,30 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfNom" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfNom" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="erreurNom" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="tfEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="erreurMail" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfPwd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="erreurMdp" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfEmail" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfPwd" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                  <EmptySpace pref="36" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnAjouter" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnModifier" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -133,9 +148,15 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfNom">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfNomFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAjouter">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/user_add.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ajouter"/>
           </Properties>
           <Events>
@@ -143,6 +164,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tfEmail">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfEmailFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="tfPwd">
           <Properties>
@@ -150,15 +174,25 @@
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfPwdFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfPwdFocusLost"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnModifier">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/Modify-icon.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Modifier"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModifierActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="erreurNom">
+        </Component>
+        <Component class="javax.swing.JLabel" name="erreurMail">
+        </Component>
+        <Component class="javax.swing.JLabel" name="erreurMdp">
         </Component>
       </SubComponents>
     </Container>

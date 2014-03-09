@@ -130,6 +130,7 @@ public class ModifierClient extends javax.swing.JFrame {
             }
         });
 
+        btnModifierClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
         btnModifierClient.setText("Modifer");
         btnModifierClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +138,7 @@ public class ModifierClient extends javax.swing.JFrame {
             }
         });
 
+        btnAnnulerModificationClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/close.png"))); // NOI18N
         btnAnnulerModificationClient.setText("Annuler");
         btnAnnulerModificationClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

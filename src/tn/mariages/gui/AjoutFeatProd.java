@@ -21,6 +21,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import tn.mariages.dao.FeaturedProdDAO;
 import tn.mariages.entities.FeaturedProd;
 
@@ -34,6 +35,13 @@ public class AjoutFeatProd extends javax.swing.JFrame {
      * Creates new form AjoutFeatProd
      */
     public AjoutFeatProd() {
+         try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible", false);
+
+        } catch (Exception e) {
+            //TODO exception
+        }
         initComponents();
     }
 

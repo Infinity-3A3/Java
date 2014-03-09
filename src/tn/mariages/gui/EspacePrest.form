@@ -304,6 +304,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="BtnModifierProfil">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/icons/Modify-icon.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Modifier"/>
               </Properties>
               <Events>
@@ -554,6 +557,11 @@
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnModifProduit">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/icons/Modify-icon.png"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModifProduitActionPerformed"/>
               </Events>
@@ -584,11 +592,21 @@
               </SubComponents>
             </Container>
             <Component class="javax.swing.JButton" name="btnSuppProduit">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/icons/circle_delete.png"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSuppProduitActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnAjoutProd">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/icons/circle_plus.png"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAjoutProdActionPerformed"/>
               </Events>
@@ -633,7 +651,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="11" max="32767" attributes="0"/>
+                      <EmptySpace pref="98" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>

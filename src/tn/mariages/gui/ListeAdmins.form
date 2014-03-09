@@ -48,13 +48,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="454" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="499" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                           <Component id="btnAjouter" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnModifier" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -74,7 +74,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="212" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="194" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnAjouter" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -113,6 +113,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnAjouter">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/user_add.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ajouter"/>
           </Properties>
           <Events>
@@ -121,6 +124,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnModifier">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/user_circle.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Modifier"/>
           </Properties>
           <Events>
@@ -129,6 +135,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/user_remove.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Supprimer"/>
           </Properties>
           <Events>

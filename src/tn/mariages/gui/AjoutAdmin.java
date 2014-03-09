@@ -14,9 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package tn.mariages.gui;
 
+import com.alee.managers.notification.NotificationIcon;
+import com.alee.managers.notification.NotificationManager;
+import com.alee.managers.notification.NotificationOption;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -26,6 +28,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.dao.ClientDAO;
 import tn.mariages.dao.PrestataireDAO;
@@ -36,29 +39,45 @@ import tn.mariages.entities.Admin;
  * @author Karim
  */
 public class AjoutAdmin extends javax.swing.JFrame {
-Admin admin1=new Admin();
+
+    Admin admin1 = new Admin();
+
     /**
      * Creates new form AjoutAdmin
      */
     public AjoutAdmin() {
-         
+        try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible", false);
+
+        } catch (Exception e) {
+            //TODO exception
+        }
         initComponents();
         jLabel1.setText("Ajouter Admin");
-         btnModifier.setEnabled(false);
-         btnAjouter.setEnabled(true);
+        btnModifier.setEnabled(false);
+        btnAjouter.setEnabled(true);
     }
 
-    public AjoutAdmin(Admin a){
-          initComponents();
-          jLabel1.setText("Modifier Admin");
-          
-    tfNom.setText(a.getNomAdmin());
-    tfEmail.setText(a.getMailAdmin());
-    tfEmail.setText(a.getPwdAdmin());
-       btnModifier.setEnabled(true);
-         btnAjouter.setEnabled(false);
-         admin1=a;
+    public AjoutAdmin(Admin a) {
+        try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible", false);
+
+        } catch (Exception e) {
+            //TODO exception
+        }
+        initComponents();
+        jLabel1.setText("Modifier Admin");
+
+        tfNom.setText(a.getNomAdmin());
+        tfEmail.setText(a.getMailAdmin());
+        tfEmail.setText(a.getPwdAdmin());
+        btnModifier.setEnabled(true);
+        btnAjouter.setEnabled(false);
+        admin1 = a;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +97,9 @@ Admin admin1=new Admin();
         tfEmail = new javax.swing.JTextField();
         tfPwd = new javax.swing.JPasswordField();
         btnModifier = new javax.swing.JButton();
+        erreurNom = new javax.swing.JLabel();
+        erreurMail = new javax.swing.JLabel();
+        erreurMdp = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,10 +112,23 @@ Admin admin1=new Admin();
 
         jLabel4.setText("Mot de passe");
 
+        tfNom.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfNomFocusLost(evt);
+            }
+        });
+
+        btnAjouter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/user_add.png"))); // NOI18N
         btnAjouter.setText("Ajouter");
         btnAjouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAjouterActionPerformed(evt);
+            }
+        });
+
+        tfEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfEmailFocusLost(evt);
             }
         });
 
@@ -102,8 +137,12 @@ Admin admin1=new Admin();
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tfPwdFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfPwdFocusLost(evt);
+            }
         });
 
+        btnModifier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
         btnModifier.setText("Modifier");
         btnModifier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,13 +169,18 @@ Admin admin1=new Admin();
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfNom)
                                     .addComponent(tfEmail)
-                                    .addComponent(tfPwd, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))))
+                                    .addComponent(tfPwd, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(erreurNom, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                                    .addComponent(erreurMail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(erreurMdp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(99, 99, 99)
                         .addComponent(btnAjouter)
                         .addGap(26, 26, 26)
                         .addComponent(btnModifier)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,18 +188,24 @@ Admin admin1=new Admin();
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(tfNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(erreurNom, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(erreurMail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(tfPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(erreurMdp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAjouter)
                     .addComponent(btnModifier))
@@ -183,104 +233,115 @@ Admin admin1=new Admin();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfPwdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPwdFocusGained
-tfPwd.setText("");        // TODO add your handling code here:
+        tfPwd.setText("");        // TODO add your handling code here:
     }//GEN-LAST:event_tfPwdFocusGained
 
     private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
- AdminDAO adminDAO=new AdminDAO();
-       ClientDAO clientDAO=new ClientDAO();
-       PrestataireDAO prestataireDAO=new PrestataireDAO();
-          
-          List <Admin> listeadmins=new ArrayList<Admin>();
-          listeadmins=adminDAO.DisplayAllAdmins();
-        if(tfNom.getText().equals("") || tfEmail.getText().equals("") ||tfPwd.getText().equals("")||tfPwd.getText().length()<6|| !tfEmail.getText().matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" ) ||clientDAO.findClientByEmailBoolean(tfEmail.getText())|| prestataireDAO.findPrestByEmailBoolean(tfEmail.getText())||adminDAO.findAdminByEmailBoolean(tfEmail.getText())){
-      
-    
-          
-           String ch="";
-           if(tfNom.getText().equals(""))
-               ch+="Veuillez saisir le nom de l'admin \n";
-           
-           
-           
-           
-           
-           
-           
-           
-            
-            if(tfEmail.getText().equals(""))
-               ch+="Veuillez Saisir l'email de l'admin  \n\n";
-            
-           if(clientDAO.findClientByEmailBoolean(tfEmail.getText())|| prestataireDAO.findPrestByEmailBoolean(tfEmail.getText())||adminDAO.findAdminByEmailBoolean(tfEmail.getText())){
-           ch+="Cette adresse mail existe deja";
-           }
-            
-         
-               
-       if(!tfEmail.getText().matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" ))
-                     
-             ch+="l'email que vous avez saisi n'est pas valide \n";
-            
-             if(tfPwd.getText().length()<6)
-                 ch+="le mot de passe doit contenir au moins 6 caracteres";
-             
-             
-            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
-                JOptionPane.showConfirmDialog (null,ch,"Warning",dialogButton);
- 
- 
-  }
-  else{
-       
-     MessageDigest md = null;
-    try {
-        md = MessageDigest.getInstance("SHA-1");
-    } catch (NoSuchAlgorithmException ex) {
-        Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        ByteArrayInputStream fis = new ByteArrayInputStream(tfPwd.getText().getBytes());
+        AdminDAO adminDAO = new AdminDAO();
+        ClientDAO clientDAO = new ClientDAO();
+        PrestataireDAO prestataireDAO = new PrestataireDAO();
 
-        byte[] dataBytes = new byte[1024];
+        List<Admin> listeadmins = new ArrayList<Admin>();
+        listeadmins = adminDAO.DisplayAllAdmins();
+        if (tfNom.getText().equals("") || tfEmail.getText().equals("") || tfPwd.getText().equals("") || tfPwd.getText().length() < 6 || !tfEmail.getText().matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+") || clientDAO.findClientByEmailBoolean(tfEmail.getText()) || prestataireDAO.findPrestByEmailBoolean(tfEmail.getText()) || adminDAO.findAdminByEmailBoolean(tfEmail.getText())) {
 
-        int nread = 0; 
-    try {
-        while ((nread = fis.read(dataBytes)) != -1) {
-            md.update(dataBytes, 0, nread);
+            String ch = "";
+            if (tfNom.getText().equals("")) {
+                erreurNom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));    
+            }
+
+            if (tfEmail.getText().equals("")) {
+               erreurMail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));    
+            }
+
+            if (clientDAO.findClientByEmailBoolean(tfEmail.getText()) || prestataireDAO.findPrestByEmailBoolean(tfEmail.getText()) || adminDAO.findAdminByEmailBoolean(tfEmail.getText())) {
+                NotificationManager.showNotification("Cet email existe Deja", NotificationIcon.warning.getIcon(), NotificationOption.discard);
+            }
+
+            if (!tfEmail.getText().matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+")) {
+                 NotificationManager.showNotification("Cet email n'est pas valide ", NotificationIcon.warning.getIcon(), NotificationOption.discard);
+            }
+
+            if (tfPwd.getText().length() < 6) {
+                NotificationManager.showNotification("le mot de passe doit contenir au moins 6 caracteres", NotificationIcon.warning.getIcon(), NotificationOption.discard);
+            }
+
+        } else {
+
+            MessageDigest md = null;
+            try {
+                md = MessageDigest.getInstance("SHA-1");
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ByteArrayInputStream fis = new ByteArrayInputStream(tfPwd.getText().getBytes());
+
+            byte[] dataBytes = new byte[1024];
+
+            int nread = 0;
+            try {
+                while ((nread = fis.read(dataBytes)) != -1) {
+                    md.update(dataBytes, 0, nread);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            byte[] mdbytes = md.digest();
+
+            //convert the byte to hex format method 1
+            StringBuffer pwd1 = new StringBuffer();
+            for (int i = 0; i < mdbytes.length; i++) {
+                pwd1.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+
+            Admin admin = new Admin();
+            admin.setNomAdmin(tfNom.getText());
+            admin.setMailAdmin(tfEmail.getText());
+            admin.setPwdAdmin(pwd1.toString());
+
+            adminDAO.insertAdmin(admin);
+            this.dispose();
         }
-    } catch (IOException ex) {
-        Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
-        byte[] mdbytes = md.digest();
-
-        //convert the byte to hex format method 1
-        StringBuffer pwd1 = new StringBuffer();
-        for (int i = 0; i < mdbytes.length; i++) {
-          pwd1.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
-        }
-
-       Admin admin=new Admin();
-       admin.setNomAdmin(tfNom.getText());
-       admin.setMailAdmin(tfEmail.getText());
-       admin.setPwdAdmin(pwd1.toString());
-       
-       adminDAO.insertAdmin(admin);
-        this.dispose();  }
     }//GEN-LAST:event_btnAjouterActionPerformed
 
     private void btnModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifierActionPerformed
-        Admin admin=new Admin();
-       AdminDAO adminDAO =new AdminDAO();
-        admin=adminDAO.findAdminByEmail(tfEmail.getText());
+        Admin admin = new Admin();
+        AdminDAO adminDAO = new AdminDAO();
+        admin = adminDAO.findAdminByEmail(tfEmail.getText());
         admin.setIdAdmin(admin1.getIdAdmin());
-       admin.setNomAdmin(tfNom.getText());
-       admin.setMailAdmin(tfEmail.getText());
-       admin.setPwdAdmin(tfPwd.getText());
-       
-       adminDAO.updateAdmin(admin);
-        this.dispose();  
+        admin.setNomAdmin(tfNom.getText());
+        admin.setMailAdmin(tfEmail.getText());
+        admin.setPwdAdmin(tfPwd.getText());
+
+        adminDAO.updateAdmin(admin);
+        this.dispose();
     }//GEN-LAST:event_btnModifierActionPerformed
+
+    private void tfNomFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNomFocusLost
+        if (!tfNom.getText().equals("")) {
+            erreurNom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        } else {
+            erreurNom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));        // TODO add your handling code here:
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNomFocusLost
+
+    private void tfEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfEmailFocusLost
+        if (!tfEmail.getText().equals("")) {
+            erreurMail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        } else {
+            erreurMail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));        // TODO add your handling code here:
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tfEmailFocusLost
+
+    private void tfPwdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPwdFocusLost
+        if (!tfPwd.getText().equals("")) {
+            erreurMdp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        } else {
+            erreurMdp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));        // TODO add your handling code here:
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPwdFocusLost
 
     /**
      * @param args the command line arguments
@@ -296,16 +357,21 @@ tfPwd.setText("");        // TODO add your handling code here:
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AjoutAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AjoutAdmin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AjoutAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AjoutAdmin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AjoutAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AjoutAdmin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AjoutAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AjoutAdmin.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -320,6 +386,9 @@ tfPwd.setText("");        // TODO add your handling code here:
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAjouter;
     private javax.swing.JButton btnModifier;
+    private javax.swing.JLabel erreurMail;
+    private javax.swing.JLabel erreurMdp;
+    private javax.swing.JLabel erreurNom;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

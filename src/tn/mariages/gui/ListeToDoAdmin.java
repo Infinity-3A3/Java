@@ -70,6 +70,7 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
             }
         });
 
+        ModifierToDo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
         ModifierToDo.setText("Modifier");
         ModifierToDo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +107,7 @@ public class ListeToDoAdmin extends javax.swing.JFrame {
                                 .addComponent(ModifierToDo)
                                 .addGap(67, 67, 67)
                                 .addComponent(SupprimerToDo)))
-                        .addGap(0, 36, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
