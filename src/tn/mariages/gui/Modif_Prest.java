@@ -17,6 +17,7 @@
 
 package tn.mariages.gui;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -30,12 +31,14 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.entities.Prestataire;
+import tn.mariages.util.FTPFileUploader;
 
 /**
  *
  * @author RAED
  */
 public class Modif_Prest extends javax.swing.JFrame {
+       JFileChooser fc = new JFileChooser();
 
      Prestataire prest=new Prestataire();
      PrestataireDAO presDAO=new PrestataireDAO();
@@ -508,7 +511,15 @@ Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:
              
            prest.setAdrPrest(taAdrPrest.getText());
            prest.setVillePrest(cmbVillePrest.getSelectedItem().toString());
-           prest.setImgPrest(tfimage.getText());
+     
+          try {
+                FTPFileUploader.getInstance().UploadPic(fc.getSelectedFile().getAbsolutePath(), "/prest/");
+            } catch (IOException ex) {
+                Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           String  img = "http://mariages.tn/prest/"+fc.getSelectedFile().getName();
+                      prest.setImgPrest(img);
+                      
            prest.setEmailPrest(TfEmailPrest.getText());
            
            prest.setPwdPrest(TfPwdPrest.getText());
@@ -546,7 +557,6 @@ Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
  String chemin="";
         
-       JFileChooser fc = new JFileChooser();
        
                 int retval = fc.showOpenDialog(null);
                 

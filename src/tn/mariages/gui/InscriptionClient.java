@@ -33,12 +33,14 @@ import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.dao.ClientDAO;
 import tn.mariages.entities.Client;
+import tn.mariages.util.FTPFileUploader;
 
 /**
  *
  * @author Karim
  */
 public class InscriptionClient extends javax.swing.JFrame {
+        JFileChooser fc = new JFileChooser();
 
     /**
      * Creates new form InscriptionClient
@@ -430,7 +432,6 @@ erreurDate.setVisible(false);
 
         String chemin="";
 
-        JFileChooser fc = new JFileChooser();
 
         int retval = fc.showOpenDialog(null);
 
@@ -596,7 +597,7 @@ java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
    java.sql.Date sqlDate2 = new java.sql.Date(utilDate2.getTime()); 
          
           String dateFin=jDateChooser2.toString();
-          String img=tfImageclient.getText();
+          String img;
             System.out.println("date"+dateFin);
           Client client=new Client();
           client.setPrenomMari(prMari);
@@ -609,7 +610,15 @@ java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
          client.setBudget(budget);
        client.setDateDebut(sqlDate.toString());
         client.setDateFin(sqlDate2.toString());
-         client.setImgClient(img);
+        
+        
+            try {
+                FTPFileUploader.getInstance().UploadPic(fc.getSelectedFile().getAbsolutePath(), "/client/");
+            } catch (IOException ex) {
+                Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             img = "http://mariages.tn/client/"+fc.getSelectedFile().getName();
+        client.setImgClient(img);
         
          clientDao.insertClient(client);
             EspaceClient espace=new EspaceClient(clientDao.findClientByEmail(email).getIdClient(), "c");
