@@ -27,7 +27,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.entities.Admin;
 import tn.mariages.dao.ClientDAO;
@@ -46,19 +45,7 @@ public class MotDePasseOublie extends javax.swing.JFrame {
      */
     public MotDePasseOublie() {
         initComponents();
-
-        try
-    {
-        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
-            UIManager.put("RootPane.setupButtonVisible", false);
-
-    }
-    catch(Exception e)
-    {
-        //TODO exception
-    }
-
-        
+     
     }
 
     /**
@@ -258,18 +245,6 @@ public String generate(int length)
         }
         //</editor-fold>
 
-        try
-    {
-        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
-            UIManager.put("RootPane.setupButtonVisible", false);
-
-    }
-    catch(Exception e)
-    {
-        //TODO exception
-    }
-
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
