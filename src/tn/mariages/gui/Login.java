@@ -535,6 +535,7 @@ mdp.setVisible(true);
                     else
                     {
                         InscriptionClient insC = new InscriptionClient();
+                        insC.tfImageclient.setText("https://graph.facebook.com/"+user.get(0)+"?fields=picture.width(720).height(720) ");
                         insC.tfEmailClient.setText(user.get(3));
                         insC.tfNom.setText(user.get(2));
                         if(user.get(6).equals("male"))

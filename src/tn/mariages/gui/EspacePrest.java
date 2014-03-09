@@ -17,6 +17,7 @@
 package tn.mariages.gui;
 
 
+import tn.mariages.util.MySQLConnexion;
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.notification.WebNotificationPopup;
 import java.awt.image.BufferedImage;
@@ -41,17 +42,13 @@ import tn.mariages.entities.Prestataire;
 import tn.mariages.entities.Produit;
 import tn.mariages.entities.ProduitPaquet;
 
-import java.io.FileNotFoundException;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -931,7 +928,6 @@ public class EspacePrest extends javax.swing.JFrame {
     }//GEN-LAST:event_btnvaliderActionPerformed
 
     private void tablecommKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablecommKeyReleased
-        // TODO add your handling code here:
         textComm.setText(tablecomm.getValueAt(tablecomm.getSelectedRow(), 3).toString());
     }//GEN-LAST:event_tablecommKeyReleased
 
@@ -1001,7 +997,9 @@ public class EspacePrest extends javax.swing.JFrame {
             // - Connexion à la base
             connection = MySQLConnexion.getInstance();
             // - Chargement et compilation du rapport (charger le fichier jrxml déjà généré)
-            JasperDesign jasperDesign = JRXmlLoader.load("C:\\Users\\omar\\Downloads\\Documents\\gl + pidev\\virus\\paquet.jrxml");
+            URL url = getClass().getResource("paquet.jrxml");
+
+            JasperDesign jasperDesign = JRXmlLoader.load(url.getPath());
             JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
             // - Paramètres à envoyer au rapport
             Map parameters = new HashMap();
@@ -1013,7 +1011,7 @@ public class EspacePrest extends javax.swing.JFrame {
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
 
             // - Création du rapport au format PDF
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\omar\\Downloads\\Documents\\gl + pidev\\virus\\paquet.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "paquet.pdf");
             System.out.println("success");
         } catch (JRException e) {
             System.out.println("erreur de compilation" + e.getMessage());
