@@ -16,9 +16,14 @@
  */
 package tn.mariages.gui;
 
+import com.alee.managers.notification.NotificationIcon;
+import com.alee.managers.notification.NotificationManager;
+import com.alee.managers.notification.NotificationStyle;
+import com.alee.managers.notification.WebNotificationPopup;
 import java.awt.image.BufferedImage;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +34,7 @@ import javax.swing.UIManager;
 import tn.mariages.dao.ClientDAO;
 import tn.mariages.dao.PaquetDAO;
 import tn.mariages.dao.ProduitDAO;
+import tn.mariages.dao.ToDoDAO;
 import tn.mariages.dao.panierPaquetDAO;
 import tn.mariages.dao.panierProduitDAO;
 import tn.mariages.entities.Client;
@@ -36,6 +42,7 @@ import tn.mariages.entities.PanierPaquet;
 import tn.mariages.entities.PanierProduit;
 import tn.mariages.entities.Paquet;
 import tn.mariages.entities.Produit;
+import tn.mariages.entities.ToDo;
 
 /**
  *
@@ -47,106 +54,83 @@ public class EspaceClient extends javax.swing.JFrame {
      * Creates new form EspaceClient
      */
     int id;
+
     public EspaceClient() {
-        
-        
+
         initComponents();
-        
-         tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
-        tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
-        
-        
-         tablePaquet.getColumnModel().getColumn(6).setMinWidth(0);
-        tablePaquet.getColumnModel().getColumn(6).setMaxWidth(0);
-        
-      
-        
-        
-         tableProd.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
-        
-          
-        
-        
-        tablepanierproduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tablepanierproduit.getColumnModel().getColumn(0).setMaxWidth(0);
-        
-        tablepanierproduit.getColumnModel().getColumn(1).setMinWidth(0);
-        tablepanierproduit.getColumnModel().getColumn(1).setMaxWidth(0);
-        
-        tablePanier.getColumnModel().getColumn(0).setMinWidth(0);
-        tablePanier.getColumnModel().getColumn(0).setMaxWidth(0);
-        
-        tablePanier.getColumnModel().getColumn(1).setMinWidth(0);
-        tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
-        Client c=new Client ();
-            ClientDAO clDAo=new ClientDAO();
-            c=clDAo.findClientById(1);
-            Idclient.setText(c.getIdClient()+"");
-            Idclient.setVisible(false);
-            NomClient.setText(c.getNomDeFamille()+ " "+c.getPrenomMari());
-            labNomMari.setText(c.getPrenomMari());
-            LabPrenomEpouse.setText(c.getPrenomEpouse());
-            LabNom.setText(c.getNomDeFamille());
-            labemail.setText(c.getEmailClient());
-            LabVille.setText(c.getVilleClient());
-            LabTel.setText(c.getTelClient());
-            LabBudget.setText(c.getBudget()+"");
-            LabDateDebut.setText(c.getDateDebut());
-            LabDateFin.setText(c.getDateFin());
-          this.id=c.getIdClient();
-         MyTablePanier  model = new MyTablePanier(Integer.parseInt(Idclient.getText()));
-                    tablePanier.setModel(model);
-    }
-     public EspaceClient(int id,String type) {
-         
-         try
-    {
-        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
-            UIManager.put("RootPane.setupButtonVisible", false);
 
     }
-    catch(Exception e)
-    {
-        //TODO exception
-    }
-         
+
+    public EspaceClient(int id, String type) {
+
+        try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible", false);
+
+        } catch (Exception e) {
+            //TODO exception
+        }
+
         initComponents();
-      if(type.equals("c")){
-            Client c=new Client ();
-            ClientDAO clDAo=new ClientDAO();
-            c=clDAo.findClientById(id);
-            Idclient.setText(c.getIdClient()+"");
+        if (type.equals("c")) {
+            Client c = new Client();
+            ClientDAO clDAo = new ClientDAO();
+            c = clDAo.findClientById(id);
+            Idclient.setText(c.getIdClient() + "");
             Idclient.setVisible(false);
-            NomClient.setText(c.getNomDeFamille()+ " "+c.getPrenomMari());
+            NomClient.setText(c.getNomDeFamille() + " " + c.getPrenomMari());
             labNomMari.setText(c.getPrenomMari());
             LabPrenomEpouse.setText(c.getPrenomEpouse());
             LabNom.setText(c.getNomDeFamille());
             labemail.setText(c.getEmailClient());
             LabVille.setText(c.getVilleClient());
             LabTel.setText(c.getTelClient());
-            LabBudget.setText(c.getBudget()+"");
+            LabBudget.setText(c.getBudget() + "");
             LabDateDebut.setText(c.getDateDebut());
             LabDateFin.setText(c.getDateFin());
-            this.id=c.getIdClient();
-            System.out.println("IMG: "+c.getImgClient());
-             ImageIcon icon;
+            this.id = c.getIdClient();
+            System.out.println("IMG: " + c.getImgClient());
+            ImageIcon icon;
             try {
                 icon = new ImageIcon(new URL(c.getImgClient().toString()));
-                 icon = new ImageIcon(icon.getImage().getScaledInstance(180, 180, BufferedImage.SCALE_SMOOTH));
- LabImageClient.setIcon(icon);     
+                icon = new ImageIcon(icon.getImage().getScaledInstance(180, 180, BufferedImage.SCALE_SMOOTH));
+                LabImageClient.setIcon(icon);
 
             } catch (MalformedURLException ex) {
                 Logger.getLogger(ListeFeatProd.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-                        Idclient.setVisible(false);
-      }
-        
-        
+
+            Idclient.setVisible(false);
+        }
+        MyTablePanier model = new MyTablePanier(Integer.parseInt(Idclient.getText()));
+        tablePanier.setModel(model);
+        MytablePanierProduitModel model1 = new MytablePanierProduitModel(Integer.parseInt(Idclient.getText()));
+        tablepanierproduit.setModel(model1);
+        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
+        tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
+
+        tablePaquet.getColumnModel().getColumn(4).setMinWidth(0);
+        tablePaquet.getColumnModel().getColumn(4).setMaxWidth(0);
+        tableProduit.getColumnModel().getColumn(6).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(6).setMaxWidth(0);
+
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+
+        tablepanierproduit.getColumnModel().getColumn(0).setMinWidth(0);
+        tablepanierproduit.getColumnModel().getColumn(0).setMaxWidth(0);
+
+        tablepanierproduit.getColumnModel().getColumn(1).setMinWidth(0);
+        tablepanierproduit.getColumnModel().getColumn(1).setMaxWidth(0);
+
+        tablePanier.getColumnModel().getColumn(0).setMinWidth(0);
+        tablePanier.getColumnModel().getColumn(0).setMaxWidth(0);
+
+        tablePanier.getColumnModel().getColumn(1).setMinWidth(0);
+        tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
+
     }
-        String[] categorie = {"  ", "La mariée", "le mari", "Beauté", "La réception", "Gastronomie", "Annimation", "Voyages", "Photographe","prix total"};
-         
+    String[] categorie = {"  ", "La mariée", "le mari", "Beauté", "La réception", "Gastronomie", "Annimation", "Voyages", "Photographe", "prix total"};
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -195,7 +179,7 @@ public class EspaceClient extends javax.swing.JFrame {
         tfNomProduit = new javax.swing.JTextField();
         btnAjoutProdPanier = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tableProd = new javax.swing.JTable();
+        tableProduit = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -210,11 +194,6 @@ public class EspaceClient extends javax.swing.JFrame {
         btnRec = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
-        });
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -390,7 +369,7 @@ public class EspaceClient extends javax.swing.JFrame {
 
         jLabel12.setText("Prix total:");
 
-        tablepanierproduit.setModel(new MytablePanierProduitModel());
+        tablepanierproduit.setModel(new MytablePanierProduitModel(id));
         jScrollPane2.setViewportView(tablepanierproduit);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -447,7 +426,7 @@ public class EspaceClient extends javax.swing.JFrame {
 
         jLabel11.setText("Catégorie:");
 
-        jLabel13.setText("Nom produit:");
+        jLabel13.setText("Nom:");
 
         tfNomProduit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -461,13 +440,13 @@ public class EspaceClient extends javax.swing.JFrame {
             }
         });
 
-        tableProd.setModel(new Mytableprod());
-        tableProd.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableProduit.setModel(new MyTableProduit());
+        tableProduit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableProdMouseClicked(evt);
+                tableProduitMouseClicked(evt);
             }
         });
-        jScrollPane4.setViewportView(tableProd);
+        jScrollPane4.setViewportView(tableProduit);
 
         jButton1.setText("Commentaires");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -490,7 +469,7 @@ public class EspaceClient extends javax.swing.JFrame {
                 .addComponent(cmbCategorieProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel13)
-                .addGap(58, 58, 58)
+                .addGap(18, 18, 18)
                 .addComponent(tfNomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -528,13 +507,7 @@ public class EspaceClient extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tablePaquet);
 
-        jLabel16.setText("Nom paquet:");
-
-        TFnOMpaquet.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                TFnOMpaquetKeyReleased(evt);
-            }
-        });
+        jLabel16.setText("Nom:");
 
         btnAjoutPaquPanier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -560,7 +533,7 @@ public class EspaceClient extends javax.swing.JFrame {
                                 .addGap(28, 28, 28))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel16)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TFnOMpaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -666,94 +639,101 @@ public class EspaceClient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-     
-        
-        
-       
-        
+        List<ToDo> listeTodo = new ArrayList<ToDo>();
+        ToDoDAO todoDAO = new ToDoDAO();
+        ClientDAO clientDAO = new ClientDAO();
+        listeTodo = todoDAO.NotifyClient(Integer.parseInt(Idclient.getText()));
+        String notify = "N'oubliez pas les taches à faire demain : \n\n";
+
+        for (ToDo toDo : listeTodo) {
+            notify += "Titre : " + toDo.getTitreToDo() + "     \n"+System.getProperty("line.separator");
+            notify += "Description : " + toDo.getDescToDo() + "    \n\n    ";
+
+        }
+        WebNotificationPopup pop = new WebNotificationPopup(NotificationStyle.mac);
+        pop.setIcon(NotificationIcon.tip.getIcon ());
+        pop.setContent("aaaaaaa");
+        pop.setContent(notify);
+        pop.setDisplayTime(15000);
+        NotificationManager.showNotification(pop);
+
         for (int i = 0; i < categorie.length; i++) {
             cmbCategorieProduit.addItem(categorie[i]);
 
         }
-        
-        
-        
-        double prix=0;
-        PaquetDAO pdao=new PaquetDAO();
-          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(Integer.parseInt(Idclient.getText()));
-          
-              for(PanierPaquet p : mylist){
-             
-               Paquet paquet=pdao.FindPaquetById( p.getIdPaquet());
-               prix+=paquet.getPrixPaquet();
-               
-              }
-              ProduitDAO pd=new ProduitDAO();
-              List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(Integer.parseInt(Idclient.getText()));
-              for(PanierProduit p1 : mylist1){
-             
-               Produit produit=pd.DisplayProdByID(p1.getIdProd());
-               prix+=produit.getPrixProd();
-               
-              }
-              
-              Prixtotal.setText(prix+"");
-          
-        
-        
+
+        double prix = 0;
+        PaquetDAO pdao = new PaquetDAO();
+        List<PanierPaquet> mylist = new panierPaquetDAO().DisplayPanierPaquetByClient(Integer.parseInt(Idclient.getText()));
+
+        for (PanierPaquet p : mylist) {
+
+            Paquet paquet = pdao.FindPaquetById(p.getIdPaquet());
+            prix += paquet.getPrixPaquet();
+
+        }
+        ProduitDAO pd = new ProduitDAO();
+        List<PanierProduit> mylist1 = new panierProduitDAO().DiplayPanierProduitByClient(Integer.parseInt(Idclient.getText()));
+        for (PanierProduit p1 : mylist1) {
+
+            Produit produit = pd.DisplayProdByID(p1.getIdProd());
+            prix += produit.getPrixProd();
+
+        }
+
+        Prixtotal.setText(prix + "");
 
 
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAjoutProdPanierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutProdPanierActionPerformed
-            
-        if(tableProd.getSelectedRow()!=-1){
-            
-            Produit  p=new Produit();
-            PanierProduit   panierProd=new PanierProduit();
-            ProduitDAO proddao=new ProduitDAO();
-            panierProduitDAO panierproduitdao=new panierProduitDAO();
-            p= proddao.DisplayProdByID((int) tableProd.getValueAt(tableProd.getSelectedRow(), 0));
+
+        if (tableProduit.getSelectedRow() != -1) {
+
+            Produit p = new Produit();
+            PanierProduit panierProd = new PanierProduit();
+            ProduitDAO proddao = new ProduitDAO();
+            panierProduitDAO panierproduitdao = new panierProduitDAO();
+            p = proddao.DisplayProdByID((int) tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));
             panierProd.setIdProd(p.getIdProd());
-              panierProd.setIdClient(Integer.parseInt(Idclient.getText()));
-             
+            panierProd.setIdClient(Integer.parseInt(Idclient.getText()));
+
             panierProd.setDateAjout(p.getDateAjoutProd());
-           System.out.println("date"+panierProd.toString());
+            System.out.println("date" + panierProd.toString());
             panierproduitdao.insertPanierProduit(panierProd);
-            
-         MytablePanierProduitModel  model1 = new MytablePanierProduitModel();
-                    tablepanierproduit.setModel(model1);
-                    tablepanierproduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tablepanierproduit.getColumnModel().getColumn(0).setMaxWidth(0);
-        
-        tablepanierproduit.getColumnModel().getColumn(1).setMinWidth(0);
-        tablepanierproduit.getColumnModel().getColumn(1).setMaxWidth(0);
-        double prix=0;
-        PaquetDAO pdao=new PaquetDAO();
-          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(Integer.parseInt(Idclient.getText()));
-          
-              for(PanierPaquet p1 : mylist){
-             
-               Paquet paquet=pdao.FindPaquetById( p1.getIdPaquet());
-               prix+=paquet.getPrixPaquet();
-               
-              }
-              
-              ProduitDAO pd=new ProduitDAO();
-              List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(Integer.parseInt(Idclient.getText()));
-              for(PanierProduit p1 : mylist1){
-             
-               Produit produit=pd.DisplayProdByID(p1.getIdProd());
-               prix+=produit.getPrixProd();
-               
-              }
-              Prixtotal.setText(prix+"");
-           
-        }else
-        {
-            int d=JOptionPane.OK_CANCEL_OPTION;
-            JOptionPane.showConfirmDialog(null, "Vous n'avez pas sélectionnez un produit","erreur",d);
-            
+
+            MytablePanierProduitModel model1 = new MytablePanierProduitModel(Integer.parseInt(Idclient.getText()));
+            tablepanierproduit.setModel(model1);
+            tablepanierproduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tablepanierproduit.getColumnModel().getColumn(0).setMaxWidth(0);
+
+            tablepanierproduit.getColumnModel().getColumn(1).setMinWidth(0);
+            tablepanierproduit.getColumnModel().getColumn(1).setMaxWidth(0);
+            double prix = 0;
+            PaquetDAO pdao = new PaquetDAO();
+            List<PanierPaquet> mylist = new panierPaquetDAO().DisplayPanierPaquetByClient(Integer.parseInt(Idclient.getText()));
+
+            for (PanierPaquet p1 : mylist) {
+
+                Paquet paquet = pdao.FindPaquetById(p1.getIdPaquet());
+                prix += paquet.getPrixPaquet();
+
+            }
+
+            ProduitDAO pd = new ProduitDAO();
+            List<PanierProduit> mylist1 = new panierProduitDAO().DiplayPanierProduitByClient(Integer.parseInt(Idclient.getText()));
+            for (PanierProduit p1 : mylist1) {
+
+                Produit produit = pd.DisplayProdByID(p1.getIdProd());
+                prix += produit.getPrixProd();
+
+            }
+            Prixtotal.setText(prix + "");
+
+        } else {
+            int d = JOptionPane.OK_CANCEL_OPTION;
+            JOptionPane.showConfirmDialog(null, "Vous n'avez pas sélectionnez un produit", "erreur", d);
+
         }
 
 
@@ -761,112 +741,107 @@ public class EspaceClient extends javax.swing.JFrame {
 
     private void btnAjoutPaquPanierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutPaquPanierActionPerformed
 
-        
-        if(tablePaquet.getSelectedRow()!=-1){
-            
-            Paquet  p=new Paquet();
-            PanierPaquet   panierPaquet=new PanierPaquet();
-            panierPaquetDAO panierpaquetddao=new panierPaquetDAO();
-            PaquetDAO paquetdao=new PaquetDAO();
-            p= paquetdao.FindPaquetById((int) tablePaquet.getValueAt(tablePaquet.getSelectedRow(), 0));
+        if (tablePaquet.getSelectedRow() != -1) {
+
+            Paquet p = new Paquet();
+            PanierPaquet panierPaquet = new PanierPaquet();
+            panierPaquetDAO panierpaquetddao = new panierPaquetDAO();
+            PaquetDAO paquetdao = new PaquetDAO();
+            p = paquetdao.FindPaquetById((int) tablePaquet.getValueAt(tablePaquet.getSelectedRow(), 0));
             panierPaquet.setIdPaquet(p.getIdPaquet());
-              panierPaquet.setIdClient(Integer.parseInt(Idclient.getText()));
-             
+            panierPaquet.setIdClient(Integer.parseInt(Idclient.getText()));
+
             panierPaquet.setDateAjout("2014-02-08");
-        
+
             panierpaquetddao.insertPanierPaquet(panierPaquet);
-            MyTablePanier  model = new MyTablePanier(Integer.parseInt(Idclient.getText()));
-                    tablePanier.setModel(model);
-                    tablePanier.getColumnModel().getColumn(0).setMinWidth(0);
-        tablePanier.getColumnModel().getColumn(0).setMaxWidth(0);
-        
-        tablePanier.getColumnModel().getColumn(1).setMinWidth(0);
-        tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
-                double prix=0;
-        PaquetDAO pdao=new PaquetDAO();
-          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(Integer.parseInt(Idclient.getText()));
-          
-              for(PanierPaquet p1 : mylist){
-             
-               Paquet paquet=pdao.FindPaquetById( p1.getIdPaquet());
-               prix+=paquet.getPrixPaquet();
-               
-              }
-              
-              ProduitDAO pd=new ProduitDAO();
-              List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(Integer.parseInt(Idclient.getText()));
-              for(PanierProduit p1 : mylist1){
-             
-               Produit produit=pd.DisplayProdByID(p1.getIdProd());
-               prix+=produit.getPrixProd();
-               
-              }
-              Prixtotal.setText(prix+"");
-        
-     
-        }else
-        {
-            int d=JOptionPane.OK_CANCEL_OPTION;
-            JOptionPane.showConfirmDialog(null, "Vous n'avez pas sélectionnez un paquet","erreur",d);
-            
+            MyTablePanier model = new MyTablePanier(Integer.parseInt(Idclient.getText()));
+            tablePanier.setModel(model);
+            tablePanier.getColumnModel().getColumn(0).setMinWidth(0);
+            tablePanier.getColumnModel().getColumn(0).setMaxWidth(0);
+
+            tablePanier.getColumnModel().getColumn(1).setMinWidth(0);
+            tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
+            double prix = 0;
+            PaquetDAO pdao = new PaquetDAO();
+            List<PanierPaquet> mylist = new panierPaquetDAO().DisplayPanierPaquetByClient(Integer.parseInt(Idclient.getText()));
+
+            for (PanierPaquet p1 : mylist) {
+
+                Paquet paquet = pdao.FindPaquetById(p1.getIdPaquet());
+                prix += paquet.getPrixPaquet();
+
+            }
+
+            ProduitDAO pd = new ProduitDAO();
+            List<PanierProduit> mylist1 = new panierProduitDAO().DiplayPanierProduitByClient(Integer.parseInt(Idclient.getText()));
+            for (PanierProduit p1 : mylist1) {
+
+                Produit produit = pd.DisplayProdByID(p1.getIdProd());
+                prix += produit.getPrixProd();
+
+            }
+            Prixtotal.setText(prix + "");
+
+        } else {
+            int d = JOptionPane.OK_CANCEL_OPTION;
+            JOptionPane.showConfirmDialog(null, "Vous n'avez pas sélectionnez un paquet", "erreur", d);
+
         }
 
-
-                 
 
     }//GEN-LAST:event_btnAjoutPaquPanierActionPerformed
 
     private void cmbCategorieProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCategorieProduitActionPerformed
-if(cmbCategorieProduit.getSelectedIndex()==0){
-            tableProd.setModel(new Mytableprod());
-             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
-       
+        if (cmbCategorieProduit.getSelectedIndex() == 0) {
+            tableProduit.setModel(new MyTableProduit());
+            tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+
         }
-        if(cmbCategorieProduit.getSelectedIndex()==1){
-            tableProd.setModel(new MyTableProduitByCat(categorie[1]));
-             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
-        
+        if (cmbCategorieProduit.getSelectedIndex() == 1) {
+            tableProduit.setModel(new MyTableProduitByCat(categorie[1]));
+            tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+
         }
-        if(cmbCategorieProduit.getSelectedIndex()==2){
-            tableProd.setModel(new MyTableProduitByCat(categorie[2]));
-             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
-        
+        if (cmbCategorieProduit.getSelectedIndex() == 2) {
+            tableProduit.setModel(new MyTableProduitByCat(categorie[2]));
+            tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+
         }
-        if(cmbCategorieProduit.getSelectedIndex()==3){
-            tableProd.setModel(new MyTableProduitByCat(categorie[3]));
-             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
-        
+        if (cmbCategorieProduit.getSelectedIndex() == 3) {
+            tableProduit.setModel(new MyTableProduitByCat(categorie[3]));
+            tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+
         }
-        if(cmbCategorieProduit.getSelectedIndex()==4){
-            tableProd.setModel(new MyTableProduitByCat(categorie[4]));
-             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
-        
+        if (cmbCategorieProduit.getSelectedIndex() == 4) {
+            tableProduit.setModel(new MyTableProduitByCat(categorie[4]));
+            tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+
         }
-        if(cmbCategorieProduit.getSelectedIndex()==5){
-            tableProd.setModel(new MyTableProduitByCat(categorie[5]));
-             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
-        
+        if (cmbCategorieProduit.getSelectedIndex() == 5) {
+            tableProduit.setModel(new MyTableProduitByCat(categorie[5]));
+            tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+
         }
-        if(cmbCategorieProduit.getSelectedIndex()==6){
-            tableProd.setModel(new MyTableProduitByCat(categorie[6]));
-             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
-        
+        if (cmbCategorieProduit.getSelectedIndex() == 6) {
+            tableProduit.setModel(new MyTableProduitByCat(categorie[6]));
+            tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+
         }
-        if(cmbCategorieProduit.getSelectedIndex()==7){
-            tableProd.setModel(new MyTableProduitByCat(categorie[7]));
-             tableProd.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
-        
+        if (cmbCategorieProduit.getSelectedIndex() == 7) {
+            tableProduit.setModel(new MyTableProduitByCat(categorie[7]));
+            tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+
         }
-                 
-     
+
+
     }//GEN-LAST:event_cmbCategorieProduitActionPerformed
 
     private void cmbCategorieProduitItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCategorieProduitItemStateChanged
@@ -875,137 +850,130 @@ if(cmbCategorieProduit.getSelectedIndex()==0){
 
     private void SupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SupprimerActionPerformed
 
-         int dialogButton = JOptionPane.YES_NO_OPTION;
-                JOptionPane.showConfirmDialog (null, "Voulez vous supprimer tous les paquets selectionnés?","Warning",dialogButton);
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        JOptionPane.showConfirmDialog(null, "Voulez vous supprimer tous les paquets selectionnés?", "Warning", dialogButton);
 
-                if(dialogButton == JOptionPane.YES_OPTION){ //The ISSUE is here
-                    
-                    panierProduitDAO produitDAO=new panierProduitDAO();
-                    panierPaquetDAO paquetDAo = new panierPaquetDAO();
-                    int id[]=new int[50];
-                    int id1[]=new int[50];
-                    int ids[]=new int[50];
-                    int ids1[]=new int[50];
-                    int j=-1;
-                    int k=-1;
-                    for(int i=0;i<tablePanier.getRowCount();i++){
-                    Boolean b =(Boolean)tablePanier.getValueAt(i, 4);
-                    
-                    if(b)
-                    {
-                        j++;
-                        k++;
-                         ids[j]=(int)tablePanier.getValueAt(i, 0);
-                         ids1[k]=(int)tablePanier.getValueAt(i, 1);
-                    }
-                      
-                      
-                    }
-                    
-                    for(int i=0;i<tablepanierproduit.getRowCount();i++){
-                    Boolean b =(Boolean)tablepanierproduit.getValueAt(i, 4);
-                    
-                    if(b)
-                    {
-                        j++;
-                        k++;
-                         id[j]=(int)tablepanierproduit.getValueAt(i, 0);
-                         id1[k]=(int)tablepanierproduit.getValueAt(i, 1);
-                    }
-                      
-                      
-                    }
-                    
-                    while(j!=-1 )
-                    {
-                        produitDAO.deletePanierProduit(id[j], id1[k]);
-                        paquetDAo.deletePaniePaquet(ids[j],ids1[k]);
-                        j--;
-                        k--;
-                    }
-                   MyTablePanier  model = new MyTablePanier(Integer.parseInt(Idclient.getText()));
-                    tablePanier.setModel(model);
-                    tablePanier.getColumnModel().getColumn(0).setMinWidth(0);
-        tablePanier.getColumnModel().getColumn(0).setMaxWidth(0);
-        
-        tablePanier.getColumnModel().getColumn(1).setMinWidth(0);
-        tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
-                    
-                    
-                    MytablePanierProduitModel  model1 = new MytablePanierProduitModel();
-                    tablepanierproduit.setModel(model1);
-                    tablepanierproduit.getColumnModel().getColumn(0).setMinWidth(0);
-        tablepanierproduit.getColumnModel().getColumn(0).setMaxWidth(0);
-        
-        tablepanierproduit.getColumnModel().getColumn(1).setMinWidth(0);
-        tablepanierproduit.getColumnModel().getColumn(1).setMaxWidth(0);
-                    double prix=0;
-        PaquetDAO pdao=new PaquetDAO();
-       ProduitDAO pd=new ProduitDAO();
-          List<PanierPaquet> mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(Integer.parseInt(Idclient.getText()));
-          List<PanierProduit> mylist1=new panierProduitDAO().DiplayPanierProduitByClient(Integer.parseInt(Idclient.getText()));
-              for(PanierPaquet p : mylist){
-             
-               Paquet paquet=pdao.FindPaquetById( p.getIdPaquet());
-               prix+=paquet.getPrixPaquet();
-               
-              }
-              
-              for(PanierProduit p1 : mylist1){
-             
-               Produit produit=pd.DisplayProdByID(p1.getIdProd());
-               prix+=produit.getPrixProd();
-               
-              }
-              
-              Prixtotal.setText(prix+"");
+        if (dialogButton == JOptionPane.YES_OPTION) { //The ISSUE is here
+
+            panierProduitDAO produitDAO = new panierProduitDAO();
+            panierPaquetDAO paquetDAo = new panierPaquetDAO();
+            int id[] = new int[50];
+            int id1[] = new int[50];
+            int ids[] = new int[50];
+            int ids1[] = new int[50];
+            int j = -1;
+            int k = -1;
+            for (int i = 0; i < tablePanier.getRowCount(); i++) {
+                Boolean b = (Boolean) tablePanier.getValueAt(i, 4);
+
+                if (b) {
+                    j++;
+                    k++;
+                    ids[j] = (int) tablePanier.getValueAt(i, 0);
+                    ids1[k] = (int) tablePanier.getValueAt(i, 1);
                 }
+
+            }
+
+            for (int i = 0; i < tablepanierproduit.getRowCount(); i++) {
+                Boolean b = (Boolean) tablepanierproduit.getValueAt(i, 4);
+
+                if (b) {
+                    j++;
+                    k++;
+                    id[j] = (int) tablepanierproduit.getValueAt(i, 0);
+                    id1[k] = (int) tablepanierproduit.getValueAt(i, 1);
+                }
+
+            }
+
+            while (j != -1) {
+                produitDAO.deletePanierProduit(id[j], id1[k]);
+                paquetDAo.deletePaniePaquet(ids[j], ids1[k]);
+                j--;
+                k--;
+            }
+            MyTablePanier model = new MyTablePanier(Integer.parseInt(Idclient.getText()));
+            tablePanier.setModel(model);
+            tablePanier.getColumnModel().getColumn(0).setMinWidth(0);
+            tablePanier.getColumnModel().getColumn(0).setMaxWidth(0);
+
+            tablePanier.getColumnModel().getColumn(1).setMinWidth(0);
+            tablePanier.getColumnModel().getColumn(1).setMaxWidth(0);
+
+            MytablePanierProduitModel model1 = new MytablePanierProduitModel(Integer.parseInt(Idclient.getText()));
+            tablepanierproduit.setModel(model1);
+            tablepanierproduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tablepanierproduit.getColumnModel().getColumn(0).setMaxWidth(0);
+
+            tablepanierproduit.getColumnModel().getColumn(1).setMinWidth(0);
+            tablepanierproduit.getColumnModel().getColumn(1).setMaxWidth(0);
+            double prix = 0;
+            PaquetDAO pdao = new PaquetDAO();
+            ProduitDAO pd = new ProduitDAO();
+            List<PanierPaquet> mylist = new panierPaquetDAO().DisplayPanierPaquetByClient(Integer.parseInt(Idclient.getText()));
+            List<PanierProduit> mylist1 = new panierProduitDAO().DiplayPanierProduitByClient(Integer.parseInt(Idclient.getText()));
+            for (PanierPaquet p : mylist) {
+
+                Paquet paquet = pdao.FindPaquetById(p.getIdPaquet());
+                prix += paquet.getPrixPaquet();
+
+            }
+
+            for (PanierProduit p1 : mylist1) {
+
+                Produit produit = pd.DisplayProdByID(p1.getIdProd());
+                prix += produit.getPrixProd();
+
+            }
+
+            Prixtotal.setText(prix + "");
+        }
 
     }//GEN-LAST:event_SupprimerActionPerformed
 
     private void tablePaquetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePaquetMouseClicked
 
-        Paquet p=new Paquet();
-        PaquetDAO pdao=new PaquetDAO();
-        p=pdao.FindPaquetById((int)tablePaquet.getValueAt(tablePaquet.getSelectedRow(), 0));
-        
-               if(evt.getClickCount()==2){
-                   
-                   this.setVisible(true);
-                   
-                   DetailPaquet detailpaquet=new DetailPaquet(p);
-                   detailpaquet.setVisible(true);
-                   
-               }
-     
+        Paquet p = new Paquet();
+        PaquetDAO pdao = new PaquetDAO();
+        p = pdao.FindPaquetById((int) tablePaquet.getValueAt(tablePaquet.getSelectedRow(), 0));
+
+        if (evt.getClickCount() == 2) {
+
+            this.setVisible(true);
+
+            DetailPaquet detailpaquet = new DetailPaquet(p);
+            detailpaquet.setVisible(true);
+
+        }
+
     }//GEN-LAST:event_tablePaquetMouseClicked
 
-    private void tableProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdMouseClicked
+    private void tableProduitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProduitMouseClicked
 
-          Produit p=new Produit();
-          ProduitDAO pdao=new ProduitDAO();
-          
-          p=pdao.DisplayProdByID((int)tableProd.getValueAt(tableProd.getSelectedRow(), 0));
-        
-          if(evt.getClickCount()==2){
-              
-              this.setVisible(true);
-              DetailsProduit detailproduit=new DetailsProduit(p);
-              detailproduit.setVisible(true);
-              
-          }
-          
-                  
+        Produit p = new Produit();
+        ProduitDAO pdao = new ProduitDAO();
 
-    }//GEN-LAST:event_tableProdMouseClicked
+        p = pdao.DisplayProdByID((int) tableProduit.getValueAt(tableProduit.getSelectedRow(), 0));
+
+        if (evt.getClickCount() == 2) {
+
+            this.setVisible(true);
+            DetailsProduit detailproduit = new DetailsProduit(p);
+            detailproduit.setVisible(true);
+
+        }
+
+
+    }//GEN-LAST:event_tableProduitMouseClicked
 
     private void BtnModifierProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModifierProfilActionPerformed
-               
-             this.setVisible(true);
-             
-             ModifierClient modifclient=new ModifierClient(Integer.parseInt(Idclient.getText()));
-             modifclient.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-             modifclient.setVisible(true);
+
+        this.setVisible(true);
+
+        ModifierClient modifclient = new ModifierClient(Integer.parseInt(Idclient.getText()));
+        modifclient.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        modifclient.setVisible(true);
     }//GEN-LAST:event_BtnModifierProfilActionPerformed
 
     private void btnRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecActionPerformed
@@ -1015,102 +983,74 @@ if(cmbCategorieProduit.getSelectedIndex()==0){
     }//GEN-LAST:event_btnRecActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            
- if(tableProd.getSelectedRow()!=-1){
-            int id = (int) tableProd.getModel().getValueAt(tableProd.getSelectedRow(), 0);
+
+        if (tableProduit.getSelectedRow() != -1) {
+            int id = (int) tableProduit.getModel().getValueAt(tableProduit.getSelectedRow(), 0);
 
             int idclient = Integer.parseInt(Idclient.getText());
 
             ListeCommentaires c = new ListeCommentaires(idclient, id);
             c.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             c.setVisible(true);
- }else
-        {
+        } else {
             int dialogButton = JOptionPane.OK_CANCEL_OPTION;
-                JOptionPane.showConfirmDialog (null, "Vous n'avez selectionné aucun produit","Warning",dialogButton);
+            JOptionPane.showConfirmDialog(null, "Vous n'avez selectionné aucun produit", "Warning", dialogButton);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void DeconnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeconnexionActionPerformed
-       this.setVisible(false);
-          Authentication authen =new Authentication();
-          authen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-          authen.setVisible(true);
+        this.setVisible(false);
+        Authentication authen = new Authentication();
+        authen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        authen.setVisible(true);
 
     }//GEN-LAST:event_DeconnexionActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        
-Client c=new Client ();
-            ClientDAO clDAo=new ClientDAO();
-            c=clDAo.findClientById(id);
-            Idclient.setText(c.getIdClient()+"");
-            Idclient.setVisible(false);
-            NomClient.setText(c.getNomDeFamille()+ " "+c.getPrenomMari());
-            labNomMari.setText(c.getPrenomMari());
-            LabPrenomEpouse.setText(c.getPrenomEpouse());
-            LabNom.setText(c.getNomDeFamille());
-            labemail.setText(c.getEmailClient());
-            LabVille.setText(c.getVilleClient());
-            LabTel.setText(c.getTelClient());
-            LabBudget.setText(c.getBudget()+"");
-            LabDateDebut.setText(c.getDateDebut());
-            LabDateFin.setText(c.getDateFin());        
-        
+
+        Client c = new Client();
+        ClientDAO clDAo = new ClientDAO();
+        c = clDAo.findClientById(id);
+        Idclient.setText(c.getIdClient() + "");
+        Idclient.setVisible(false);
+        NomClient.setText(c.getNomDeFamille() + " " + c.getPrenomMari());
+        labNomMari.setText(c.getPrenomMari());
+        LabPrenomEpouse.setText(c.getPrenomEpouse());
+        LabNom.setText(c.getNomDeFamille());
+        labemail.setText(c.getEmailClient());
+        LabVille.setText(c.getVilleClient());
+        LabTel.setText(c.getTelClient());
+        LabBudget.setText(c.getBudget() + "");
+        LabDateDebut.setText(c.getDateDebut());
+        LabDateFin.setText(c.getDateFin());
+
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void ListToDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListToDoActionPerformed
-                this.setVisible(true);
-                ListeToDoClient lstToDoCl=new ListeToDoClient(id);
-                lstToDoCl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-               lstToDoCl.setVisible(true);
+        this.setVisible(true);
+        ListeToDoClient lstToDoCl = new ListeToDoClient(id);
+        lstToDoCl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        lstToDoCl.setVisible(true);
     }//GEN-LAST:event_ListToDoActionPerformed
 
     private void tfNomProduitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomProduitKeyReleased
-      String nom = tfNomProduit.getText();
-        if(!nom.equals("")){
-        Mytableprod modelprod = new Mytableprod(nom);
-        tableProd.setModel(modelprod);
-        tableProd.getColumnModel().getColumn(0).setMinWidth(0);
-            tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
-            tableProd.repaint();
-        }
-        else
-        {
-            Mytableprod modelprod = new Mytableprod();
-        tableProd.setModel(modelprod);
-        tableProd.getColumnModel().getColumn(0).setMinWidth(0);
-            tableProd.getColumnModel().getColumn(0).setMaxWidth(0);
-            tableProd.repaint();
+        String nom = tfNomProduit.getText();
+        if (!nom.equals("")) {
+            MyTableProduit modelprod = new MyTableProduit(nom);
+            tableProduit.setModel(modelprod);
+            tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProduit.repaint();
+        } else {
+            MyTableProduit modelprod = new MyTableProduit();
+            tableProduit.setModel(modelprod);
+            tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProduit.repaint();
         }
 
     }//GEN-LAST:event_tfNomProduitKeyReleased
-
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formMouseClicked
-
-    private void TFnOMpaquetKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFnOMpaquetKeyReleased
-        String nom = TFnOMpaquet.getText();
-        if(!nom.equals("")){
-        TableListPaquetModel modelpaq = new TableListPaquetModel(nom);
-        tablePaquet.setModel(modelpaq);
-        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
-            tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
-            tablePaquet.repaint();
-        }
-        else
-        {
-            TableListPaquetModel modelpaq = new TableListPaquetModel();
-        tablePaquet.setModel(modelpaq);
-        tablePaquet.getColumnModel().getColumn(0).setMinWidth(0);
-            tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
-            tablePaquet.repaint();
-        }
-
-
-    }//GEN-LAST:event_TFnOMpaquetKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1138,14 +1078,11 @@ Client c=new Client ();
             java.util.logging.Logger.getLogger(EspaceClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-try
-    {
-        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
-    }
-    catch(Exception e)
-    {
-        //TODO exception
-    }
+        try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+        } catch (Exception e) {
+            //TODO exception
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1202,7 +1139,7 @@ try
     private javax.swing.JLabel labemail;
     private javax.swing.JTable tablePanier;
     private javax.swing.JTable tablePaquet;
-    private javax.swing.JTable tableProd;
+    private javax.swing.JTable tableProduit;
     private javax.swing.JTable tablepanierproduit;
     private javax.swing.JTextField tfNomProduit;
     // End of variables declaration//GEN-END:variables
