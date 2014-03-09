@@ -205,6 +205,7 @@ public class EspacePrest extends javax.swing.JFrame {
 
         LabSpec.setText("jLabel18");
 
+        BtnModifierProfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
         BtnModifierProfil.setText("Modifier");
         BtnModifierProfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -394,6 +395,7 @@ public class EspacePrest extends javax.swing.JFrame {
             }
         });
 
+        btnModifProduit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
         btnModifProduit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifProduitActionPerformed(evt);
@@ -408,12 +410,14 @@ public class EspacePrest extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tableProduit);
 
+        btnSuppProduit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
         btnSuppProduit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuppProduitActionPerformed(evt);
             }
         });
 
+        btnAjoutProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_plus.png"))); // NOI18N
         btnAjoutProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAjoutProdActionPerformed(evt);
@@ -536,7 +540,7 @@ public class EspacePrest extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+                .addContainerGap(98, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(138, 138, 138)

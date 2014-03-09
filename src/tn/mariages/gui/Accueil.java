@@ -61,6 +61,13 @@ public class Accueil extends javax.swing.JFrame {
      * Creates new form Accueil
      */
     public Accueil() {
+          try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible", false);
+
+        } catch (Exception e) {
+            //TODO exception
+        }
         initComponents();
         
     }
@@ -265,7 +272,7 @@ public class Accueil extends javax.swing.JFrame {
    
    JFrame LogoFrame =new JFrame("Logo");
         LogoFrame.setSize(w-45, h+16);
-        LogoFrame.setExtendedState( this.MAXIMIZED_VERT ); 
+        LogoFrame.setExtendedState( this.MAXIMIZED_HORIZ ); 
         this.setAlwaysOnTop (true);
         //LogoFrame.setExtendedState(LogoFrame.MAXIMIZED_BOTH);
         LogoFrame.setLocation(65, -16);
@@ -414,9 +421,9 @@ try
     Accueil ac =  new Accueil();
     int h = Toolkit.getDefaultToolkit().getScreenSize().height;
     int w = Toolkit.getDefaultToolkit().getScreenSize().width;
-    ac.setLocation(-27, -16);
+    ac.setLocation(100,100);
     ac.setSize(144, h+16);
-    ac.setExtendedState( ac.MAXIMIZED_VERT ); 
+    ac.setExtendedState( ac.MAXIMIZED_HORIZ );
     ac.setVisible(true);
                 
             }

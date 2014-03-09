@@ -99,6 +99,7 @@ public class ListePrestataire extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablePrest);
 
+        BtnAjouterPres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/user_add.png"))); // NOI18N
         BtnAjouterPres.setText("Ajouter ");
         BtnAjouterPres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +107,7 @@ public class ListePrestataire extends javax.swing.JFrame {
             }
         });
 
+        BtnModifierPres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
         BtnModifierPres.setText("Modifier");
         BtnModifierPres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +115,7 @@ public class ListePrestataire extends javax.swing.JFrame {
             }
         });
 
+        BtnSupprimePres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/user_delete.png"))); // NOI18N
         BtnSupprimePres.setText("Supprimer");
         BtnSupprimePres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

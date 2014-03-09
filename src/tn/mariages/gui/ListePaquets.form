@@ -156,6 +156,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnAjouter">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/circle_plus.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ajouter Paquet"/>
           </Properties>
           <Events>
@@ -164,6 +167,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnModifier">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/circle_ok.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Modifier Paquet"/>
           </Properties>
           <Events>
@@ -172,6 +178,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSupprimer">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/circle_delete.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Supprimer Paquet"/>
           </Properties>
           <Events>
@@ -188,6 +197,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnlisterprod">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/arrow_down.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Lister Produits"/>
           </Properties>
           <Events>
@@ -281,6 +293,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSupprimerProduit">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/circle_delete.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Supprimer Produit"/>
           </Properties>
           <Events>
@@ -289,6 +304,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAjouterProduit">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/circle_plus.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ajouter Produit"/>
           </Properties>
           <Events>
@@ -370,6 +388,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnProduitsPaquets">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/circle_plus.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ajouter Produits"/>
           </Properties>
           <Events>
@@ -378,6 +399,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAnnuler">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/close.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Annuler"/>
           </Properties>
           <Events>

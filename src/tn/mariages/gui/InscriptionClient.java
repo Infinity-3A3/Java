@@ -14,9 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package tn.mariages.gui;
 
+import com.alee.managers.notification.NotificationIcon;
+import com.alee.managers.notification.NotificationManager;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -41,35 +42,31 @@ import tn.mariages.util.FTPFileUploader;
  * @author Karim
  */
 public class InscriptionClient extends javax.swing.JFrame {
-        JFileChooser fc = new JFileChooser();
+
+    JFileChooser fc = new JFileChooser();
 
     /**
      * Creates new form InscriptionClient
      */
     public InscriptionClient() {
-        try
-    {
-        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+        try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
             UIManager.put("RootPane.setupButtonVisible", false);
 
-    }
-    catch(Exception e)
-    {
-        //TODO exception
-    }
+        } catch (Exception e) {
+            //TODO exception
+        }
         initComponents();
-          this.setResizable(false);
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
-         Date d1=new Date();
-     
-        jDateChooser1.setDate(d1);
-          jDateChooser2.setDate(d1);
-      
-          
+        Date d1 = new Date();
 
-        
+        jDateChooser1.setDate(d1);
+        jDateChooser2.setDate(d1);
+
     }
- String[] ville={"Ariana","Mannouba","Carthage","El ghazela"};
+    String[] ville = {"Ariana", "Mannouba", "Carthage", "El ghazela"};
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -230,6 +227,7 @@ public class InscriptionClient extends javax.swing.JFrame {
 
         jDateChooser2.setDateFormatString("yyyy-MM-dd");
 
+        btnInscrire.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/user_add.png"))); // NOI18N
         btnInscrire.setText("S'inscrire");
         btnInscrire.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,6 +266,7 @@ public class InscriptionClient extends javax.swing.JFrame {
             }
         });
 
+        btnQuitter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/close.png"))); // NOI18N
         btnQuitter.setText("Quitter");
         btnQuitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,111 +282,109 @@ public class InscriptionClient extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(241, 241, 241)
-                        .addComponent(btnInscrire, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 265, Short.MAX_VALUE)
-                        .addComponent(btnQuitter))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfPwdClient, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfPrenomMari, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfPrenomEpouse, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfEmailClient, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfNom, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(erreurPrenomEpouse, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                            .addComponent(errerueNomFamille, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(erreurEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(erreurPrenomMari, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(erreurMdp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tfTelClient, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(erreurTel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(spinBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(erreurBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tfImageclient, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btParcourir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(erreurDate, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(erreurImage, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tfPwdClient, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tfPrenomMari, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tfPrenomEpouse, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tfEmailClient, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tfNom, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(erreurPrenomEpouse, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(errerueNomFamille, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(erreurEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(erreurMdp, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(erreurPrenomMari, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(21, 21, 21)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(erreurDate, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel13)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel10)
-                                                .addGap(35, 35, 35)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel11)
-                                                    .addComponent(jLabel12)))
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel9))
-                                        .addGap(28, 28, 28)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(tfTelClient, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(erreurTel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(spinBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(erreurBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(tfImageclient, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(btParcourir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(erreurImage, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cmbVilleClient, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel16)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfPwdClient1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(erreurVille, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(erreurMdp1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(jLabel8)
+                                .addGap(93, 93, 93)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfPwdClient1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                            .addComponent(cmbVilleClient, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(erreurMdp1, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                            .addComponent(erreurVille, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(124, 124, 124)
+                        .addComponent(btnInscrire, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnQuitter, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfPrenomMari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(tfTelClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(erreurPrenomMari, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(erreurTel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(erreurTel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(tfPrenomMari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(tfTelClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(tfPrenomEpouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(erreurPrenomEpouse, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(erreurPrenomEpouse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(tfPrenomEpouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel9)
                     .addComponent(spinBudget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(erreurBudget, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,14 +392,14 @@ public class InscriptionClient extends javax.swing.JFrame {
                                 .addComponent(jLabel10)
                                 .addComponent(jLabel11))
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(3, 3, 3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(erreurDate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(tfNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(errerueNomFamille))
+                            .addComponent(errerueNomFamille, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(17, 17, 17)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -412,43 +409,40 @@ public class InscriptionClient extends javax.swing.JFrame {
                             .addComponent(jLabel13)
                             .addComponent(tfImageclient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btParcourir)
-                            .addComponent(erreurImage, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
-                        .addComponent(erreurMdp))
+                            .addComponent(erreurImage, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(tfEmailClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(erreurEmail))
+                                .addComponent(erreurEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfPwdClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
+                            .addComponent(jLabel6)
+                            .addComponent(erreurMdp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(erreurMdp1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel16)
+                        .addComponent(tfPwdClient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel16)
-                                    .addComponent(tfPwdClient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(erreurMdp1)))
-                        .addGap(26, 26, 26)
+                        .addGap(2, 2, 2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbVilleClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)
-                            .addComponent(erreurVille))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addComponent(btnInscrire, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnQuitter))))
+                            .addComponent(btnInscrire, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnQuitter, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(erreurVille, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cmbVilleClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8)))))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -468,7 +462,7 @@ public class InscriptionClient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfPrenomMariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPrenomMariActionPerformed
-        String chemin="";
+        String chemin = "";
 
         JFileChooser fc = new JFileChooser();
 
@@ -478,15 +472,15 @@ public class InscriptionClient extends javax.swing.JFrame {
 
             chemin = fc.getSelectedFile().getAbsolutePath();
 
-            chemin = chemin.replace("\\", "/");    }                                            
+            chemin = chemin.replace("\\", "/");
+        }
 
-                tfImageclient.setText(chemin);
+        tfImageclient.setText(chemin);
     }//GEN-LAST:event_tfPrenomMariActionPerformed
 
     private void btParcourirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btParcourirActionPerformed
 
-        String chemin="";
-
+        String chemin = "";
 
         int retval = fc.showOpenDialog(null);
 
@@ -494,194 +488,170 @@ public class InscriptionClient extends javax.swing.JFrame {
 
             chemin = fc.getSelectedFile().getAbsolutePath();
 
-            chemin = chemin.replace("\\", "/");    }                                            
+            chemin = chemin.replace("\\", "/");
+        }
 
-                tfImageclient.setText(chemin);
+        tfImageclient.setText(chemin);
     }//GEN-LAST:event_btParcourirActionPerformed
 
     private void btnInscrireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInscrireActionPerformed
-Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" );  
-    Pattern pattern = Pattern.compile("^\\d+$");
-    Matcher matcher3 = pattern2.matcher(tfEmailClient.getText());
-      Matcher matcher = pattern.matcher(tfTelClient.getText());
-         Matcher matcher2 = pattern.matcher(spinBudget.getText());   
-      
-         ClientDAO clientDao=new ClientDAO();
-         AdminDAO adminDAO=new AdminDAO();
-         PrestataireDAO prestataireDAO=new PrestataireDAO();
-        if(tfPrenomMari.getText().equals("")|| tfPrenomEpouse.getText().equals("")|| tfNom.getText().equals("") ||jDateChooser1.getDateFormatString().equals("")|| jDateChooser2.getDateFormatString().equals("")|| tfImageclient.getText().equals("") || tfEmailClient.getText().equals("") || tfPwdClient.getText().equals("")||!matcher.matches()||!matcher2.matches()||!matcher3.matches()|| clientDao.findClientByEmailBoolean(tfEmailClient.getText())|| prestataireDAO.findPrestByEmailBoolean(tfEmailClient.getText())||adminDAO.findAdminByEmailBoolean(tfEmailClient.getText()) ){
-    
-     String ch="";
-           if(tfPrenomMari.getText().equals(""))
-              erreurPrenomMari.setVisible(true);
-           
-            if(tfPrenomEpouse.getText().equals(""))
-               erreurPrenomEpouse.setVisible(true);
-            if(tfNom.getText().equals(""))
-              errerueNomFamille.setVisible(true);
-          
-          
-            if(tfEmailClient.getText().equals(""))
-            { erreurEmail.setText("Ce champs ne peut pas etre vide");
-              erreurEmail.setVisible(true);}
-             else if(!matcher3.matches())
-             {  erreurEmail.setText("Veuillez saisir un email valide");
-             erreurEmail.setVisible(true);}
-             
-             else if(clientDao.findClientByEmailBoolean(tfEmailClient.getText())|| prestataireDAO.findPrestByEmailBoolean(tfEmailClient.getText())||adminDAO.findAdminByEmailBoolean(tfEmailClient.getText()) ){
-              erreurEmail.setText("Cet email existe Deja");
-             erreurEmail.setVisible(true);}
-             
-             
-            
-            
-             if(spinBudget.getText().equals("")){
-                 erreurBudget.setText("Ce champs ne peut pas etre vide");
-               erreurBudget.setVisible(true);
-               
-             }
-             else if(!matcher2.matches()){
-             erreurBudget.setText("le budget que vous avez saisi n'est pas valide");
-             erreurBudget.setVisible(true);
-             }
-             if(tfTelClient.getText().equals(""))
-             {
-              erreurTel.setText("Ce champs ne peut pas etre vide");
-               erreurTel.setVisible(true);
-             }
-             else if(!matcher.matches())
-             {
-              erreurTel.setText("Le numero n'est pas valide");
-               erreurTel.setVisible(true);
-             }
-              if(tfPwdClient.getText().equals(""))
-               erreurMdp.setVisible(true);
-           
-              if(tfPwdClient1.getText().equals(""))
-               erreurMdp1.setVisible(true);
-              
-              
-               if(tfPwdClient1.getText().equals(""))
-               {
-                   erreurMdp1.setText("Ce champs ne peut pas etre vide");
-               erreurMdp1.setVisible(true);
-               }
-               else if(!tfPwdClient1.getText().equals(tfPwdClient.getText()) && !tfPwdClient1.getText().equals("")){
-                 erreurMdp1.setText("Les deux mot de passes sont differents ");
-               erreurMdp1.setVisible(true);
-               
-               }
-               
-               else if(!tfPwdClient1.getText().equals(tfPwdClient.getText()) && tfPwdClient1.getText().equals("")){
-               erreurMdp1.setVisible(false);
-               }
+        Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+");
+        Pattern pattern = Pattern.compile("^\\d+$");
+        Matcher matcher3 = pattern2.matcher(tfEmailClient.getText());
+        Matcher matcher = pattern.matcher(tfTelClient.getText());
+        Matcher matcher2 = pattern.matcher(spinBudget.getText());
+
+        ClientDAO clientDao = new ClientDAO();
+        AdminDAO adminDAO = new AdminDAO();
+        PrestataireDAO prestataireDAO = new PrestataireDAO();
+        if (tfPrenomMari.getText().equals("") || tfPrenomEpouse.getText().equals("") || tfNom.getText().equals("") || jDateChooser1.getDateFormatString().equals("") || jDateChooser2.getDateFormatString().equals("") || tfImageclient.getText().equals("") || tfEmailClient.getText().equals("") || tfPwdClient.getText().equals("") || !matcher.matches() || !matcher2.matches() || !matcher3.matches() || clientDao.findClientByEmailBoolean(tfEmailClient.getText()) || prestataireDAO.findPrestByEmailBoolean(tfEmailClient.getText()) || adminDAO.findAdminByEmailBoolean(tfEmailClient.getText())) {
+
+            String ch = "";
+            if (tfPrenomMari.getText().equals("")) {
+                erreurPrenomMari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
+
+            if (tfPrenomEpouse.getText().equals("")) {
+                erreurPrenomEpouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
+            if (tfNom.getText().equals("")) {
+                errerueNomFamille.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
+
+            if (tfEmailClient.getText().equals("")) {
+                erreurEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+                erreurEmail.setVisible(true);
+            } else if (!matcher3.matches()) {
+                erreurEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+                erreurEmail.setVisible(true);
+            } else if (clientDao.findClientByEmailBoolean(tfEmailClient.getText()) || prestataireDAO.findPrestByEmailBoolean(tfEmailClient.getText()) || adminDAO.findAdminByEmailBoolean(tfEmailClient.getText())) {
+               NotificationManager.showNotification ( "Cet email existe Deja", NotificationIcon.warning.getIcon() );
                 
-               
-               
-               
-              if(jDateChooser2.getDateFormatString().equals("") )
-               erreurDate.setVisible(true);
-             if(tfImageclient.getText().equals(""))
-               erreurImage.setVisible(true);
-              
-         
-     
-     
-     
-     
-     
-     
- }else{
-     
-    
-     
-     String prMari=tfPrenomMari.getText();
- 
-            String prEpouse=tfPrenomEpouse.getText();
-          String nom=tfNom.getText();
-          String email=tfEmailClient.getText();
-          String pwd=tfPwdClient.getText();
-          String tel=tfTelClient.getText();
-          String vville=cmbVilleClient.getSelectedItem().toString();
-          int  budget= Integer.parseInt(spinBudget.getText());
-          
-    MessageDigest md = null;
-    try {
-        md = MessageDigest.getInstance("SHA-1");
-    } catch (NoSuchAlgorithmException ex) {
-        Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        ByteArrayInputStream fis = new ByteArrayInputStream(pwd.getBytes());
+            }
 
-        byte[] dataBytes = new byte[1024];
+            if (spinBudget.getText().equals("")) {
+                erreurBudget.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+                erreurBudget.setVisible(true);
 
-        int nread = 0; 
-    try {
-        while ((nread = fis.read(dataBytes)) != -1) {
-            md.update(dataBytes, 0, nread);
-        }
-    } catch (IOException ex) {
-        Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
-    }
+            } else if (!matcher2.matches()) {
+                erreurBudget.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+                erreurBudget.setVisible(true);
+            }
+            if (tfTelClient.getText().equals("")) {
+                erreurTel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+                erreurTel.setVisible(true);
+            } else if (!matcher.matches()) {
+                erreurTel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+                erreurTel.setVisible(true);
+            }
+            if (tfPwdClient.getText().equals("")) {
+                erreurMdp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
 
-        byte[] mdbytes = md.digest();
+            if (tfPwdClient1.getText().equals("")) {
+                erreurMdp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
 
-        //convert the byte to hex format method 1
-        StringBuffer pwd1 = new StringBuffer();
-        for (int i = 0; i < mdbytes.length; i++) {
-          pwd1.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
-        }
+            if (tfPwdClient1.getText().equals("")) {
+                erreurMdp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+                erreurMdp1.setVisible(true);
+            } else if (!tfPwdClient1.getText().equals(tfPwdClient.getText()) && !tfPwdClient1.getText().equals("")) {
+                erreurMdp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+                erreurMdp1.setVisible(true);
 
-    
-      
-    
+            } else if (!tfPwdClient1.getText().equals(tfPwdClient.getText()) && tfPwdClient1.getText().equals("")) {
+                erreurMdp1.setVisible(false);
+            }
 
-         java.util.Date utilDate = jDateChooser1.getDate();
-java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-             java.util.Date utilDate2 = jDateChooser2.getDate();
-   java.sql.Date sqlDate2 = new java.sql.Date(utilDate2.getTime()); 
-         
-          String dateFin=jDateChooser2.toString();
-          String img;
-            System.out.println("date"+dateFin);
-          Client client=new Client();
-          client.setPrenomMari(prMari);
-          client.setPrenomEpouse(prEpouse);
-          client.setNomDeFamille(nom);
-         client.setEmailClient(email);
-         client.setPwdClient(pwd1.toString());
-         client.setTelClient(tel);;
-         client.setVilleClient(vville);
-         client.setBudget(budget);
-       client.setDateDebut(sqlDate.toString());
-        client.setDateFin(sqlDate2.toString());
-        
-        
+            if (jDateChooser2.getDateFormatString().equals("")) {
+                erreurDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
+            if (tfImageclient.getText().equals("")) {
+                erreurImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
+
+        } else {
+
+            String prMari = tfPrenomMari.getText();
+
+            String prEpouse = tfPrenomEpouse.getText();
+            String nom = tfNom.getText();
+            String email = tfEmailClient.getText();
+            String pwd = tfPwdClient.getText();
+            String tel = tfTelClient.getText();
+            String vville = cmbVilleClient.getSelectedItem().toString();
+            int budget = Integer.parseInt(spinBudget.getText());
+
+            MessageDigest md = null;
+            try {
+                md = MessageDigest.getInstance("SHA-1");
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ByteArrayInputStream fis = new ByteArrayInputStream(pwd.getBytes());
+
+            byte[] dataBytes = new byte[1024];
+
+            int nread = 0;
+            try {
+                while ((nread = fis.read(dataBytes)) != -1) {
+                    md.update(dataBytes, 0, nread);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(InscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            byte[] mdbytes = md.digest();
+
+            //convert the byte to hex format method 1
+            StringBuffer pwd1 = new StringBuffer();
+            for (int i = 0; i < mdbytes.length; i++) {
+                pwd1.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+
+            java.util.Date utilDate = jDateChooser1.getDate();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            java.util.Date utilDate2 = jDateChooser2.getDate();
+            java.sql.Date sqlDate2 = new java.sql.Date(utilDate2.getTime());
+
+            String dateFin = jDateChooser2.toString();
+            String img;
+            System.out.println("date" + dateFin);
+            Client client = new Client();
+            client.setPrenomMari(prMari);
+            client.setPrenomEpouse(prEpouse);
+            client.setNomDeFamille(nom);
+            client.setEmailClient(email);
+            client.setPwdClient(pwd1.toString());
+            client.setTelClient(tel);;
+            client.setVilleClient(vville);
+            client.setBudget(budget);
+            client.setDateDebut(sqlDate.toString());
+            client.setDateFin(sqlDate2.toString());
+
             try {
                 FTPFileUploader.getInstance().UploadPic(fc.getSelectedFile().getAbsolutePath(), "/client/");
             } catch (IOException ex) {
                 Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
             }
-             img = "http://mariages.tn/client/"+fc.getSelectedFile().getName();
-        client.setImgClient(img);
-        
-         clientDao.insertClient(client);
-            EspaceClient espace=new EspaceClient(clientDao.findClientByEmail(email).getIdClient(), "c");
+            img = "http://mariages.tn/client/" + fc.getSelectedFile().getName();
+            client.setImgClient(img);
+
+            clientDao.insertClient(client);
+            EspaceClient espace = new EspaceClient(clientDao.findClientByEmail(email).getIdClient(), "c");
             this.dispose();
             espace.setVisible(true);
-            
-            
-          
- }              
-          
+
+        }
+
     }//GEN-LAST:event_btnInscrireActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       
- for (int i=0;i<ville.length;i++){
-                 cmbVilleClient.addItem(ville[i]);
-                 
-             }
+
+        for (int i = 0; i < ville.length; i++) {
+            cmbVilleClient.addItem(ville[i]);
+
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void btnQuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitterActionPerformed
@@ -689,106 +659,101 @@ java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 //auth.setVisible(true);
         Login log = new Login();
         log.setVisible(true);
-this.dispose();// TODO add your handling code here:
+        this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_btnQuitterActionPerformed
 
     private void tfPrenomMariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPrenomMariKeyReleased
-         
+
     }//GEN-LAST:event_tfPrenomMariKeyReleased
 
     private void tfPrenomMariFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPrenomMariFocusLost
-if(!tfPrenomMari.getText().equals(""))      
-           erreurPrenomMari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
-else
-     erreurPrenomMari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        if (!tfPrenomMari.getText().equals("")) {
+            erreurPrenomMari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        } else {
+            erreurPrenomMari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        }
     }//GEN-LAST:event_tfPrenomMariFocusLost
 
     private void tfPrenomMariFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPrenomMariFocusGained
-        
+
     }//GEN-LAST:event_tfPrenomMariFocusGained
 
     private void tfPrenomEpouseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPrenomEpouseFocusLost
-      if(!tfPrenomEpouse.getText().equals(""))
-           erreurPrenomEpouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
-else
-     erreurPrenomEpouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
-        
+        if (!tfPrenomEpouse.getText().equals("")) {
+            erreurPrenomEpouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        } else {
+            erreurPrenomEpouse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        }
+
     }//GEN-LAST:event_tfPrenomEpouseFocusLost
 
     private void tfNomFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNomFocusLost
-   if(!tfNom.getText().equals(""))
-         errerueNomFamille.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
-else
-     errerueNomFamille.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        if (!tfNom.getText().equals("")) {
+            errerueNomFamille.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        } else {
+            errerueNomFamille.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        }
     }//GEN-LAST:event_tfNomFocusLost
 
     private void tfEmailClientFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfEmailClientFocusLost
-     ClientDAO clientDao=new ClientDAO();
-         AdminDAO adminDAO=new AdminDAO();
-         PrestataireDAO prestataireDAO=new PrestataireDAO();
-         Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" );  
-         Matcher matcher3 = pattern2.matcher(tfEmailClient.getText());
-         if(tfEmailClient.getText().equals(""))
-               erreurEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
-            else if((clientDao.findClientByEmailBoolean(tfEmailClient.getText())|| prestataireDAO.findPrestByEmailBoolean(tfEmailClient.getText())||adminDAO.findAdminByEmailBoolean(tfEmailClient.getText()) ))
-                   erreurEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
-              else if(!matcher3.matches())
-                     erreurEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
-         else
-                     erreurEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        ClientDAO clientDao = new ClientDAO();
+        AdminDAO adminDAO = new AdminDAO();
+        PrestataireDAO prestataireDAO = new PrestataireDAO();
+        Pattern pattern2 = Pattern.compile("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+");
+        Matcher matcher3 = pattern2.matcher(tfEmailClient.getText());
+        if (tfEmailClient.getText().equals("")) {
+            erreurEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else if ((clientDao.findClientByEmailBoolean(tfEmailClient.getText()) || prestataireDAO.findPrestByEmailBoolean(tfEmailClient.getText()) || adminDAO.findAdminByEmailBoolean(tfEmailClient.getText()))) {
+            erreurEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else if (!matcher3.matches()) {
+            erreurEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else {
+            erreurEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        }
     }//GEN-LAST:event_tfEmailClientFocusLost
 
     private void tfPwdClientFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPwdClientFocusLost
-         if(!tfPwdClient.getText().equals(""))
-                erreurMdp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
-         else
-               erreurMdp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        if (!tfPwdClient.getText().equals("")) {
+            erreurMdp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        } else {
+            erreurMdp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        }
     }//GEN-LAST:event_tfPwdClientFocusLost
 
     private void tfPwdClient1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPwdClient1FocusLost
-           if(tfPwdClient1.getText().equals(""))
-               {
-                     erreurMdp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
-               }
-               else if(!tfPwdClient1.getText().equals(tfPwdClient.getText()) && !tfPwdClient1.getText().equals("")){
-                 erreurMdp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
-               
-               }
-           else
-                      erreurMdp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        if (tfPwdClient1.getText().equals("")) {
+            erreurMdp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else if (!tfPwdClient1.getText().equals(tfPwdClient.getText()) && !tfPwdClient1.getText().equals("")) {
+            erreurMdp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+
+        } else {
+            erreurMdp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        }
     }//GEN-LAST:event_tfPwdClient1FocusLost
 
     private void tfTelClientFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfTelClientFocusLost
-  Pattern pattern = Pattern.compile("^[0-9]{8}+$");
-   Matcher matcher = pattern.matcher(tfTelClient.getText());
-    if(tfTelClient.getText().equals(""))
-             {
-               erreurTel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
-             }
-             else if(!matcher.matches())
-             {
-             erreurTel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
-             }
-             else{
-                    erreurTel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
-             }
+        Pattern pattern = Pattern.compile("^[0-9]{8}+$");
+        Matcher matcher = pattern.matcher(tfTelClient.getText());
+        if (tfTelClient.getText().equals("")) {
+            erreurTel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else if (!matcher.matches()) {
+            erreurTel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else {
+            erreurTel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        }
     }//GEN-LAST:event_tfTelClientFocusLost
 
     private void spinBudgetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_spinBudgetFocusLost
-          Pattern pattern = Pattern.compile("^\\d+$");
-   
-         Matcher matcher = pattern.matcher(spinBudget.getText()); 
-          if(spinBudget.getText().equals(""))
-             {
-               erreurBudget.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
-             }
-             else if(!matcher.matches())
-             {
-             erreurBudget.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
-             }
-             else{
-                   erreurBudget.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
-             }
+        Pattern pattern = Pattern.compile("^\\d+$");
+
+        Matcher matcher = pattern.matcher(spinBudget.getText());
+        if (spinBudget.getText().equals("")) {
+            erreurBudget.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else if (!matcher.matches()) {
+            erreurBudget.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else {
+            erreurBudget.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        }
     }//GEN-LAST:event_spinBudgetFocusLost
 
     private void tfImageclientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfImageclientActionPerformed
@@ -796,10 +761,11 @@ else
     }//GEN-LAST:event_tfImageclientActionPerformed
 
     private void tfImageclientFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfImageclientFocusLost
-          if(!tfImageclient.getText().equals(""))
-             erreurImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
-          else
-                erreurImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        if (!tfImageclient.getText().equals("")) {
+            erreurImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else {
+            erreurImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        }
     }//GEN-LAST:event_tfImageclientFocusLost
 
     /**
@@ -828,16 +794,13 @@ else
             java.util.logging.Logger.getLogger(InscriptionClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-   try
-    {
-        org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+        try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
             UIManager.put("RootPane.setupButtonVisible", false);
 
-    }
-    catch(Exception e)
-    {
-        //TODO exception
-    }
+        } catch (Exception e) {
+            //TODO exception
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

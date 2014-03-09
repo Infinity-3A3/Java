@@ -111,6 +111,7 @@ public class ListePaquets extends javax.swing.JFrame {
         tablelistepaquet.setModel(new TableListPaquetModel());
         jScrollPane1.setViewportView(tablelistepaquet);
 
+        btnAjouter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_plus.png"))); // NOI18N
         btnAjouter.setText("Ajouter Paquet");
         btnAjouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +119,7 @@ public class ListePaquets extends javax.swing.JFrame {
             }
         });
 
+        btnModifier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_ok.png"))); // NOI18N
         btnModifier.setText("Modifier Paquet");
         btnModifier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +127,7 @@ public class ListePaquets extends javax.swing.JFrame {
             }
         });
 
+        btnSupprimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
         btnSupprimer.setText("Supprimer Paquet");
         btnSupprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +138,7 @@ public class ListePaquets extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Liste de Paquets");
 
+        btnlisterprod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/arrow_down.png"))); // NOI18N
         btnlisterprod.setText("Lister Produits");
         btnlisterprod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,6 +196,7 @@ public class ListePaquets extends javax.swing.JFrame {
         labelpaquet.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         labelpaquet.setText("Liste des produits du paquet : ");
 
+        btnSupprimerProduit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
         btnSupprimerProduit.setText("Supprimer Produit");
         btnSupprimerProduit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,6 +204,7 @@ public class ListePaquets extends javax.swing.JFrame {
             }
         });
 
+        btnAjouterProduit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_plus.png"))); // NOI18N
         btnAjouterProduit.setText("Ajouter Produit");
         btnAjouterProduit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,6 +251,7 @@ public class ListePaquets extends javax.swing.JFrame {
         tablelisteProduit.setModel(new TableListeAjoutProduitPaquet());
         jScrollPane3.setViewportView(tablelisteProduit);
 
+        btnProduitsPaquets.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_plus.png"))); // NOI18N
         btnProduitsPaquets.setText("Ajouter Produits");
         btnProduitsPaquets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,6 +259,7 @@ public class ListePaquets extends javax.swing.JFrame {
             }
         });
 
+        btnAnnuler.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/close.png"))); // NOI18N
         btnAnnuler.setText("Annuler");
         btnAnnuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -533,11 +541,11 @@ public class ListePaquets extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                /*if ("Nimbus".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }*/
-                 javax.swing.UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName());
+                }
+                //  javax.swing.UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName());
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(ListePaquets_client.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -550,7 +558,12 @@ public class ListePaquets extends javax.swing.JFrame {
         }
         //</editor-fold>
          
-        
+        try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+        } catch (Exception e) {
+            //TODO exception
+        }
+
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
