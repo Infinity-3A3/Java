@@ -30,11 +30,14 @@ import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.ClientDAO;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.entities.Prestataire;
+import tn.mariages.util.FTPFileUploader;
 /**
  *
  * @author Karim
  */
 public class InscriptionPrestataire extends javax.swing.JFrame {
+            JFileChooser fc = new JFileChooser();
+
 Prestataire prest = new Prestataire();
     PrestataireDAO presDAO = new PrestataireDAO();
     String[] specialite = {"--Choisir specialité--"};
@@ -573,8 +576,16 @@ erreurAdresse.setVisible(false);
 
             prest.setAdrPrest(jtAdrPrest.getText());
             prest.setVillePrest(cmbVillePrest.getSelectedItem().toString());
+            
             prest.setImgPrest(jtImgPrest.getText());
-            prest.setEmailPrest(jtEmailPrest.getText());
+            
+            try {
+                FTPFileUploader.getInstance().UploadPic(fc.getSelectedFile().getAbsolutePath(), "/prest/");
+            } catch (IOException ex) {
+                Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           String  img = "http://mariages.tn/prest/"+fc.getSelectedFile().getName();
+                      prest.setImgPrest(img);
 
             prest.setPwdPrest(pwd1.toString());
             prest.setCategorie(cmbCategoriePrest.getSelectedItem().toString());
@@ -604,7 +615,6 @@ erreurAdresse.setVisible(false);
     private void btnParcourirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParcourirActionPerformed
         String chemin="";
 
-        JFileChooser fc = new JFileChooser();
 
         int retval = fc.showOpenDialog(null);
 
