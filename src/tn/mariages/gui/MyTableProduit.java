@@ -40,6 +40,13 @@ public class MyTableProduit extends AbstractTableModel {
             rowlist[i][6] = Boolean.FALSE;
         }
     }
+    
+    public MyTableProduit(String nom) {
+        mylist = new ProduitDAO().DisplayAllProd( nom);
+        for (int i = 0; i < getRowCount(); i++) {
+            rowlist[i][6] = Boolean.FALSE;
+        }
+    }
 
     @Override
     public int getRowCount() {

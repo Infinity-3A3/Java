@@ -42,9 +42,9 @@ public class MyTablePanier  extends AbstractTableModel{
     String [] headers  = {"idclient","idPaquet","Nom Paquet ","Prix","Supprimer"};
     Boolean rowlist[][] = new Boolean[50][50];
 
-    public MyTablePanier() {
+    public MyTablePanier(int id) {
     
-     mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(23);
+     mylist=new panierPaquetDAO().DisplayPanierPaquetByClient(id);
     for (int i = 0; i < getRowCount(); i++) {
         rowlist[i][4]=Boolean.FALSE;
        

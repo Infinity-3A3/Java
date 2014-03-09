@@ -365,7 +365,7 @@ public class EspaceClient extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Panier", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
-        tablePanier.setModel(new MyTablePanier());
+        tablePanier.setModel(new MyTablePanier(id));
         jScrollPane1.setViewportView(tablePanier);
 
         Supprimer.setText("Supprimer");
@@ -437,6 +437,12 @@ public class EspaceClient extends javax.swing.JFrame {
         jLabel11.setText("Catégorie:");
 
         jLabel13.setText("Nom:");
+
+        tfNomProduit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfNomProduitKeyReleased(evt);
+            }
+        });
 
         btnAjoutProdPanier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -752,7 +758,7 @@ public class EspaceClient extends javax.swing.JFrame {
             panierPaquet.setDateAjout("2014-02-08");
         
             panierpaquetddao.insertPanierPaquet(panierPaquet);
-            MyTablePanier  model = new MyTablePanier();
+            MyTablePanier  model = new MyTablePanier(Integer.parseInt(Idclient.getText()));
                     tablePanier.setModel(model);
                     tablePanier.getColumnModel().getColumn(0).setMinWidth(0);
         tablePanier.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -900,7 +906,7 @@ if(cmbCategorieProduit.getSelectedIndex()==0){
                         j--;
                         k--;
                     }
-                   MyTablePanier  model = new MyTablePanier();
+                   MyTablePanier  model = new MyTablePanier(Integer.parseInt(Idclient.getText()));
                     tablePanier.setModel(model);
                     tablePanier.getColumnModel().getColumn(0).setMinWidth(0);
         tablePanier.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -1043,6 +1049,26 @@ Client c=new Client ();
                 lstToDoCl.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                lstToDoCl.setVisible(true);
     }//GEN-LAST:event_ListToDoActionPerformed
+
+    private void tfNomProduitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomProduitKeyReleased
+      String nom = tfNomProduit.getText();
+        if(!nom.equals("")){
+        MyTableProduit modelprod = new MyTableProduit(nom);
+        tableProduit.setModel(modelprod);
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProduit.repaint();
+        }
+        else
+        {
+            MyTableProduit modelprod = new MyTableProduit();
+        tableProduit.setModel(modelprod);
+        tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
+            tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
+            tableProduit.repaint();
+        }
+
+    }//GEN-LAST:event_tfNomProduitKeyReleased
 
     /**
      * @param args the command line arguments
