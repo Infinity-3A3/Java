@@ -363,17 +363,8 @@ public class Login extends javax.swing.JFrame {
             Client c = clientDAO.findClientByEmail(email);
             ToDoDAO todoDAO=new ToDoDAO();
             todoDAO.DeleteToDos(clientDAO.findClientByEmail(email).getIdClient());
-            List <ToDo> listeTodo=new ArrayList<ToDo>();
-            listeTodo=todoDAO.NotifyClient(clientDAO.findClientByEmail(email).getIdClient());
-            String notify="N'oubliez pas les taches à faire demain : \n\n";
-            for (ToDo toDo : listeTodo) {
-                notify+="Titre : "+toDo.getTitreToDo()+"\n";
-                   notify+="Description : "+toDo.getDescToDo()+"\n\n";
-                   
-            }
-            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
-            
-                JOptionPane.showConfirmDialog (null,notify,"Rappel",dialogButton);
+         
+           
          dispose();
 
          EspaceClient EC = new EspaceClient(c.getIdClient(), "c");

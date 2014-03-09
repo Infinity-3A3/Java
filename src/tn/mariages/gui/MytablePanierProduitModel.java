@@ -34,11 +34,11 @@ public class MytablePanierProduitModel extends AbstractTableModel{
     String [] headers  = {"idclient","idProduit","Nom Produit ","Prix produit","Supprimer"};
     Boolean rowlist[][] = new Boolean[50][50];
 
-    public MytablePanierProduitModel() {
+    public MytablePanierProduitModel(int id) {
         panierProduitDAO panierproddao= new panierProduitDAO();
                 
         
-        mylist=panierproddao.DiplayPanierProduitByClient(23);
+        mylist=panierproddao.DiplayPanierProduitByClient(id);
          for (int i = 0; i < getRowCount(); i++) {
         rowlist[i][4]=Boolean.FALSE;
        
