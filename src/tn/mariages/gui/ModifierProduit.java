@@ -97,6 +97,7 @@ public class ModifierProduit extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setToolTipText("Modifier Produit");
         jPanel1.setMaximumSize(new java.awt.Dimension(32750, 32750));
 
         jLabel1.setText("Nom Du Produit :");
@@ -134,7 +135,8 @@ public class ModifierProduit extends javax.swing.JFrame {
             }
         });
 
-        btnReset.setText("Reset");
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/close.png"))); // NOI18N
+        btnReset.setText("Annuler");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetActionPerformed(evt);
@@ -153,6 +155,7 @@ public class ModifierProduit extends javax.swing.JFrame {
             }
         });
 
+        btnmaj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
         btnmaj.setText("Mettre a jour");
         btnmaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,7 +223,7 @@ public class ModifierProduit extends javax.swing.JFrame {
                     .addComponent(tfImgProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAjoutImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReset)
                     .addComponent(btnmaj))

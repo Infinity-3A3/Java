@@ -7,7 +7,7 @@
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-      <Color id="Curseur par d&#xe9;faut"/>
+      <Color id="Default Cursor"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -120,6 +120,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnSupprimerClient">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/user_remove.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Supprimer"/>
           </Properties>
           <Events>
@@ -128,6 +131,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnModifierClient">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/user_circle.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Modifier"/>
           </Properties>
           <Events>
@@ -136,6 +142,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAjouterClient">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/icons/user_add.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ajouter"/>
           </Properties>
           <Events>
@@ -249,7 +258,7 @@
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="labVille" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="55" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="45" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>

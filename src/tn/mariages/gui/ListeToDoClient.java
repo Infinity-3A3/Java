@@ -80,6 +80,7 @@ public class ListeToDoClient extends javax.swing.JFrame {
         );
         jScrollPane1.setViewportView(tabelListeToDoClient);
 
+        btnAjouter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_plus.png"))); // NOI18N
         btnAjouter.setText("Ajouter");
         btnAjouter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +88,7 @@ public class ListeToDoClient extends javax.swing.JFrame {
             }
         });
 
+        btnModifier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
         btnModifier.setText("Modifier");
         btnModifier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +96,7 @@ public class ListeToDoClient extends javax.swing.JFrame {
             }
         });
 
+        btnSupprimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_minus.png"))); // NOI18N
         btnSupprimer.setText("supprimer");
         btnSupprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

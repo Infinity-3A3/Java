@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import tn.mariages.dao.PaquetDAO;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.entities.Paquet;
@@ -31,35 +32,37 @@ public class AjoutPaquet extends javax.swing.JFrame {
      * Creates new form AjoutPaquet
      */
     int id_prest;
-    Paquet paq =new Paquet();
-    PrestataireDAO prestDAO=new PrestataireDAO();
-        Prestataire prest = new Prestataire();
+    Paquet paq = new Paquet();
+    PrestataireDAO prestDAO = new PrestataireDAO();
+    Prestataire prest = new Prestataire();
     private JFileChooser Img;
+
     public AjoutPaquet() {
         initComponents();
         BtnModifierPaquet.setVisible(false);
     }
+
     public AjoutPaquet(Paquet p) {
         initComponents();
-        jLabel1.setText("Modifier le Paquet : "+p.getIdPaquet());
+        jLabel1.setText("Modifier le Paquet : " + p.getIdPaquet());
         BtnAjouterPaquet.setVisible(false);
         paq = p;
-        
+
         tfNomPaquet.setText(p.getNomPaquet());
         tfDescPaquet.setText(p.getDescPaquet());
         tfImage.setText(p.getImgPaquet());
         DecimalFormat f = new DecimalFormat("##");
         tfPrixPaquet.setText(f.format(p.getPrixPaquet()));
-        
+
     }
 
     AjoutPaquet(int id_prest) {
         initComponents();
-        this.id_prest=id_prest;
+        this.id_prest = id_prest;
         BtnModifierPaquet.setVisible(false);
         cmbProduitPaquet.setVisible(false);
         jLabel6.setVisible(false);
-                
+
     }
 
     /**
@@ -88,6 +91,12 @@ public class AjoutPaquet extends javax.swing.JFrame {
         tfImage = new javax.swing.JTextField();
         BtnAjouterPaquet = new javax.swing.JButton();
         btnParcourir = new javax.swing.JButton();
+        erreurnomP = new javax.swing.JLabel();
+        erreurdesPa = new javax.swing.JLabel();
+        erreurPres = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        erreurimg = new javax.swing.JLabel();
+        erreurprix = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -95,8 +104,6 @@ public class AjoutPaquet extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Ajouter un paquet");
@@ -109,10 +116,28 @@ public class AjoutPaquet extends javax.swing.JFrame {
 
         jLabel5.setText("Image:");
 
+        tfNomPaquet.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfNomPaquetFocusLost(evt);
+            }
+        });
+
         tfDescPaquet.setColumns(20);
         tfDescPaquet.setRows(5);
+        tfDescPaquet.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfDescPaquetFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(tfDescPaquet);
 
+        tfPrixPaquet.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfPrixPaquetFocusLost(evt);
+            }
+        });
+
+        BtnModifierPaquet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
         BtnModifierPaquet.setText("Modifier");
         BtnModifierPaquet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +145,7 @@ public class AjoutPaquet extends javax.swing.JFrame {
             }
         });
 
+        BtnAnnulerPaquet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/close.png"))); // NOI18N
         BtnAnnulerPaquet.setText("Annuler");
         BtnAnnulerPaquet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,12 +155,24 @@ public class AjoutPaquet extends javax.swing.JFrame {
 
         jLabel6.setText("Prestataire");
 
+        cmbProduitPaquet.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cmbProduitPaquetFocusLost(evt);
+            }
+        });
+
         tfImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfImageActionPerformed(evt);
             }
         });
+        tfImage.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfImageFocusLost(evt);
+            }
+        });
 
+        BtnAjouterPaquet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_plus.png"))); // NOI18N
         BtnAjouterPaquet.setText("Ajouter");
         BtnAjouterPaquet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,16 +196,9 @@ public class AjoutPaquet extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(219, 219, 219))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(BtnAjouterPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnModifierPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnAnnulerPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnParcourir)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -178,14 +209,33 @@ public class AjoutPaquet extends javax.swing.JFrame {
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel5))
                                 .addGap(74, 74, 74)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfPrixPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tfNomPaquet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cmbProduitPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(148, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfImage)
+                                    .addComponent(tfPrixPaquet)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                                    .addComponent(tfNomPaquet, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                                    .addComponent(cmbProduitPaquet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(erreurnomP, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                            .addComponent(erreurdesPa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(erreurPres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(erreurimg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(erreurprix, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(152, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnAjouterPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnModifierPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnAnnulerPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88))))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(479, 479, 479)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addGap(112, 112, 112)))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane1, tfImage, tfNomPaquet, tfPrixPaquet});
@@ -196,33 +246,47 @@ public class AjoutPaquet extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfNomPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(tfNomPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(erreurnomP, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(erreurdesPa, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(tfPrixPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(erreurprix, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmbProduitPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6))
+                    .addComponent(erreurPres, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfPrixPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbProduitPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(tfImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(tfImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(erreurimg, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(btnParcourir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGap(88, 88, 88)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnModifierPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnAnnulerPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnAjouterPaquet, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(215, 215, 215)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                    .addGap(198, 198, 198)))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {BtnAnnulerPaquet, BtnModifierPaquet});
@@ -231,17 +295,11 @@ public class AjoutPaquet extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -252,45 +310,47 @@ public class AjoutPaquet extends javax.swing.JFrame {
     }//GEN-LAST:event_tfImageActionPerformed
 
     private void BtnModifierPaquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModifierPaquetActionPerformed
-        
+
         Paquet p = new Paquet();
         PaquetDAO pDAO = new PaquetDAO();
-        
+
         Pattern pattern = Pattern.compile("^\\d+$");
-      Matcher matcher = pattern.matcher(tfPrixPaquet.getText());
-        
-        if(tfPrixPaquet.getText().equals("") || tfNomPaquet.getText().equals("") || tfDescPaquet.getText().equals("") || tfImage.getText().equals("")||!matcher.matches() ||tfDescPaquet.getText().length()<10){
-           String ch="";
-           if(tfNomPaquet.getText().equals(""))
-               ch+="Veuillez saisir le Nom de votre paquet \n";
-           
-            if(tfPrixPaquet.getText().equals(""))
-               ch+="Veuillez preciser le prix de votre paquet  \n";
-            else if(!matcher.matches())
-                ch+="Veuiller bien remplir le champ du prix de votre paquet \n";
-            if(tfDescPaquet.getText().equals(""))
-               ch+="Veuillez donner une description de votre paquet  \n";
-            else if(tfDescPaquet.getText().length()<10)
-                ch+="La description du paquet doit contenir au moins 10 caracteres \n";
-            if(tfImage.getText().equals(""))
-               ch+="Veuillez donner le chemain d'une image de votre paquet  \n";
-            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
-                JOptionPane.showConfirmDialog (null,ch,"Warning",dialogButton);
-            
-        }
-        else
-        {
-            if(cmbProduitPaquet.isVisible()){
-                            prest=prestDAO.findPrestByNomPrest((String)cmbProduitPaquet.getItemAt(cmbProduitPaquet.getSelectedIndex()));
-                            id_prest=prest.getIdPrest();
+        Matcher matcher = pattern.matcher(tfPrixPaquet.getText());
+
+        if (tfPrixPaquet.getText().equals("") || tfNomPaquet.getText().equals("") || tfDescPaquet.getText().equals("") || tfImage.getText().equals("") || !matcher.matches() || tfDescPaquet.getText().length() < 10) {
+            String ch = "";
+            if (tfNomPaquet.getText().equals("")) {
+                ch += "Veuillez saisir le Nom de votre paquet \n";
             }
-                
+
+            if (tfPrixPaquet.getText().equals("")) {
+                ch += "Veuillez preciser le prix de votre paquet  \n";
+            } else if (!matcher.matches()) {
+                ch += "Veuiller bien remplir le champ du prix de votre paquet \n";
+            }
+            if (tfDescPaquet.getText().equals("")) {
+                ch += "Veuillez donner une description de votre paquet  \n";
+            } else if (tfDescPaquet.getText().length() < 10) {
+                ch += "La description du paquet doit contenir au moins 10 caracteres \n";
+            }
+            if (tfImage.getText().equals("")) {
+                ch += "Veuillez donner le chemain d'une image de votre paquet  \n";
+            }
+            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
+            JOptionPane.showConfirmDialog(null, ch, "Warning", dialogButton);
+
+        } else {
+            if (cmbProduitPaquet.isVisible()) {
+                prest = prestDAO.findPrestByNomPrest((String) cmbProduitPaquet.getItemAt(cmbProduitPaquet.getSelectedIndex()));
+                id_prest = prest.getIdPrest();
+            }
+
             p.setIdPaquet(paq.getIdPaquet());
             p.setIdPrest(id_prest);
             p.setNomPaquet(tfNomPaquet.getText());
             p.setDescPaquet(tfDescPaquet.getText());
             p.setPrixPaquet(Double.parseDouble(tfPrixPaquet.getText()));
-            p.setShortDescPaquet(tfDescPaquet.getText().substring(0, 10)+"...");
+            p.setShortDescPaquet(tfDescPaquet.getText().substring(0, 10) + "...");
             if (tfImage.getText().substring(0, 4).equals("http")) {
                 p.setImgPaquet(tfImage.getText());
             } else {
@@ -303,28 +363,27 @@ public class AjoutPaquet extends javax.swing.JFrame {
                 String img = "http://mariages.tn/paquet/" + Img.getSelectedFile().getName();
                 p.setImgPaquet(img);
             }
-            pDAO.updatePaquet(p);           
+            pDAO.updatePaquet(p);
             this.dispose();
-            
-            
+
         }
-            
-        
+
+
     }//GEN-LAST:event_BtnModifierPaquetActionPerformed
 
     private void BtnAnnulerPaquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAnnulerPaquetActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_BtnAnnulerPaquetActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
+
         List<Prestataire> listePrest = new ArrayList<Prestataire>();
-        listePrest=prestDAO.DisplayAllPrestataire();
-        for(int i =0 ;i < listePrest.size();i++){
-           cmbProduitPaquet.addItem(listePrest.get(i).getNomPrest());    
+        listePrest = prestDAO.DisplayAllPrestataire();
+        for (int i = 0; i < listePrest.size(); i++) {
+            cmbProduitPaquet.addItem(listePrest.get(i).getNomPrest());
         }
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnAjouterPaquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAjouterPaquetActionPerformed
@@ -332,59 +391,98 @@ public class AjoutPaquet extends javax.swing.JFrame {
         Paquet p = new Paquet();
         PaquetDAO pDAO = new PaquetDAO();
         //id prest static (à voir)
-        
+
         Pattern pattern = Pattern.compile("^\\d+$");
-      Matcher matcher = pattern.matcher(tfPrixPaquet.getText());
-        
-        if(tfPrixPaquet.getText().equals("") || tfNomPaquet.getText().equals("") || tfDescPaquet.getText().equals("") || tfImage.getText().equals("")||!matcher.matches() ||tfDescPaquet.getText().length()<10){
-           String ch="";
-           if(tfNomPaquet.getText().equals(""))
-               ch+="Veuillez saisir le Nom de votre paquet \n";
-           
-            if(tfPrixPaquet.getText().equals(""))
-               ch+="Veuillez preciser le prix de votre paquet  \n";
-            else if(!matcher.matches()){
-                ch+="Veuiller bien remplir le champ du prix de votre paquet \n";
-                System.out.println("brrrrr");
+        Matcher matcher = pattern.matcher(tfPrixPaquet.getText());
+
+        if (tfPrixPaquet.getText().equals("") || tfNomPaquet.getText().equals("") || tfDescPaquet.getText().equals("") || tfImage.getText().equals("") || !matcher.matches() || tfDescPaquet.getText().length() < 10) {
+            String ch = "";
+            if (tfNomPaquet.getText().equals("")) {
+                erreurnomP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
             }
-            if(tfDescPaquet.getText().equals(""))
-               ch+="Veuillez donner une description de votre paquet  \n";
-            else if(tfDescPaquet.getText().length()<10)
-                ch+="La description du paquet doit contenir au moins 10 caracteres \n";
-            if(tfImage.getText().equals(""))
-               ch+="Veuillez donner le chemain d'une image de votre paquet  \n";
-            int dialogButton = JOptionPane.OK_CANCEL_OPTION;
-                JOptionPane.showConfirmDialog (null,ch,"Warning",dialogButton);
+
+            if (tfPrixPaquet.getText().equals("")) {
+                erreurprix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            } else if (!matcher.matches()) {
+                erreurprix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+               
+            }
+            if (tfDescPaquet.getText().equals("")) {
+                erreurdesPa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            } else if (tfDescPaquet.getText().length() < 10) {
+               erreurdesPa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
+            if (tfImage.getText().equals("")) {
+                erreurimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
             
-        }
-        else
-        {
-            prest=prestDAO.findPrestByNomPrest((String)cmbProduitPaquet.getItemAt(cmbProduitPaquet.getSelectedIndex()));
+
+        } else {
+            prest = prestDAO.findPrestByNomPrest((String) cmbProduitPaquet.getItemAt(cmbProduitPaquet.getSelectedIndex()));
             p.setIdPrest(prest.getIdPrest());
             p.setNomPaquet(tfNomPaquet.getText());
             p.setDescPaquet(tfDescPaquet.getText());
             p.setPrixPaquet(Double.parseDouble(tfPrixPaquet.getText()));
-            p.setShortDescPaquet(tfDescPaquet.getText().substring(0, 10)+"...");
+            p.setShortDescPaquet(tfDescPaquet.getText().substring(0, 10) + "...");
             try {
                 FTPFileUploader.getInstance().UploadPic(Img.getSelectedFile().getAbsolutePath(), "/paquet/");
             } catch (IOException ex) {
                 Logger.getLogger(AjoutClient.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String img = "http://mariages.tn/paquet/"+Img.getSelectedFile().getName();
+            String img = "http://mariages.tn/paquet/" + Img.getSelectedFile().getName();
             p.setImgPaquet(img);
-            pDAO.insertPaquet(p);           
+            pDAO.insertPaquet(p);
             this.dispose();
-            
-     
+
         }
     }//GEN-LAST:event_BtnAjouterPaquetActionPerformed
 
     private void btnParcourirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParcourirActionPerformed
-        
+
         Img = new JFileChooser();
         Img.showOpenDialog(this);
         tfImage.setText(Img.getSelectedFile().getAbsolutePath());
     }//GEN-LAST:event_btnParcourirActionPerformed
+
+    private void tfNomPaquetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNomPaquetFocusLost
+        if (!tfNomPaquet.getText().equals("")) {
+            erreurnomP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        } else {
+            erreurnomP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));        // TODO add your handling code here:
+        }                  // TODO add your handling code here:
+    }//GEN-LAST:event_tfNomPaquetFocusLost
+
+    private void tfDescPaquetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDescPaquetFocusLost
+        if (tfDescPaquet.getText().equals("")) {
+            erreurdesPa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else if (tfDescPaquet.getText().length() < 10) {
+            erreurdesPa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else {
+            erreurdesPa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));   }          // TODO add your handling code here:
+    }//GEN-LAST:event_tfDescPaquetFocusLost
+
+    private void tfPrixPaquetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPrixPaquetFocusLost
+        if (!tfPrixPaquet.getText().equals("")) {
+            erreurprix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        } else {
+            erreurprix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));        // TODO add your handling code here:
+        }           // TODO add your handling code here:
+    }//GEN-LAST:event_tfPrixPaquetFocusLost
+
+    private void cmbProduitPaquetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbProduitPaquetFocusLost
+        if (cmbProduitPaquet.getSelectedItem().toString().equals("--Choisir catégorie--")) {
+            erreurPres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else {
+            erreurPres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));  }      // TODO add your handling code here:
+    }//GEN-LAST:event_cmbProduitPaquetFocusLost
+
+    private void tfImageFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfImageFocusLost
+        if (!tfImage.getText().equals("")) {
+            erreurimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        } else {
+            erreurimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));        // TODO add your handling code here:
+        }  // TODO add your handling code here:
+    }//GEN-LAST:event_tfImageFocusLost
 
     /**
      * @param args the command line arguments
@@ -412,7 +510,13 @@ public class AjoutPaquet extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AjoutPaquet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+  try {
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            UIManager.put("RootPane.setupButtonVisible", false);
 
+        } catch (Exception e) {
+            //TODO exception
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -426,7 +530,13 @@ public class AjoutPaquet extends javax.swing.JFrame {
     private javax.swing.JButton BtnModifierPaquet;
     private javax.swing.JButton btnParcourir;
     private javax.swing.JComboBox cmbProduitPaquet;
+    private javax.swing.JLabel erreurPres;
+    private javax.swing.JLabel erreurdesPa;
+    private javax.swing.JLabel erreurimg;
+    private javax.swing.JLabel erreurnomP;
+    private javax.swing.JLabel erreurprix;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
