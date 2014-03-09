@@ -47,6 +47,15 @@ public class TableListeToDoClientModel extends AbstractTableModel{
             }
 }
 
+    
+     public TableListeToDoClientModel(String nom,int id){
+    listToDo=new ToDoDAO().DisplayAllToDoByClient(nom,id);
+    for (int i = 0; i < getRowCount(); i++) {
+        rowlist[i][5]=Boolean.FALSE;
+      
+            }
+}
+    
     @Override
     public int getRowCount() {
         return listToDo.size();   

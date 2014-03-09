@@ -248,6 +248,45 @@ public class ToDoDAO {
        
        
        
+       
+       
+            
+       public List<ToDo> DisplayAllToDoByClient (String nom,int id){
+
+
+        List<ToDo> listetodo = new ArrayList<ToDo>();
+
+        String requete = "select * from todo where idClient="+id+" and titreToDo="+nom+" order by dateToDo DESC";
+        try {
+            
+           Statement statement = MyConnection.getInstance().cnx
+                   .createStatement();
+           
+            ResultSet resultat = statement.executeQuery(requete);
+
+            while(resultat.next()){
+              ToDo todo=new ToDo();
+                todo.setIdToDo(resultat.getInt(1));
+                todo.setIdClient(resultat.getInt(2));
+              todo.setTitreToDo(resultat.getString(3));
+              todo.setDescToDo(resultat.getString(4));
+              todo.setDateToDo(resultat.getString(5));
+              todo.setLabelUrgent(resultat.getBoolean(6));
+               todo.setLabelRDV(resultat.getBoolean(7));
+                todo.setLabelPayement(resultat.getBoolean(8));
+
+                listetodo.add(todo);
+            }
+            return listetodo;
+        } catch (SQLException ex) {
+           //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("erreur lors du chargement des depots "+ex.getMessage());
+            return null;
+        }
+    }
+       
+       
+       
     public List<ToDo> DisplayAllToDo (){
 
 

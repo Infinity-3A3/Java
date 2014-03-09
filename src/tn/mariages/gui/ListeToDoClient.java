@@ -61,6 +61,7 @@ public class ListeToDoClient extends javax.swing.JFrame {
         btnAjouter = new javax.swing.JButton();
         btnModifier = new javax.swing.JButton();
         btnSupprimer = new javax.swing.JButton();
+        rechercheTitre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         idclinet = new javax.swing.JLabel();
 
@@ -72,6 +73,8 @@ public class ListeToDoClient extends javax.swing.JFrame {
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
             }
         });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Taches a faire", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         tabelListeToDoClient.setModel(new TableListeToDoClientModel(id)
         );
@@ -98,8 +101,13 @@ public class ListeToDoClient extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Taches a faire");
+        rechercheTitre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                rechercheTitreKeyReleased(evt);
+            }
+        });
+
+        jLabel1.setText("recherche par titre:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,18 +126,22 @@ public class ListeToDoClient extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(jLabel1)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rechercheTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(39, 39, 39)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rechercheTitre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAjouter)
                     .addComponent(btnModifier)
@@ -223,6 +235,22 @@ public class ListeToDoClient extends javax.swing.JFrame {
                     tabelListeToDoClient.setModel(model);
     }//GEN-LAST:event_formWindowGainedFocus
 
+    private void rechercheTitreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rechercheTitreKeyReleased
+         // TODO add your handling code here:
+        String titre = rechercheTitre.getText();
+        if(!titre.equals("")){
+        TableListeToDoClientModel modeleToDO = new TableListeToDoClientModel(titre,Integer.parseInt(idclinet.getText()));
+       tabelListeToDoClient.setModel(modeleToDO);
+        
+        }
+        else
+        {
+        
+          TableListeToDoClientModel model = new TableListeToDoClientModel(Integer.parseInt(idclinet.getText()));
+                    tabelListeToDoClient.setModel(model);
+        }
+    }//GEN-LAST:event_rechercheTitreKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -266,6 +294,7 @@ public class ListeToDoClient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField rechercheTitre;
     private javax.swing.JTable tabelListeToDoClient;
     // End of variables declaration//GEN-END:variables
 }
