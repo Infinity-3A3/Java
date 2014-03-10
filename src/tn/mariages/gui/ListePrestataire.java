@@ -77,10 +77,10 @@ public class ListePrestataire extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -107,7 +107,7 @@ public class ListePrestataire extends javax.swing.JFrame {
             }
         });
 
-        BtnModifierPres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
+        BtnModifierPres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/user_ok.png"))); // NOI18N
         BtnModifierPres.setText("Modifier");
         BtnModifierPres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

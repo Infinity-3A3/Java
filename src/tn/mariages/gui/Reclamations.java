@@ -20,6 +20,7 @@ package tn.mariages.gui;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 import tn.mariages.dao.ReclamationDAO;
@@ -122,16 +123,16 @@ public class Reclamations extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -150,8 +151,10 @@ public class Reclamations extends javax.swing.JFrame {
             int id=(int) table.getModel().getValueAt(table.getSelectedRow(), 3);
             System.out.println(id);
             
+            
             RepondreReclamation rp = new RepondreReclamation(id);
-        
+        rp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        rp.setLocationRelativeTo(null);
         rp.setVisible(true); 
         
             

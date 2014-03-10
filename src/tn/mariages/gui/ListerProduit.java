@@ -107,7 +107,7 @@ public class ListerProduit extends javax.swing.JFrame {
             }
         });
 
-        btnModifProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
+        btnModifProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/cog.png"))); // NOI18N
         btnModifProd.setText("Modifier Produit");
         btnModifProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,6 +243,7 @@ public class ListerProduit extends javax.swing.JFrame {
 
     private void btnAjoutProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutProdActionPerformed
         AjoutProduit myAjoutProduit = new AjoutProduit();
+        myAjoutProduit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         myAjoutProduit.setVisible(true);
 
     }//GEN-LAST:event_btnAjoutProdActionPerformed
