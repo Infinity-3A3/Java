@@ -674,13 +674,14 @@ public class EspaceClient extends javax.swing.JFrame {
         ToDoDAO todoDAO = new ToDoDAO();
         ClientDAO clientDAO = new ClientDAO();
         listeTodo = todoDAO.NotifyClient(Integer.parseInt(Idclient.getText()));
-        String notify = "N'oubliez pas les taches à faire demain : \n\n";
+        String notify = "N'oubliez pas les taches à faire demain :";
 
         for (ToDo toDo : listeTodo) {
             notify += "Titre : " + toDo.getTitreToDo() + "     \n"+System.getProperty("line.separator");
             notify += "Description : " + toDo.getDescToDo() + "    \n\n    ";
 
         }
+        
         WebNotificationPopup pop = new WebNotificationPopup(NotificationStyle.mac);
         pop.setIcon(NotificationIcon.tip.getIcon ());
        

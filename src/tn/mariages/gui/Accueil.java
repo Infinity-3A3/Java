@@ -401,7 +401,23 @@ rec.setVisible(true);
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-     
+      try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+//                javax.swing.UIManager.setLookAndFeel(WebLookAndFeel.class.getCanonicalName());
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AjoutProduit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AjoutProduit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AjoutProduit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AjoutProduit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         //</editor-fold>
 try
     {
@@ -421,7 +437,7 @@ try
     Accueil ac =  new Accueil();
     int h = Toolkit.getDefaultToolkit().getScreenSize().height;
     int w = Toolkit.getDefaultToolkit().getScreenSize().width;
-    ac.setLocation(100,100);
+    ac.setLocation(0,0);
     ac.setSize(144, h+16);
     ac.setExtendedState( ac.MAXIMIZED_HORIZ );
     ac.setVisible(true);

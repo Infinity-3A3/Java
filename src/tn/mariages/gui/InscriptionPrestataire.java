@@ -609,7 +609,7 @@ Prestataire prest = new Prestataire();
             
             
             prest.setNomPrest(jtNomPrest.getText());
-
+            prest.setEmailPrest(jtEmailPrest.getText());
             prest.setDescPrest(jtDescPrest.getText());
 
             prest.setAdrPrest(jtAdrPrest.getText());
@@ -640,10 +640,8 @@ Prestataire prest = new Prestataire();
             prest.setTelMobilePrest(jtNumMobilPrest.getText());
             prest.setTelFixePrest(jtNumMobilPrest.getText());
             presDAO.insertPrestataire(prest);
-
-            prest.setIdPrest(presDAO.findPrestByEmail(prest.getEmailPrest()).getIdPrest());
-            
-            EspacePrest espace=new EspacePrest(prest.getIdPrest(), "p");
+            Prestataire p = presDAO.findPrestByEmail(prest.getEmailPrest());
+            EspacePrest espace=new EspacePrest(p.getIdPrest());
             espace.setVisible(true);
             
          
@@ -653,15 +651,9 @@ Prestataire prest = new Prestataire();
     }//GEN-LAST:event_btnInscriActionPerformed
 
     private void btnParcourirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParcourirActionPerformed
-        String chemin="";
-
-
-        int retval = fc.showOpenDialog(null);
-
-        if (retval == JFileChooser.APPROVE_OPTION) {
-
-            chemin = fc.getSelectedFile().getAbsolutePath();
-        }
+         fc.showOpenDialog(this);
+        if(!fc.getSelectedFile().getAbsoluteFile().equals(""))
+            jtImgPrest.setText(fc.getSelectedFile().getAbsolutePath());
     }//GEN-LAST:event_btnParcourirActionPerformed
 
     private void cmbCategoriePrestItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCategoriePrestItemStateChanged

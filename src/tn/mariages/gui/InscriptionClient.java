@@ -480,18 +480,10 @@ public class InscriptionClient extends javax.swing.JFrame {
 
     private void btParcourirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btParcourirActionPerformed
 
-        String chemin = "";
-
-        int retval = fc.showOpenDialog(null);
-
-        if (retval == JFileChooser.APPROVE_OPTION) {
-
-            chemin = fc.getSelectedFile().getAbsolutePath();
-
-            chemin = chemin.replace("\\", "/");
-        }
-
-        tfImageclient.setText(chemin);
+        fc.showOpenDialog(this);
+        if(!fc.getSelectedFile().getAbsoluteFile().equals(""))
+            tfImageclient.setText(fc.getSelectedFile().getAbsolutePath());
+            
     }//GEN-LAST:event_btParcourirActionPerformed
 
     private void btnInscrireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInscrireActionPerformed

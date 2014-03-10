@@ -29,6 +29,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import tn.mariages.dao.PrestataireDAO;
@@ -43,7 +45,7 @@ import tn.mariages.util.FTPFileUploader;
  */
 public class ModifierProduit extends javax.swing.JFrame {
 
-    String[] Categories = {"Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
+    String[] Categories = {"--Choisir catégorie--", "La mariée", "le mari", "Beauté", "La réception", "Gastronomie", "Annimation", "Voyages", "Photographe"};
     int id;
     Produit p = new Produit();
     private int id_prest;
@@ -80,15 +82,21 @@ public class ModifierProduit extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         tfnomProduit = new javax.swing.JTextField();
         tfPrixProduit = new javax.swing.JTextField();
-        btnAjoutImage = new javax.swing.JButton();
         cmbCategorieProduit = new javax.swing.JComboBox();
         btnReset = new javax.swing.JButton();
-        tfImgProd = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tfDescProduit = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         cmbPrestataire = new javax.swing.JComboBox();
         btnmaj = new javax.swing.JButton();
+        webFileDrop1 = new com.alee.extended.filechooser.WebFileDrop();
+        webFileDrop2 = new com.alee.extended.filechooser.WebFileDrop();
+        erreurnomP = new javax.swing.JLabel();
+        erreurDes = new javax.swing.JLabel();
+        erreurPres = new javax.swing.JLabel();
+        erreurCat = new javax.swing.JLabel();
+        erreurPrix = new javax.swing.JLabel();
+        erreurImg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -115,23 +123,31 @@ public class ModifierProduit extends javax.swing.JFrame {
                 tfnomProduitActionPerformed(evt);
             }
         });
+        tfnomProduit.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfnomProduitFocusLost(evt);
+            }
+        });
 
         tfPrixProduit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPrixProduitActionPerformed(evt);
             }
         });
-
-        btnAjoutImage.setText("Parcourir");
-        btnAjoutImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAjoutImageActionPerformed(evt);
+        tfPrixProduit.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfPrixProduitFocusLost(evt);
             }
         });
 
         cmbCategorieProduit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbCategorieProduitActionPerformed(evt);
+            }
+        });
+        cmbCategorieProduit.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cmbCategorieProduitFocusLost(evt);
             }
         });
 
@@ -145,6 +161,11 @@ public class ModifierProduit extends javax.swing.JFrame {
 
         tfDescProduit.setColumns(20);
         tfDescProduit.setRows(5);
+        tfDescProduit.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfDescProduitFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(tfDescProduit);
 
         jLabel6.setText("Prestataire :");
@@ -152,6 +173,11 @@ public class ModifierProduit extends javax.swing.JFrame {
         cmbPrestataire.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPrestataireActionPerformed(evt);
+            }
+        });
+        cmbPrestataire.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cmbPrestataireFocusLost(evt);
             }
         });
 
@@ -163,70 +189,111 @@ public class ModifierProduit extends javax.swing.JFrame {
             }
         });
 
+        webFileDrop1.setBorder(new javax.swing.border.MatteBorder(null));
+        webFileDrop1.setDropText("Placez vos images ici");
+
+        webFileDrop2.setBorder(new javax.swing.border.MatteBorder(null));
+        webFileDrop2.setDropText("Placez vos images ici");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(71, 71, 71)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(71, 71, 71)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnmaj)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnReset))
-                    .addComponent(tfnomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnmaj)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cmbPrestataire, 0, 277, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(cmbCategorieProduit, 0, 277, Short.MAX_VALUE)
+                            .addComponent(tfPrixProduit, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(webFileDrop2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(erreurImg, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(71, 71, 71)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAjoutImage)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cmbPrestataire, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cmbCategorieProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfPrixProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfImgProd, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(154, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(webFileDrop1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap(124, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(erreurPres, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(erreurDes, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(erreurCat, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(erreurPrix, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(tfnomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(erreurnomP, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(tfnomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(tfnomProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(erreurnomP, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(erreurDes, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(cmbPrestataire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(erreurPres, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(cmbCategorieProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(erreurCat, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfPrixProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4))
+                    .addComponent(erreurPrix, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(cmbPrestataire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cmbCategorieProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfPrixProduit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(tfImgProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAjoutImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReset)
-                    .addComponent(btnmaj))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(webFileDrop2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(erreurImg, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnReset)
+                            .addComponent(btnmaj)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(webFileDrop1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -252,13 +319,6 @@ public class ModifierProduit extends javax.swing.JFrame {
     private void tfPrixProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPrixProduitActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfPrixProduitActionPerformed
-
-    private void btnAjoutImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutImageActionPerformed
-        ImgChooser = new JFileChooser();
-        ImgChooser.showOpenDialog(this);
-        tfImgProd.setText(ImgChooser.getSelectedFile().getAbsolutePath());
-
-    }//GEN-LAST:event_btnAjoutImageActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
 
@@ -299,7 +359,7 @@ public class ModifierProduit extends javax.swing.JFrame {
         tfnomProduit.setText(p.getNomProd());
         tfDescProduit.setText(p.getDescProd());
         tfPrixProduit.setText(String.valueOf(f.format(p.getPrixProd())));
-        tfImgProd.setText(p.getImgProd_P());
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void cmbPrestataireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPrestataireActionPerformed
@@ -307,6 +367,29 @@ public class ModifierProduit extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbPrestataireActionPerformed
 
     private void btnmajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmajActionPerformed
+        if (tfnomProduit.getText().equals("") || tfDescProduit.getText().equals("") || tfPrixProduit.getText().equals("")) {
+            if (tfnomProduit.getText().equals("")) {
+                erreurnomP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
+            if (tfPrixProduit.getText().equals("")) {
+                erreurPrix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
+            if (tfDescProduit.getText().equals("")) {
+                erreurDes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
+            if (cmbCategorieProduit.getSelectedItem().equals("--Choisir categorie--")) {
+                erreurCat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
+            if (cmbPrestataire.getSelectedItem().equals("--Choisir prestataire--")) {
+                erreurPres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
+            if (webFileDrop1.getSelectedFiles().isEmpty()) {
+                erreurImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }
+
+        } else {
+        
+        
         ProduitDAO myDAO = new ProduitDAO();
         PrestataireDAO myDAO1 = new PrestataireDAO();
         Produit p = new Produit();
@@ -325,23 +408,74 @@ public class ModifierProduit extends javax.swing.JFrame {
         p.setShortDescProd(tfDescProduit.getText().substring(0, 10) + "...");
         p.setDateAjoutProd(dt);
         p.setIdPrest(id_prest);
-        if (tfImgProd.getText() != null) {
-            try {
-                FTPFileUploader.getInstance().UploadPic(tfImgProd.getText(), "/prod/");
-            } catch (IOException ex) {
-                Logger.getLogger(AjoutProduit.class.getName()).log(Level.SEVERE, null, ex);
+        String[] images = {"\"http://placehold.it/150x150&text=Img%20Produit\"", "\"http://placehold.it/150x150&text=Img%20Produit\" ", "\"http://placehold.it/150x150&text=Img%20Produit\"", "\"http://placehold.it/150x150&text=Img%20Produit\"", "\"http://placehold.it/150x150&text=Img%20Produit\""};
+            for (int i = 0; i < webFileDrop1.getSelectedFiles().size(); i++) {
+                if (webFileDrop1.getSelectedFiles().get(i).getAbsolutePath() != null) {
+                    try {
+                        FTPFileUploader.getInstance().UploadPic(webFileDrop1.getSelectedFiles().get(0).getAbsolutePath(), "/prod/");
+                    } catch (IOException ex) {
+                        Logger.getLogger(AjoutProduit.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    images[i] = "http://mariages.tn/prod/" + webFileDrop1.getSelectedFiles().get(i).getName();
+                } else {
+                    images[i] = "http://placehold.it/150x150&text=Img%20Produit";
+                }
             }
-            p.setImgProd_P("http://mariages.tn/prod/" + ImgChooser.getSelectedFile().getName());
-        } else {
-
-            p.setImgProd_P("http://placehold.it/150x150&text=Img%20Produit");
-        }
-        p.setImgProd_1("http://placehold.it/150x150&text=Img%20Produit");
-        p.setImgProd_2("http://placehold.it/150x150&text=Img%20Produit");
-        p.setImgProd_3("http://placehold.it/150x150&text=Img%20Produit");
-        p.setImgProd_4("http://placehold.it/150x150&text=Img%20Produit");
-        myDAO.UpdateProd(p);
+            p.setImgProd_P(images[0]);
+            p.setImgProd_1(images[1]);
+            p.setImgProd_2(images[2]);
+            p.setImgProd_3(images[3]);
+            p.setImgProd_4(images[4]);
+            
+        myDAO.UpdateProd(p);}
     }//GEN-LAST:event_btnmajActionPerformed
+
+    private void tfnomProduitFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfnomProduitFocusLost
+ if (tfnomProduit.getText().equals("")) {
+            erreurnomP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else {
+            erreurnomP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tfnomProduitFocusLost
+
+    private void tfDescProduitFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDescProduitFocusLost
+  if (tfDescProduit.getText().equals("")) {
+            erreurnomP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else if (tfDescProduit.getText().length() < 10) {
+            erreurDes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        } else {
+            erreurDes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDescProduitFocusLost
+
+    private void tfPrixProduitFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPrixProduitFocusLost
+ Pattern pattern = Pattern.compile("^\\d+$");
+        Matcher matcher = pattern.matcher(tfPrixProduit.getText());
+        if (!tfPrixProduit.getText().equals("")) {
+            erreurPrix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        }  else if (!matcher.matches()) {
+                erreurPrix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+               
+            }  else{
+            erreurPrix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPrixProduitFocusLost
+
+    private void cmbPrestataireFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbPrestataireFocusLost
+ if (cmbPrestataire.getSelectedItem().equals("--Choisir prestataire--")) {
+                erreurPres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }else {
+            erreurPres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbPrestataireFocusLost
+
+    private void cmbCategorieProduitFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cmbCategorieProduitFocusLost
+ if (cmbCategorieProduit.getSelectedItem().equals("--Choisir categorie--")) {
+                erreurCat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/erreur.jpg")));
+            }else {
+            erreurCat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/bon.jpg")));
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCategorieProduitFocusLost
 
     /**
      * @param args the command line arguments
@@ -386,11 +520,16 @@ public class ModifierProduit extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser ImgChooser;
-    private javax.swing.JButton btnAjoutImage;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnmaj;
     private javax.swing.JComboBox cmbCategorieProduit;
     private javax.swing.JComboBox cmbPrestataire;
+    private javax.swing.JLabel erreurCat;
+    private javax.swing.JLabel erreurDes;
+    private javax.swing.JLabel erreurImg;
+    private javax.swing.JLabel erreurPres;
+    private javax.swing.JLabel erreurPrix;
+    private javax.swing.JLabel erreurnomP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -400,9 +539,10 @@ public class ModifierProduit extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea tfDescProduit;
-    private javax.swing.JTextField tfImgProd;
     private javax.swing.JTextField tfPrixProduit;
     private javax.swing.JTextField tfnomProduit;
+    private com.alee.extended.filechooser.WebFileDrop webFileDrop1;
+    private com.alee.extended.filechooser.WebFileDrop webFileDrop2;
     // End of variables declaration//GEN-END:variables
 
 }

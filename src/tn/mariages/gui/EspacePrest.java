@@ -72,7 +72,12 @@ public class EspacePrest extends javax.swing.JFrame {
         btnvalider.setVisible(false);
         cmbNomPaquet.setVisible(false);
     }
-
+ public EspacePrest(int id) {
+        initComponents();
+        id_prest=id;
+        btnvalider.setVisible(false);
+        cmbNomPaquet.setVisible(false);
+    }
     
     public EspacePrest(int id,String cmt) {
         id_prest=id;
@@ -804,7 +809,7 @@ public class EspacePrest extends javax.swing.JFrame {
         tablePaquet.getColumnModel().getColumn(0).setMaxWidth(0);
         tableProduit.getColumnModel().getColumn(0).setMinWidth(0);
         tableProduit.getColumnModel().getColumn(0).setMaxWidth(0);
-
+        System.out.println(id_prest);
         Prestataire p = new Prestataire();
         PrestataireDAO pdao = new PrestataireDAO();
         p = pdao.findPrestById(id_prest);
