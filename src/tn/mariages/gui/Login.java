@@ -13,9 +13,6 @@ import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,11 +20,8 @@ import javax.swing.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -36,17 +30,11 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.parser.ParserDelegator;
 import tn.mariages.dao.ClientDAO;
 
-import tn.mariages.entities.ToDo;
 import tn.mariages.dao.PrestataireDAO;
 import tn.mariages.dao.AdminDAO;
 import tn.mariages.dao.ToDoDAO;
 import tn.mariages.entities.Client;
 import tn.mariages.entities.Prestataire;
-import static tn.mariages.gui.FacebookLoginTEST.access_token;
-import static tn.mariages.gui.FacebookLoginTEST.firstRequest;
-import static tn.mariages.gui.FacebookLoginTEST.firstRequestDone;
-import static tn.mariages.gui.FacebookLoginTEST.secondRequest;
-import static tn.mariages.gui.FacebookLoginTEST.secondRequestDone;
 import tn.mariages.util.facebook.GraphReaderExample;
 /**
  *
@@ -367,6 +355,7 @@ public class Login extends javax.swing.JFrame {
          dispose();
 
          EspaceClient EC = new EspaceClient(c.getIdClient(), "c");
+         EC.setExtendedState(EC.MAXIMIZED_BOTH);
          EC.setVisible(true);
         
         }
@@ -376,6 +365,7 @@ public class Login extends javax.swing.JFrame {
             dispose();
              Prestataire findPrestByEmail = prestatiareDAO.findPrestByEmail(email);
       EspacePrest EP = new EspacePrest(findPrestByEmail.getIdPrest(), "p");
+      EP.setExtendedState(EP.MAXIMIZED_BOTH);  
       EP.setVisible(true);
         }
         else{
@@ -433,6 +423,8 @@ File f2=new File("Pass.txt");
 
     private void btnMdpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMdpActionPerformed
 MotDePasseOublie mdp=new MotDePasseOublie();
+       mdp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 mdp.setVisible(true);
     }//GEN-LAST:event_btnMdpActionPerformed
 

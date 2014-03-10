@@ -223,7 +223,7 @@
         <Component class="javax.swing.JButton" name="BtnModifierPaquet">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/icons/Modify-icon.png"/>
+              <Image iconType="3" name="/resources/icons/circle_ok.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Modifier"/>
           </Properties>
@@ -234,7 +234,7 @@
         <Component class="javax.swing.JButton" name="BtnAnnulerPaquet">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/icons/close.png"/>
+              <Image iconType="3" name="/resources/icons/circle_delete.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Annuler"/>
           </Properties>

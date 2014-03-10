@@ -137,7 +137,7 @@ public class AjoutPaquet extends javax.swing.JFrame {
             }
         });
 
-        BtnModifierPaquet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/Modify-icon.png"))); // NOI18N
+        BtnModifierPaquet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_ok.png"))); // NOI18N
         BtnModifierPaquet.setText("Modifier");
         BtnModifierPaquet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,7 +145,7 @@ public class AjoutPaquet extends javax.swing.JFrame {
             }
         });
 
-        BtnAnnulerPaquet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/close.png"))); // NOI18N
+        BtnAnnulerPaquet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/circle_delete.png"))); // NOI18N
         BtnAnnulerPaquet.setText("Annuler");
         BtnAnnulerPaquet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
