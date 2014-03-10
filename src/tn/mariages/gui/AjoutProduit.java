@@ -56,7 +56,7 @@ import tn.mariages.util.FTPFileUploader;
  */
 public class AjoutProduit extends javax.swing.JFrame {
 
-    String[] Categories = {"--Choisir categorie--", "Salles de Fetes", "Centres de Coiffures", "Troupe Musical", "Photographe", "Agence de voyages de noces", "Restaurant", "Decorateur", "Fleuriste"};
+    String[] Categories = {"--Choisir catégorie--", "La mariée", "le mari", "Beauté", "La réception", "Gastronomie", "Annimation", "Voyages", "Photographe"};
     int id_prest;
     private static final Map<String, ImageIcon> iconsCache = new HashMap<String, ImageIcon>();
 
